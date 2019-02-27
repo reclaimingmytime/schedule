@@ -197,7 +197,7 @@ foreach ($calendar as $entry) {
 	}
 }
 
-if(!empty($schedule)) {
+if (!empty($schedule)) {
 	//Sanitize input
 	escapeArray($schedule);
 }
@@ -212,38 +212,38 @@ if(!empty($schedule)) {
 		<title>Calendar for <?php echo $displayedDateFull; ?></title>
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		
+
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	</head>
 	<body>
 		<div class="container-fluid">
 			<header>
 				<nav class="navbar navbar-expand-lg navbar-light bg-light  mt-3 mb-4">
-						<div class="navbar-header">
-							<?php if ($desiredDate !== $today) { ?>
-								<a class="navbar-brand" href=".">Schedule</a>
-							<?php } else { ?>
-								<span class="navbar-brand">Schedule</span>
-							<?php } ?>
-						</div>
-						<ul class="navbar-nav mr-auto">
-							<?php if ($desiredDate !== $today) { ?>
-								<li class="nav-item"><a class="nav-link" href="?"><i class="fas fa-play"></i> Today</a></li>
-							<?php } else { ?>
-								<li class="nav-item active"><a class="nav-link"><i class="fas fa-play"></i> Today</a></li>
-							<?php } ?>
+					<div class="navbar-header">
+						<?php if ($desiredDate !== $today) { ?>
+							<a class="navbar-brand" href=".">Schedule</a>
+						<?php } else { ?>
+							<span class="navbar-brand">Schedule</span>
+						<?php } ?>
+					</div>
+					<ul class="navbar-nav mr-auto">
+						<?php if ($desiredDate !== $today) { ?>
+							<li class="nav-item"><a class="nav-link" href="?"><i class="fas fa-play"></i> Today</a></li>
+						<?php } else { ?>
+							<li class="nav-item active"><a class="nav-link"><i class="fas fa-play"></i> Today</a></li>
+						<?php } ?>
 
-							<li class="nav-item"><a class="nav-link" href="?d=<?php echo $nextDay; ?>"><i class="fas fa-forward"></i> Next Day</a></li>
-							<li class="nav-item"><a class="nav-link" href="?d=<?php echo $nextWeek; ?>"><i class="fas fa-step-forward"></i> Next Week</a></li>
+						<li class="nav-item"><a class="nav-link" href="?d=<?php echo $nextDay; ?>"><i class="fas fa-forward"></i> Next Day</a></li>
+						<li class="nav-item"><a class="nav-link" href="?d=<?php echo $nextWeek; ?>"><i class="fas fa-step-forward"></i> Next Week</a></li>
 
-							<?php
-							if ($prevDay >= createNewDate($minDate)) { ?>
-								<li class="nav-item"><a class="nav-link" href="?d=<?php echo $prevDay; ?>"><i class="fas fa-backward"></i> Previous Day</a></li>
-							<?php }
-							if ($prevWeek >= createNewDate($minDate)) { ?>
-								<li class="nav-item"><a class="nav-link" href="?d=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> Previous Week</a></li>
-							<?php } ?>
-						</ul>
+						<?php if ($prevDay >= createNewDate($minDate)) { ?>
+							<li class="nav-item"><a class="nav-link" href="?d=<?php echo $prevDay; ?>"><i class="fas fa-backward"></i> Previous Day</a></li>
+						<?php }
+						if ($prevWeek >= createNewDate($minDate)) {
+							?>
+							<li class="nav-item"><a class="nav-link" href="?d=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> Previous Week</a></li>
+						<?php } ?>
+					</ul>
 				</nav>
 			</header>
 
@@ -254,12 +254,12 @@ if(!empty($schedule)) {
 					<li class="list-inline-item"><?php echo $displayedDate; ?></li>
 					<li class="list-inline-item"><?php echo $currentTime; ?></li>
 				</ul>
-				
+
 				<?php if (empty($schedule)) { ?>
-				<div class="alert alert-secondary mt-4" role="alert">
-					No entries have been found for that day.
-				</div>
-				<?php
+					<div class="alert alert-secondary mt-4" role="alert">
+						No entries have been found for that day.
+					</div>
+					<?php
 				} else {
 
 					foreach ($schedule as $event) {
@@ -267,13 +267,13 @@ if(!empty($schedule)) {
 						?>
 						<div class="card mb-4 mt-4">
 							<div class="card-header">
-									<i class="fas fa-clock"></i>
-									<strong ml-xl><?php echo $timeRange ?></strong>
+								<i class="fas fa-clock"></i>
+								<strong ml-xl><?php echo $timeRange ?></strong>
 							</div>
-							
+
 							<div class="card-body">
 								<p><strong><?php echo $event['subject']; ?></strong></p>
-								
+
 								<?php if (!empty($event['room'])) { ?>
 									<p><?php echo $event['room']; ?></p>
 								<?php } ?>
@@ -287,5 +287,22 @@ if(!empty($schedule)) {
 				?>
 			</main>
 		</div>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="js/swipe.min.js"></script>
+		<script>
+			$(function() {			
+				$("body").swipe( {
+				swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+					if (direction == "left") {
+							window.location.href = "?d=<?php echo $nextDay; ?>";
+					}
+					if (direction == "right") {
+						window.location.href = "?d=<?php echo $prevDay; ?>";
+					}			
+				},
+				threshold:75
+			});
+		});
+		</script>
 	</body>
 </html>
