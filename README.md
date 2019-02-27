@@ -12,6 +12,8 @@ In the desired directory, type the following: `git clone https://github.com/recl
 1. Copy `config.default.php` to `config.php`.
 2. Open `config.php` and change the required variables.
 
+Note: The directory must be writable (at least chmod 700). Otherwise, the API cache file will not be writable.
+
 ## Command-line updates
 As an alternative to downloading the new files manually, if you have installed the script through git, you can simply update your local repository using `git pull` in that directory.
 
