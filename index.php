@@ -78,13 +78,13 @@ function createCache($folder) {
 	if(!is_writable($folder)) {
 		mkdir($folder, 0700, true);
 		if(!is_writable($folder)) {
-			die('Insufficient permissions to create "' . $folder . '". Please create the file or folder manually and add at least permission 700.');
+			die('Insufficient permissions to create "' . $folder . '". Please create the file or folder manually and add at least chmod 700.');
 		}
 	}
 }
 
 function retreiveData($api, $cache_file) {
-	if (file_exists($cache_file) && (filemtime($cache_file) > (time() - 60 * 30 ))) {
+	if (is_writable($cache_file) && (filemtime($cache_file) > (time() - 60 * 30 ))) {
 		$file = file_get_contents($cache_file);
 	} else {
 		$file = file_get_contents($api);
