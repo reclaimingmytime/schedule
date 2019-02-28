@@ -107,6 +107,14 @@ $nextDay = createNewDate($desiredDate, "1 day");
 $prevDay = createNewDate($desiredDate, "1 day ago");
 $prevWeek = createNewDate($desiredDate, "1 week ago");
 
+if($prevWeek < createNewDate($minDate)) {
+	$prevWeek = "none";
+}
+
+if($prevDay < createNewDate($minDate)) {
+	$prevDay = "none";
+}
+
 /* Schedule preparation */
 
 //Room Functions
@@ -236,10 +244,10 @@ if (!empty($schedule)) {
 						<li class="nav-item mr-3"><a class="nav-link" href="?d=<?php echo $nextDay; ?>"><i class="fas fa-forward"></i> <span class="d-none d-md-inline">Next Day</span></a></li>
 						<li class="nav-item mr-3"><a class="nav-link" href="?d=<?php echo $nextWeek; ?>"><i class="fas fa-step-forward"></i> <span class="d-none d-md-inline">Next Week</span></a></li>
 
-						<?php if ($prevDay >= createNewDate($minDate)) { ?>
+						<?php if ($prevDay !== "none") { ?>
 						<li class="nav-item mr-3"><a class="nav-link" href="?d=<?php echo $prevDay; ?>"><i class="fas fa-backward"></i> <span class="d-none d-md-inline">Previous Day</span></a></li>
 						<?php }
-						if ($prevWeek >= createNewDate($minDate)) {
+						if ($prevWeek !== "none") {
 							?>
 							<li class="nav-item"><a class="nav-link" href="?d=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> <span class="d-none d-md-inline">Previous Week</span></a></li>
 						<?php } ?>

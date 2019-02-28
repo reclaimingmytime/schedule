@@ -5,7 +5,9 @@ $(function () {
 				window.location.href = "?d=" + $('head').data('nextday');
 			}
 			if (direction == "right") {
-				window.location.href = "?d=" + $('head').data('prevday');
+				if($('head').data('prevday') !== "none") {
+					window.location.href = "?d=" + $('head').data('prevday');
+				}
 			}
 		},
 		threshold: 75
@@ -14,7 +16,9 @@ $(function () {
 	$(document).keydown(function (e) {
 		switch (e.which) {
 			case 37: // left
-				window.location.href = "?d=" + $('head').data('prevday');
+				if($('head').data('prevday') !== "none") {
+					window.location.href = "?d=" + $('head').data('prevday');
+				}
 				break;
 
 			case 39: // right
@@ -22,7 +26,9 @@ $(function () {
 				break;
 
 			case 38: // up
-				window.location.href = "?d=" + $('head').data('prevweek');
+				if($('head').data('prevweek') !== "none") {
+					window.location.href = "?d=" + $('head').data('prevweek');
+				}
 				break;
 
 			case 40: // down
