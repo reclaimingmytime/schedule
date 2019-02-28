@@ -17,22 +17,24 @@ Note: The directory must be writable (at least chmod 700). Otherwise, the API ca
 ## Usage
 ### Keyboard navigation
 
-| Shortcut                  | Action        |
-| ------------------------- | ------------- |
-| `Right arrow key`  or `D` | Next Day      |
-| `Left arrow key` or `A`   | Previous Day  |
-| `Bottom arrow key` or `S` | Next Week     |
-| `Top arrow key` `W`       | Previous Week |
-| `Enter`                   | Current Week  |
+| Shortcut     | Action        |
+| ------------ | ------------- |
+| `D` or `L`   | Next Day      |
+| `A` or `H`   | Previous Day  |
+| `S` or `F`   | Previous Week |
+| `W` or `K`   | Next Week     |
+| `Enter`      | Current Week  |
+
+Note: Arrow keys are not used in order to not to interfere with any keyboard-based scrolling.
 
 ### Touch navigation
 
 | Gesture     | Action       |
-| ----------- | :----------- |
+| ----------- | ------------ |
 | Swipe left  | Next day     |
 | Swipe right | Previous day |
 
 ## Command-line updates
-As an alternative to downloading the new files manually, if you have installed the script through git, you can simply update your local repository using `git pull` in that directory.
+As an alternative to downloading the new files manually, if you have installed the script through git, you can simply update your local repository using `git pull rebase origin` in that directory.
 
 Note that your configuration file `config.php` will be **kept** in any case, as that file is ignored by git.

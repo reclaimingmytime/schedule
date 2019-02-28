@@ -19,6 +19,10 @@ if (!empty($timezone)) {
 //	return false;
 //}
 
+function isBetween($x, $min, $max) {
+  return ($min <= $x) && ($x <= $max);
+}
+
 function equals($x, $y) {
 	return $x == $y;
 }
@@ -46,7 +50,7 @@ function escapeArray(&$array) {
 function getClassInput() {
 	$classGET = !empty($_GET['c']) ? $_GET['c'] : '';
 	$classCookie = !empty($_COOKIE['c']) ? $_COOKIE['c'] : '';
-	
+
 	if(!empty($classGET) && $classCookie !== $classGET) {
 		return $classGET;
 	} else {
@@ -59,7 +63,7 @@ function getClass($defaultClass, $allowedClasses) {
 	if(!empty($class) && in_array($class, $allowedClasses)) {
 		$expTime = new DateTime("1 year");
 		$exp = $expTime->getTimestamp();
-		
+
 		setcookie("c", $class, $exp, '/', null, false, true);
 		return $class;
 	}
@@ -68,6 +72,15 @@ function getClass($defaultClass, $allowedClasses) {
 
 function getAPIUrl($api, $replace, $default) {
 	return str_replace($default, $replace, $api);
+}
+
+function createCache($folder) {
+	if(!is_writable($folder)) {
+		mkdir($folder, 0700, true);
+		if(!is_writable($folder)) {
+			die('Insufficient permissions to create "' . $folder . '". Please create the file or folder manually and add at least permission 700.');
+		}
+	}
 }
 
 function retreiveData($api, $cache_file) {
@@ -93,7 +106,9 @@ function retreiveData($api, $cache_file) {
 $class = getClass($defaultClass, $allowedClasses);
 $desiredAPI = getAPIUrl($api, $class, $defaultClass);
 
-$cache_file = "cache/" . $class . ".json";
+$folder = "cache/";
+createCache($folder);
+$cache_file = $folder . $class . ".json";
 $calendar = retreiveData($desiredAPI, $cache_file);
 
 /* Date preparation */
@@ -118,6 +133,10 @@ function getCustomDate($param, $today) {
 
 function createNewDate($date, $interval = "today") {
 	return date("Y-m-d", strtotime($interval, strtotime($date)));
+}
+
+function createTime($input) {
+	return DateTime::createFromFormat('H:i', $input);
 }
 
 $today = date("Y-m-d");
@@ -245,13 +264,12 @@ if (!empty($schedule)) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-	<head data-nextday="<?php echo $nextDay; ?>" data-prevday="<?php echo $prevDay; ?>" data-nextweek="<?php echo $nextWeek; ?>" data-prevweek="<?php echo $prevWeek; ?>">
+	<head data-desireddate="<?php echo $desiredDate; ?>" data-today="<?php echo $today; ?>" data-nextday="<?php echo $nextDay; ?>" data-prevday="<?php echo $prevDay; ?>" data-nextweek="<?php echo $nextWeek; ?>" data-prevweek="<?php echo $prevWeek; ?>">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Calendar for <?php echo $displayedDateFull; ?></title>
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	</head>
 	<body>
@@ -291,7 +309,7 @@ if (!empty($schedule)) {
 					<li class="list-inline-item"><i class="fas fa-calendar-alt"></i></li>
 					<li class="list-inline-item"><?php echo $weekDay; ?></li>
 					<li class="list-inline-item"><?php echo $displayedDate; ?></li>
-					<li class="list-inline-item"><?php echo $currentTime; ?></li>
+					<li class="list-inline-item currentTime"><?php echo $currentTime; ?></li>
 				</ul>
 
 				<?php if (empty($schedule)) { ?>
@@ -302,10 +320,16 @@ if (!empty($schedule)) {
 				} else {
 
 					foreach ($schedule as $event) {
+						 if($desiredDate == $today && isBetween(createTime($currentTime), createTime($event['start']), createTime($event['end']))) {
+						 $headerClasses = ' bg-dark text-light';
+						} else {
+						 $headerClasses = '';
+						}
+						 
 						$timeRange = $event['start'] . " - " . $event['end'];
 						?>
 						<div class="card mb-4 mt-4">
-							<div class="card-header">
+							<div class="card-header<?php echo $headerClasses; ?>">
 								<i class="fas fa-clock"></i>
 								<strong ml-xl><?php echo $timeRange ?></strong>
 							</div>
