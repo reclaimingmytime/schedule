@@ -7,17 +7,17 @@ if (!empty($timezone)) {
 
 /* Functions */
 
-function strposa($haystack, $needle, $offset = 0) {
-	if (!is_array($needle)) {
-		$needle = [$needle];
-	}
-	foreach ($needle as $query) {
-		if (!empty($query) && strpos($haystack, $query, $offset) !== false) {
-			return true;
-		}
-	}
-	return false;
-}
+//function strposa($haystack, $needle, $offset = 0) {
+//	if (!is_array($needle)) {
+//		$needle = [$needle];
+//	}
+//	foreach ($needle as $query) {
+//		if (!empty($query) && strpos($haystack, $query, $offset) !== false) {
+//			return true;
+//		}
+//	}
+//	return false;
+//}
 
 function equals($x, $y) {
 	return $x == $y;
@@ -43,6 +43,33 @@ function escapeArray(&$array) {
 
 /* API connection */
 
+function getClassInput() {
+	$classGET = !empty($_GET['c']) ? $_GET['c'] : '';
+	$classCookie = !empty($_COOKIE['c']) ? $_COOKIE['c'] : '';
+	
+	if(!empty($classGET) && $classCookie !== $classGET) {
+		return $classGET;
+	} else {
+		return $classCookie;
+	}
+}
+
+function getClass($defaultClass, $allowedClasses) {
+	$class = getClassInput();
+	if(!empty($class) && in_array($class, $allowedClasses)) {
+		$expTime = new DateTime("1 year");
+		$exp = $expTime->getTimestamp();
+		
+		setcookie("c", $class, $exp, '/', null, false, true);
+		return $class;
+	}
+	return $defaultClass;
+}
+
+function getAPIUrl($api, $replace, $default) {
+	return str_replace($default, $replace, $api);
+}
+
 function retreiveData($api, $cache_file) {
 	if (file_exists($cache_file) && (filemtime($cache_file) > (time() - 60 * 30 ))) {
 		$file = file_get_contents($cache_file);
@@ -63,7 +90,11 @@ function retreiveData($api, $cache_file) {
 	return $calendarArray[CALENDAR];
 }
 
-$calendar = retreiveData($api, $cache_file);
+$class = getClass($defaultClass, $allowedClasses);
+$desiredAPI = getAPIUrl($api, $class, $defaultClass);
+
+$cache_file = "cache/" . $class . ".json";
+$calendar = retreiveData($desiredAPI, $cache_file);
 
 /* Date preparation */
 

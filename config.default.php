@@ -7,6 +7,8 @@ $minDate = "01.01.2000";
 /* API connection */
 $cache_file = "mock-api.json";
 
+$defaultClass = "CLASS";
+$allowedClasses = ['CLASS1', 'CLASS2'];
 $api = 'https://example.com/api/';
 
 /* Handling Data */
