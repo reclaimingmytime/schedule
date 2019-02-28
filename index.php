@@ -206,7 +206,7 @@ if (!empty($schedule)) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-	<head>
+	<head data-nextday="<?php echo $nextDay; ?>" data-prevday="<?php echo $prevDay; ?>" data-nextweek="<?php echo $nextWeek; ?>" data-prevweek="<?php echo $prevWeek; ?>">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Calendar for <?php echo $displayedDateFull; ?></title>
@@ -218,30 +218,30 @@ if (!empty($schedule)) {
 	<body>
 		<div class="container-fluid">
 			<header>
-				<nav class="navbar navbar-expand-lg navbar-light bg-light  mt-3 mb-4">
-					<div class="navbar-header">
+				<nav class="navbar navbar-expand navbar-light bg-light mt-3 mb-4">
+					<div class="navbar-header  d-none d-sm-block">
 						<?php if ($desiredDate !== $today) { ?>
 							<a class="navbar-brand" href=".">Schedule</a>
 						<?php } else { ?>
 							<span class="navbar-brand">Schedule</span>
 						<?php } ?>
 					</div>
-					<ul class="navbar-nav mr-auto">
+					<ul class="navbar-nav m-auto ml-sm-0">
 						<?php if ($desiredDate !== $today) { ?>
-							<li class="nav-item"><a class="nav-link" href="?"><i class="fas fa-play"></i> Today</a></li>
+						<li class="nav-item mr-3 ml-3"><a class="nav-link" href="?"><i class="fas fa-play"></i> <span class="d-none d-md-inline">Today</span></a></li>
 						<?php } else { ?>
-							<li class="nav-item active"><a class="nav-link"><i class="fas fa-play"></i> Today</a></li>
+						<li class="nav-item mr-3 ml-3 active"><a class="nav-link"><i class="fas fa-play"></i> <span class="d-none d-md-inline">Today</span></a></li>
 						<?php } ?>
 
-						<li class="nav-item"><a class="nav-link" href="?d=<?php echo $nextDay; ?>"><i class="fas fa-forward"></i> Next Day</a></li>
-						<li class="nav-item"><a class="nav-link" href="?d=<?php echo $nextWeek; ?>"><i class="fas fa-step-forward"></i> Next Week</a></li>
+						<li class="nav-item mr-3"><a class="nav-link" href="?d=<?php echo $nextDay; ?>"><i class="fas fa-forward"></i> <span class="d-none d-md-inline">Next Day</span></a></li>
+						<li class="nav-item mr-3"><a class="nav-link" href="?d=<?php echo $nextWeek; ?>"><i class="fas fa-step-forward"></i> <span class="d-none d-md-inline">Next Week</span></a></li>
 
 						<?php if ($prevDay >= createNewDate($minDate)) { ?>
-							<li class="nav-item"><a class="nav-link" href="?d=<?php echo $prevDay; ?>"><i class="fas fa-backward"></i> Previous Day</a></li>
+						<li class="nav-item mr-3"><a class="nav-link" href="?d=<?php echo $prevDay; ?>"><i class="fas fa-backward"></i> <span class="d-none d-md-inline">Previous Day</span></a></li>
 						<?php }
 						if ($prevWeek >= createNewDate($minDate)) {
 							?>
-							<li class="nav-item"><a class="nav-link" href="?d=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> Previous Week</a></li>
+							<li class="nav-item"><a class="nav-link" href="?d=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> <span class="d-none d-md-inline">Previous Week</span></a></li>
 						<?php } ?>
 					</ul>
 				</nav>
@@ -289,20 +289,6 @@ if (!empty($schedule)) {
 		</div>
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="js/swipe.min.js"></script>
-		<script>
-			$(function() {			
-				$("body").swipe( {
-				swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-					if (direction == "left") {
-							window.location.href = "?d=<?php echo $nextDay; ?>";
-					}
-					if (direction == "right") {
-						window.location.href = "?d=<?php echo $prevDay; ?>";
-					}			
-				},
-				threshold:75
-			});
-		});
-		</script>
+		<script src="js/main.min.js"></script>
 	</body>
 </html>
