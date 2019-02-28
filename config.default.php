@@ -9,7 +9,8 @@ $cache_file = "mock-api.json";
 
 $defaultClass = "CLASS1";
 $allowedClasses = ['CLASS1', 'CLASS2'];
-$api = 'https://example.com/api/';
+
+$api = "https://example.com/api.json?class=$defaultClass";
 
 /* Handling Data */
 define('CALENDAR', 'cal');
