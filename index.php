@@ -152,9 +152,9 @@ $displayedDateFull = $weekDay . ", " . $desiredDatePretty;
 $displayedDate = $desiredDatePretty;
 
 $nextWeek = createNewDate($desiredDate, "1 week");
-$nextDay = createNewDate($desiredDate, "1 day");
+$nextDay = createNewDate($desiredDate, "1 weekday");
 
-$prevDay = createNewDate($desiredDate, "1 day ago");
+$prevDay = createNewDate($desiredDate, "1 weekday ago");
 $prevWeek = createNewDate($desiredDate, "1 week ago");
 
 if($prevWeek < createNewDate($minDate)) {
@@ -201,6 +201,11 @@ function extractTime($dateTime) {
 function extractDate($dateTime) {
 	$info = explode(" ", $dateTime);
 	return $info[0];
+}
+
+function isWeekend($date) {
+	$weekDay = date('w', strtotime($date));
+	return ($weekDay == 0 || $weekDay == 6);
 }
 
 //Duplicate check functions
@@ -261,6 +266,13 @@ if (!empty($schedule)) {
 }
 
 /* Display Schedule */
+function onGoingEvent($event) {
+	global $desiredDate;
+	global $today;
+	global $currentTime;
+	
+	return $desiredDate == $today && isBetween(createTime($currentTime), createTime($event['start']), createTime($event['end']));
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -285,19 +297,17 @@ if (!empty($schedule)) {
 					</div>
 					<ul class="navbar-nav m-auto ml-sm-0">
 						<?php if ($desiredDate !== $today) { ?>
-						<li class="nav-item mr-3 ml-3"><a class="nav-link" href="?"><i class="fas fa-play"></i> <span class="d-none d-md-inline">Today</span></a></li>
+							<li class="nav-item mr-3 ml-3"><a class="nav-link" href="?"><i class="fas fa-play"></i> <span class="d-none d-md-inline">Today</span></a></li>
 						<?php } else { ?>
-						<li class="nav-item mr-3 ml-3 active"><a class="nav-link"><i class="fas fa-play"></i> <span class="d-none d-md-inline">Today</span></a></li>
+							<li class="nav-item mr-3 ml-3 active"><a class="nav-link"><i class="fas fa-play"></i> <span class="d-none d-md-inline">Today</span></a></li>
 						<?php } ?>
 
 						<li class="nav-item mr-3"><a class="nav-link" href="?d=<?php echo $nextDay; ?>"><i class="fas fa-forward"></i> <span class="d-none d-md-inline">Next Day</span></a></li>
 						<li class="nav-item mr-3"><a class="nav-link" href="?d=<?php echo $nextWeek; ?>"><i class="fas fa-step-forward"></i> <span class="d-none d-md-inline">Next Week</span></a></li>
 
 						<?php if ($prevDay !== "none") { ?>
-						<li class="nav-item mr-3"><a class="nav-link" href="?d=<?php echo $prevDay; ?>"><i class="fas fa-backward"></i> <span class="d-none d-md-inline">Previous Day</span></a></li>
-						<?php }
-						if ($prevWeek !== "none") {
-							?>
+							<li class="nav-item mr-3"><a class="nav-link" href="?d=<?php echo $prevDay; ?>"><i class="fas fa-backward"></i> <span class="d-none d-md-inline">Previous Day</span></a></li>
+						<?php } if ($prevWeek !== "none") { ?>
 							<li class="nav-item"><a class="nav-link" href="?d=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> <span class="d-none d-md-inline">Previous Week</span></a></li>
 						<?php } ?>
 					</ul>
@@ -314,40 +324,48 @@ if (!empty($schedule)) {
 
 				<?php if (empty($schedule)) { ?>
 					<div class="alert alert-secondary mt-4" role="alert">
-						No entries have been found for that day.
+						<?php if(isWeekend($desiredDate)) { ?>
+							Weekends have been excluded from the schedule.
+						<?php } else { ?>
+							No entries have been found for that day.
+						<?php } ?>
 					</div>
 					<?php
-				} else {
+				} else { ?>
+						<div class="container-fluid">
+							<div class="row">
 
-					foreach ($schedule as $event) {
-						 if($desiredDate == $today && isBetween(createTime($currentTime), createTime($event['start']), createTime($event['end']))) {
-						 $headerClasses = ' bg-dark text-light';
-						} else {
-						 $headerClasses = '';
+							<?php foreach ($schedule as $key => $event) {
+								$timeRange = $event['start'] . " - " . $event['end'];
+								$headerClasses = onGoingEvent($event) ? ' bg-dark text-light' : '';
+							?>
+
+							<div class="col-xl-2">
+								<div class="card mb-4 mt-4">
+									<div class="card-header<?php echo $headerClasses; ?>">
+										<i class="fas fa-clock"></i>
+										<strong ml-xl><?php echo $timeRange ?></strong>
+									</div>
+
+									<div class="card-body">
+										<p><strong><?php echo $event['subject']; ?></strong></p>
+
+										<?php if (!empty($event['room'])) { ?>
+											<p><?php echo $event['room']; ?></p>
+										<?php } ?>
+
+										<p><?php echo $event['prof']; ?></p>
+									</div>
+								</div>
+							</div>
+								
+							<?php
+							}
 						}
-						 
-						$timeRange = $event['start'] . " - " . $event['end'];
 						?>
-						<div class="card mb-4 mt-4">
-							<div class="card-header<?php echo $headerClasses; ?>">
-								<i class="fas fa-clock"></i>
-								<strong ml-xl><?php echo $timeRange ?></strong>
-							</div>
-
-							<div class="card-body">
-								<p><strong><?php echo $event['subject']; ?></strong></p>
-
-								<?php if (!empty($event['room'])) { ?>
-									<p><?php echo $event['room']; ?></p>
-								<?php } ?>
-
-								<p><?php echo $event['prof']; ?></p>
-							</div>
 						</div>
-						<?php
-					}
-				}
-				?>
+					</div>
+				</div>
 			</main>
 		</div>
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
