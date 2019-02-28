@@ -17,13 +17,13 @@ Note: The directory must be writable (at least chmod 700). Otherwise, the API ca
 ## Usage
 ### Keyboard navigation
 
-| Shortcut     | Action        |
-| ------------ | ------------- |
-| `D` or `L`   | Next Day      |
-| `A` or `H`   | Previous Day  |
-| `S` or `F`   | Previous Week |
-| `W` or `K`   | Next Week     |
-| `Enter`      | Current Week  |
+| Shortcut | Action        |
+| -------- | ------------- |
+| `D`      | Next Day      |
+| `A`      | Previous Day  |
+| `S`      | Previous Week |
+| `W`      | Next Week     |
+| `Enter`  | Current Week  |
 
 Note: Arrow keys are not used in order to not to interfere with any keyboard-based scrolling.
 

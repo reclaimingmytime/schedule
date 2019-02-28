@@ -305,7 +305,7 @@ if (!empty($schedule)) {
 			</header>
 
 			<main>
-				<ul id="currentDay" class="list-inline text-muted h4">
+				<ul class="list-inline text-muted h4">
 					<li class="list-inline-item"><i class="fas fa-calendar-alt"></i></li>
 					<li class="list-inline-item"><?php echo $weekDay; ?></li>
 					<li class="list-inline-item"><?php echo $displayedDate; ?></li>
