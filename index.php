@@ -350,7 +350,7 @@ function onGoingEvent($event) {
 			</header>
 
 			<main>
-				<ul class="list-inline text-muted h4">
+				<ul class="list-inline text-muted h4 pb-2 pt-2">
 					<li class="list-inline-item"><i class="fas fa-calendar-alt"></i></li>
 					<li class="list-inline-item"><?php echo $weekDay; ?></li>
 					<li class="list-inline-item"><?php echo $displayedDate; ?></li>
@@ -374,7 +374,7 @@ function onGoingEvent($event) {
 							$headerClasses = onGoingEvent($event) ? ' bg-dark text-light' : '';
 						?>
 
-						<div class="col-md-4 col-xl-3 pr-md-4 pr-xl-5">
+						<div class="col-md-4 col-xl-3 pr-md-4 pr-xl-5 pb-2 pb-xl-4">
 							<div class="card mb-2 mt-3">
 								<div class="card-header<?php echo $headerClasses; ?>">
 									<i class="fas fa-clock"></i>
