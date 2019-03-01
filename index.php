@@ -78,10 +78,20 @@ function getAPIUrl($api, $replace, $default) {
 }
 
 function createCache($folder) {
-	if(!is_writable($folder)) {
-		mkdir($folder, 0700, true);
-		if(!is_writable($folder)) {
-			die('Insufficient permissions to create "' . $folder . '". Please create the file or folder manually and add at least chmod 700.');
+	if (!is_writable($folder)) { //checks both, exists & writable
+		$errorMsg = 'Insufficient permission to create files and folders. Please give the parent directory sufficient permissions (at least chmod 700).';
+		
+		if (!file_exists($folder)) {
+			try {
+				mkdir($folder, 0700, true);
+			} catch (Exception $ex) {
+				die($errorMsg);
+			}
+			if (!is_writable($folder)) {
+				die($errorMsg);
+			}
+		} else if (!is_writable($folder)) {
+			die($errorMsg);
 		}
 	}
 }
@@ -90,7 +100,11 @@ function retreiveData($api, $cache_file) {
 	if (is_writable($cache_file) && (filemtime($cache_file) > (time() - 60 * 30 ))) {
 		$file = file_get_contents($cache_file);
 	} else {
-		$file = file_get_contents($api);
+		try {
+			$file = file_get_contents($api);
+		} catch (Exception $ex) {
+			die("Unable to reach API.");
+		}
 		//refresh cache
 		file_put_contents($cache_file, $file, LOCK_EX);
 	}
