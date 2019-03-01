@@ -52,4 +52,22 @@ $(function () {
 		}
 		e.preventDefault(); // prevent the default action (scroll / move caret)
 	});
+	
+	/* Time */
+	function pad (str, max) {
+		str = str.toString();
+		return str.length < max ? pad("0" + str, max) : str;
+	}
+	
+	var displayed = $('.currentTime').text();
+	function updateTime() {
+		var dt = new Date();
+		var time = dt.getHours() + ":" + pad(dt.getMinutes(), 2);
+
+		if(displayed !== time) {
+			displayed = time;
+			$('.currentTime').html(time);	
+		}
+	}
+	setInterval(function(){ updateTime(); }, 5000);
 });
