@@ -156,10 +156,15 @@ $weekDay = $desiredDateObj->format("D");
 $displayedDateFull = $weekDay . ", " . $desiredDatePretty;
 $displayedDate = $desiredDatePretty;
 
-if(isset($excludeWeekends) && $excludeWeekends === false) {
-	$weekDayString = "day";
-} else {
+function excludedWeekends() {
+	global $excludeWeekends;
+	return isset($excludeWeekends) && $excludeWeekends === true;
+}
+
+if(excludedWeekends()) {
 	$weekDayString = "weekday";
+} else {
+	$weekDayString = "day";
 }
 
 $nextWeek = createNewDate($desiredDate, "1 week");
@@ -354,7 +359,7 @@ function onGoingEvent($event) {
 
 				<?php if (empty($schedule)) { ?>
 					<div class="alert alert-secondary mt-4" role="alert">
-						<?php if(isWeekend($desiredDate)) { ?>
+						<?php if(isWeekend($desiredDate) && excludedWeekends()) { ?>
 							Weekends have been excluded from the schedule.
 						<?php } else { ?>
 							No entries have been found for that day.
