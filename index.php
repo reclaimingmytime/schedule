@@ -332,38 +332,36 @@ function onGoingEvent($event) {
 					</div>
 					<?php
 				} else { ?>
-						<div class="container-fluid">
-							<div class="row">
+						<div class="row">
 
-							<?php foreach ($schedule as $key => $event) {
-								$timeRange = $event['start'] . " - " . $event['end'];
-								$headerClasses = onGoingEvent($event) ? ' bg-dark text-light' : '';
-							?>
+						<?php foreach ($schedule as $key => $event) {
+							$timeRange = $event['start'] . " - " . $event['end'];
+							$headerClasses = onGoingEvent($event) ? ' bg-dark text-light' : '';
+						?>
 
-							<div class="col-xl-2 pl-0 pr-xl-4">
-								<div class="card mb-4 mt-4">
-									<div class="card-header<?php echo $headerClasses; ?>">
-										<i class="fas fa-clock"></i>
-										<strong ml-xl><?php echo $timeRange ?></strong>
-									</div>
+						<div class="col-md-4 col-xl-3 pr-md-4 pr-xl-5">
+							<div class="card mb-4 mt-4">
+								<div class="card-header<?php echo $headerClasses; ?>">
+									<i class="fas fa-clock"></i>
+									<strong ml-xl><?php echo $timeRange ?></strong>
+								</div>
 
-									<div class="card-body">
-										<p><strong><?php echo $event['subject']; ?></strong></p>
+								<div class="card-body">
+									<p><strong><?php echo $event['subject']; ?></strong></p>
 
-										<?php if (!empty($event['room'])) { ?>
-											<p><?php echo $event['room']; ?></p>
-										<?php } ?>
+									<?php if (!empty($event['room'])) { ?>
+										<p><?php echo $event['room']; ?></p>
+									<?php } ?>
 
-										<p><?php echo $event['prof']; ?></p>
-									</div>
+									<p><?php echo $event['prof']; ?></p>
 								</div>
 							</div>
-								
-							<?php
-							}
-						}
-						?>
 						</div>
+
+						<?php
+						}
+					}
+					?>
 					</div>
 				</div>
 			</main>
