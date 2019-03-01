@@ -35,6 +35,6 @@ Note: Arrow keys as a shortcut would interfere with keyboard-based scrolling.
 | Swipe right | Previous day |
 
 ## Command-line updates
-As an alternative to downloading the new files manually, if you have installed the script through git, you can simply update your local repository using `git pull rebase origin` in that directory.
+As an alternative to downloading the new files manually, if you have installed the script through git, you can simply update your local repository using `git pull origin master` in that directory.
 
 Note that your configuration file `config.php` will be **kept** in any case, as that file is ignored by git.
