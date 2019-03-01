@@ -283,6 +283,12 @@ function onGoingEvent($event) {
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+		
+		<style>
+			#navbarDropdown {
+				outline: none;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="container-fluid">
@@ -290,7 +296,7 @@ function onGoingEvent($event) {
 				<nav class="navbar navbar-expand navbar-light bg-light mt-3 mb-4">
 					<div class="navbar-header  d-none d-sm-block">
 						<?php if ($desiredDate !== $today) { ?>
-							<a class="navbar-brand" href=".">Schedule</a>
+							<a class="navbar-brand" href="?">Schedule</a>
 						<?php } else { ?>
 							<span class="navbar-brand">Schedule</span>
 						<?php } ?>
@@ -309,6 +315,19 @@ function onGoingEvent($event) {
 							<li class="nav-item mr-3"><a class="nav-link" href="?d=<?php echo $prevDay; ?>"><i class="fas fa-backward"></i> <span class="d-none d-md-inline">Previous Day</span></a></li>
 						<?php } if ($prevWeek !== "none") { ?>
 							<li class="nav-item"><a class="nav-link" href="?d=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> <span class="d-none d-md-inline">Previous Week</span></a></li>
+						<?php } ?>
+							
+						<?php if(!empty($allowedClasses)) { ?>
+						<li class="nav-item ml-3 d-none d-sm-inline-block dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="fas fa-folder"></i> <span class="d-none d-md-inline">Class</span>
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<?php foreach($allowedClasses as $c) { ?>
+								<a class="dropdown-item<?php if($class == $c) echo " active";?>" href="?c=<?php echo $c; ?>&amp;d=<?php echo $desiredDate; ?>"><i class="fas fa-folder-open"></i> <?php echo $c; ?></a>
+								<?php } ?>
+							</div>
+						</li>
 						<?php } ?>
 					</ul>
 				</nav>
@@ -367,6 +386,7 @@ function onGoingEvent($event) {
 			</main>
 		</div>
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 		<script src="js/swipe.min.js"></script>
 		<script src="js/main.min.js"></script>
 	</body>
