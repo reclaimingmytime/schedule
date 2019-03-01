@@ -348,7 +348,7 @@ function onGoingEvent($event) {
 					</ul>
 				</nav>
 			</header>
-
+			
 			<main>
 				<ul class="list-inline text-muted h4 pb-2 pt-2">
 					<li class="list-inline-item"><i class="fas fa-calendar-alt"></i></li>
@@ -393,13 +393,13 @@ function onGoingEvent($event) {
 						</div>
 
 						<?php
-						}
-					}
-					?>
+						}?>
 						</div>
-				</div>
-			</main>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+					<?php }
+					?>
+				</main>
+			</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha256-CjSoeELFOcH0/uxWu6mC/Vlrc1AARqbm/jiiImDGV3s=" crossorigin="anonymous"></script>
 		<script src="js/swipe.min.js"></script>
 		<script src="js/main.min.js"></script>
