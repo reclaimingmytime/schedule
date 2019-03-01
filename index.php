@@ -156,10 +156,16 @@ $weekDay = $desiredDateObj->format("D");
 $displayedDateFull = $weekDay . ", " . $desiredDatePretty;
 $displayedDate = $desiredDatePretty;
 
-$nextWeek = createNewDate($desiredDate, "1 week");
-$nextDay = createNewDate($desiredDate, "1 weekday");
+if(isset($excludeWeekends) && $excludeWeekends === false) {
+	$weekDayString = "day";
+} else {
+	$weekDayString = "weekday";
+}
 
-$prevDay = createNewDate($desiredDate, "1 weekday ago");
+$nextWeek = createNewDate($desiredDate, "1 week");
+$nextDay = createNewDate($desiredDate, "1 $weekDayString");
+
+$prevDay = createNewDate($desiredDate, "1 $weekDayString ago");
 $prevWeek = createNewDate($desiredDate, "1 week ago");
 
 if($prevWeek < createNewDate($minDate)) {

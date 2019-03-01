@@ -3,6 +3,7 @@
 //$timezone = 'Europe/London';
 
 //$minDate = "01.01.2000";
+$excludeWeekends = false;
 
 /* API connection */
 $cache_file = "mock-api.json";
