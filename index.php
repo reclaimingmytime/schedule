@@ -1,4 +1,7 @@
 <?php
+if(!file_exists("config.php")) {
+	die("config.php missing. Please use config.default.php as a template (if available).");
+}
 require_once("config.php");
 
 if (!empty($timezone)) {
