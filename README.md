@@ -12,7 +12,7 @@ In the desired directory, type the following: `git clone https://github.com/recl
 1. Copy `config.default.php` to `config.php`.
 2. Open `config.php` and change the required variables.
 
-Note: The directory of the script and the folder "cache/" (created by the script) must be writable with at least chmod 700. Otherwise, the API cache file will not be writable, which is required for the script to work.
+Note: The directory of the script and the folder "cache/" (created by the script) must be **writable** with at least chmod 700. Otherwise, the script will **fail** to do it's job.
 
 ## Usage
 ### Keyboard navigation
