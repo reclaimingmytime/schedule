@@ -2,7 +2,7 @@
 /* Time */
 //$timezone = 'Europe/London';
 
-$minDate = "01.01.2000";
+//$minDate = "01.01.2000";
 
 /* API connection */
 $cache_file = "mock-api.json";

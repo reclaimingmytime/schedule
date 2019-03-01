@@ -113,7 +113,12 @@ $calendar = retreiveData($desiredAPI, $cache_file);
 
 /* Date preparation */
 
+if(empty($minDate)) {
+	$minDate = date("d.m.Y", 0);
+}
+
 $min = new DateTime($minDate);
+//$min = (!empty($minDate) ? new DateTime($minDate) : new DateTime());
 
 function validDate($input) {
 	//DateTime even detects 31st Feb and 31st Nov as errors
