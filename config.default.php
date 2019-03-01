@@ -6,8 +6,6 @@
 $excludeWeekends = false;
 
 /* API connection */
-$cache_file = "mock-api.json";
-
 $defaultClass = "CLASS1";
 $allowedClasses = ['CLASS1', 'CLASS2'];
 
