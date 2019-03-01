@@ -25,7 +25,7 @@ Note: The directory must be writable (at least chmod 700). Otherwise, the API ca
 | `W`      | Next Week     |
 | `Enter`  | Current Week  |
 
-Note: Arrow keys are not used in order to not to interfere with any keyboard-based scrolling.
+Note: Arrow keys as a shortcut would interfere with keyboard-based scrolling.
 
 ### Touch navigation
 
