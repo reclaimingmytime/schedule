@@ -368,7 +368,6 @@ function onGoingEvent($event) {
 					<?php
 				} else { ?>
 					<div class="row">
-						
 						<?php foreach ($schedule as $key => $event) {
 							$timeRange = $event['start'] . " - " . $event['end'];
 							$headerClasses = onGoingEvent($event) ? ' bg-dark text-light' : '';
