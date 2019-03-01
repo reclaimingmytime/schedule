@@ -334,6 +334,7 @@ function onGoingEvent($event) {
 				} else { ?>
 						<div class="container-fluid">
 							<div class="row">
+								<div class="row">
 
 							<?php foreach ($schedule as $key => $event) {
 								$timeRange = $event['start'] . " - " . $event['end'];
@@ -364,6 +365,7 @@ function onGoingEvent($event) {
 						}
 						?>
 						</div>
+						</div>								
 					</div>
 				</div>
 			</main>
