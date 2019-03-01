@@ -334,14 +334,13 @@ function onGoingEvent($event) {
 				} else { ?>
 						<div class="container-fluid">
 							<div class="row">
-								<div class="row">
 
 							<?php foreach ($schedule as $key => $event) {
 								$timeRange = $event['start'] . " - " . $event['end'];
 								$headerClasses = onGoingEvent($event) ? ' bg-dark text-light' : '';
 							?>
 
-							<div class="col-xl-2">
+							<div class="col-xl-2 pl-0 pr-xl-4">
 								<div class="card mb-4 mt-4">
 									<div class="card-header<?php echo $headerClasses; ?>">
 										<i class="fas fa-clock"></i>
@@ -365,7 +364,6 @@ function onGoingEvent($event) {
 						}
 						?>
 						</div>
-						</div>								
 					</div>
 				</div>
 			</main>
