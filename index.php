@@ -340,14 +340,14 @@ function onGoingEvent($event) {
 						?>
 
 						<div class="col-md-4 col-xl-3 pr-md-4 pr-xl-5">
-							<div class="card mb-4 mt-4">
+							<div class="card mb-2 mt-3">
 								<div class="card-header<?php echo $headerClasses; ?>">
 									<i class="fas fa-clock"></i>
-									<strong ml-xl><?php echo $timeRange ?></strong>
+									<strong><?php echo $timeRange ?></strong>
 								</div>
 
 								<div class="card-body">
-									<p><strong><?php echo $event['subject']; ?></strong></p>
+									<p class="font-weight-bold"><?php echo $event['subject']; ?></p>
 
 									<?php if (!empty($event['room'])) { ?>
 										<p><?php echo $event['room']; ?></p>
