@@ -120,6 +120,10 @@ function retreiveData($api, $cache_file) {
 	return $calendarArray[CALENDAR];
 }
 
+if(!isset($allowedClasses)) {
+	$allowedClasses = [];
+}
+
 $class = getClass($defaultClass, $allowedClasses);
 $desiredAPI = getAPIUrl($api, $class, $defaultClass);
 
@@ -321,6 +325,14 @@ function onGoingEvent($event) {
 			#navbarDropdown {
 				outline: none;
 			}
+			.active {
+				pointer-events: none;
+			}
+			.dropdown-item.active {
+				font-weight: bold;
+				color: #212529;
+				background-color: transparent;
+			}
 		</style>
 	</head>
 	<body>
@@ -354,7 +366,7 @@ function onGoingEvent($event) {
 						<?php if(!empty($allowedClasses)) { ?>
 						<li class="nav-item ml-3 d-none d-sm-inline-block dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-folder"></i> <span class="d-none d-md-inline">Classes</span>
+								<i class="fas fa-folder"></i> <span class="d-none d-md-inline"><?php echo $class; ?></span>
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<?php foreach($allowedClasses as $c) { ?>
@@ -415,22 +427,26 @@ function onGoingEvent($event) {
 						</div>
 					<?php }
 					?>
-				</main>
-			<footer class="d-block d-sm-none text-center">
-				<div class="dropdown d-inline">
-					<a class="btn btn-white text-secondary dropdown-toggle mt-3 mb-3" href="#" role="button" id="classLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<i class="fas fa-folder"></i> Classes
-					</a>
-
-					<div class="dropdown-menu" aria-labelledby="classLink">
-						<?php foreach($allowedClasses as $c) { ?>
-							<a class="dropdown-item<?php if($class == $c) echo " active";?>" href="?c=<?php echo $c; ?>&amp;d=<?php echo $desiredDate; ?>"><i class="fas fa-folder-open"></i> <?php echo $c; ?></a>
-						<?php } ?>
-			</div>
-				</div>
+			</main>
+			
+			<footer class="d-block d-sm-none text-center mt-3 mb-3">
+				<?php if (!empty($allowedClasses)) { ?>
+					<div class="dropup d-inline">
+						<a class="btn btn-white text-secondary dropdown-toggle" href="#" role="button" id="classLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fas fa-folder"></i> <?php echo $class; ?>
+						</a>
+						<div class="dropdown-menu" aria-labelledby="classLink">
+							<?php foreach ($allowedClasses as $c) { ?>
+								<a class="dropdown-item<?php if ($class == $c) echo " active"; ?>" href="?c=<?php echo $c; ?>&amp;d=<?php echo $desiredDate; ?>"><i class="fas fa-folder-open"></i> <?php echo $c; ?></a>
+							<?php } ?>
+						</div>
+					</div>
+				<?php } ?>
 				<a href="#" class="btn btn-light bg-white text-muted" role="button" aria-pressed="true"><i class="fas fa-angle-up"></i> Top</a>
 			</footer>
+
 		</div>
+		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha256-CjSoeELFOcH0/uxWu6mC/Vlrc1AARqbm/jiiImDGV3s=" crossorigin="anonymous"></script>
