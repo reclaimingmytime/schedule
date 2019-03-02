@@ -336,7 +336,7 @@ function onGoingEvent($event) {
 					</div>
 					<ul class="navbar-nav m-auto ml-sm-0">
 						<?php if ($desiredDate !== $today) { ?>
-							<li class="nav-item mr-3 ml-3"><a class="nav-link" href="."><i class="fas fa-play"></i> <span class="d-none d-md-inline">Today</span></a></li>
+							<li class="nav-item mr-3 ml-3"><a class="nav-link" href="?"><i class="fas fa-play"></i> <span class="d-none d-md-inline">Today</span></a></li>
 						<?php } else { ?>
 							<li class="nav-item mr-3 ml-3 active"><a class="nav-link"><i class="fas fa-play"></i> <span class="d-none d-md-inline">Today</span></a></li>
 						<?php } ?>
