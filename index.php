@@ -354,7 +354,7 @@ function onGoingEvent($event) {
 						<?php if(!empty($allowedClasses)) { ?>
 						<li class="nav-item ml-3 d-none d-sm-inline-block dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-folder"></i> <span class="d-none d-md-inline">Class</span>
+								<i class="fas fa-folder"></i> <span class="d-none d-md-inline">Classes</span>
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<?php foreach($allowedClasses as $c) { ?>
