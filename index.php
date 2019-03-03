@@ -87,10 +87,8 @@ function createCache($folder) {
 			} catch (Exception $ex) {
 				die($errorMsg);
 			}
-			if (!is_writable($folder)) {
-				die($errorMsg);
-			}
-		} else if (!is_writable($folder)) {
+		} 
+		if (!is_writable($folder)) {
 			die($errorMsg);
 		}
 	}
