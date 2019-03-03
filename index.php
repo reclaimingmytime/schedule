@@ -433,7 +433,7 @@ function onGoingEvent($event) {
 
 				<?php if (isset($weekBump) && $weekBump === true) { ?>
 					<p class="text-center text-sm-left mt-4">
-						<a class="btn btn-secondary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+						<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
 							Info
 						</a>
 					</p>
