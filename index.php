@@ -432,13 +432,14 @@ function onGoingEvent($event) {
 					<?php } ?>
 
 				<?php if (isset($weekBump) && $weekBump === true) { ?>
-					<div class="dropup text-center text-sm-left mt-4">
-						<button class="btn btn-secondary dropdown-toggle" type="button" id="weekendInfo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<p class="text-center text-sm-left mt-4">
+						<a class="btn btn-secondary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
 							Info
-						</button>
-						<div class="dropdown-menu text-muted pt-4 pb-2 px-4" style="max-width: 200px;">
-							<p>Weekends have been excluded from the schedule.</p>
-							<p>You are now viewing the next week day.</p>
+						</a>
+					</p>
+					<div class="collapse" id="collapseExample">
+						<div class="card card-body pb-1">
+							<p>Weekends have been excluded from the schedule. You are now viewing the next week day.</p>
 						</div>
 					</div>
 				<?php } ?>
