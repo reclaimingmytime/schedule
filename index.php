@@ -427,11 +427,9 @@ function onGoingEvent($event) {
 							</div>
 						</div>
 
-						<?php
-						}?>
+						<?php } ?>
 						</div>
-					<?php }
-					?>
+					<?php } ?>
 
 				<?php if (isset($weekBump) && $weekBump === true) { ?>
 					<div class="dropup text-center text-sm-left mt-4">
