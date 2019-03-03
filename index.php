@@ -137,7 +137,6 @@ if(empty($minDate)) {
 }
 
 $min = new DateTime($minDate);
-//$min = (!empty($minDate) ? new DateTime($minDate) : new DateTime());
 
 function validDate($input) {
 	//DateTime even detects 31st Feb and 31st Nov as errors
