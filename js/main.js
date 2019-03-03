@@ -1,6 +1,6 @@
-/* Swipe */
-
 $(function () {
+
+	/* Swipe */
 	$("html").swipe({
 		swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
 			if (direction == "left") {
@@ -15,6 +15,7 @@ $(function () {
 		threshold: 50
 	});
 
+	/* Keyboard navigation */
 	$(document).keydown(function (e) {
 		switch (e.which) {
 			// case 37: // left
@@ -71,7 +72,7 @@ $(function () {
 	}
 	setInterval(function(){ updateTime(); }, 5000);
 	
-	//Scroll to top
+	/* Scroll to top */
 	$('.top').on('click', function () {
 		$('html, body').animate({
 			scrollTop: 0
