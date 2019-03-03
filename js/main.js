@@ -62,7 +62,7 @@ $(function () {
 	var displayed = $('.currentTime').text();
 	function updateTime() {
 		var dt = new Date();
-		var time = dt.getHours() + ":" + pad(dt.getMinutes(), 2);
+		var time = pad(dt.getHours(), 2) + ":" + pad(dt.getMinutes(), 2);
 
 		if(displayed !== time) {
 			displayed = time;
