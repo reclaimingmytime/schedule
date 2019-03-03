@@ -395,12 +395,6 @@ function onGoingEvent($event) {
 					<li class="list-inline-item"><?php echo $displayedDate; ?></li>
 					<li class="list-inline-item currentTime"><?php echo $currentTime; ?></li>
 				</ul>
-				
-				<?php if(isset($weekBump) && $weekBump === true) { ?>
-				<div class="alert alert-muted mt-4" role="alert">
-					Weekends have been excluded from the schedule. You are now viewing the next weekday.
-				</div>
-				<?php } ?>
 
 				<?php if (empty($schedule)) { ?>
 					<div class="alert alert-secondary mt-4" role="alert">
@@ -438,6 +432,18 @@ function onGoingEvent($event) {
 						</div>
 					<?php }
 					?>
+
+				<?php if (isset($weekBump) && $weekBump === true) { ?>
+					<div class="dropup text-center text-sm-left mt-4">
+						<button class="btn btn-secondary dropdown-toggle" type="button" id="weekendInfo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Info
+						</button>
+						<div class="dropdown-menu text-muted pt-4 pb-2 px-4" style="max-width: 200px;">
+							<p>Weekends have been excluded from the schedule.</p>
+							<p>You are now viewing the next week day.</p>
+						</div>
+					</div>
+				<?php } ?>
 			</main>
 			
 			<footer class="d-block d-sm-none text-center my-4">
