@@ -70,4 +70,15 @@ $(function () {
 		}
 	}
 	setInterval(function(){ updateTime(); }, 5000);
+	
+	//Scroll to top
+	$('.top').on('click', function () {
+		$('html, body').animate({
+			scrollTop: 0
+		}, 500);
+		return false;
+	});
+	if (($(document).height() > $(window).height())) { //if content is scrollable
+		$('.top').addClass('d-inline-block');
+	}
 });
