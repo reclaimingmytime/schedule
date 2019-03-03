@@ -369,11 +369,11 @@ function onGoingEvent($event) {
 						<?php if ($prevDay !== "none") { ?>
 							<li class="nav-item mr-3"><a class="nav-link" href="?d=<?php echo $prevDay; ?>"><i class="fas fa-backward"></i> <span class="d-none d-md-inline">Previous Day</span></a></li>
 						<?php } if ($prevWeek !== "none") { ?>
-							<li class="nav-item"><a class="nav-link" href="?d=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> <span class="d-none d-md-inline">Previous Week</span></a></li>
+							<li class="nav-item mr-3"><a class="nav-link" href="?d=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> <span class="d-none d-md-inline">Previous Week</span></a></li>
 						<?php } ?>
 							
 						<?php if(!empty($allowedClasses)) { ?>
-						<li class="nav-item ml-3 d-none d-sm-inline-block dropdown">
+						<li class="nav-item d-none d-sm-inline-block dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="fas fa-folder"></i> <span class="d-none d-md-inline"><?php echo $class; ?></span>
 							</a>
