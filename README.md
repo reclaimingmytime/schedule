@@ -29,12 +29,17 @@ Note: Arrow keys as a shortcut would interfere with keyboard-based scrolling.
 
 ### Touch navigation
 
-| Gesture     | Action       |
-| ----------- | ------------ |
-| Swipe left  | Next day     |
-| Swipe right | Previous day |
+| Gesture                      | Action        |
+| ---------------------------- | ------------- |
+| Swipe left with one finger   | Next day      |
+| Swipe right with one finger  | Previous day  |
+| Swipe left with two fingers  | Next week     |
+| Swipe right with two fingers | Previous week |
 
 ## Command-line updates
-As an alternative to downloading the new files manually, if you have installed the script through git, you can simply update your local repository using `git pull origin master` in that directory.
+As an alternative to downloading the new files manually, if you have installed the script through git, you can simply update your local repository by typing the following in that directory.
+
+`git fetch --all
+ git reset --hard origin/master`
 
 Note that your configuration file `config.php` will be **kept** in any case, as that file is ignored by git.
