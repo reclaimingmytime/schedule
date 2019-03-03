@@ -3,15 +3,23 @@ $(function () {
 	/* Swipe */
 	$("html").swipe({
 		swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
-			if (direction == "left") {
+			if (direction == "left" && (fingerCount == 1 || fingerCount == 0)) {
 				window.location.href = "?d=" + $('head').data('nextday');
 			}
-			if (direction == "right") {
+			if (direction == "left" && fingerCount == 2) {
+				window.location.href = "?d=" + $('head').data('nextweek');
+			}
+			
+			if (direction == "right" && (fingerCount == 1 || fingerCount == 0) && $('head').data('prevday') !== "none") {
 				if ($('head').data('prevday') !== "none") {
 					window.location.href = "?d=" + $('head').data('prevday');
 				}
 			}
+			if (direction == "right" && fingerCount == 2 && $('head').data('prevweek') !== "none") {
+				window.location.href = "?d=" + $('head').data('prevweek');
+			}
 		},
+		fingers: 'all',
 		threshold: 50
 	});
 
@@ -25,12 +33,12 @@ $(function () {
 				}
 				break;
 
-			// case 39: // right
+				// case 39: // right
 			case 68: // D
 				window.location.href = "?d=" + $('head').data('nextday');
 				break;
 
-			// case 38: // up
+				// case 38: // up
 			case 87: // W
 				window.location.href = "?d=" + $('head').data('nextweek');
 				break;
@@ -53,25 +61,27 @@ $(function () {
 		}
 		e.preventDefault(); // prevent the default action (scroll / move caret)
 	});
-	
+
 	/* Time */
-	function pad (str, max) {
+	function pad(str, max) {
 		str = str.toString();
 		return str.length < max ? pad("0" + str, max) : str;
 	}
-	
+
 	var displayed = $('.currentTime').text();
 	function updateTime() {
 		var dt = new Date();
 		var time = pad(dt.getHours(), 2) + ":" + pad(dt.getMinutes(), 2);
 
-		if(displayed !== time) {
+		if (displayed !== time) {
 			displayed = time;
-			$('.currentTime').html(time);	
+			$('.currentTime').html(time);
 		}
 	}
-	setInterval(function(){ updateTime(); }, 5000);
-	
+	setInterval(function () {
+		updateTime();
+	}, 5000);
+
 	/* Scroll to top */
 	$('.top').on('click', function () {
 		$('html, body').animate({
