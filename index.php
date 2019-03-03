@@ -162,10 +162,27 @@ function createTime($input) {
 	return DateTime::createFromFormat('H:i', $input);
 }
 
+function excludedWeekends() {
+	global $excludeWeekends;
+	return isset($excludeWeekends) && $excludeWeekends === true;
+}
+
 $today = date("Y-m-d");
 $currentTime = date("H:i");
 
 $desiredDate = getCustomDate("d", $today);
+
+$weekBump = false;
+if(excludedWeekends() && isWeekend($desiredDate)) {
+	$desiredDate = createNewDate($desiredDate, "1 weekday");
+	$weekBump = true;
+}
+if(excludedWeekends() && isWeekend($today)) {
+	$today = createNewDate($today, "1 weekday");
+	if($today == $desiredDate) {
+		$weekBump = true;
+	}
+}
 
 $desiredDateObj = new DateTime($desiredDate);
 
@@ -173,11 +190,6 @@ $desiredDatePretty = $desiredDateObj->format("d.m.y");
 $weekDay = $desiredDateObj->format("D");
 $displayedDateFull = $weekDay . ", " . $desiredDatePretty;
 $displayedDate = $desiredDatePretty;
-
-function excludedWeekends() {
-	global $excludeWeekends;
-	return isset($excludeWeekends) && $excludeWeekends === true;
-}
 
 if(excludedWeekends()) {
 	$weekDayString = "weekday";
@@ -383,14 +395,16 @@ function onGoingEvent($event) {
 					<li class="list-inline-item"><?php echo $displayedDate; ?></li>
 					<li class="list-inline-item currentTime"><?php echo $currentTime; ?></li>
 				</ul>
+				
+				<?php if(isset($weekBump) && $weekBump === true) { ?>
+				<div class="alert alert-muted mt-4" role="alert">
+					Weekends have been excluded from the schedule. You are now viewing the next weekday.
+				</div>
+				<?php } ?>
 
 				<?php if (empty($schedule)) { ?>
 					<div class="alert alert-secondary mt-4" role="alert">
-						<?php if(isWeekend($desiredDate) && excludedWeekends()) { ?>
-							Weekends have been excluded from the schedule.
-						<?php } else { ?>
 							No entries have been found for that day.
-						<?php } ?>
 					</div>
 					<?php
 				} else { ?>
