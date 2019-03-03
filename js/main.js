@@ -79,6 +79,6 @@ $(function () {
 		return false;
 	});
 	if (($(document).height() > $(window).height())) { //if content is scrollable
-		$('.top').addClass('d-inline-block');
+		$('.top').removeClass('d-none').addClass('d-inline-block');
 	}
 });
