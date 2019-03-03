@@ -389,7 +389,7 @@ function onGoingEvent($event) {
 			</header>
 			
 			<main>
-				<ul class="list-inline text-muted h4 pb-2 pt-2">
+				<ul class="list-inline text-muted h4 py-2">
 					<li class="list-inline-item"><i class="fas fa-calendar-alt"></i></li>
 					<li class="list-inline-item"><?php echo $weekDay; ?></li>
 					<li class="list-inline-item"><?php echo $displayedDate; ?></li>
@@ -404,7 +404,7 @@ function onGoingEvent($event) {
 
 				<?php if (empty($schedule)) { ?>
 					<div class="alert alert-secondary mt-4" role="alert">
-							No entries have been found for that day.
+						No entries have been found for that day.
 					</div>
 					<?php
 				} else { ?>
@@ -440,7 +440,7 @@ function onGoingEvent($event) {
 					?>
 			</main>
 			
-			<footer class="d-block d-sm-none text-center mt-4 mb-4">
+			<footer class="d-block d-sm-none text-center my-4">
 				<?php if (!empty($allowedClasses)) { ?>
 					<div class="dropup d-inline">
 						<a class="btn btn-white text-muted dropdown-toggle" href="#" role="button" id="classLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
