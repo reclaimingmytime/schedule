@@ -12,7 +12,7 @@ $(function () {
 				}
 			}
 		},
-		threshold: 10
+		threshold: 50
 	});
 
 	$(document).keydown(function (e) {
