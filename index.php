@@ -426,10 +426,10 @@ function onGoingEvent($event) {
 					?>
 			</main>
 			
-			<footer class="d-block d-sm-none text-center mt-3 mb-3">
+			<footer class="d-block d-sm-none text-center mt-4 mb-4">
 				<?php if (!empty($allowedClasses)) { ?>
 					<div class="dropup d-inline">
-						<a class="btn btn-white text-secondary dropdown-toggle" href="#" role="button" id="classLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<a class="btn btn-white text-muted dropdown-toggle" href="#" role="button" id="classLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="fas fa-folder"></i> <?php echo $class; ?>
 						</a>
 						<div class="dropdown-menu" aria-labelledby="classLink">
@@ -439,7 +439,7 @@ function onGoingEvent($event) {
 						</div>
 					</div>
 				<?php } ?>
-				<a href="#" class="btn btn-light bg-white text-muted" role="button" aria-pressed="true"><i class="fas fa-angle-up"></i> Top</a>
+				<a href="#" class="btn btn-white text-muted" role="button" aria-pressed="true"><i class="fas fa-angle-up"></i> Top</a>
 			</footer>
 
 		</div>
