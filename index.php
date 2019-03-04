@@ -115,11 +115,15 @@ function retreiveData($api, $cache_file) {
 
 	$calendarArray = json_decode($calendarJSON, true);
 
-	return $calendarArray[CALENDAR];
+	return defined('CALENDAR') ? $calendarArray[CALENDAR] : $calendarArray;
 }
 
 if(!isset($allowedClasses)) {
 	$allowedClasses = [];
+}
+
+if(!isset($defaultClass) || !isset($api)) {
+	die('Empty or invalid API. Please specify $api and $defaultClass in your config file in the following format:<br><b>$api</b> = https://example.com/api.json?class=<b>$defaultClass</b>');
 }
 
 $class = getClass($defaultClass, $allowedClasses);
@@ -214,8 +218,12 @@ if($prevDay < createNewDate($minDate)) {
 /* Schedule preparation */
 
 //Room Functions
+if(!isset($roomPrefix)) {
+	$roomPrefix = "";
+}
+
 function prepareRoom($raw, $roomPrefix) {
-	return str_replace($roomPrefix, "", $raw);
+	return !empty($roomPrefix) ? str_replace($roomPrefix, "", $raw) : $raw;
 }
 
 //Prof Functions
@@ -231,6 +239,14 @@ function getFullNames($abbr, $profs) {
 		return $profs[$abbr];
 	}
 	return $abbr;
+}
+
+if(!isset($profs)) {
+	$profs = [];
+}
+
+if(!isset($emptyProfs)) {
+	$emptyProfs = [];
 }
 
 function prepareProfs($prof, $emptyProfs, $profs) {
@@ -254,7 +270,18 @@ function isWeekend($date) {
 	return ($weekDay == 0 || $weekDay == 6);
 }
 
-//Duplicate check functions
+//Ensure defined constants
+function ensureDefined($const) {
+	if(!defined($const)) {
+		die("Undefined constant $const. Please define in config file.");
+	}
+}
+ensureDefined("SUBJECT");
+ensureDefined("START");
+ensureDefined("ROOM");
+ensureDefined("PROF");
+
+//Duplicate check
 function sameEvent($e, $new) {
 	return equals($e["start"], $new["start"]) && equals($e["end"], $new["end"]) && equals($e["subject"], $new["subject"]);
 }
@@ -282,9 +309,19 @@ foreach ($calendar as $entry) {
 		$new = [];
 		$new["start"] = extractTime($entry[START]);
 		$new["end"] = extractTime($entry[END]);
-		$new["subject"] = $entry[SUBJECT];
-		$new["room"] = prepareRoom($entry[ROOM], $roomPrefix);
-		$new["prof"] = prepareProfs($entry[PROF], $emptyProfs, $profs);
+
+		if(defined('SUBJECT')) {
+			$new["subject"] = $entry[SUBJECT];
+		}
+		
+		if(defined('ROOM')) {
+			$new["room"] = prepareRoom($entry[ROOM], $roomPrefix);
+		}
+		
+		if(defined('PROF')) {
+			$new["prof"] = prepareProfs($entry[PROF], $emptyProfs, $profs);
+		}
+		
 
 		$add = true;
 
@@ -416,13 +453,18 @@ function onGoingEvent($event) {
 								</div>
 
 								<div class="card-body">
-									<p class="font-weight-bold"><?php echo $event['subject']; ?></p>
+											<?php if (!empty($event['subject'])) { ?>
+												<p class="font-weight-bold"><?php echo $event['subject']; ?></p>
+											<?php } ?>
 
 											<ul class="list-inline">
 												<?php if (!empty($event['room'])) { ?>
 													<li class="list-inline-item pr-3"><?php echo $event['room']; ?></li>
 												<?php } ?>
-												<li class="list-inline-item"><?php echo $event['prof']; ?></li>
+													
+												<?php if (!empty($event['prof'])) { ?>
+													<li class="list-inline-item"><?php echo $event['prof']; ?></li>
+												<?php } ?>
 											</ul>
 								</div>
 							</div>
