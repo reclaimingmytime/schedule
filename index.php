@@ -418,11 +418,12 @@ function onGoingEvent($event) {
 								<div class="card-body">
 									<p class="font-weight-bold"><?php echo $event['subject']; ?></p>
 
-									<?php if (!empty($event['room'])) { ?>
-										<p><?php echo $event['room']; ?></p>
-									<?php } ?>
-
-									<p><?php echo $event['prof']; ?></p>
+											<ul class="list-inline">
+												<?php if (!empty($event['room'])) { ?>
+													<li class="list-inline-item pr-3"><?php echo $event['room']; ?></li>
+												<?php } ?>
+												<li class="list-inline-item"><?php echo $event['prof']; ?></li>
+											</ul>
 								</div>
 							</div>
 						</div>
