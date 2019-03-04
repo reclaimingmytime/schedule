@@ -8,6 +8,8 @@ As an alternative to downloading the files manually from GitHub, you can use the
 
 In the desired directory, type the following: `git clone https://github.com/reclaimingmytime/schedule.git`
 
+This will place the script in the sub-folder `schedule`.
+
 ## Configuration
 1. Copy `config.default.php` to `config.php`.
 2. Open `config.php` and change the required variables.
