@@ -1,13 +1,17 @@
 # schedule
 A PHP script that creates a study schedule based on an API.
 
-The script has been kept extremely simple by design.
+The script has been kept simple by design.
 
 ## Functionality
 
 The script displays one day at a time. By the default, the script shows the current day. You can navigate to the next or previous day or week, or go back to today.
 
 The links are disabled dynamically. For example, if you are on the current day, the link "Today" is disabled. That gives you a clear indication of where you are without having to read the date.
+
+### Input validation
+
+The date is checked for validity, so `February 30` and `November 31` will be rejected.
 
 ### Limitations
 
