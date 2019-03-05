@@ -42,14 +42,14 @@ Note: Arrow keys as a shortcut would interfere with keyboard-based scrolling.
 | Swipe left with two fingers  | Next week     |
 | Swipe right with two fingers | Previous week |
 
-## Command-line installation
+## Installation
 As an alternative to downloading the files manually from GitHub, you can use the command-line.
 
 In the desired directory, type or paste the following: `git clone https://github.com/reclaimingmytime/schedule.git`
 
 This will place the script in the sub-folder `schedule`.
 
-## Command-line updates
+## Updating
 
 As an alternative to downloading the new files manually, if you have installed the script through git, you can simply update your local repository using the following command:
 
