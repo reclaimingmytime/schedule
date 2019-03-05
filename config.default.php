@@ -23,7 +23,7 @@ define('PROF', 'Professor');
 $emptyProfs = ['-'];
 
 $profs = [
-		"js" => "John Doe",
+	"doe" => "John Doe",
 ];
 
 $roomPrefix = 'Room-';
