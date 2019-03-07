@@ -222,8 +222,17 @@ if(!isset($roomPrefix)) {
 	$roomPrefix = "";
 }
 
-function prepareRoom($raw, $roomPrefix) {
+function trimRoom($raw, $roomPrefix) {
 	return !empty($roomPrefix) ? str_replace($roomPrefix, "", $raw) : $raw;	
+}
+
+function prepareRoom($raw, $roomPrefix, $rooms) {
+	$room = trimRoom($raw, $roomPrefix);
+	
+	if(array_key_exists($room, $rooms)) {
+		return $rooms[$room];
+	}
+	return $room;
 }
 
 //Prof Functions
@@ -314,7 +323,7 @@ foreach ($calendar as $entry) {
 		$new["start"] = extractTime($entry[START]);
 		$new["end"] = extractTime($entry[END]);
 		$new["subject"] = $entry[SUBJECT];
-		$new["room"] = prepareRoom($entry[ROOM], $roomPrefix);
+		$new["room"] = prepareRoom($entry[ROOM], $roomPrefix, $rooms);
 		$new["prof"] = prepareProfs($entry[PROF], $emptyProfs, $profs);
 
 		$add = true;
@@ -457,7 +466,7 @@ function onGoingEvent($event) {
 												<?php } ?>
 													
 												<?php if (!empty($event['prof'])) { ?>
-													<li class="list-inline-item"><?php echo $event['prof']; ?></li>
+													<li class="list-inline-item text-secondary"><?php echo $event['prof']; ?></li>
 												<?php } ?>
 											</ul>
 								</div>
