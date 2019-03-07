@@ -20,14 +20,15 @@ define('SUBJECT', 'Subject');
 define('ROOM', 'Room');
 define('PROF', 'Professor');
 
+/* Displaying Data */
 $emptyProfs = ['-'];
 
 $profs = [
 	"doe" => "John Doe",
 ];
 
+$roomPrefix = 'Room-';
+
 $rooms = [
 		"001" => "Entrance Hall"
 ];
-
-$roomPrefix = 'Room-';
