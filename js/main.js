@@ -3,6 +3,7 @@ $(function () {
 	/* Swipe */
 	$("html").swipe({
 		swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
+			// fingerCount 0: No touchscreen detected
 			if (direction == "left" && (fingerCount == 1 || fingerCount == 0)) {
 				window.location.href = "?d=" + $('head').data('nextday');
 			}
