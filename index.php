@@ -166,7 +166,7 @@ function createTime($input) {
 	return DateTime::createFromFormat('H:i', $input);
 }
 
-function excludedWeekends() {
+function hasExcludedWeekends() {
 	global $excludeWeekends;
 	return isset($excludeWeekends) && $excludeWeekends === true;
 }
@@ -177,11 +177,11 @@ $currentTime = date("H:i");
 $desiredDate = getCustomDate("d", $today);
 
 $weekBump = false;
-if(excludedWeekends() && isWeekend($desiredDate)) {
+if(hasExcludedWeekends() && isWeekend($desiredDate)) {
 	$desiredDate = createNewDate($desiredDate, "1 weekday");
 	$weekBump = true;
 }
-if(excludedWeekends() && isWeekend($today)) {
+if(hasExcludedWeekends() && isWeekend($today)) {
 	$today = createNewDate($today, "1 weekday");
 	if($today == $desiredDate) {
 		$weekBump = true;
@@ -195,7 +195,7 @@ $weekDay = $desiredDateObj->format("D");
 $displayedDateFull = $weekDay . ", " . $desiredDatePretty;
 $displayedDate = $desiredDatePretty;
 
-if(excludedWeekends()) {
+if(hasExcludedWeekends()) {
 	$weekDayString = "weekday";
 } else {
 	$weekDayString = "day";
@@ -223,7 +223,7 @@ if(!isset($roomPrefix)) {
 }
 
 function prepareRoom($raw, $roomPrefix) {
-	return !empty($roomPrefix) ? str_replace($roomPrefix, "", $raw) : $raw;
+	return !empty($roomPrefix) ? str_replace($roomPrefix, "", $raw) : $raw;	
 }
 
 //Prof Functions
