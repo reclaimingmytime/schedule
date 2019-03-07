@@ -450,7 +450,7 @@ function onGoingEvent($event) {
 						?>
 						
 						<div class="col-md-4 col-xl-3 pr-md-4 pr-xl-5 pb-4 pb-xl-5">
-							<div class="card h-100 mt-3">
+							<div class="card mt-3">
 								<div class="card-header<?php echo $headerClasses; ?>">
 									<i class="fas fa-clock"></i>
 									<strong><?php echo $timeRange ?></strong>
@@ -465,10 +465,10 @@ function onGoingEvent($event) {
 												<?php if (!empty($event['room'])) { ?>
 													<li class="list-inline-item pr-3"><?php echo $event['room']; ?></li>
 												<?php } ?>
-													
+
 												<?php if (!empty($event['prof'])) { ?>
 													<li class="list-inline-item text-secondary"><?php echo $event['prof']; ?></li>
-												<?php } ?>
+													<?php } ?>
 											</ul>
 								</div>
 							</div>
