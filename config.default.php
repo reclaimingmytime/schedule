@@ -26,4 +26,8 @@ $profs = [
 	"doe" => "John Doe",
 ];
 
+$rooms = [
+		"001" => "Entrance Hall"
+];
+
 $roomPrefix = 'Room-';
