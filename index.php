@@ -424,7 +424,7 @@ function onGoingEvent($event) {
 			</header>
 			
 			<main>
-				<ul class="list-inline text-muted h4 pt-2 pb-3">
+				<ul class="list-inline text-muted h4 py-2">
 					<li class="list-inline-item"><i class="fas fa-calendar-alt"></i></li>
 					<li class="list-inline-item"><?php echo $weekDay; ?></li>
 					<li class="list-inline-item"><?php echo $displayedDate; ?></li>
@@ -443,19 +443,18 @@ function onGoingEvent($event) {
 							$headerClasses = onGoingEvent($event) ? ' bg-dark text-light' : '';
 						?>
 						
-						<div class="col-md-4 col-xl-3 pr-md-4 pr-xl-5 pb-4 pb-xl-5">
-							<div class="card">
+						<div class="col-12 pb-1">
+							<div class="card mt-3">
 								<div class="card-header<?php echo $headerClasses; ?>">
 									<i class="fas fa-clock"></i>
 									<strong><?php echo $timeRange ?></strong>
 								</div>
 
 								<div class="card-body pt-3 pb-1">
-											<?php if (!empty($event['subject'])) { ?>
-												<p class="font-weight-bold"><?php echo $event['subject']; ?></p>
-											<?php } ?>
-
 											<ul class="list-inline">
+												<?php if (!empty($event['subject'])) { ?>
+													<li class="list-inline-item pr-3 font-weight-bold"><?php echo $event['subject']; ?></li>
+												<?php } ?>
 												<?php if (!empty($event['room'])) { ?>
 													<li class="list-inline-item pr-3"><?php echo $event['room']; ?></li>
 												<?php } ?>
