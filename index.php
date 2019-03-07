@@ -271,15 +271,19 @@ function isWeekend($date) {
 }
 
 //Ensure defined constants
-function ensureDefined($const) {
-	if(!defined($const)) {
-		die("Undefined constant $const. Please define in config file.");
+function ensureDefined($constant) {
+	if (!defined($constant)) {
+		die("Undefined constant $constant. Please define in config file.");
 	}
 }
-ensureDefined("SUBJECT");
-ensureDefined("START");
-ensureDefined("ROOM");
-ensureDefined("PROF");
+
+function ensureAllDefined($constants) {
+	foreach ($constants as $constant) {
+		ensureDefined($constant);
+	}
+}
+
+ensureAllDefined(['SUBJECT', 'START', 'END', 'ROOM', 'PROF']);
 
 //Duplicate check
 function sameEvent($e, $new) {
