@@ -384,33 +384,33 @@ function onGoingEvent($event) {
 			<header>
 				<nav class="navbar navbar-expand navbar-light bg-light mt-3 mb-4">
 					<div class="navbar-header d-none d-sm-block">
-						
 						<?php if ($desiredDate !== $today) { ?>
 							<a class="navbar-brand" href="?">Schedule</a>
 						<?php } else { ?>
 							<span class="navbar-brand">Schedule</span>
 						<?php } ?>
 					</div>
+				
 					<ul class="navbar-nav m-auto ml-sm-0">
 						<?php if ($desiredDate !== $today) { ?>
-							<li class="nav-item mr-4 ml-3"><a class="nav-link" href="."><i class="fas fa-play"></i> <span class="d-none d-md-inline">Today</span></a></li>
+							<li class="nav-item mr-4 ml-3"><a class="nav-link" href="."><i class="fas fa-play"></i> <span class="d-none d-lg-inline">Today</span></a></li>
 						<?php } else { ?>
-							<li class="nav-item mr-4 ml-3 active"><a class="nav-link"><i class="fas fa-play"></i> <span class="d-none d-md-inline">Today</span></a></li>
+							<li class="nav-item mr-4 ml-3 active"><a class="nav-link"><i class="fas fa-play"></i> <span class="d-none d-lg-inline">Today</span></a></li>
 						<?php } ?>
 
-						<li class="nav-item mr-4"><a class="nav-link" href="?d=<?php echo $nextDay; ?>"><i class="fas fa-forward"></i> <span class="d-none d-md-inline">Next Day</span></a></li>
-						<li class="nav-item mr-4"><a class="nav-link" href="?d=<?php echo $nextWeek; ?>"><i class="fas fa-step-forward"></i> <span class="d-none d-md-inline">Next Week</span></a></li>
+						<li class="nav-item mr-4"><a class="nav-link" href="?d=<?php echo $nextDay; ?>"><i class="fas fa-forward"></i> <span class="d-none d-lg-inline">Next Day</span></a></li>
+						<li class="nav-item mr-4"><a class="nav-link" href="?d=<?php echo $nextWeek; ?>"><i class="fas fa-step-forward"></i> <span class="d-none d-lg-inline">Next Week</span></a></li>
 
 						<?php if ($prevDay !== "none") { ?>
-							<li class="nav-item mr-4"><a class="nav-link" href="?d=<?php echo $prevDay; ?>"><i class="fas fa-backward"></i> <span class="d-none d-md-inline">Previous Day</span></a></li>
+							<li class="nav-item mr-4"><a class="nav-link" href="?d=<?php echo $prevDay; ?>"><i class="fas fa-backward"></i> <span class="d-none d-lg-inline">Previous Day</span></a></li>
 						<?php } if ($prevWeek !== "none") { ?>
-							<li class="nav-item mr-4"><a class="nav-link" href="?d=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> <span class="d-none d-md-inline">Previous Week</span></a></li>
+							<li class="nav-item mr-4"><a class="nav-link" href="?d=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> <span class="d-none d-lg-inline">Previous Week</span></a></li>
 						<?php } ?>
 							
 						<?php if(!empty($allowedClasses)) { ?>
 						<li class="nav-item d-none d-sm-inline-block dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-folder"></i> <span class="d-none d-md-inline"><?php echo $class; ?></span>
+								<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $class; ?></span>
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<?php foreach($allowedClasses as $c) { ?>
