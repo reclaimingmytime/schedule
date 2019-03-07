@@ -313,13 +313,9 @@ foreach ($calendar as $entry) {
 		$new = [];
 		$new["start"] = extractTime($entry[START]);
 		$new["end"] = extractTime($entry[END]);
-
-			$new["subject"] = $entry[SUBJECT];
-		
-			$new["room"] = prepareRoom($entry[ROOM], $roomPrefix);
-
-			$new["prof"] = prepareProfs($entry[PROF], $emptyProfs, $profs);
-		
+		$new["subject"] = $entry[SUBJECT];
+		$new["room"] = prepareRoom($entry[ROOM], $roomPrefix);
+		$new["prof"] = prepareProfs($entry[PROF], $emptyProfs, $profs);
 
 		$add = true;
 
