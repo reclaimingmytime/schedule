@@ -226,10 +226,8 @@ function trimRoom($raw, $roomPrefix) {
 	return !empty($roomPrefix) ? str_replace($roomPrefix, "", $raw) : $raw;	
 }
 
-function prepareRoom($raw, $roomPrefix, $rooms) {
-	$room = trimRoom($raw, $roomPrefix);
-	
-	if(array_key_exists($room, $rooms)) {
+function lookupRooms($room, $rooms) {
+	if(!empty($rooms) && array_key_exists($room, $rooms)) {
 		return $rooms[$room];
 	}
 	return $room;
@@ -258,7 +256,7 @@ if(!isset($emptyProfs)) {
 	$emptyProfs = [];
 }
 
-function prepareProfs($prof, $emptyProfs, $profs) {
+function lookupProfs($prof, $emptyProfs, $profs) {
 	$shortProf = trimPlaceholders($prof, $emptyProfs);
 	return getFullNames($shortProf, $profs);
 }
@@ -323,9 +321,12 @@ foreach ($calendar as $entry) {
 		$new["start"] = extractTime($entry[START]);
 		$new["end"] = extractTime($entry[END]);
 		$new["subject"] = $entry[SUBJECT];
-		$new["room"] = prepareRoom($entry[ROOM], $roomPrefix, $rooms);
-		$new["prof"] = prepareProfs($entry[PROF], $emptyProfs, $profs);
-
+		
+		$shortRoom = !empty($roomPrefix) ? trimRoom($entry[ROOM], $roomPrefix) : $entry[ROOM];
+		$new["room"] = lookupRooms($shortRoom , $rooms);
+		
+		$new["prof"] = !empty($emptyProfs) && !empty($profs) ? lookupProfs($entry[PROF], $emptyProfs, $profs) : $entry[PROF];
+		
 		$add = true;
 
 		foreach ($schedule as $key => $existing) {
