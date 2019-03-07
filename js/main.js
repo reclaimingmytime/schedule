@@ -82,7 +82,7 @@ $(function () {
 	$('.top').on('click', function () {
 		$('html, body').animate({
 			scrollTop: 0
-		}, 500);
+		}, 400);
 		return false;
 	});
 	if (($(document).height() > $(window).height())) { //if content is scrollable
