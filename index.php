@@ -217,6 +217,14 @@ if($prevDay < createNewDate($minDate)) {
 
 /* Schedule preparation */
 
+//General Functions
+function lookup($room, $rooms) {
+	if(array_key_exists($room, $rooms)) {
+		return $rooms[$room];
+	}
+	return $room;
+}
+
 //Room Functions
 if(!isset($roomPrefix)) {
 	$roomPrefix = "";
@@ -226,26 +234,12 @@ function trimRoom($raw, $roomPrefix) {
 	return !empty($roomPrefix) ? str_replace($roomPrefix, "", $raw) : $raw;	
 }
 
-function lookupRooms($room, $rooms) {
-	if(!empty($rooms) && array_key_exists($room, $rooms)) {
-		return $rooms[$room];
-	}
-	return $room;
-}
-
 //Prof Functions
 function trimPlaceholders($raw, $placeholders) {
 	if (in_array($raw, $placeholders)) {
 		return "";
 	}
 	return $raw;
-}
-
-function getFullNames($abbr, $profs) {
-	if (array_key_exists($abbr, $profs)) {
-		return $profs[$abbr];
-	}
-	return $abbr;
 }
 
 if(!isset($profs)) {
@@ -257,8 +251,8 @@ if(!isset($emptyProfs)) {
 }
 
 function lookupProfs($prof, $emptyProfs, $profs) {
-	$shortProf = trimPlaceholders($prof, $emptyProfs);
-	return getFullNames($shortProf, $profs);
+	$realProf = trimPlaceholders($prof, $emptyProfs);
+	return lookup($realProf, $profs);
 }
 
 //Time functions
@@ -320,10 +314,10 @@ foreach ($calendar as $entry) {
 		$new = [];
 		$new["start"] = extractTime($entry[START]);
 		$new["end"] = extractTime($entry[END]);
-		$new["subject"] = $entry[SUBJECT];
+		$new["subject"] = !empty($subjects) ? lookup($entry[SUBJECT], $subjects) : $entry[SUBJECT];
 		
 		$shortRoom = !empty($roomPrefix) ? trimRoom($entry[ROOM], $roomPrefix) : $entry[ROOM];
-		$new["room"] = lookupRooms($shortRoom , $rooms);
+		$new["room"] = lookup($shortRoom , $rooms);
 		
 		$new["prof"] = !empty($emptyProfs) && !empty($profs) ? lookupProfs($entry[PROF], $emptyProfs, $profs) : $entry[PROF];
 		
@@ -430,7 +424,7 @@ function onGoingEvent($event) {
 			</header>
 			
 			<main>
-				<ul class="list-inline text-muted h4 py-2">
+				<ul class="list-inline text-muted h4 pt-2 pb-3">
 					<li class="list-inline-item"><i class="fas fa-calendar-alt"></i></li>
 					<li class="list-inline-item"><?php echo $weekDay; ?></li>
 					<li class="list-inline-item"><?php echo $displayedDate; ?></li>
@@ -450,13 +444,13 @@ function onGoingEvent($event) {
 						?>
 						
 						<div class="col-md-4 col-xl-3 pr-md-4 pr-xl-5 pb-4 pb-xl-5">
-							<div class="card mt-3">
+							<div class="card">
 								<div class="card-header<?php echo $headerClasses; ?>">
 									<i class="fas fa-clock"></i>
 									<strong><?php echo $timeRange ?></strong>
 								</div>
 
-								<div class="card-body">
+								<div class="card-body pt-3 pb-1">
 											<?php if (!empty($event['subject'])) { ?>
 												<p class="font-weight-bold"><?php echo $event['subject']; ?></p>
 											<?php } ?>

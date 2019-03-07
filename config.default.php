@@ -21,6 +21,10 @@ define('ROOM', 'Room');
 define('PROF', 'Professor');
 
 /* Displaying Data */
+$subjects = [
+		"Break" => "Study_Break"
+];
+
 $emptyProfs = ['-'];
 
 $profs = [
