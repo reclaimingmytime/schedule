@@ -53,7 +53,7 @@ This will place the script in the sub-folder `schedule`.
 
 As an alternative to downloading the new files manually, if you have installed the script through git, you can simply update your local repository using the following command:
 
-`git fetch --all && git reset --hard origin/master`
+`git pull origin master`
 
 Note that your configuration file `config.php` will be **kept** in any case, as that file is ignored by git.
 
