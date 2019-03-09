@@ -67,16 +67,15 @@ function getCookie($string) {
 	return !empty($_COOKIE[$string]) ? $_COOKIE[$string] : '';
 }
 
-/* API connection */
-
 function getInput($get, $cookie) {
-	if (!empty($get) && $cookie !== $get) {
+	if (!empty($get) && $get !== $cookie) {
 		return $get;
 	} else {
 		return $cookie;
 	}
 }
 
+/* API connection */
 function validClass($class, $allowedClasses) {
 	return !empty($class) && in_array($class, $allowedClasses);
 }
