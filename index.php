@@ -92,6 +92,10 @@ function getClass($defaultClass, $allowedClasses) {
 		}
 		return $class;
 	}
+	//use cookie as fallback
+	if(validClass($classCookie, $allowedClasses)) {
+		return $classCookie;
+	}
 	return $defaultClass;
 }
 
