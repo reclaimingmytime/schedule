@@ -1,5 +1,7 @@
 <?php
-if (!file_exists("config.php")) {
+session_start();
+
+if(!file_exists("config.php")) {
 	die("config.php missing. Please use config.default.php as a template (if available).");
 }
 require_once("config.php");
@@ -8,7 +10,26 @@ if (!empty($timezone)) {
 	date_default_timezone_set($timezone);
 }
 
-/* Functions */
+/* CSRF Token */
+if(!isset($_SESSION['token'])) {
+	$_SESSION['token'] = bin2hex(random_bytes(16));
+}
+$token = $_SESSION['token'];
+$tokenEmbed = '&amp;token=' . $token;
+
+function validToken($input, $token) {
+	global $validToken;
+	
+	if($input !== $token) {
+		$validToken = false;
+		return false;
+	} else {
+		$validToken = true;
+	}
+	return true;
+}
+
+/* General */
 
 //function strposa($haystack, $needle, $offset = 0) {
 //	if (!is_array($needle)) {
@@ -23,7 +44,7 @@ if (!empty($timezone)) {
 //}
 
 function isBetween($x, $min, $max) {
-	return ($min <= $x) && ($x <= $max);
+  return ($min <= $x) && ($x <= $max);
 }
 
 function equals($x, $y) {
@@ -58,7 +79,7 @@ function writeCookie($name, $val, $time) {
 function isDifferent($x, $y) {
 	return !empty($x) && $x !== $y;
 }
-
+		
 function getParameter($string) {
 	return !empty($_GET[$string]) ? $_GET[$string] : '';
 }
@@ -70,9 +91,8 @@ function getCookie($string) {
 function getInput($get, $cookie) {
 	if (!empty($get) && $get !== $cookie) {
 		return $get;
-	} else {
-		return $cookie;
 	}
+	return $cookie;
 }
 
 /* API connection */
@@ -83,12 +103,17 @@ function validClass($class, $allowedClasses) {
 function getClass($defaultClass, $allowedClasses) {
 	$classGET = getParameter("class");
 	$classCookie = getCookie("class");
-	
+
 	$class = getInput($classGET, $classCookie);
 
 	if (validClass($class, $allowedClasses)) {
 		if (isDifferent($classGET, $classCookie)) {
-			writeCookie("class", $class, "1 year");
+			global $token;
+			if(validToken(getParameter("token"), $token)) {
+				writeCookie("class", $class, "1 year");
+			} else {
+				return $defaultClass;
+			}
 		}
 		return $class;
 	}
@@ -106,14 +131,14 @@ function getAPIUrl($api, $replace, $default) {
 function createCache($folder) {
 	if (!is_writable($folder)) { //checks both, exists & writable
 		$errorMsg = 'Insufficient permission to create files and folders. Please give the parent directory sufficient permissions (at least chmod 700).';
-
+		
 		if (!file_exists($folder)) {
 			try {
 				mkdir($folder, 0700, true);
 			} catch (Exception $ex) {
 				die($errorMsg);
 			}
-		}
+		} 
 		if (!is_writable($folder)) {
 			die($errorMsg);
 		}
@@ -144,11 +169,11 @@ function retreiveData($api, $cache_file) {
 	return defined('CALENDAR') ? $calendarArray[CALENDAR] : $calendarArray;
 }
 
-if (!isset($allowedClasses)) {
+if(!isset($allowedClasses)) {
 	$allowedClasses = [];
 }
 
-if (!isset($defaultClass) || !isset($api)) {
+if(!isset($defaultClass) || !isset($api)) {
 	die('Empty or invalid API. Please specify $api and $defaultClass in your config file in the following format:<br><b>$api</b> = https://example.com/api.json?class=<b>$defaultClass</b>');
 }
 
@@ -162,7 +187,7 @@ $calendar = retreiveData($desiredAPI, $cache_file);
 
 /* Date preparation */
 
-if (empty($minDate)) {
+if(empty($minDate)) {
 	$minDate = date("d.m.Y", 0);
 }
 
@@ -203,13 +228,13 @@ $currentTime = date("H:i");
 $desiredDate = getCustomDate("date", $today);
 
 $weekBump = false;
-if (hasExcludedWeekends() && isWeekend($desiredDate)) {
+if(hasExcludedWeekends() && isWeekend($desiredDate)) {
 	$desiredDate = createNewDate($desiredDate, "1 weekday");
 	$weekBump = true;
 }
-if (hasExcludedWeekends() && isWeekend($today)) {
+if(hasExcludedWeekends() && isWeekend($today)) {
 	$today = createNewDate($today, "1 weekday");
-	if ($today == $desiredDate) {
+	if($today == $desiredDate) {
 		$weekBump = true;
 	}
 }
@@ -221,7 +246,7 @@ $weekDay = $desiredDateObj->format("D");
 $displayedDateFull = $weekDay . ", " . $desiredDatePretty;
 $displayedDate = $desiredDatePretty;
 
-if (hasExcludedWeekends()) {
+if(hasExcludedWeekends()) {
 	$weekDayString = "weekday";
 } else {
 	$weekDayString = "day";
@@ -233,11 +258,11 @@ $nextDay = createNewDate($desiredDate, "1 $weekDayString");
 $prevDay = createNewDate($desiredDate, "1 $weekDayString ago");
 $prevWeek = createNewDate($desiredDate, "1 week ago");
 
-if ($prevWeek < createNewDate($minDate)) {
+if($prevWeek < createNewDate($minDate)) {
 	$prevWeek = "none";
 }
 
-if ($prevDay < createNewDate($minDate)) {
+if($prevDay < createNewDate($minDate)) {
 	$prevDay = "none";
 }
 
@@ -245,19 +270,19 @@ if ($prevDay < createNewDate($minDate)) {
 
 //General Functions
 function lookup($room, $rooms) {
-	if (array_key_exists($room, $rooms)) {
+	if(array_key_exists($room, $rooms)) {
 		return $rooms[$room];
 	}
 	return $room;
 }
 
 //Room Functions
-if (!isset($roomPrefix)) {
+if(!isset($roomPrefix)) {
 	$roomPrefix = "";
 }
 
 function trimRoom($raw, $roomPrefix) {
-	return !empty($roomPrefix) ? str_replace($roomPrefix, "", $raw) : $raw;
+	return !empty($roomPrefix) ? str_replace($roomPrefix, "", $raw) : $raw;	
 }
 
 //Prof Functions
@@ -268,11 +293,11 @@ function trimPlaceholders($raw, $placeholders) {
 	return $raw;
 }
 
-if (!isset($profs)) {
+if(!isset($profs)) {
 	$profs = [];
 }
 
-if (!isset($emptyProfs)) {
+if(!isset($emptyProfs)) {
 	$emptyProfs = [];
 }
 
@@ -341,12 +366,12 @@ foreach ($calendar as $entry) {
 		$new["start"] = extractTime($entry[START]);
 		$new["end"] = extractTime($entry[END]);
 		$new["subject"] = !empty($subjects) ? lookup($entry[SUBJECT], $subjects) : $entry[SUBJECT];
-
+		
 		$shortRoom = !empty($roomPrefix) ? trimRoom($entry[ROOM], $roomPrefix) : $entry[ROOM];
-		$new["room"] = lookup($shortRoom, $rooms);
-
+		$new["room"] = lookup($shortRoom , $rooms);
+		
 		$new["prof"] = !empty($emptyProfs) && !empty($profs) ? lookupProfs($entry[PROF], $emptyProfs, $profs) : $entry[PROF];
-
+		
 		$add = true;
 
 		foreach ($schedule as $key => $existing) {
@@ -373,13 +398,12 @@ if (!empty($schedule)) {
 }
 
 /* Display Schedule */
-
 function onGoingEvent($event) {
 	global $desiredDate;
 	global $today;
 	global $currentTime;
 	global $weekBump;
-
+	
 	return $desiredDate == $today && isBetween(createTime($currentTime), createTime($event['start']), createTime($event['end'])) && $weekBump === false;
 }
 ?>
@@ -392,7 +416,7 @@ function onGoingEvent($event) {
 
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha256-YLGeXaapI0/5IgZopewRJcFXomhRMlYYjugPLSyNjTY=" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
+		
 		<style>
 			#navbarDropdown {
 				outline: none;
@@ -416,15 +440,15 @@ function onGoingEvent($event) {
 							<a class="navbar-brand" href="?">Schedule</a>
 						<?php } else { ?>
 							<span class="navbar-brand">Schedule</span>
-<?php } ?>
+						<?php } ?>
 					</div>
-
+				
 					<ul class="navbar-nav m-auto ml-sm-0">
 						<?php if ($desiredDate !== $today) { ?>
 							<li class="nav-item mr-4 ml-3"><a class="nav-link" href="."><i class="fas fa-play"></i> <span class="d-none d-lg-inline">Today</span></a></li>
 						<?php } else { ?>
 							<li class="nav-item mr-4 ml-3 active"><a class="nav-link"><i class="fas fa-play"></i> <span class="d-none d-lg-inline">Today</span></a></li>
-<?php } ?>
+						<?php } ?>
 
 						<li class="nav-item mr-4"><a class="nav-link" href="?date=<?php echo $nextDay; ?>"><i class="fas fa-forward"></i> <span class="d-none d-lg-inline">Next Day</span></a></li>
 						<li class="nav-item mr-4"><a class="nav-link" href="?date=<?php echo $nextWeek; ?>"><i class="fas fa-step-forward"></i> <span class="d-none d-lg-inline">Next Week</span></a></li>
@@ -434,24 +458,29 @@ function onGoingEvent($event) {
 						<?php } if ($prevWeek !== "none") { ?>
 							<li class="nav-item mr-4"><a class="nav-link" href="?date=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> <span class="d-none d-lg-inline">Previous Week</span></a></li>
 						<?php } ?>
-
-<?php if (!empty($allowedClasses)) { ?>
-							<li class="nav-item d-none d-sm-inline-block dropdown">
-								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?></span>
-								</a>
-								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<?php foreach ($allowedClasses as $class) { ?>
-										<a class="dropdown-item<?php if ($desiredClass == $class) echo " active"; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate; ?>"><i class="fas fa-folder-open"></i> <?php echo $class; ?></a>
-	<?php } ?>
-								</div>
-							</li>
-<?php } ?>
+							
+						<?php if(!empty($allowedClasses)) { ?>
+						<li class="nav-item d-none d-sm-inline-block dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?></span>
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<?php foreach($allowedClasses as $class) { ?>
+								<a class="dropdown-item<?php if($desiredClass == $class) echo " active";?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"><i class="fas fa-folder-open"></i> <?php echo $class; ?></a>
+								<?php } ?>
+							</div>
+						</li>
+						<?php } ?>
 					</ul>
 				</nav>
 			</header>
-
+			
 			<main>
+				<?php if(isset($validToken) && $validToken === false) { ?>
+				<div class="alert alert-danger" role="alert">
+					The class could not be changed as your request was invalid. Please try again.
+				</div>
+				<?php } ?>
 				<ul class="list-inline text-muted h4">
 					<li class="list-inline-item"><i class="fas fa-calendar-alt"></i></li>
 					<li class="list-inline-item"><?php echo $weekDay; ?></li>
@@ -459,48 +488,47 @@ function onGoingEvent($event) {
 					<li class="list-inline-item currentTime"><?php echo $currentTime; ?></li>
 				</ul>
 
-<?php if (empty($schedule)) { ?>
+				<?php if (empty($schedule)) { ?>
 					<div class="alert alert-secondary mt-4" role="alert">
 						No entries have been found for that day.
 					</div>
-					<?php } else {
-					?>
+					<?php
+				} else { ?>
 					<div class="row">
-						<?php
-						foreach ($schedule as $event) {
+						<?php foreach ($schedule as $event) {
 							$timeRange = $event['start'] . " - " . $event['end'];
 							$headerClasses = onGoingEvent($event) ? ' bg-dark text-light' : '';
-							?>
+						?>
+						
+						<div class="col-12 pb-1">
+							<div class="card mt-3">
+								<div class="card-header<?php echo $headerClasses; ?>">
+									<i class="fas fa-clock"></i>
+									<strong><?php echo $timeRange ?></strong>
+								</div>
 
-							<div class="col-12 pb-1">
-								<div class="card mt-3">
-									<div class="card-header<?php echo $headerClasses; ?>">
-										<i class="fas fa-clock"></i>
-										<strong><?php echo $timeRange ?></strong>
-									</div>
+								<div class="card-body pt-3 pb-1">
+											<ul class="list-inline">
+												<?php if (!empty($event['subject'])) { ?>
+													<li class="list-inline-item pr-3 font-weight-bold"><?php echo $event['subject']; ?></li>
+												<?php } ?>
+												<?php if (!empty($event['room'])) { ?>
+													<li class="list-inline-item pr-3"><?php echo $event['room']; ?></li>
+												<?php } ?>
 
-									<div class="card-body pt-3 pb-1">
-										<ul class="list-inline">
-											<?php if (!empty($event['subject'])) { ?>
-												<li class="list-inline-item pr-3 font-weight-bold"><?php echo $event['subject']; ?></li>
-											<?php } ?>
-											<?php if (!empty($event['room'])) { ?>
-												<li class="list-inline-item pr-3"><?php echo $event['room']; ?></li>
-											<?php } ?>
-
-											<?php if (!empty($event['prof'])) { ?>
-												<li class="list-inline-item text-secondary"><?php echo $event['prof']; ?></li>
-		<?php } ?>
-										</ul>
-									</div>
+												<?php if (!empty($event['prof'])) { ?>
+													<li class="list-inline-item text-secondary"><?php echo $event['prof']; ?></li>
+													<?php } ?>
+											</ul>
 								</div>
 							</div>
+						</div>
 
+						<?php } ?>
+						</div>
 					<?php } ?>
-					</div>
-				<?php } ?>
 
-<?php if (isset($weekBump) && $weekBump === true) { ?>
+				<?php if (isset($weekBump) && $weekBump === true) { ?>
 					<p class="text-center text-sm-left mt-4">
 						<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
 							Info
@@ -511,11 +539,11 @@ function onGoingEvent($event) {
 							<p>Weekends have been excluded from the schedule. You are now viewing the next week day.</p>
 						</div>
 					</div>
-<?php } ?>
+				<?php } ?>
 			</main>
-
+			
 			<footer class="text-center my-4">
-<?php if (!empty($allowedClasses)) { ?>
+				<?php if (!empty($allowedClasses)) { ?>
 					<div class="d-inline-block d-sm-none dropup d-inline">
 						<a class="btn btn-white text-muted dropdown-toggle" href="#" role="button" id="classLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="fas fa-folder"></i> <?php echo $desiredClass; ?>
@@ -523,15 +551,15 @@ function onGoingEvent($event) {
 						<div class="dropdown-menu" aria-labelledby="classLink">
 							<?php foreach ($allowedClasses as $class) { ?>
 								<a class="dropdown-item<?php if ($desiredClass == $class) echo " active"; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate; ?>"><i class="fas fa-folder-open"></i> <?php echo $class; ?></a>
-					<?php } ?>
+							<?php } ?>
 						</div>
 					</div>
-<?php } ?>
+				<?php } ?>
 				<a href="#" class="btn btn-white text-muted top d-none" role="button" aria-pressed="true"><i class="fas fa-angle-up"></i> Top</a>
 			</footer>
 
 		</div>
-
+		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha256-CjSoeELFOcH0/uxWu6mC/Vlrc1AARqbm/jiiImDGV3s=" crossorigin="anonymous"></script>
