@@ -51,8 +51,8 @@ function escapeArray(&$array) {
 /* API connection */
 
 function getClassInput() {
-	$classGET = !empty($_GET['c']) ? $_GET['c'] : '';
-	$classCookie = !empty($_COOKIE['c']) ? $_COOKIE['c'] : '';
+	$classGET = !empty($_GET['class']) ? $_GET['class'] : '';
+	$classCookie = !empty($_COOKIE['class']) ? $_COOKIE['class'] : '';
 
 	if(!empty($classGET) && $classCookie !== $classGET) {
 		return $classGET;
@@ -67,7 +67,7 @@ function getClass($defaultClass, $allowedClasses) {
 		$expTime = new DateTime("1 year");
 		$exp = $expTime->getTimestamp();
 
-		setcookie("c", $class, $exp, '/', null, false, true);
+		setcookie("class", $class, $exp, '/', null, false, true);
 		return $class;
 	}
 	return $defaultClass;
@@ -126,12 +126,12 @@ if(!isset($defaultClass) || !isset($api)) {
 	die('Empty or invalid API. Please specify $api and $defaultClass in your config file in the following format:<br><b>$api</b> = https://example.com/api.json?class=<b>$defaultClass</b>');
 }
 
-$class = getClass($defaultClass, $allowedClasses);
-$desiredAPI = getAPIUrl($api, $class, $defaultClass);
+$desiredClass = getClass($defaultClass, $allowedClasses);
+$desiredAPI = getAPIUrl($api, $desiredClass, $defaultClass);
 
 $folder = "cache/";
 createCache($folder);
-$cache_file = $folder . $class . ".json";
+$cache_file = $folder . $desiredClass . ".json";
 $calendar = retreiveData($desiredAPI, $cache_file);
 
 /* Date preparation */
@@ -174,7 +174,7 @@ function hasExcludedWeekends() {
 $today = date("Y-m-d");
 $currentTime = date("H:i");
 
-$desiredDate = getCustomDate("d", $today);
+$desiredDate = getCustomDate("date", $today);
 
 $weekBump = false;
 if(hasExcludedWeekends() && isWeekend($desiredDate)) {
@@ -399,23 +399,23 @@ function onGoingEvent($event) {
 							<li class="nav-item mr-4 ml-3 active"><a class="nav-link"><i class="fas fa-play"></i> <span class="d-none d-lg-inline">Today</span></a></li>
 						<?php } ?>
 
-						<li class="nav-item mr-4"><a class="nav-link" href="?d=<?php echo $nextDay; ?>"><i class="fas fa-forward"></i> <span class="d-none d-lg-inline">Next Day</span></a></li>
-						<li class="nav-item mr-4"><a class="nav-link" href="?d=<?php echo $nextWeek; ?>"><i class="fas fa-step-forward"></i> <span class="d-none d-lg-inline">Next Week</span></a></li>
+						<li class="nav-item mr-4"><a class="nav-link" href="?date=<?php echo $nextDay; ?>"><i class="fas fa-forward"></i> <span class="d-none d-lg-inline">Next Day</span></a></li>
+						<li class="nav-item mr-4"><a class="nav-link" href="?date=<?php echo $nextWeek; ?>"><i class="fas fa-step-forward"></i> <span class="d-none d-lg-inline">Next Week</span></a></li>
 
 						<?php if ($prevDay !== "none") { ?>
-							<li class="nav-item mr-4"><a class="nav-link" href="?d=<?php echo $prevDay; ?>"><i class="fas fa-backward"></i> <span class="d-none d-lg-inline">Previous Day</span></a></li>
+							<li class="nav-item mr-4"><a class="nav-link" href="?date=<?php echo $prevDay; ?>"><i class="fas fa-backward"></i> <span class="d-none d-lg-inline">Previous Day</span></a></li>
 						<?php } if ($prevWeek !== "none") { ?>
-							<li class="nav-item mr-4"><a class="nav-link" href="?d=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> <span class="d-none d-lg-inline">Previous Week</span></a></li>
+							<li class="nav-item mr-4"><a class="nav-link" href="?date=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> <span class="d-none d-lg-inline">Previous Week</span></a></li>
 						<?php } ?>
 							
 						<?php if(!empty($allowedClasses)) { ?>
 						<li class="nav-item d-none d-sm-inline-block dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $class; ?></span>
+								<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?></span>
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<?php foreach($allowedClasses as $c) { ?>
-								<a class="dropdown-item<?php if($class == $c) echo " active";?>" href="?c=<?php echo $c; ?>&amp;d=<?php echo $desiredDate; ?>"><i class="fas fa-folder-open"></i> <?php echo $c; ?></a>
+								<?php foreach($allowedClasses as $class) { ?>
+								<a class="dropdown-item<?php if($desiredClass == $class) echo " active";?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate; ?>"><i class="fas fa-folder-open"></i> <?php echo $class; ?></a>
 								<?php } ?>
 							</div>
 						</li>
@@ -490,11 +490,11 @@ function onGoingEvent($event) {
 				<?php if (!empty($allowedClasses)) { ?>
 					<div class="d-inline-block d-sm-none dropup d-inline">
 						<a class="btn btn-white text-muted dropdown-toggle" href="#" role="button" id="classLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<i class="fas fa-folder"></i> <?php echo $class; ?>
+							<i class="fas fa-folder"></i> <?php echo $desiredClass; ?>
 						</a>
 						<div class="dropdown-menu" aria-labelledby="classLink">
-							<?php foreach ($allowedClasses as $c) { ?>
-								<a class="dropdown-item<?php if ($class == $c) echo " active"; ?>" href="?c=<?php echo $c; ?>&amp;d=<?php echo $desiredDate; ?>"><i class="fas fa-folder-open"></i> <?php echo $c; ?></a>
+							<?php foreach ($allowedClasses as $class) { ?>
+								<a class="dropdown-item<?php if ($desiredClass == $class) echo " active"; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate; ?>"><i class="fas fa-folder-open"></i> <?php echo $class; ?></a>
 							<?php } ?>
 						</div>
 					</div>
