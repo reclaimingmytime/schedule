@@ -26,7 +26,7 @@ $(function () {
 
 	/* Keyboard navigation */
 	$(document).keydown(function (e) {
-		if (!e.ctrlKey && !e.metaKey) {
+		if (!e.ctrlKey && !e.metaKey && !e.shiftKey) {
 			switch (e.which) {
 				case 65: // A
 					if ($('head').data('prevday') !== "none") {
