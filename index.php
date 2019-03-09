@@ -351,8 +351,9 @@ function onGoingEvent($event) {
 	global $desiredDate;
 	global $today;
 	global $currentTime;
+	global $weekBump;
 	
-	return $desiredDate == $today && isBetween(createTime($currentTime), createTime($event['start']), createTime($event['end']));
+	return $desiredDate == $today && isBetween(createTime($currentTime), createTime($event['start']), createTime($event['end'])) && $weekBump === false;
 }
 ?>
 <!DOCTYPE html>
