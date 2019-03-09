@@ -10,7 +10,7 @@ $(function () {
 			if (direction == "left" && fingerCount == 2) {
 				window.location.href = "?d=" + $('head').data('nextweek');
 			}
-			
+
 			if (direction == "right" && (fingerCount == 1 || fingerCount == 0) && $('head').data('prevday') !== "none") {
 				if ($('head').data('prevday') !== "none") {
 					window.location.href = "?d=" + $('head').data('prevday');
@@ -26,37 +26,39 @@ $(function () {
 
 	/* Keyboard navigation */
 	$(document).keydown(function (e) {
-		switch (e.which) {
-			case 65: // A
-				if ($('head').data('prevday') !== "none") {
-					window.location.href = "?d=" + $('head').data('prevday');
-				}
-				break;
+		if (!e.ctrlKey && !e.metaKey) {
+			switch (e.which) {
+				case 65: // A
+					if ($('head').data('prevday') !== "none") {
+						window.location.href = "?d=" + $('head').data('prevday');
+					}
+					break;
 
-			case 68: // D
-				window.location.href = "?d=" + $('head').data('nextday');
-				break;
+				case 68: // D
+					window.location.href = "?d=" + $('head').data('nextday');
+					break;
 
-			case 87: // W
-				window.location.href = "?d=" + $('head').data('nextweek');
-				break;
+				case 87: // W
+					window.location.href = "?d=" + $('head').data('nextweek');
+					break;
 
-			case 83: // S
-				if ($('head').data('prevweek') !== "none") {
-					window.location.href = "?d=" + $('head').data('prevweek');
-				}
-				break;
+				case 83: // S
+					if ($('head').data('prevweek') !== "none") {
+						window.location.href = "?d=" + $('head').data('prevweek');
+					}
+					break;
 
-			case 13: // enter
-				if ($('head').data('today') !== $('head').data('desireddate')) {
-					window.location.href = ".";
-				}
-				break;
+				case 13: // enter
+					if ($('head').data('today') !== $('head').data('desireddate')) {
+						window.location.href = ".";
+					}
+					break;
 
-			default:
-				return; // exit this handler for other keys
+				default:
+					return; // exit this handler for other keys
+			}
+			e.preventDefault(); // prevent the default action (scroll / move caret)
 		}
-		e.preventDefault(); // prevent the default action (scroll / move caret)
 	});
 
 	/* Time */
