@@ -17,7 +17,7 @@ Custom classes are matched against a previous set of allowed classes. So, if `Cl
 
 #### Rejected Input
 
-When input is rejected, the default value is silently used.
+When input is rejected, the default value is used without any message.
 
 ### Limitations
 
@@ -94,7 +94,7 @@ Note: The directory of the script and the folder "cache/" (created by the script
 | Variable or Constant                         | Description                                                  |
 | -------------------------------------------- | ------------------------------------------------------------ |
 | `CALENDAR`                                   | *Optional.* The array index of the calendar events.          |
-| `START`, `END`, `SUBJECT`, `ROOM` and `PROF` | **Required**. Array index for the respective information. START and END are used for time and date and assume the following format: *YYYY-MM-DD HH:MM:SS*. |
+| `START`, `END`, `SUBJECT`, `ROOM` and `PROF` | **Required**. Array index for the respective data. START and END are used for time and date and assume the following format: *YYYY-MM-DD HH:MM:SS*. |
 | `$emptyProfs`                                | *Optional.* Array of names that should be considered empty, such as "-". |
 | `$profs`                                     | *Optional.* Associative array of initials to full names.     |
 | `$roomPrefix`                                | *Optional.* A prefix that might seem redundant, such as "Room-". |
