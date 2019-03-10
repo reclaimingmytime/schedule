@@ -50,7 +50,7 @@ function createCache($folder) {
 	}
 }
 
-function retreiveData($api, $cache_file) {
+function retrieveData($api, $cache_file) {
 	if (is_writable($cache_file) && (filemtime($cache_file) > (time() - 60 * 30 ))) {
 		$file = file_get_contents($cache_file);
 	} else {
@@ -87,4 +87,4 @@ $folder = "cache/";
 createCache($folder);
 
 $cache_file = $folder . $desiredClass . ".json";
-$calendar = retreiveData($desiredAPI, $cache_file);
+$calendar = retrieveData($desiredAPI, $cache_file);
