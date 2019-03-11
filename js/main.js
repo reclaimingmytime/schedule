@@ -1,5 +1,4 @@
 $(function () {
-
 	/* Swipe */
 	$("html").swipe({
 		swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
