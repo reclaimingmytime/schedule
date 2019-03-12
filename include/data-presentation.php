@@ -72,7 +72,9 @@
 					<div class="alert alert-danger" role="alert">
 						The class could not be changed as your request was invalid. Please try again.
 					</div>
-				<?php } ?>
+				<?php } 
+				unset($_SESSION['validToken']);
+				?>
 				<ul class="list-inline text-muted h4">
 					<li class="list-inline-item"><i class="fas fa-calendar-alt"></i></li>
 					<li class="list-inline-item"><?php echo $weekDay; ?></li>
