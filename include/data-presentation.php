@@ -68,10 +68,10 @@
 			</header>
 			
 			<main>
-				<?php if(isset($validToken) && $validToken === false) { ?>
-				<div class="alert alert-danger" role="alert">
-					The class could not be changed as your request was invalid. Please try again.
-				</div>
+				<?php if (isset($_SESSION['validToken']) && $_SESSION['validToken'] === false) { ?>
+					<div class="alert alert-danger" role="alert">
+						The class could not be changed as your request was invalid. Please try again.
+					</div>
 				<?php } ?>
 				<ul class="list-inline text-muted h4">
 					<li class="list-inline-item"><i class="fas fa-calendar-alt"></i></li>

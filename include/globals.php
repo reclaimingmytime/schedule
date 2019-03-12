@@ -70,6 +70,11 @@ function getInput($get, $cookie) {
 	return $cookie;
 }
 
+function redirect($path = '.') {
+	header('Location:' . $path);
+	die();
+}
+
 /* CSRF Token */
 if(!isset($_SESSION['token'])) {
 	$_SESSION['token'] = bin2hex(random_bytes(16));
@@ -78,13 +83,11 @@ $token = $_SESSION['token'];
 $tokenEmbed = '&amp;token=' . $token;
 
 function validToken($input, $token) {
-	global $validToken;
-	
 	if($input !== $token) {
-		$validToken = false;
+		$_SESSION['validToken'] = false;
 		return false;
 	} else {
-		$validToken = true;
+		$_SESSION['validToken'] = true;
 	}
 	return true;
 }
