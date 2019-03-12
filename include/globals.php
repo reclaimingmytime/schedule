@@ -4,25 +4,6 @@ if (!empty($timezone)) {
 	date_default_timezone_set($timezone);
 }
 
-/* CSRF Token */
-if(!isset($_SESSION['token'])) {
-	$_SESSION['token'] = bin2hex(random_bytes(16));
-}
-$token = $_SESSION['token'];
-$tokenEmbed = '&amp;token=' . $token;
-
-function validToken($input, $token) {
-	global $validToken;
-	
-	if($input !== $token) {
-		$validToken = false;
-		return false;
-	} else {
-		$validToken = true;
-	}
-	return true;
-}
-
 /* Functions */
 
 //function strposa($haystack, $needle, $offset = 0) {
@@ -87,4 +68,23 @@ function getInput($get, $cookie) {
 		return $get;
 	}
 	return $cookie;
+}
+
+/* CSRF Token */
+if(!isset($_SESSION['token'])) {
+	$_SESSION['token'] = bin2hex(random_bytes(16));
+}
+$token = $_SESSION['token'];
+$tokenEmbed = '&amp;token=' . $token;
+
+function validToken($input, $token) {
+	global $validToken;
+	
+	if($input !== $token) {
+		$validToken = false;
+		return false;
+	} else {
+		$validToken = true;
+	}
+	return true;
 }
