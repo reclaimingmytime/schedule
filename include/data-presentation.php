@@ -70,7 +70,7 @@
 			<main>
 				<?php if (isset($_SESSION['validToken']) && $_SESSION['validToken'] === false) { ?>
 					<div class="alert alert-danger" role="alert">
-						The class could not be changed as your request was invalid. Please try again.
+						The class could not be changed as the link is invalid. Please try again.
 					</div>
 				<?php } 
 				unset($_SESSION['validToken']);
