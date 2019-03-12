@@ -144,7 +144,7 @@
 						</a>
 						<div class="dropdown-menu" aria-labelledby="classLink">
 							<?php foreach ($allowedClasses as $class) { ?>
-								<a class="dropdown-item<?php if ($desiredClass == $class) echo " active"; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate; ?>"><i class="fas fa-folder-open"></i> <?php echo $class; ?></a>
+								<a class="dropdown-item<?php if($desiredClass == $class) echo " active"; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"><i class="fas fa-folder-open"></i> <?php echo $class; ?></a>
 							<?php } ?>
 						</div>
 					</div>
