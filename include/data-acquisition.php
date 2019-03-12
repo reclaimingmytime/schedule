@@ -97,12 +97,10 @@ function getClass($defaultClass, $allowedClasses, $desiredDate) {
 	$class = getInput($classGET, $classCookie);
 
 	if (validClass($class, $allowedClasses)) {
-		if (!empty($classGET)) {
-			if (isDifferent($classGET, $classCookie)) {
-				global $token;
-				if (validToken(getParameter("token"), $token)) {
-					writeCookie("class", $class, "1 year");
-				}
+		global $token;
+		if (!empty($classGET) && isDifferent($classGET, $classCookie)) {
+			if (validToken(getParameter("token"), $token)) {
+				writeCookie("class", $class, "1 year");
 			}
 			redirect("?date=" . $desiredDate);
 		}
