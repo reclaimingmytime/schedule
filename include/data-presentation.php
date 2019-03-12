@@ -1,4 +1,13 @@
-<?php /* Display Schedule */ ?>
+<?php
+/* Display Schedule */
+
+function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed) {
+	foreach ($allowedClasses as $class) { ?>
+		<a class="dropdown-item<?php if ($desiredClass == $class) echo " active"; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"><i class="fas fa-folder-open"></i> <?php echo $class; ?></a>
+		<?php
+	}
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head data-desireddate="<?php echo $desiredDate; ?>" data-today="<?php echo $today; ?>" data-nextday="<?php echo $nextDay; ?>" data-prevday="<?php echo $prevDay; ?>" data-nextweek="<?php echo $nextWeek; ?>" data-prevweek="<?php echo $prevWeek; ?>">
@@ -57,9 +66,7 @@
 								<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?></span>
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<?php foreach($allowedClasses as $class) { ?>
-								<a class="dropdown-item<?php if($desiredClass == $class) echo " active";?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"><i class="fas fa-folder-open"></i> <?php echo $class; ?></a>
-								<?php } ?>
+								<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed); ?>
 							</div>
 						</li>
 						<?php } ?>
@@ -143,9 +150,7 @@
 							<i class="fas fa-folder"></i> <?php echo $desiredClass; ?>
 						</a>
 						<div class="dropdown-menu" aria-labelledby="classLink">
-							<?php foreach ($allowedClasses as $class) { ?>
-								<a class="dropdown-item<?php if($desiredClass == $class) echo " active"; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"><i class="fas fa-folder-open"></i> <?php echo $class; ?></a>
-							<?php } ?>
+							<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed); ?>
 						</div>
 					</div>
 				<?php } ?>
