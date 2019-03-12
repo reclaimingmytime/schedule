@@ -76,8 +76,12 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 			
 			<main>
 				<?php if (isset($_SESSION['validToken']) && $_SESSION['validToken'] === false) { ?>
-					<div class="alert alert-danger" role="alert">
-						The class could not be changed as the link is invalid. Please try again.
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						<strong>The class could not be changed.</strong><br>
+						This link is invalid. Please try again.
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
 					</div>
 				<?php } 
 				unset($_SESSION['validToken']);
