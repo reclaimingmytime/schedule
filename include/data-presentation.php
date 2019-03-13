@@ -17,7 +17,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha256-YLGeXaapI0/5IgZopewRJcFXomhRMlYYjugPLSyNjTY=" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-		
+
 		<style>
 			#navbarDropdown {
 				outline: none;
@@ -43,7 +43,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 							<span class="navbar-brand">Schedule</span>
 						<?php } ?>
 					</div>
-				
+
 					<ul class="navbar-nav m-auto ml-sm-0">
 						<?php if ($desiredDate !== $today) { ?>
 							<li class="nav-item mr-4 ml-3"><a class="nav-link" href="."><i class="fas fa-play"></i> <span class="d-none d-lg-inline">Today</span></a></li>
@@ -59,7 +59,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 						<?php } if ($prevWeek !== "none") { ?>
 							<li class="nav-item mr-4"><a class="nav-link" href="?date=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> <span class="d-none d-lg-inline">Previous Week</span></a></li>
 						<?php } ?>
-							
+
 						<?php if(!empty($allowedClasses)) { ?>
 						<li class="nav-item d-none d-sm-inline-block dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -73,7 +73,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 					</ul>
 				</nav>
 			</header>
-			
+
 			<main>
 				<?php if (isset($_SESSION['validToken']) && $_SESSION['validToken'] === false) { ?>
 					<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -83,10 +83,10 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-				<?php } 
+				<?php }
 				unset($_SESSION['validToken']);
 				?>
-				<ul class="list-inline text-muted h4">
+				<ul class="list-inline text-muted h4 pb-1">
 					<li class="list-inline-item"><i class="fas fa-calendar-alt"></i></li>
 					<li class="list-inline-item"><?php echo $weekDay; ?></li>
 					<li class="list-inline-item"><?php echo $displayedDate; ?></li>
@@ -99,13 +99,11 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 					</div>
 					<?php
 				} else { ?>
-					<div class="row">
 						<?php foreach ($schedule as $event) {
 							$timeRange = $event['start'] . " - " . $event['end'];
 							$headerClasses = onGoingEvent($event) ? ' bg-dark text-light' : '';
 						?>
-						
-						<div class="col-12 pb-1">
+
 							<div class="card mt-3">
 								<div class="card-header<?php echo $headerClasses; ?>">
 									<i class="fas fa-clock"></i>
@@ -127,11 +125,9 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 											</ul>
 								</div>
 							</div>
-						</div>
 
-						<?php } ?>
-						</div>
-					<?php } ?>
+						<?php }
+					} ?>
 
 				<?php if (isset($weekBump) && $weekBump === true) { ?>
 					<p class="text-center text-sm-left mt-4">
@@ -146,7 +142,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 					</div>
 				<?php } ?>
 			</main>
-			
+
 			<footer class="text-center my-4">
 				<?php if (!empty($allowedClasses)) { ?>
 					<div class="d-inline-block d-sm-none dropup d-inline">
@@ -162,7 +158,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 			</footer>
 
 		</div>
-		
+
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha256-CjSoeELFOcH0/uxWu6mC/Vlrc1AARqbm/jiiImDGV3s=" crossorigin="anonymous"></script>
