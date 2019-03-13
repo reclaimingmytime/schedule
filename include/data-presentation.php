@@ -19,8 +19,11 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
 		<style>
-			#navbarDropdown {
-				outline: none;
+			.dropdown-toggle {
+					outline: none;
+			}
+			.btn:focus {
+					box-shadow: none;
 			}
 			.active {
 				pointer-events: none;
@@ -70,6 +73,105 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 							</div>
 						</li>
 						<?php } ?>
+						
+						<?php /*
+						<button type="button" class="btn btn-white ml-sm-1 ml-md-3 text-muted" data-toggle="modal" data-target="#shortcuts">
+							<i class="fas fa-info"></i> <span class="d-none d-xl-inline">Shortcuts</span>
+						</button>
+
+						<div class="modal fade" id="shortcuts" role="dialog" aria-labelledby="shortcutsTitle" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="shortcutsTitle">Shortcuts and Gestures</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<table id="tablePreview" class="table">
+											<h5>Keyboard</h5>
+											<thead>
+												<tr>
+													<th>Shortcut</th>
+													<th>Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<th><pre>D</pre></th>
+													<td>Next Day</td>
+												</tr>
+												<tr>
+													<th><pre>A</pre></th>
+													<td>Previous Day</td>
+												</tr>
+												<tr>
+													<th><pre>S</pre></th>
+													<td>Previous Week</td>
+												</tr>
+												<tr>
+													<th><pre>W</pre></th>
+													<td>Next Week</td>
+												</tr>
+												<tr>
+													<th><pre>Enter</pre></th>
+													<td>Current Week</td>
+												</tr>
+												<tr>
+													<th><pre>Esc</pre></th>
+													<td>Close this pop-up</td>
+												</tr>
+											</tbody>
+										</table>
+										
+										<h5>One-Finger Swipe</h5>
+										<table class="table">
+											<thead>
+												<tr>
+													<th>Gesture</th>
+													<th>Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<th><pre>Left</pre></th>
+													<td>Next Day</td>
+												</tr>
+												<tr>
+													<th><pre>Right</pre></th>
+													<td>Previous Day</td>
+												</tr>
+											</tbody>
+										</table>
+										
+										<h5>Two-Finger Swipe</h5>
+										<table class="table">
+											<thead>
+												<tr>
+													<th>Gesture</th>
+													<th>Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<th><pre>Left</pre></th>
+													<td>Next Week</td>
+												</tr>
+												<tr>
+													<th><pre>Right</pre></th>
+													<td>Previous Week</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						*/ ?>
 					</ul>
 				</nav>
 			</header>
