@@ -40,15 +40,11 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 			<header>
 				<nav class="navbar navbar-expand navbar-light bg-light mt-3 mb-4">
 					<div class="navbar-header d-none d-sm-block">
-						<?php if ($desiredDate !== $today) { ?>
-							<a class="navbar-brand" href=".">Schedule</a>
-						<?php } else { ?>
-							<span class="navbar-brand">Schedule</span>
-						<?php } ?>
+						<a class="navbar-brand <?php echo ($desiredDate == $today) ? ' active' : ''; ?>" href=".">Schedule</a>
 					</div>
 
 					<ul class="navbar-nav m-auto ml-sm-0">
-						<li class="nav-item mr-4 ml-3<?php echo ($desiredDate !== $today) ? ' active' : ""; ?>">
+						<li class="nav-item mr-4 ml-3<?php echo ($desiredDate == $today) ? ' active' : ''; ?>">
 							<a class="nav-link" href="."><i class="fas fa-play"></i> <span class="d-none d-lg-inline">Today</span></a>
 						</li>
 
