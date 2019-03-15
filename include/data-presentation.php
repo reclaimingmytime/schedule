@@ -59,7 +59,8 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 
 						<?php if ($prevDay !== "none") { ?>
 							<li class="nav-item mr-4"><a class="nav-link" href="?date=<?php echo $prevDay; ?>"><i class="fas fa-backward"></i> <span class="d-none d-lg-inline">Previous Day</span></a></li>
-						<?php } if ($prevWeek !== "none") { ?>
+						<?php }
+						if ($prevWeek !== "none") { ?>
 							<li class="nav-item mr-4"><a class="nav-link" href="?date=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> <span class="d-none d-lg-inline">Previous Week</span></a></li>
 						<?php } ?>
 
