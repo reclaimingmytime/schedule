@@ -121,7 +121,6 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 												<?php if (!empty($event['room'])) { ?>
 													<li class="list-inline-item pr-3"><?php echo $event['room']; ?></li>
 												<?php } ?>
-
 												<?php if (!empty($event['prof'])) { ?>
 													<li class="list-inline-item text-secondary"><?php echo $event['prof']; ?></li>
 													<?php } ?>
