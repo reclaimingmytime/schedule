@@ -40,7 +40,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 			<header>
 				<nav class="navbar navbar-expand navbar-light bg-light mt-3 mb-4">
 					<div class="navbar-header d-none d-sm-block">
-						<a class="navbar-brand <?php echo ($desiredDate == $today) ? ' active' : ''; ?>" href=".">Schedule</a>
+						<a class="navbar-brand<?php echo ($desiredDate == $today) ? ' active' : ''; ?>" href=".">Schedule</a>
 					</div>
 
 					<ul class="navbar-nav m-auto ml-sm-0">
