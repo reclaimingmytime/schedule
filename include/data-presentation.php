@@ -142,11 +142,11 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 
 				<?php if (isset($weekBump) && $weekBump === true) { ?>
 					<p class="text-center text-sm-left mt-4">
-						<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+						<a class="btn btn-outline-secondary" data-toggle="collapse" href="#weekendNotice" role="button" aria-expanded="false" aria-controls="weekendNotice">
 							Info
 						</a>
 					</p>
-					<div class="collapse" id="collapseExample">
+					<div class="collapse" id="weekendNotice">
 						<div class="card card-body pb-1">
 							<p>Weekends have been excluded from the schedule. You are now viewing the next week day.</p>
 						</div>
