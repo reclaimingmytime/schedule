@@ -79,11 +79,11 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 					</ul>
 				</nav>
 			</header>
-
-			<main>
-				<?php if (isset($_SESSION['validToken']) && $_SESSION['validToken'] === false) { ?>
-				<div class="row">
-						<div class="col-xl-6">
+			
+			<div class="row">
+				<div class="col-xl-6">
+					<main>
+						<?php if (isset($_SESSION['validToken']) && $_SESSION['validToken'] === false) { ?>
 							<div class="alert alert-danger alert-dismissible fade show" role="alert">
 								<strong>The class could not be changed.</strong><br>
 								This link is invalid. Please try again.
@@ -91,68 +91,64 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
-						</div>
-				</div>
-				<?php }
-				unset($_SESSION['validToken']);
-				?>
-				<ul class="list-inline text-muted h4 pb-1">
-					<li class="list-inline-item"><i class="fas fa-calendar-alt"></i></li>
-					<li class="list-inline-item"><?php echo $weekDay; ?></li>
-					<li class="list-inline-item"><?php echo $displayedDate; ?></li>
-					<li class="list-inline-item currentTime"><?php echo $currentTime; ?></li>
-				</ul>
-
-				<?php if (empty($schedule)) { ?>
-					<div class="alert alert-secondary mt-4" role="alert">
-						No entries have been found for that day.
-					</div>
-					<?php
-				} else { ?>
-						<?php foreach ($schedule as $event) {
-							$timeRange = $event['start'] . " - " . $event['end'];
-							$headerClasses = onGoingEvent($event) ? ' bg-dark text-light' : '';
+						<?php }
+						unset($_SESSION['validToken']);
 						?>
-					<div class="row">
-						<div class="col-xl-6">
-							<div class="card mt-3">
-								<div class="card-header<?php echo $headerClasses; ?>">
-									<i class="fas fa-clock"></i>
-									<strong><?php echo $timeRange ?></strong>
-								</div>
+						<ul class="list-inline text-muted h4 pb-1">
+							<li class="list-inline-item"><i class="fas fa-calendar-alt"></i></li>
+							<li class="list-inline-item"><?php echo $weekDay; ?></li>
+							<li class="list-inline-item"><?php echo $displayedDate; ?></li>
+							<li class="list-inline-item currentTime"><?php echo $currentTime; ?></li>
+						</ul>
 
-								<div class="card-body pt-3 pb-1">
-											<ul class="list-inline">
-												<?php if (!empty($event['subject'])) { ?>
-													<li class="list-inline-item pr-3 font-weight-bold"><?php echo $event['subject']; ?></li>
-												<?php }
-												if (!empty($event['room'])) { ?>
-													<li class="list-inline-item pr-3"><?php echo $event['room']; ?></li>
-												<?php }
-												if (!empty($event['prof'])) { ?>
-													<li class="list-inline-item text-secondary"><?php echo $event['prof']; ?></li>
-													<?php } ?>
-											</ul>
+						<?php if (empty($schedule)) { ?>
+							<div class="alert alert-secondary mt-4" role="alert">
+								No entries have been found for that day.
+							</div>
+							<?php
+						} else { ?>
+								<?php foreach ($schedule as $event) {
+									$timeRange = $event['start'] . " - " . $event['end'];
+									$headerClasses = onGoingEvent($event) ? ' bg-dark text-light' : '';
+								?>
+								<div class="card mt-3">
+									<div class="card-header<?php echo $headerClasses; ?>">
+										<i class="fas fa-clock"></i>
+										<strong><?php echo $timeRange ?></strong>
+									</div>
+
+									<div class="card-body pt-3 pb-1">
+												<ul class="list-inline">
+													<?php if (!empty($event['subject'])) { ?>
+														<li class="list-inline-item pr-3 font-weight-bold"><?php echo $event['subject']; ?></li>
+													<?php }
+													if (!empty($event['room'])) { ?>
+														<li class="list-inline-item pr-3"><?php echo $event['room']; ?></li>
+													<?php }
+													if (!empty($event['prof'])) { ?>
+														<li class="list-inline-item text-secondary"><?php echo $event['prof']; ?></li>
+														<?php } ?>
+												</ul>
+									</div>
+								</div>
+								<?php }
+							} ?>
+
+						<?php if (isset($weekBump) && $weekBump === true) { ?>
+							<p class="text-center text-sm-left mt-4">
+								<a class="btn btn-outline-secondary" data-toggle="collapse" href="#weekendNotice" role="button" aria-expanded="false" aria-controls="weekendNotice">
+									Info
+								</a>
+							</p>
+							<div class="collapse" id="weekendNotice">
+								<div class="card card-body pb-1">
+									<p>Weekends have been excluded from the schedule. You are now viewing the next week day.</p>
 								</div>
 							</div>
-						</div>
+						<?php } ?>
+						</main>
 					</div>
-						<?php }
-					} ?>
-
-				<?php if (isset($weekBump) && $weekBump === true) { ?>
-					<p class="text-center text-sm-left mt-4">
-						<a class="btn btn-outline-secondary" data-toggle="collapse" href="#weekendNotice" role="button" aria-expanded="false" aria-controls="weekendNotice">
-							Info
-						</a>
-					</p>
-					<div class="collapse" id="weekendNotice">
-						<div class="card card-body pb-1">
-							<p>Weekends have been excluded from the schedule. You are now viewing the next week day.</p>
-						</div>
-					</div>
-				<?php } ?>
-			</main>
+				</div>
 
 			<footer class="text-center my-4">
 				<?php if (!empty($allowedClasses)) { ?>
