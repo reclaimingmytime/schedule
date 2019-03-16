@@ -79,4 +79,13 @@ $(function () {
 	setInterval(function () {
 		updateTime();
 	}, 5000);
+
+	/* Automatic Scroll */
+	$("#infoBtn").click(function () {
+		if (!$('#weekendNotice').hasClass('show')) {
+			$([document.documentElement, document.body]).animate({
+				scrollTop: $("#classLink").offset().top //cannot scroll to hidden weekendNotice directly
+			}, 250);
+		}
+	});
 });
