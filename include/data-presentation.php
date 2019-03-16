@@ -82,13 +82,17 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 
 			<main>
 				<?php if (isset($_SESSION['validToken']) && $_SESSION['validToken'] === false) { ?>
-					<div class="alert alert-danger alert-dismissible fade show" role="alert">
-						<strong>The class could not be changed.</strong><br>
-						This link is invalid. Please try again.
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
+				<div class="row">
+						<div class="col-xl-6">
+							<div class="alert alert-danger alert-dismissible fade show" role="alert">
+								<strong>The class could not be changed.</strong><br>
+								This link is invalid. Please try again.
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+						</div>
+				</div>
 				<?php }
 				unset($_SESSION['validToken']);
 				?>
@@ -109,7 +113,8 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 							$timeRange = $event['start'] . " - " . $event['end'];
 							$headerClasses = onGoingEvent($event) ? ' bg-dark text-light' : '';
 						?>
-
+					<div class="row">
+						<div class="col-xl-6">
 							<div class="card mt-3">
 								<div class="card-header<?php echo $headerClasses; ?>">
 									<i class="fas fa-clock"></i>
@@ -130,7 +135,8 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 											</ul>
 								</div>
 							</div>
-
+						</div>
+					</div>
 						<?php }
 					} ?>
 
