@@ -118,17 +118,17 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 									</div>
 
 									<div class="card-body pt-3 pb-1">
-												<ul class="list-inline">
-													<?php if (!empty($event['subject'])) { ?>
-														<li class="list-inline-item pr-3 font-weight-bold"><?php echo $event['subject']; ?></li>
-													<?php }
-													if (!empty($event['room'])) { ?>
-														<li class="list-inline-item pr-3"><?php echo $event['room']; ?></li>
-													<?php }
-													if (!empty($event['prof'])) { ?>
-														<li class="list-inline-item text-secondary"><?php echo $event['prof']; ?></li>
-														<?php } ?>
-												</ul>
+										<ul class="list-inline">
+											<?php if (!empty($event['subject'])) { ?>
+													<li class="list-inline-item pr-3 font-weight-bold"><?php echo $event['subject']; ?></li>
+											<?php }
+											if (!empty($event['room'])) { ?>
+													<li class="list-inline-item pr-3"><?php echo $event['room']; ?></li>
+											<?php }
+											if (!empty($event['prof'])) { ?>
+													<li class="list-inline-item text-secondary"><?php echo $event['prof']; ?></li>
+													<?php } ?>
+										</ul>
 									</div>
 								</div>
 								<?php }
