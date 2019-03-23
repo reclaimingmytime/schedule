@@ -45,24 +45,24 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 
 					<ul class="navbar-nav m-auto ml-sm-0">
 						<li class="nav-item mr-4 ml-3<?php echo ($desiredDate == $today) ? ' active' : ''; ?>">
-							<a class="nav-link" id="today" href="."><i class="fas fa-play"></i> <span class="d-none d-lg-inline">Today</span></a>
+              <a class="nav-link" id="today" href="."><i class="fas fa-play"></i> <span class="d-none d-lg-inline">Today <small>(Enter)</small></span></a>
 						</li>
 
 						<li class="nav-item mr-4">
-							<a class="nav-link" id="nextDay" href="?date=<?php echo $nextDay; ?>"><i class="fas fa-forward"></i> <span class="d-none d-lg-inline">Next Day</span></a>
+              <a class="nav-link" id="nextDay" href="?date=<?php echo $nextDay; ?>"><i class="fas fa-forward"></i> <span class="d-none d-lg-inline">Next Day <small>(D)</small></span></a>
 						</li>
 						<li class="nav-item mr-4">
-							<a class="nav-link" id="nextWeek" href="?date=<?php echo $nextWeek; ?>"><i class="fas fa-step-forward"></i> <span class="d-none d-lg-inline">Next Week</span></a>
+							<a class="nav-link" id="nextWeek" href="?date=<?php echo $nextWeek; ?>"><i class="fas fa-step-forward"></i> <span class="d-none d-lg-inline">Next Week <small>(W)</small></span></a>
 						</li>
 
 						<?php if ($prevDay !== "none") { ?>
 							<li class="nav-item mr-4">
-								<a class="nav-link" id="prevDay" href="?date=<?php echo $prevDay; ?>"><i class="fas fa-backward"></i> <span class="d-none d-lg-inline">Previous Day</span></a>
+								<a class="nav-link" id="prevDay" href="?date=<?php echo $prevDay; ?>"><i class="fas fa-backward"></i> <span class="d-none d-lg-inline">Previous Day <small>(A)</small></span></a>
 							</li>
 						<?php }
 						if ($prevWeek !== "none") { ?>
 							<li class="nav-item mr-4">
-								<a class="nav-link" id="prevWeek" href="?date=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> <span class="d-none d-lg-inline">Previous Week</span></a>
+								<a class="nav-link" id="prevWeek" href="?date=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> <span class="d-none d-lg-inline">Previous Week <small>(S)</small></span></a>
 							</li>
 						<?php } ?>
 
@@ -152,7 +152,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 
 			<footer class="text-center my-4">
 				<?php if (!empty($allowedClasses)) { ?>
-					<div class="d-inline-block d-sm-none dropup d-inline">
+					<div class="d-block d-sm-none dropup d-inline">
 						<a class="btn btn-white text-muted dropdown-toggle" href="#" role="button" id="classLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="fas fa-folder"></i> <?php echo $desiredClass; ?>
 						</a>
@@ -161,6 +161,9 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 						</div>
 					</div>
 				<?php } ?>
+        <div class="d-block d-sm-none mt-2">
+          <small class="text-muted">Navigate by swiping left and right.</small>
+        </div>
 			</footer>
 
 		</div>
