@@ -2,25 +2,28 @@ $(function () {
   function redirect(url) {
     window.location.href = url;
   }
+  function redirectToHref(selector) {
+    redirect($(selector).attr('href'));
+  }
   
   /* Swipe */
   $("html").swipe({
     swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
       // fingerCount 0: No touchscreen detected
       if (direction == "left" && (fingerCount == 1 || fingerCount == 0)) {
-        redirect($('#nextDay').attr('href'));
+        redirectToHref('#nextDay');
       }
       if (direction == "left" && fingerCount == 2) {
-        redirect($('#nextWeek').attr('href'));
+        redirectToHref('#nextWeek');
       }
 
       if (direction == "right" && (fingerCount == 1 || fingerCount == 0) && $('head').data('prevday') !== "none") {
         if ($('head').data('prevday') !== "none") {
-          redirect($('#prevDay').attr('href'));
+          redirectToHref('#prevDay');
         }
       }
       if (direction == "right" && fingerCount == 2 && $('head').data('prevweek') !== "none") {
-        redirect($('#prevWeek').attr('href'));
+        redirectToHref('#prevWeek');
       }
     },
     fingers: 'all',
@@ -33,27 +36,27 @@ $(function () {
       switch (e.which) {
         case 65: // A
           if ($('head').data('prevday') !== "none") {
-            redirect($('#prevDay').attr('href'));
+            redirectToHref('#prevDay');
           }
           break;
 
         case 68: // D
-          redirect($('#nextDay').attr('href'));
+          redirectToHref('#nextDay');
           break;
 
         case 87: // W
-          redirect($('#nextWeek').attr('href'));
+          redirectToHref('#nextWeek');
           break;
 
         case 83: // S
           if ($('head').data('prevweek') !== "none") {
-            redirect($('#prevWeek').attr('href'));
+            redirectToHref('#prevWeek');
           }
           break;
 
         case 13: // enter
           if ($('head').data('today') !== $('head').data('desireddate')) {
-            redirect($('#today').attr('href'));
+            redirectToHref('#today');
           }
           break;
 
