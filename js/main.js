@@ -5,7 +5,13 @@ $(function () {
   function redirectToHref(selector) {
     redirect($(selector).attr('href'));
   }
-  
+  function notNone(val) {
+    return val !== "none";
+  }
+  function dataNotNone(data) {
+    return notNone($('head').data(data));
+  }
+
   /* Swipe */
   $("html").swipe({
     swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
@@ -17,12 +23,10 @@ $(function () {
         redirectToHref('#nextWeek');
       }
 
-      if (direction == "right" && (fingerCount == 1 || fingerCount == 0) && $('head').data('prevday') !== "none") {
-        if ($('head').data('prevday') !== "none") {
-          redirectToHref('#prevDay');
-        }
+      if (direction == "right" && (fingerCount == 1 || fingerCount == 0) && dataNotNone('prevday')) {
+        redirectToHref('#prevDay');
       }
-      if (direction == "right" && fingerCount == 2 && $('head').data('prevweek') !== "none") {
+      if (direction == "right" && fingerCount == 2 && dataNotNone('prevweek')) {
         redirectToHref('#prevWeek');
       }
     },
@@ -35,7 +39,7 @@ $(function () {
     if (!e.ctrlKey && !e.metaKey && !e.shiftKey) {
       switch (e.which) {
         case 65: // A
-          if ($('head').data('prevday') !== "none") {
+          if (dataNotNone('prevday')) {
             redirectToHref('#prevDay');
           }
           break;
@@ -49,7 +53,7 @@ $(function () {
           break;
 
         case 83: // S
-          if ($('head').data('prevweek') !== "none") {
+          if (dataNotNone('prevweek')) {
             redirectToHref('#prevWeek');
           }
           break;
