@@ -1,22 +1,26 @@
 $(function () {
+  function redirect(url) {
+    window.location.href = url;
+  }
+  
   /* Swipe */
   $("html").swipe({
     swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
       // fingerCount 0: No touchscreen detected
       if (direction == "left" && (fingerCount == 1 || fingerCount == 0)) {
-        window.location.href = $('#nextDay').attr('href');
+        redirect($('#nextDay').attr('href'));
       }
       if (direction == "left" && fingerCount == 2) {
-        window.location.href = $('#nextWeek').attr('href');
+        redirect($('#nextWeek').attr('href'));
       }
 
       if (direction == "right" && (fingerCount == 1 || fingerCount == 0) && $('head').data('prevday') !== "none") {
         if ($('head').data('prevday') !== "none") {
-          window.location.href = $('#prevDay').attr('href');
+          redirect($('#prevDay').attr('href'));
         }
       }
       if (direction == "right" && fingerCount == 2 && $('head').data('prevweek') !== "none") {
-        window.location.href = $('#prevWeek').attr('href');
+        redirect($('#prevWeek').attr('href'));
       }
     },
     fingers: 'all',
@@ -29,27 +33,27 @@ $(function () {
       switch (e.which) {
         case 65: // A
           if ($('head').data('prevday') !== "none") {
-            window.location.href = $('#prevDay').attr('href');
+            redirect($('#prevDay').attr('href'));
           }
           break;
 
         case 68: // D
-          window.location.href = $('#nextDay').attr('href');
+          redirect($('#nextDay').attr('href'));
           break;
 
         case 87: // W
-          window.location.href = $('#nextWeek').attr('href');
+          redirect($('#nextWeek').attr('href'));
           break;
 
         case 83: // S
           if ($('head').data('prevweek') !== "none") {
-            window.location.href = $('#prevWeek').attr('href');
+            redirect($('#prevWeek').attr('href'));
           }
           break;
 
         case 13: // enter
           if ($('head').data('today') !== $('head').data('desireddate')) {
-            window.location.href = $('#today').attr('href');
+            redirect($('#today').attr('href'));
           }
           break;
 
