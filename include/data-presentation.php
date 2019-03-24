@@ -68,10 +68,10 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 
 						<?php if(!empty($allowedClasses)) { ?>
 						<li class="nav-item d-none d-sm-inline-block dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<a class="nav-link dropdown-toggle" href="#" id="classNavButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?></span>
 							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<div class="dropdown-menu" id="classNavMenu" aria-labelledby="classNavButton">
 								<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed); ?>
 							</div>
 						</li>
@@ -120,14 +120,14 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 									<div class="card-body pt-3 pb-1">
 										<ul class="list-inline">
 											<?php if (!empty($event['subject'])) { ?>
-													<li class="list-inline-item pr-3 font-weight-bold"><?php echo $event['subject']; ?></li>
+                        <li class="list-inline-item pr-3 font-weight-bold"><?php echo $event['subject']; ?></li>
 											<?php }
 											if (!empty($event['room'])) { ?>
 													<li class="list-inline-item pr-3"><?php echo $event['room']; ?></li>
 											<?php }
 											if (!empty($event['prof'])) { ?>
-													<li class="list-inline-item text-secondary"><?php echo $event['prof']; ?></li>
-													<?php } ?>
+                        <li class="list-inline-item text-secondary"><?php echo $event['prof']; ?></li>
+                      <?php } ?>
 										</ul>
 									</div>
 								</div>
@@ -153,10 +153,10 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 			<footer class="text-center my-4">
 				<?php if (!empty($allowedClasses)) { ?>
 					<div class="d-block d-sm-none dropup d-inline">
-						<a class="btn btn-white text-muted dropdown-toggle" href="#" role="button" id="classLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<a class="btn btn-white text-muted dropdown-toggle" href="#" role="button" id="classFooterButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="fas fa-folder"></i> <?php echo $desiredClass; ?>
 						</a>
-						<div class="dropdown-menu" aria-labelledby="classLink">
+						<div class="dropdown-menu" id="classFooterMenu" aria-labelledby="classFooterButton">
 							<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed); ?>
 						</div>
 					</div>
