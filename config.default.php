@@ -22,7 +22,7 @@ define('PROF', 'Professor');
 
 /* Displaying Data */
 $subjects = [
-		"Break" => "Study_Break"
+		"brk" => "Break"
 ];
 
 $emptyProfs = ['-'];
