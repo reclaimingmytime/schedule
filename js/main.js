@@ -78,7 +78,7 @@ $(function () {
           if ($('#keyCode' + e.keyCode).length && !$('#keyCode' + e.keyCode).hasClass('active')) {
             document.getElementById('keyCode' + e.keyCode).click();
           }
-          if($('#keyCode' + e.keyCode).hasClass('active')) {
+          if($('#keyCode' + e.keyCode).hasClass('active') && $('#keyCode' + e.keyCode).is(':visible')) {
             document.getElementById('classNavButton').click(); //close menu if link is active
           }
           break;
