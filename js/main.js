@@ -63,6 +63,25 @@ $(function () {
             redirectToHref('#today');
           }
           break;
+         
+        //0-9
+        case 48:
+        case 49:
+        case 50:
+        case 51:
+        case 52:
+        case 53:
+        case 54:
+        case 55:
+        case 56:
+        case 57:
+          if ($('#keyCode' + e.keyCode).length) {
+            document.getElementById('keyCode' + e.keyCode).click();
+          }
+          break;
+        
+        case 67:
+          document.getElementById('classNavButton').click();
 
         default:
           return; // exit this handler for other keys

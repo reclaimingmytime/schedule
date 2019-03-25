@@ -1,10 +1,14 @@
 <?php
 /* Display Schedule */
 
-function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed) {
+function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, $ids = false) {
+  $keyCode = 48;
+  $i = 0;
 	foreach ($allowedClasses as $class) { ?>
-		<a class="dropdown-item<?php if ($desiredClass == $class) echo " active"; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"><i class="fas fa-folder-open"></i> <?php echo $class; ?></a>
+		<a class="dropdown-item<?php if ($desiredClass == $class) echo " active"; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php echo ($ids === true ? " id=\"keyCode$keyCode\"" : '') ?>><i class="fas fa-folder-open"></i> <?php echo $class . ($ids === true ? " <small>($i)</small>" : ''); ?></a>
 		<?php
+    $keyCode++;
+    $i++;
 	}
 }
 ?>
@@ -69,10 +73,10 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 						<?php if(!empty($allowedClasses)) { ?>
 						<li class="nav-item d-none d-sm-inline-block dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="classNavButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?></span>
+                <i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?> <small>(C)</small></span>
 							</a>
 							<div class="dropdown-menu" id="classNavMenu" aria-labelledby="classNavButton">
-								<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed); ?>
+								<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, true); ?>
 							</div>
 						</li>
 						<?php } ?>
