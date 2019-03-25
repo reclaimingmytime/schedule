@@ -75,8 +75,11 @@ $(function () {
         case 55:
         case 56:
         case 57:
-          if ($('#keyCode' + e.keyCode).length) {
+          if ($('#keyCode' + e.keyCode).length && !$('#keyCode' + e.keyCode).hasClass('active')) {
             document.getElementById('keyCode' + e.keyCode).click();
+          }
+          if($('#keyCode' + e.keyCode).hasClass('active')) {
+            document.getElementById('classNavButton').click(); //close menu if link is active
           }
           break;
         
