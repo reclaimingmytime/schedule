@@ -30,11 +30,6 @@ function createTime($input) {
 	return DateTime::createFromFormat('H:i', $input);
 }
 
-function hasExcludedWeekends() {
-	global $excludeWeekends;
-	return isset($excludeWeekends) && $excludeWeekends === true;
-}
-
 function isWeekend($date) {
 	$weekDay = date('w', strtotime($date));
 	return ($weekDay == 0 || $weekDay == 6);
@@ -46,15 +41,23 @@ $currentTime = date("H:i");
 $desiredDate = getCustomDate("date", $today, $min);
 
 $weekBump = false;
-if(hasExcludedWeekends() && isWeekend($desiredDate)) {
-	$desiredDate = createNewDate($desiredDate, "1 weekday");
-	$weekBump = true;
-}
-if(hasExcludedWeekends() && isWeekend($today)) {
-	$today = createNewDate($today, "1 weekday");
-	if($today == $desiredDate) {
-		$weekBump = true;
-	}
+
+if(isset($excludeWeekends) && isTrue($excludeWeekends)) {
+  if(isWeekend($desiredDate)) {
+    $desiredDate = createNewDate($desiredDate, "1 weekday");
+    $weekBump = true;
+  }
+  
+  if(isWeekend($today)) {
+    $today = createNewDate($today, "1 weekday");
+    if($today == $desiredDate) {
+      $weekBump = true;
+    }
+  }
+  
+  $weekDayString = "weekday";
+} else {
+  $weekDayString = "day";
 }
 
 $desiredDateObj = new DateTime($desiredDate);
@@ -63,12 +66,6 @@ $desiredDatePretty = $desiredDateObj->format("d.m.y");
 $weekDay = $desiredDateObj->format("D");
 $displayedDateFull = $weekDay . ", " . $desiredDatePretty;
 $displayedDate = $desiredDatePretty;
-
-if(hasExcludedWeekends()) {
-	$weekDayString = "weekday";
-} else {
-	$weekDayString = "day";
-}
 
 $nextWeek = createNewDate($desiredDate, "1 week");
 $nextDay = createNewDate($desiredDate, "1 $weekDayString");
