@@ -7,17 +7,16 @@ if(empty($minDate)) {
 
 $min = new DateTime($minDate);
 
-function validDate($input) {
+function validDate($min, $input) {
 	//DateTime even detects 31st Feb and 31st Nov as errors
 	$date = DateTime::createFromFormat('Y-m-d', $input);
 	$date_errors = DateTime::getLastErrors();
 
-	global $min;
 	return $date >= $min && $date_errors['warning_count'] === 0 && $date_errors['error_count'] === 0;
 }
 
-function getCustomDate($param, $today) {
-	if (isset($_GET[$param]) && validDate($_GET[$param])) {
+function getCustomDate($param, $today, $min) {
+	if (isset($_GET[$param]) && validDate($min, $_GET[$param])) {
 		return $_GET[$param];
 	}
 	return $today;
@@ -44,7 +43,7 @@ function isWeekend($date) {
 $today = date("Y-m-d");
 $currentTime = date("H:i");
 
-$desiredDate = getCustomDate("date", $today);
+$desiredDate = getCustomDate("date", $today, $min);
 
 $weekBump = false;
 if(hasExcludedWeekends() && isWeekend($desiredDate)) {
@@ -90,14 +89,13 @@ function validClass($class, $allowedClasses) {
 	return !empty($class) && in_array($class, $allowedClasses);
 }
 
-function getClass($defaultClass, $allowedClasses, $desiredDate) {
+function getClass($defaultClass, $allowedClasses, $desiredDate, $token) {
 	$classGET = getParameter("class");
 	$classCookie = getCookie("class");
 
 	$class = getInput($classGET, $classCookie);
 
 	if (validClass($class, $allowedClasses)) {
-		global $token;
 		if (!empty($classGET) && isDifferent($classGET, $classCookie)) {
 			if (validToken(getParameter("token"), $token)) {
 				writeCookie("class", $class, "1 year");
@@ -164,7 +162,7 @@ if(!isset($defaultClass) || !isset($api)) {
 	die('Empty or invalid API. Please specify $api and $defaultClass in your config file in the following format:<br><b>$api</b> = https://example.com/api.json?class=<b>$defaultClass</b>');
 }
 
-$desiredClass = getClass($defaultClass, $allowedClasses, $desiredDate);
+$desiredClass = getClass($defaultClass, $allowedClasses, $desiredDate, $token);
 $desiredAPI = getAPIUrl($api, $desiredClass, $defaultClass);
 
 $folder = "cache/";

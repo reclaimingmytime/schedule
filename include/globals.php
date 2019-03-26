@@ -23,7 +23,7 @@ function isBetween($x, $min, $max) {
 }
 
 function equals($x, $y) {
-	return $x == $y;
+	return $x === $y;
 }
 
 function exists($x, $y) {
@@ -32,6 +32,14 @@ function exists($x, $y) {
 
 function notExists($x, $y) {
 	return strpos($x, $y) === false;
+}
+
+function isTrue($x) {
+  return $x === true;
+}
+
+function isFalse($x) {
+  return $x === false;
 }
 
 function escape($a) {

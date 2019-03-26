@@ -74,13 +74,12 @@ function validProf($profs, $emptyProfs) {
 	return !in_array($profs, $emptyProfs);
 }
 
-function containsNewRoom($e, $new) {
-	return !empty($e["room"]) && notExists($e["room"], $new["room"]);
+function containsNewRoom($existing, $new) {
+	return !empty($existing["room"]) && notExists($existing["room"], $new["room"]);
 }
 
-function containsNewProf($e, $new) {
-	global $emptyProfs;
-	return !empty($e["prof"]) && notExists($e["prof"], $new["prof"]) && validProf($new["prof"], $emptyProfs);
+function containsNewProf($existing, $new, $emptyProfs) {
+	return !empty($existing["prof"]) && notExists($existing["prof"], $new["prof"]) && validProf($new["prof"], $emptyProfs);
 }
 
 //Populating schedule array
@@ -108,7 +107,7 @@ foreach ($calendar as $entry) {
 				if (containsNewRoom($existing, $new)) {
 					$schedule[$key]["room"] .= ", " . $new["room"];
 				}
-				if (containsNewProf($existing, $new)) {
+				if (containsNewProf($existing, $new, $emptyProfs)) {
 					$schedule[$key]["prof"] .= ", " . $new["prof"];
 				}
 			}
@@ -125,11 +124,10 @@ if (!empty($schedule)) {
 	escapeArray($schedule);
 }
 
-function onGoingEvent($event) {
-	global $desiredDate;
-	global $today;
-	global $currentTime;
-	global $weekBump;
-	
-	return $desiredDate == $today && isBetween(createTime($currentTime), createTime($event['start']), createTime($event['end'])) && $weekBump === false;
+function timeIsBetween($time, $start, $end) {
+  return isBetween(createTime($time), createTime($start), createTime($end));
+}
+
+function onGoingEvent($event, $currentTime) {
+  return timeIsBetween($currentTime, $event['start'], $event['end']);
 }
