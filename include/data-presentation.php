@@ -5,7 +5,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
   $keyCode = 49;
   $i = 1;
 	foreach ($allowedClasses as $class) { ?>
-		<a class="dropdown-item<?php if ($desiredClass == $class) echo " active"; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php echo ($ids === true && $i <= 9 ? " id=\"keyCode$keyCode\"" : '') ?>><i class="fas fa-folder-open"></i> <?php echo $class . ($ids === true && $i <= 9 ? " <small class=\"text-muted\">($i)</small>" : ''); ?></a>
+		<a class="dropdown-item<?php if ($desiredClass == $class) echo " active"; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php echo ($ids === true && $i <= 9 ? " id=\"keyCode$keyCode\"" : '') ?>><i class="fas fa-folder-open"></i> <?php echo $class . ($ids === true && $i <= 9 ? " <small class=\"text-muted d-none d-lg-inline\">($i)</small>" : ''); ?></a>
 		<?php
     $keyCode++;
     $i++;
