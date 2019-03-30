@@ -2,12 +2,12 @@
 /* Display Schedule */
 
 function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, $ids = false) {
-  $keyCode = 49;
   $i = 1;
-	foreach ($allowedClasses as $class) { ?>
+	foreach ($allowedClasses as $class) {
+    $keyCode = $i + 48;
+    ?>
 		<a class="dropdown-item<?php if ($desiredClass == $class) echo " active"; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php echo ($ids === true && $i <= 9 ? " id=\"keyCode$keyCode\"" : '') ?>><i class="fas fa-folder-open"></i> <?php echo $class . ($ids === true && $i <= 9 ? " <small class=\"text-muted d-none d-lg-inline\">($i)</small>" : ''); ?></a>
 		<?php
-    $keyCode++;
     $i++;
 	}
 }
