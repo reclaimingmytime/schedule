@@ -82,7 +82,7 @@ $(function () {
           }
           break;
         
-        case 67:
+        case 67: //C
           document.getElementById('classNavButton').click();
 
         default:
