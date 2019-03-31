@@ -5,6 +5,9 @@ $(function () {
   function redirectToHref(selector) {
     redirect($(selector).attr('href'));
   }
+  function clickID(id) {
+    document.getElementById(id).click();
+  }
   function notNone(val) {
     return val !== "none";
   }
@@ -75,15 +78,15 @@ $(function () {
         case 56:
         case 57:
           if ($('#keyCode' + e.keyCode).length && !$('#keyCode' + e.keyCode).hasClass('active')) {
-            document.getElementById('keyCode' + e.keyCode).click();
+            clickID('keyCode' + e.keyCode);
           }
           if($('#keyCode' + e.keyCode).hasClass('active') && $('#keyCode' + e.keyCode).is(':visible')) {
-            document.getElementById('classNavButton').click(); //close menu if link is active
+            clickID('classNavButton'); //close menu if link is active
           }
           break;
         
         case 67: //C
-          document.getElementById('classNavButton').click();
+          clickID('classNavButton');
 
         default:
           return; // exit this handler for other keys
