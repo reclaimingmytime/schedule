@@ -77,10 +77,11 @@ $(function () {
         case 55:
         case 56:
         case 57:
-          if ($('#keyCode' + e.keyCode).length && !$('#keyCode' + e.keyCode).hasClass('active')) {
-            clickID('keyCode' + e.keyCode);
+          var keyCodeElement = '#keyCode' + e.keyCode;
+          if ($(keyCodeElement).length && !$(keyCodeElement).hasClass('active')) {
+            redirectToHref(keyCodeElement);
           }
-          if($('#keyCode' + e.keyCode).hasClass('active') && $('#keyCode' + e.keyCode).is(':visible')) {
+          if($(keyCodeElement).hasClass('active') && $(keyCodeElement).is(':visible')) {
             clickID('classNavButton'); //close menu if link is active
           }
           break;
