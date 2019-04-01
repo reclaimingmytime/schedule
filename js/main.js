@@ -1,4 +1,5 @@
 $(function () {
+  // Redirect
   function redirect(url) {
     window.location.href = url;
   }
@@ -8,6 +9,14 @@ $(function () {
   function clickID(id) {
     document.getElementById(id).click();
   }
+  // Detect "active"
+  $.fn.isActive = function () {
+    return this.hasClass('active');
+  };
+  $.fn.isVisible = function () {
+    return this.is(':visible');
+  };
+  // Detect "none"
   function notNone(val) {
     return val !== "none";
   }
@@ -78,10 +87,10 @@ $(function () {
         case 56:
         case 57:
           var keyCodeElement = '#keyCode' + e.keyCode;
-          if ($(keyCodeElement).length && !$(keyCodeElement).hasClass('active')) {
+          if ($(keyCodeElement).length && !$(keyCodeElement).isActive()) {
             redirectToHref(keyCodeElement);
           }
-          if($(keyCodeElement).hasClass('active') && $(keyCodeElement).is(':visible')) {
+          if($(keyCodeElement).hasClass('active') && $(keyCodeElement).isVisible()) {
             clickID('classNavButton'); //close menu if link is active
           }
           break;
