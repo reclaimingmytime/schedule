@@ -31,14 +31,17 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 
 		<style>
 			.dropdown-toggle {
-					outline: none;
+        outline: none;
 			}
 			.btn:focus {
-					box-shadow: none;
+        box-shadow: none;
 			}
 			.active {
 				pointer-events: none;
 			}
+      a:hover {
+        text-decoration: none;
+      }
 			.dropdown-item.active {
 				font-weight: bold;
 				color: #212529;
@@ -173,7 +176,14 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 					</div>
 				<?php } ?>
         <div class="d-block d-sm-none mt-2">
-          <small class="text-muted">Navigate by swiping left and right.</small>
+            <a class="text-muted" data-toggle="collapse" href="#navInfo" role="button" aria-expanded="false" aria-controls="navInfo">
+              <small>Navigate by swiping left and right. <i class="fas fa-info-circle"></i></small>
+            </a>
+            <div class="collapse" id="navInfo">
+              <div class="card card-body mt-2 pb-1">
+                <p>Swiping left and right using <strong>two fingers horizontally</strong> changes the <b>week</b>.</p>
+              </div>
+            </div>
         </div>
 			</footer>
 
