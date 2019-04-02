@@ -23,6 +23,11 @@ $(function () {
   function dataNotNone(data) {
     return notNone($('head').data(data));
   }
+  //Time
+  function pad(str, max) {
+    str = str.toString();
+    return str.length < max ? pad("0" + str, max) : str;
+  }
 
   /* Swipe */
   $("html").swipe({
@@ -118,11 +123,6 @@ $(function () {
       }
 
     });
-  }
-
-  function pad(str, max) {
-    str = str.toString();
-    return str.length < max ? pad("0" + str, max) : str;
   }
 
   var displayed = $('.currentTime').text();
