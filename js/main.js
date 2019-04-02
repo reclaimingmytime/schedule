@@ -28,6 +28,9 @@ $(function () {
     str = str.toString();
     return str.length < max ? pad("0" + str, max) : str;
   }
+  function isBetween(x, min, max) {
+    return (min <= x) && (x <= max);
+  }
 
   /* Swipe */
   $("html").swipe({
@@ -115,11 +118,12 @@ $(function () {
     $("div[data-start]").val(function(){ //for-each all divs with data-start
       var start = $(this).data('start');
       var end = $(this).data('end');
-
-      if(start <= time && time <= end) {
-        $(this).addClass('bg-dark text-light');
-      } else if($(this).hasClass('bg-dark')) {
-        $(this).removeClass('bg-dark text-light');
+      
+      var highlightClasses = 'bg-dark text-light';
+      if(isBetween(time, start, end)) {
+        $(this).addClass();
+      } else if($(this).hasClass(highlightClasses)) {
+        $(this).removeClass(highlightClasses);
       }
 
     });
