@@ -28,17 +28,17 @@ $(function () {
   $("html").swipe({
     swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
       // fingerCount 0: No touchscreen detected
-      if (direction == "left" && (fingerCount == 1 || fingerCount == 0)) {
+      if (direction === "left" && (fingerCount === 1 || fingerCount === 0)) {
         redirectToHref('#nextDay');
       }
-      if (direction == "left" && fingerCount == 2) {
+      if (direction === "left" && fingerCount === 2) {
         redirectToHref('#nextWeek');
       }
 
-      if (direction == "right" && (fingerCount == 1 || fingerCount == 0) && dataNotNone('prevday')) {
+      if (direction === "right" && (fingerCount === 1 || fingerCount === 0) && dataNotNone('prevday')) {
         redirectToHref('#prevDay');
       }
-      if (direction == "right" && fingerCount == 2 && dataNotNone('prevweek')) {
+      if (direction === "right" && fingerCount === 2 && dataNotNone('prevweek')) {
         redirectToHref('#prevWeek');
       }
     },
