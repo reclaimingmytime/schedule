@@ -181,7 +181,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
             </a>
             <div class="collapse" id="navInfo">
               <div class="card card-body mt-2 pb-1">
-                <p>Swiping left and right using <strong>two fingers horizontally</strong> changes the <b>week</b>.</p>
+                <p><strong>One-finger</strong> swipes change the <b>day</b>, while <b>two-finger</b> swipes change the <strong>week</strong>.</p>
               </div>
             </div>
         </div>
