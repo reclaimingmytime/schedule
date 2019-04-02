@@ -123,7 +123,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 						} else { ?>
 								<?php foreach ($schedule as $event) {
 									$timeRange = $event['start'] . " - " . $event['end'];
-									$headerClasses = equals($desiredDate, $today) &&  isFalse($weekBump) && onGoingEvent($event, $currentTime) ? ' bg-dark text-light' : '';
+									$headerClasses = equals($desiredDate, $today) && isFalse($weekBump) && onGoingEvent($event, $currentTime) ? ' bg-dark text-light' : '';
 								?>
 								<div class="card mt-3">
 									<div class="card-header<?php echo $headerClasses; ?>">
