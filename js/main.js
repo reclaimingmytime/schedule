@@ -119,7 +119,7 @@ $(function () {
       if(start <= time && time <= end) {
         $(this).addClass('bg-dark text-light');
       } else if($(this).hasClass('bg-dark')) {
-        $(this).removeClass('bg-dark').addClass('text-light');
+        $(this).removeClass('bg-dark text-light');
       }
 
     });
