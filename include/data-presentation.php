@@ -18,10 +18,12 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
     $i++;
 	}
 }
+
+$highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : false;
 ?>
 <!DOCTYPE html>
 <html lang="en">
-	<head data-desireddate="<?php echo $desiredDate; ?>" data-today="<?php echo $today; ?>" data-nextday="<?php echo $nextDay; ?>" data-prevday="<?php echo $prevDay; ?>" data-nextweek="<?php echo $nextWeek; ?>" data-prevweek="<?php echo $prevWeek; ?>">
+	<head data-desireddate="<?php echo $desiredDate; ?>" data-today="<?php echo $today; ?>" data-nextday="<?php echo $nextDay; ?>" data-prevday="<?php echo $prevDay; ?>" data-nextweek="<?php echo $nextWeek; ?>" data-prevweek="<?php echo $prevWeek; ?>" data-highlightevents="<?php echo $highlightEvents ? 'true' : 'false'; ?>">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Calendar for <?php echo $displayedDateFull; ?></title>
@@ -120,13 +122,13 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 								No entries have been found for that day.
 							</div>
 							<?php
-						} else { ?>
-								<?php foreach ($schedule as $event) {
+						} else {
+								foreach ($schedule as $event) {
 									$timeRange = $event['start'] . " - " . $event['end'];
-									$headerClasses = equals($desiredDate, $today) && isFalse($weekBump) && onGoingEvent($event, $currentTime) ? ' bg-dark text-light' : '';
+									$headerClasses = isTrue($highlightEvents) && onGoingEvent($event, $currentTime) ? ' bg-dark text-light' : '';
 								?>
 								<div class="card mt-3">
-									<div class="card-header<?php echo $headerClasses; ?>">
+									<div class="card-header<?php echo $headerClasses; ?>" data-start="<?php echo $event['start'];?>" data-end="<?php echo $event['end'];?>">
 										<i class="fas fa-clock"></i>
 										<strong><?php echo $timeRange ?></strong>
 									</div>

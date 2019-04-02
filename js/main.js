@@ -106,6 +106,20 @@ $(function () {
   });
 
   /* Time */
+  function updateEvents(time) {
+    $("div[data-start]").val(function(){ //for-each all divs with data-start
+      var start = $(this).data('start');
+      var end = $(this).data('end');
+
+      if(start <= time && time <= end) {
+        $(this).addClass('bg-dark text-light');
+      } else if($(this).hasClass('bg-dark')) {
+        $(this).removeClass('bg-dark').addClass('text-light');
+      }
+
+    });
+  }
+
   function pad(str, max) {
     str = str.toString();
     return str.length < max ? pad("0" + str, max) : str;
@@ -119,11 +133,17 @@ $(function () {
     if (displayed !== time) {
       displayed = time;
       $('.currentTime').html(time);
+      if($("head").data('highlightevents') === true) {
+        updateEvents(time);
+      }
     }
+    
   }
   setInterval(function () {
     updateTime();
   }, 5000);
+  
+  updateTime();
 
   /* Automatic Scroll */
   $("#infoBtn").click(function () {
