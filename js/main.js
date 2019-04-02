@@ -133,4 +133,7 @@ $(function () {
       }, 250);
     }
   });
+  
+  /* Tooltip */
+  $('[data-toggle="tooltip"]').tooltip();
 });

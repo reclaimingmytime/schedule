@@ -176,14 +176,9 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 					</div>
 				<?php } ?>
         <div class="d-block d-sm-none mt-2">
-            <a class="text-muted" data-toggle="collapse" href="#navInfo" role="button" aria-expanded="false" aria-controls="navInfo">
-              <small>Navigate by swiping left and right. <i class="fas fa-info-circle"></i></small>
-            </a>
-            <div class="collapse" id="navInfo">
-              <div class="card card-body mt-2 pb-1">
-                <p><strong>One-finger</strong> swipes change the <b>day</b>, while <b>two-finger</b> swipes change the <strong>week</strong>.</p>
-              </div>
-            </div>
+          <span class="text-muted" data-toggle="tooltip" data-placement="bottom" title="One-finger swipes change the day. Two-finger swipes change the week.">
+            <small>Navigate by swiping left and right. <i class="fas fa-info-circle"></i></small>
+          </span>
         </div>
 			</footer>
 
