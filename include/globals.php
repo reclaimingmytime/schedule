@@ -19,7 +19,7 @@ if (!empty($timezone)) {
 //}
 
 function isBetween($x, $min, $max) {
-  return ($min <= $x) && ($x <= $max);
+	return ($min <= $x) && ($x <= $max);
 }
 
 function equals($x, $y) {
@@ -35,11 +35,11 @@ function notExists($x, $y) {
 }
 
 function isTrue($x) {
-  return $x === true;
+	return $x === true;
 }
 
 function isFalse($x) {
-  return $x === false;
+	return $x === false;
 }
 
 function escape($a) {

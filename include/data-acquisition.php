@@ -43,21 +43,21 @@ $desiredDate = getCustomDate("date", $today, $min);
 $weekBump = false;
 
 if(isset($excludeWeekends) && isTrue($excludeWeekends)) {
-  if(isWeekend($desiredDate)) {
-    $desiredDate = createNewDate($desiredDate, "1 weekday");
-    $weekBump = true;
-  }
-  
-  if(isWeekend($today)) {
-    $today = createNewDate($today, "1 weekday");
-    if($today == $desiredDate) {
-      $weekBump = true;
-    }
-  }
-  
-  $weekDayString = "weekday";
+	if(isWeekend($desiredDate)) {
+		$desiredDate = createNewDate($desiredDate, "1 weekday");
+		$weekBump = true;
+	}
+	
+	if(isWeekend($today)) {
+		$today = createNewDate($today, "1 weekday");
+		if($today == $desiredDate) {
+			$weekBump = true;
+		}
+	}
+	
+	$weekDayString = "weekday";
 } else {
-  $weekDayString = "day";
+	$weekDayString = "day";
 }
 
 $desiredDateObj = new DateTime($desiredDate);

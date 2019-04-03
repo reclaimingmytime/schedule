@@ -125,9 +125,9 @@ if (!empty($schedule)) {
 }
 
 function timeIsBetween($time, $start, $end) {
-  return isBetween(createTime($time), createTime($start), createTime($end));
+	return isBetween(createTime($time), createTime($start), createTime($end));
 }
 
 function onGoingEvent($event, $currentTime) {
-  return timeIsBetween($currentTime, $event['start'], $event['end']);
+	return timeIsBetween($currentTime, $event['start'], $event['end']);
 }

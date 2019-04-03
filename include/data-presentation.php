@@ -2,20 +2,20 @@
 /* Display Schedule */
 
 function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, $showIDs = false) {
-  $i = 1;
+	$i = 1;
 	foreach ($allowedClasses as $class) {
-    $keyCode = $i + 48;
-    ?>
+		$keyCode = $i + 48;
+		?>
 		<a class="dropdown-item<?php if ($desiredClass == $class) echo " active"; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php echo ($showIDs === true && $i <= 9 ? ' id="keyCode' . $keyCode . '"' : '') ?>>
-      <i class="fas fa-folder-open"></i>
-      <?php echo $class;
-      
-      if($showIDs === true && $i <= 9) { ?>
-        <small class="text-muted d-none d-lg-inline">(<?php echo $i; ?>)</small>
-      <?php } ?>
-    </a>
+			<i class="fas fa-folder-open"></i>
+			<?php echo $class;
+			
+			if($showIDs === true && $i <= 9) { ?>
+				<small class="text-muted d-none d-lg-inline">(<?php echo $i; ?>)</small>
+			<?php } ?>
+		</a>
 		<?php
-    $i++;
+		$i++;
 	}
 }
 
@@ -32,23 +32,23 @@ $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : f
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 		<style>
-			.dropdown-toggle {
-        outline: none;
-			}
-			.btn:focus {
-        box-shadow: none;
-			}
-			.active {
-				pointer-events: none;
-			}
-      a:hover {
-        text-decoration: none;
-      }
-			.dropdown-item.active {
-				font-weight: bold;
-				color: #212529;
-				background-color: transparent;
-			}
+		.dropdown-toggle {
+			outline: none;
+		}
+		.btn:focus {
+			box-shadow: none;
+		}
+		.active {
+			pointer-events: none;
+		}
+		a:hover {
+			text-decoration: none;
+		}
+		.dropdown-item.active {
+			font-weight: bold;
+			color: #212529;
+			background-color: transparent;
+		}
 		</style>
 	</head>
 	<body>
@@ -61,11 +61,11 @@ $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : f
 
 					<ul class="navbar-nav m-auto ml-sm-0">
 						<li class="nav-item mr-4 ml-3<?php echo ($desiredDate == $today) ? ' active' : ''; ?>">
-              <a class="nav-link" id="today" href="."><i class="fas fa-play"></i> <span class="d-none d-lg-inline">Today <small>(Enter)</small></span></a>
+							<a class="nav-link" id="today" href="."><i class="fas fa-play"></i> <span class="d-none d-lg-inline">Today <small>(Enter)</small></span></a>
 						</li>
 
 						<li class="nav-item mr-4">
-              <a class="nav-link" id="nextDay" href="?date=<?php echo $nextDay; ?>"><i class="fas fa-forward"></i> <span class="d-none d-lg-inline">Next Day <small>(D)</small></span></a>
+							<a class="nav-link" id="nextDay" href="?date=<?php echo $nextDay; ?>"><i class="fas fa-forward"></i> <span class="d-none d-lg-inline">Next Day <small>(D)</small></span></a>
 						</li>
 						<li class="nav-item mr-4">
 							<a class="nav-link" id="nextWeek" href="?date=<?php echo $nextWeek; ?>"><i class="fas fa-step-forward"></i> <span class="d-none d-lg-inline">Next Week <small>(W)</small></span></a>
@@ -85,7 +85,7 @@ $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : f
 						<?php if(!empty($allowedClasses)) { ?>
 						<li class="nav-item d-none d-sm-inline-block dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="classNavButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?> <small>(C)</small></span>
+								<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?> <small>(C)</small></span>
 							</a>
 							<div class="dropdown-menu" id="classNavMenu" aria-labelledby="classNavButton">
 								<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, true); ?>
@@ -136,14 +136,14 @@ $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : f
 									<div class="card-body pt-3 pb-1">
 										<ul class="list-inline">
 											<?php if (!empty($event['subject'])) { ?>
-                        <li class="list-inline-item pr-3 font-weight-bold"><?php echo $event['subject']; ?></li>
+												<li class="list-inline-item pr-3 font-weight-bold"><?php echo $event['subject']; ?></li>
 											<?php }
 											if (!empty($event['room'])) { ?>
 													<li class="list-inline-item pr-3"><?php echo $event['room']; ?></li>
 											<?php }
 											if (!empty($event['prof'])) { ?>
-                        <li class="list-inline-item text-secondary"><?php echo $event['prof']; ?></li>
-                      <?php } ?>
+												<li class="list-inline-item text-secondary"><?php echo $event['prof']; ?></li>
+											<?php } ?>
 										</ul>
 									</div>
 								</div>
@@ -177,11 +177,11 @@ $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : f
 						</div>
 					</div>
 				<?php } ?>
-        <div class="d-block d-sm-none mt-2">
-          <span class="text-muted" data-toggle="tooltip" data-placement="bottom" title="One-finger swipes change the day. Two-finger swipes change the week.">
-            <small>Navigate by swiping left and right. <i class="fas fa-info-circle"></i></small>
-          </span>
-        </div>
+				<div class="d-block d-sm-none mt-2">
+					<span class="text-muted" data-toggle="tooltip" data-placement="bottom" title="One-finger swipes change the day. Two-finger swipes change the week.">
+						<small>Navigate by swiping left and right. <i class="fas fa-info-circle"></i></small>
+					</span>
+				</div>
 			</footer>
 
 		</div>
