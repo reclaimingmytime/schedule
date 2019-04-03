@@ -121,7 +121,7 @@ $(function () {
       
       var highlightClasses = 'bg-dark text-light';
       if(isBetween(time, start, end)) {
-        $(this).addClass();
+        $(this).addClass(highlightClasses);
       } else if($(this).hasClass(highlightClasses)) {
         $(this).removeClass(highlightClasses);
       }
