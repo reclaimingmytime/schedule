@@ -118,8 +118,8 @@ $(function () {
 		$("div[data-start]").val(function(){ //for-each all divs with data-start
 			var start = $(this).data('start');
 			var end = $(this).data('end');
-			
 			var highlightClasses = 'bg-dark text-light';
+			
 			if(isBetween(time, start, end)) {
 				$(this).addClass(highlightClasses);
 			} else {
