@@ -147,8 +147,6 @@ $(function () {
     updateTime();
   }, 5000);
   
-  updateTime();
-
   /* Automatic Scroll */
   $("#infoBtn").click(function () {
     if (!$('#weekendNotice').hasClass('show')) {
