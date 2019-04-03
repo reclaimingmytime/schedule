@@ -98,8 +98,8 @@ $(function () {
           if ($(keyCodeElement).length && !$(keyCodeElement).isActive()) {
             redirectToHref(keyCodeElement);
           }
-          if($(keyCodeElement).hasClass('active') && $(keyCodeElement).isVisible()) {
-            clickID('classNavButton'); //close menu if link is active
+          if($(keyCodeElement).isActive() && $(keyCodeElement).isVisible()) {
+            clickID('classNavButton'); //close menu when selecting active class
           }
           break;
         
