@@ -10,7 +10,7 @@ $(function () {
     document.getElementById(id).click();
   }
   // Detect "active"
-  $.fn.isActive = function () {
+  $.fn.hasActiveClass = function () {
     return this.hasClass('active');
   };
   $.fn.isVisible = function () {
@@ -95,10 +95,10 @@ $(function () {
         case 56:
         case 57:
           var keyCodeElement = '#keyCode' + e.keyCode;
-          if ($(keyCodeElement).length && !$(keyCodeElement).isActive()) {
+          if ($(keyCodeElement).length && !$(keyCodeElement).hasActiveClass()) {
             redirectToHref(keyCodeElement);
           }
-          if($(keyCodeElement).isActive() && $(keyCodeElement).isVisible()) {
+          if($(keyCodeElement).hasActiveClass() && $(keyCodeElement).isVisible()) {
             clickID('classNavButton'); //close menu when selecting active class
           }
           break;
