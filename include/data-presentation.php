@@ -4,13 +4,15 @@
 function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, $showIDs = false) {
 	$i = 1;
 	foreach ($allowedClasses as $class) {
-		$keyCode = $i + 48;
+		if($showIDs === true && $i <= 9) {
+			$keyCode = $i + 48;
+		}
 		?>
-		<a class="dropdown-item<?php if ($desiredClass == $class) echo " active font-weight-bold text-body bg-transparent"; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php echo ($showIDs === true && $i <= 9 ? ' id="keyCode' . $keyCode . '"' : '') ?>>
+		<a class="dropdown-item<?php if ($desiredClass == $class) echo " active font-weight-bold text-body bg-transparent"; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php echo !empty($keyCode) ? ' id="keyCode' . $keyCode . '"' : ''; ?>>
 			<i class="fas fa-folder-open"></i>
 			<?php echo $class;
 			
-			if($showIDs === true && $i <= 9) { ?>
+			if(!empty($keyCode)) { ?>
 				<small class="text-muted d-none d-lg-inline">(<?php echo $i; ?>)</small>
 			<?php } ?>
 		</a>
