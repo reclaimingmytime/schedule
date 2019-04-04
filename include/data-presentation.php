@@ -4,11 +4,7 @@
 function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, $showIDs = false) {
 	$i = 1;
 	foreach ($allowedClasses as $class) {
-		if($showIDs === true && $i <= 9) {
-			$keyCode = $i + 48;
-		} else {
-			$keyCode = null;
-		}
+		$keyCode = $showIDs === true && $i <= 9 ? $i + 48 : null;
 		?>
 		<a class="dropdown-item<?php if ($desiredClass == $class) echo ' active font-weight-bold text-body bg-transparent'; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php echo !empty($keyCode) ? ' id="keyCode' . $keyCode . '"' : ''; ?>>
 			<i class="fas fa-folder-open"></i>
