@@ -35,9 +35,6 @@ $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : f
 		.dropdown-toggle {
 			outline: none;
 		}
-		.btn:focus {
-			box-shadow: none;
-		}
 		.active {
 			pointer-events: none;
 		}
@@ -161,7 +158,7 @@ $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : f
 			<footer class="text-center my-4">
 				<?php if (!empty($allowedClasses)) { ?>
 					<div class="d-block d-sm-none dropup d-inline">
-						<a class="btn btn-white text-muted dropdown-toggle" href="#" role="button" id="classFooterButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<a class="btn btn-white shadow-none text-muted dropdown-toggle" href="#" role="button" id="classFooterButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="fas fa-folder"></i> <?php echo $desiredClass; ?>
 						</a>
 						<div class="dropdown-menu" id="classFooterMenu" aria-labelledby="classFooterButton">
