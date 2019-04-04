@@ -6,6 +6,8 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 	foreach ($allowedClasses as $class) {
 		if($showIDs === true && $i <= 9) {
 			$keyCode = $i + 48;
+		} else {
+			$keyCode = null;
 		}
 		?>
 		<a class="dropdown-item<?php if ($desiredClass == $class) echo " active font-weight-bold text-body bg-transparent"; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php echo !empty($keyCode) ? ' id="keyCode' . $keyCode . '"' : ''; ?>>
