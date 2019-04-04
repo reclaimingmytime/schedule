@@ -41,9 +41,6 @@ $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : f
 		.active {
 			pointer-events: none;
 		}
-		a:hover {
-			text-decoration: none;
-		}
 		.dropdown-item.active {
 			font-weight: bold;
 			color: #212529;
