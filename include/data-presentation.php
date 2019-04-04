@@ -15,7 +15,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 			<?php } ?>
 		</a>
 		<?php
-		$i++;
+		++$i;
 	}
 }
 
