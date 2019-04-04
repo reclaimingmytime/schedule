@@ -107,7 +107,7 @@ $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : f
 						</ul>
 
 						<?php if (empty($schedule)) { ?>
-							<div class="alert alert-secondary mt-4" role="alert">
+							<div class="alert alert-secondary mt-3" role="alert">
 								No entries have been found for that day.
 							</div>
 							<?php
