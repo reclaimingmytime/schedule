@@ -99,7 +99,7 @@ $(function () {
 						redirectToHref(keyCodeElement);
 					}
 					if($(keyCodeElement).hasActiveClass() && $(keyCodeElement).isVisible()) {
-						clickID('classNavButton'); //close menu when selecting active class
+						clickID('classNavButton'); //close menu when selecting link with active class
 					}
 					break;
 				
