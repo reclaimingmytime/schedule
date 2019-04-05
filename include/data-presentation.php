@@ -99,12 +99,12 @@ $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : f
 						<?php }
 						unset($_SESSION['validToken']);
 						?>
-						<ul class="list-inline text-muted h4 pb-1">
-							<li class="list-inline-item"><i class="fas fa-calendar-alt"></i></li>
-							<li class="list-inline-item"><?php echo $weekDay; ?></li>
-							<li class="list-inline-item"><?php echo $displayedDate; ?></li>
-							<li class="list-inline-item currentTime"><?php echo $currentTime; ?></li>
-						</ul>
+						<h1 class="text-muted h4 pb-1">
+							<span class="mr-2"><i class="fas fa-calendar-alt"></i></span>
+							<span class="mr-2"><?php echo $weekDay; ?></span>
+							<span class="mr-2"><?php echo $displayedDate; ?></span>
+							<span class="mr-2 currentTime"><?php echo $currentTime; ?></span>
+						</h1>
 
 						<?php if (empty($schedule)) { ?>
 							<div class="alert alert-secondary mt-3" role="alert">
