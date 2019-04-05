@@ -85,9 +85,9 @@ $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : f
 				</nav>
 			</header>
 			
-			<div class="row">
-				<div class="col-xl-6">
-					<main>
+			<main>
+				<div class="row">
+					<div class="col-xl-6">
 						<?php if (isset($_SESSION['validToken']) && $_SESSION['validToken'] === false) { ?>
 							<div class="alert alert-danger alert-dismissible fade show" role="alert">
 								<strong>The class could not be changed.</strong><br>
@@ -151,9 +151,9 @@ $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : f
 								</div>
 							</div>
 						<?php } ?>
-						</main>
+						</div>
 					</div>
-				</div>
+				</main>
 
 			<footer class="text-center my-4">
 				<?php if (!empty($allowedClasses)) { ?>
