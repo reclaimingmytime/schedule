@@ -130,17 +130,17 @@ function createCache($folder) {
 }
 
 function retrieveData($api, $cache_file) {
-	if (is_writable($cache_file) && (filemtime($cache_file) > (time() - 60 * 30 ))) {
+//	if (is_writable($cache_file) && (filemtime($cache_file) > (time() - 60 * 30 ))) {
 		$file = file_get_contents($cache_file);
-	} else {
-		try {
-			$file = file_get_contents($api);
-		} catch (Exception $ex) {
-			die("Unable to reach API.");
-		}
-		//refresh cache
-		file_put_contents($cache_file, $file, LOCK_EX);
-	}
+//	} else {
+//		try {
+//			$file = file_get_contents($api);
+//		} catch (Exception $ex) {
+//			die("Unable to reach API.");
+//		}
+//		//refresh cache
+//		file_put_contents($cache_file, $file, LOCK_EX);
+//	}
 
 	if (empty($file) || $file === false) {
 		die("Error connecting to API.");
