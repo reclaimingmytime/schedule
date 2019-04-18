@@ -18,6 +18,23 @@ if (!empty($timezone)) {
 //	return false;
 //}
 
+function stringPart($string, $startString) {
+	$pos = strpos($string, $startString);
+	if($pos == 0) {
+		return;
+	}
+	$start = $pos + strlen($startString);
+	return substr($string, $start);
+}
+
+function stringRange($string, $startString, $endString) {
+	$start = strpos($string, $startString) + strlen($startString); //select start point and don't include start text
+
+	$end = strpos($string, $endString); //select end point by selecting next delimiter
+	
+	return substr($string, $start, $end - $start);
+}
+
 function isBetween($x, $min, $max) {
 	return ($min <= $x) && ($x <= $max);
 }

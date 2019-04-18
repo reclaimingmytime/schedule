@@ -129,8 +129,8 @@ function createCache($folder) {
 	}
 }
 
-function retrieveData($api, $cache_file) {
-	if (is_writable($cache_file) && (filemtime($cache_file) > (time() - 60 * 30 ))) {
+function retrieveData($api, $cache_file, $type) {
+	if (is_writable($cache_file) && (filemtime($cache_file) > strtotime('now -1 day'))) {
 		$file = file_get_contents($cache_file);
 	} else {
 		try {
@@ -146,24 +146,35 @@ function retrieveData($api, $cache_file) {
 		die("Error connecting to API.");
 	}
 
-	$calendar = json_decode($file, true);
+	if($type == 'ical') {
+		include('classes/CalFileParser.php');
 
-	return defined('CALENDAR') ? $calendar[CALENDAR] : $calendar;
+		$cal = new CalFileParser();
+		return $cal->parse($api, 'array');
+	} else {
+		$calendar = json_decode($file, true);
+		return defined('CALENDAR') ? $calendar[CALENDAR] : $calendar;
+	}
 }
 
 if(!isset($allowedClasses)) {
 	$allowedClasses = [];
 }
 
-if(!isset($defaultClass) || !isset($api)) {
-	die('Empty or invalid API. Please specify $api and $defaultClass in your config file in the following format:<br><b>$api</b> = https://example.com/api.json?class=<b>$defaultClass</b>');
+if(isset($type) && $type !== 'ical') {
+	if((!isset($defaultClass) || !isset($api))) {
+		die('Empty or invalid API. Please specify $api and $defaultClass in your config file in the following format:<br><b>$api</b> = https://example.com/api.json?class=<b>$defaultClass</b>');
+	}
+	$desiredClass = getClass($defaultClass, $allowedClasses, $desiredDate, $token);
+	$desiredAPI = getAPIUrl($api, $desiredClass, $defaultClass);
+	$cache_filename = $desiredClass . ".json";
+} else {
+	$desiredAPI = $api;
+	$cache_filename = "cache.ical";
 }
-
-$desiredClass = getClass($defaultClass, $allowedClasses, $desiredDate, $token);
-$desiredAPI = getAPIUrl($api, $desiredClass, $defaultClass);
 
 $folder = "cache/";
 createCache($folder);
 
-$cache_file = $folder . $desiredClass . ".json";
-$calendar = retrieveData($desiredAPI, $cache_file);
+$cache_file = $folder . $cache_filename;
+$calendar = retrieveData($desiredAPI, $cache_file, $type);

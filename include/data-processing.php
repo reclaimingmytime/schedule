@@ -26,7 +26,11 @@ function trimPlaceholders($raw, $placeholders) {
 	return $raw;
 }
 
-if(!isset($profs)) {
+if(!isset($displayProfs)) {
+	$displayProfs = false;
+}
+
+if(!isset($profs) && $displayProfs === true) {
 	$profs = [];
 }
 
@@ -63,7 +67,7 @@ function ensureAllDefined($constants) {
 	}
 }
 
-ensureAllDefined(['SUBJECT', 'START', 'END', 'ROOM', 'PROF']);
+ensureAllDefined(['SUBJECT', 'START', 'END', 'ROOM']);
 
 //Duplicate check
 function sameEvent($e, $new) {
@@ -86,19 +90,33 @@ function containsNewProf($existing, $new, $emptyProfs) {
 $schedule = [];
 
 foreach ($calendar as $entry) {
-	$date = extractDate($entry[START]);
+	$date = ($type == 'ical') ? $entry[START]->format('Y-m-d') : extractDate($entry[START]);
 
 	if ($date == $desiredDate) {
 		$new = [];
-		$new["start"] = extractTime($entry[START]);
-		$new["end"] = extractTime($entry[END]);
-		$new["subject"] = !empty($subjects) ? lookup($entry[SUBJECT], $subjects) : $entry[SUBJECT];
+			
+		$new["start"] = ($type == 'ical') ? $entry[START]->format('H:i') : extractTime($entry[START]);
+		$new["end"] = ($type == 'ical') ? $entry[END]->format('H:i') : extractTime($entry[END]);
 		
 		$shortRoom = !empty($roomPrefix) ? trimRoom($entry[ROOM], $roomPrefix) : $entry[ROOM];
 		$new["room"] = lookup($shortRoom , $rooms);
 		
-		$new["prof"] = !empty($emptyProfs) && !empty($profs) ? lookupProfs($entry[PROF], $emptyProfs, $profs) : $entry[PROF];
+		if($type == 'ical') {
+			$thisSubject = stringRange($entry[SUBJECT], SUBJECTSECTION[0], SUBJECTSECTION[1]);
+		} else {
+			$thisSubject = $entry[SUBJECT];
+		}
+		$new["subject"] = !empty($subjects) ? lookup($thisSubject, $subjects) : $thisSubject;
 		
+		if($displayProfs === true) {
+			if($type == 'ical') {
+				$thisProf = stringRange($entry[PROF], PROFSECTION[0], PROFSECTION[1]);
+			} else {
+				$thisProf = $entry[PROF];
+			}
+			$new["prof"] = !empty($emptyProfs) && !empty($profs) ? lookupProfs($thisProf, $emptyProfs, $profs) : $entry[PROF];
+		}
+
 		$add = true;
 
 		foreach ($schedule as $key => $existing) {
