@@ -86,6 +86,10 @@ function containsNewProf($existing, $new, $emptyProfs) {
 	return !empty($existing["prof"]) && notExists($existing["prof"], $new["prof"]) && validProf($new["prof"], $emptyProfs);
 }
 
+function containsNewInfo($existing, $new) {
+	return !empty($new["info"]) && notExists($existing["info"], $new["info"]);
+}
+
 //Populating schedule array
 $schedule = [];
 
@@ -108,6 +112,10 @@ foreach ($calendar as $entry) {
 		}
 		$new["subject"] = !empty($subjects) ? lookup($thisSubject, $subjects) : $thisSubject;
 		
+		if(defined('INFO')) {
+			$new["info"] = stringRange($entry[INFO], INFOSECTION[0], INFOSECTION[1]);
+		}
+		
 		if($displayProfs === true) {
 			if($type == 'ical') {
 				$thisProf = stringRange($entry[PROF], PROFSECTION[0], PROFSECTION[1]);
@@ -127,6 +135,9 @@ foreach ($calendar as $entry) {
 				}
 				if (containsNewProf($existing, $new, $emptyProfs)) {
 					$schedule[$key]["prof"] .= ", " . $new["prof"];
+				}
+				if (containsNewInfo($existing, $new)) {
+					$schedule[$key]["info"] .= ", " . $new["info"];
 				}
 			}
 		}

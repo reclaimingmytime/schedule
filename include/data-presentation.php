@@ -131,7 +131,10 @@ $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : f
 													<li class="list-inline-item pr-3"><?php echo $event['room']; ?></li>
 											<?php }
 											if (!empty($event['prof'])) { ?>
-												<li class="list-inline-item text-secondary"><?php echo $event['prof']; ?></li>
+												<li class="list-inline-item text-secondary pr-3"><?php echo $event['prof']; ?></li>
+											<?php }
+											if (!empty($event['info'])) { ?>
+												<li class="list-inline-item text-secondary"><?php echo $event['info']; ?></li>
 											<?php } ?>
 										</ul>
 									</div>

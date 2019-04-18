@@ -28,6 +28,10 @@ function stringPart($string, $startString) {
 }
 
 function stringRange($string, $startString, $endString) {
+	if($endString == false) {
+		return stringPart($string, $startString);
+	}
+	
 	$start = strpos($string, $startString) + strlen($startString); //select start point and don't include start text
 
 	$end = strpos($string, $endString); //select end point by selecting next delimiter
