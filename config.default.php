@@ -27,6 +27,7 @@ $subjects = [
 
 $emptyProfs = ['-'];
 
+$displayProfs = true;
 $profs = [
 	"doe" => "John Doe",
 ];
