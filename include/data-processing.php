@@ -137,7 +137,10 @@ foreach ($calendar as $entry) {
 					$schedule[$key]["prof"] .= ", " . $new["prof"];
 				}
 				if (containsNewInfo($existing, $new)) {
-					$schedule[$key]["info"] .= ", " . $new["info"];
+					if(isset($existing['info'])) {
+						$schedule[$key]["info"] .= ", ";
+					}
+					$schedule[$key]["info"] .= $new["info"];
 				}
 			}
 		}
