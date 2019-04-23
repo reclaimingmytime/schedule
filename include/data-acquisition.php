@@ -150,7 +150,7 @@ function retrieveData($api, $cache_file, $type) {
 		include('classes/CalFileParser.php');
 
 		$cal = new CalFileParser();
-		return $cal->parse($api, 'array');
+		return $cal->parse($cache_file, 'array');
 	} else {
 		$calendar = json_decode($file, true);
 		return defined('CALENDAR') ? $calendar[CALENDAR] : $calendar;
