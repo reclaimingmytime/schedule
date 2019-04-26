@@ -54,6 +54,10 @@ function extractDate($dateTime) {
 	return $info[0];
 }
 
+function extractIcalDate($string) {
+	return DateTime::createFromFormat('Y-m-d H:i:s.000000', $string);
+}
+
 //Ensure defined constants
 function ensureDefined($constant) {
 	if (!defined($constant)) {
@@ -94,13 +98,13 @@ function containsNewInfo($existing, $new) {
 $schedule = [];
 
 foreach ($calendar as $entry) {
-	$date = ($type == 'ical') ? $entry[START]->format('Y-m-d') : extractDate($entry[START]);
+	$date = ($type == 'ical') ? extractIcalDate($entry[START]["date"])->format('Y-m-d') : extractDate($entry[START]);
 
 	if ($date == $desiredDate) {
 		$new = [];
 			
-		$new["start"] = ($type == 'ical') ? $entry[START]->format('H:i') : extractTime($entry[START]);
-		$new["end"] = ($type == 'ical') ? $entry[END]->format('H:i') : extractTime($entry[END]);
+		$new["start"] = ($type == 'ical') ? extractIcalDate($entry[START]["date"])->format('H:i') : extractTime($entry[START]);
+		$new["end"] = ($type == 'ical') ? extractIcalDate($entry[END]["date"])->format('H:i') : extractTime($entry[END]);
 		
 		$shortRoom = !empty($roomPrefix) ? trimRoom($entry[ROOM], $roomPrefix) : $entry[ROOM];
 		$new["room"] = lookup($shortRoom , $rooms);
