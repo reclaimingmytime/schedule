@@ -90,6 +90,7 @@ Note: The directory of the script and the folder "cache/" (created by the script
 | `$defaultClass`   | **Required**. Default class when fetching the API.           |
 | `$allowedClasses` | *Optional*. Array of allowed classes. If undefined or empty, only $defaultClass is allowed and the class switcher is hidden. |
 | `$api`            | **Required**. URL of the API. Must be and accessible URL. Assumes the API serves JSON. |
+| `$type`           | *Optional*. Type of the API. Can be "*json*" or "*ical*".    |
 
 #### Handling Data
 
