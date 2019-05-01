@@ -61,7 +61,7 @@ This will place the script in the sub-folder `schedule`. If you want the script 
 
 As an alternative to downloading the new files manually, if you have installed the script through git, you can simply update your local repository using the following command:
 
-`git pull origin master`
+`git pull`
 
 Note that your configuration file `config.php` will be **kept** in any case, as that file is ignored by git.
 
@@ -98,6 +98,8 @@ Note: The directory of the script and the folder "cache/" (created by the script
 | -------------------------------------------- | ------------------------------------------------------------ |
 | `CALENDAR`                                   | *Optional.* The array index of the calendar events.          |
 | `START`, `END`, `SUBJECT`, `ROOM` and `PROF` | **Required**. Array index for the respective data. START and END are used for time and date and assume the following format: *YYYY-MM-DD HH:MM:SS*. |
+| `INFO` | *Optional*. Part of the ical file containing the descripton. |
+| `SUBJECTSECTION`, `PROFSECTION` and `INFOSECTION` | **Required when `$type` is ical**. Associative array of the part containing the relevant content. |
 | `$emptyProfs`                                | *Optional.* Array of names that should be considered empty, such as "-". |
 | `$subjects`                                  | *Optional.* Associative array of preferred names for subjects, e.g. "Break" instead of "Recess" |
 | `$profs`                                     | *Optional.* Associative array of initials to full names.     |
