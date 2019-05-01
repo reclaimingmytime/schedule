@@ -22,7 +22,7 @@ function getCustomDate($param, $today, $min) {
 	return $today;
 }
 
-function createNewDate($date, $interval = "today") {
+function createDate($date, $interval = "today") {
 	return date("Y-m-d", strtotime($interval, strtotime($date)));
 }
 
@@ -44,12 +44,12 @@ $weekBump = false;
 
 if(isset($excludeWeekends) && isTrue($excludeWeekends)) {
 	if(isWeekend($desiredDate)) {
-		$desiredDate = createNewDate($desiredDate, "1 weekday");
+		$desiredDate = createDate($desiredDate, "1 weekday");
 		$weekBump = true;
 	}
 	
 	if(isWeekend($today)) {
-		$today = createNewDate($today, "1 weekday");
+		$today = createDate($today, "1 weekday");
 		if($today == $desiredDate) {
 			$weekBump = true;
 		}
@@ -67,17 +67,17 @@ $weekDay = $desiredDateObj->format("D");
 $displayedDateFull = $weekDay . ", " . $desiredDatePretty;
 $displayedDate = $desiredDatePretty;
 
-$nextWeek = createNewDate($desiredDate, "1 week");
-$nextDay = createNewDate($desiredDate, "1 $weekDayString");
+$nextWeek = createDate($desiredDate, "1 week");
+$nextDay = createDate($desiredDate, "1 $weekDayString");
 
-$prevDay = createNewDate($desiredDate, "1 $weekDayString ago");
-$prevWeek = createNewDate($desiredDate, "1 week ago");
+$prevDay = createDate($desiredDate, "1 $weekDayString ago");
+$prevWeek = createDate($desiredDate, "1 week ago");
 
-if($prevWeek < createNewDate($minDate)) {
+if($prevWeek < createDate($minDate)) {
 	$prevWeek = "none";
 }
 
-if($prevDay < createNewDate($minDate)) {
+if($prevDay < createDate($minDate)) {
 	$prevDay = "none";
 }
 
