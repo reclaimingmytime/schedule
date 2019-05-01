@@ -6,18 +6,6 @@ if (!empty($timezone)) {
 
 /* Functions */
 
-//function strposa($haystack, $needle, $offset = 0) {
-//	if (!is_array($needle)) {
-//		$needle = [$needle];
-//	}
-//	foreach ($needle as $query) {
-//		if (!empty($query) && strpos($haystack, $query, $offset) !== false) {
-//			return true;
-//		}
-//	}
-//	return false;
-//}
-
 function stringPart($string, $startString) {
 	$pos = strpos($string, $startString);
 	if($pos == 0) {
