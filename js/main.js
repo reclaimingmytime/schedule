@@ -9,6 +9,11 @@ $(function () {
 	function clickID(id) {
 		document.getElementById(id).click();
 	}
+	function clickIDIfExists(id) {
+		if($("#" + id).length) {
+			clickID(id);
+		}
+	}
 	// Detect "active"
 	$.fn.hasActiveClass = function () {
 		return this.hasClass('active');
@@ -99,12 +104,12 @@ $(function () {
 						redirectToHref(keyCodeElement);
 					}
 					if($(keyCodeElement).hasActiveClass() && $(keyCodeElement).isVisible()) {
-						clickID('classNavButton'); //close menu when selecting link with active class
+						clickIDIfExists('classNavButton'); //close menu when selecting link with active class
 					}
 					break;
 				
 				case 67: //C
-					clickID('classNavButton');
+					clickIDIfExists('classNavButton');
 
 				default:
 					return; // exit this handler for other keys
