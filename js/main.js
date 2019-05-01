@@ -119,6 +119,10 @@ $(function () {
 	});
 
 	/* Time */
+	function formatTime(min, hours) {
+		return pad(min, 2) + ":" + pad(hours, 2);
+	}
+	
 	function updateEvents(time) {
 		$("div[data-start]").val(function(){ //for-each all divs with data-start
 			var start = $(this).data('start');
@@ -135,9 +139,10 @@ $(function () {
 	}
 
 	var displayed = $('.currentTime').text();
+	
 	function updateTime() {
 		var dt = new Date();
-		var time = pad(dt.getHours(), 2) + ":" + pad(dt.getMinutes(), 2);
+		var time = formatTime(dt.getHours(), dt.getMinutes());
 
 		if (displayed !== time) {
 			displayed = time;
