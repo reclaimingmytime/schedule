@@ -55,7 +55,7 @@ As an alternative to downloading the files manually from GitHub, you can use the
 
 In the desired directory, type or paste the following: `git clone https://github.com/reclaimingmytime/schedule.git`
 
-This will place the script in the sub-folder `schedule`.
+This will place the script in the sub-folder `schedule`. If you want the script in a custom directory, add the directory name after the URL. A `.` clones the repository in the current directory: `git clone https://github.com/reclaimingmytime/schedule.git .`
 
 ## Updating
 
