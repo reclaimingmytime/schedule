@@ -17,7 +17,7 @@ function validDate($min, $max, $input) {
 	$date = DateTime::createFromFormat('Y-m-d', $input);
 	$date_errors = DateTime::getLastErrors();
 	
-	return 	isBetween($date, $min, $max) && $date_errors['warning_count'] === 0 && $date_errors['error_count'] === 0;
+	return isBetween($date, $min, $max) && $date_errors['warning_count'] === 0 && $date_errors['error_count'] === 0;
 }
 
 function getCustomDate($param, $today, $min, $max) {
