@@ -6,7 +6,7 @@ if(empty($minDate)) {
 }
 
 if(empty($maxDate)) {
-	$maxDate = "31.12." . (date("Y") + 1000);
+	$maxDate = "31.12." . (date("Y") + 100);
 }
 
 $min = new DateTime($minDate);

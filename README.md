@@ -82,7 +82,7 @@ Note: The directory of the script and the folder "cache/" (created by the script
 | ------------------ | ------------------------------------------------------------ |
 | `$timezone`        | *Optional*. The timezone that should be used for displaying the event time. *Default: Server setting.* |
 | `$minDate`         | *Optional*. All dates below the minimum date are considered invalid. Useful if your API only serves the current year, e.g. `"01.01." . date("Y")` *Default: 1.1.1970 (unix time)* |
-| `$maxDate`         | *Optional*. All dates above the maximum date are considered invalid. *Default: New year's day 1000 years from today* |
+| `$maxDate`         | *Optional*. All dates above the maximum date are considered invalid. *Default: New year's day 100 years from today* |
 | `$excludeWeekends` | *Optional*. Weekends will be skipped with an appropriate notice. *Default: false.* |
 #### API Connection
 
