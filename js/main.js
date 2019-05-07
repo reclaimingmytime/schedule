@@ -17,7 +17,6 @@ $(function () {
 			clickID(id);
 		}
 	}
-	
 	// Detect "active"
 	$.fn.hasActiveClass = function () {
 		return this.hasClass('active');
