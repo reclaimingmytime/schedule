@@ -13,8 +13,8 @@ $min = new DateTime($minDate);
 $max = new DateTime($maxDate);
 
 function validDate($min, $max, $input) {
-	//DateTime even detects 31st Feb and 31st Nov as errors
-	$date = DateTime::createFromFormat('Y-m-d', $input);
+	//The ! resets the time to midnight
+	$date = DateTime::createFromFormat('!Y-m-d', $input);
 	$date_errors = DateTime::getLastErrors();
 	
 	return isBetween($date, $min, $max) && $date_errors['warning_count'] === 0 && $date_errors['error_count'] === 0;
