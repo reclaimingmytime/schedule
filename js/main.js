@@ -17,6 +17,7 @@ $(function () {
 			clickID(id);
 		}
 	}
+	
 	// Detect "active"
 	$.fn.hasActiveClass = function () {
 		return this.hasClass('active');
@@ -29,7 +30,8 @@ $(function () {
 		return val !== "none";
 	}
 	function dataNotNone(data) {
-		return notNone($('head').data(data));
+		var attr = $('head').data(data);
+		return attr !== undefined && notNone(attr);
 	}
 	//Time
 	function pad(str, max) {
@@ -91,7 +93,7 @@ $(function () {
 					break;
 
 				case 13: // enter
-					if ($('head').data('today') !== $('head').data('desireddate')) {
+				 	if ($('head').data('today') !== $('head').data('desireddate')) {
 						redirectToHref('#today');
 					}
 					break;
