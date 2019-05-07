@@ -53,12 +53,17 @@ $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : f
 							<a class="nav-link" id="today" href="."><i class="fas fa-play"></i> <span class="d-none d-lg-inline">Today <small>(Enter)</small></span></a>
 						</li>
 
+						<?php if ($nextDay !== "none") { ?>
 						<li class="nav-item mr-4">
 							<a class="nav-link" id="nextDay" href="?date=<?php echo $nextDay; ?>"><i class="fas fa-forward"></i> <span class="d-none d-lg-inline">Next Day <small>(D)</small></span></a>
 						</li>
+						<?php } ?>
+						
+						<?php if ($nextWeek !== "none") { ?>
 						<li class="nav-item mr-4">
 							<a class="nav-link" id="nextWeek" href="?date=<?php echo $nextWeek; ?>"><i class="fas fa-step-forward"></i> <span class="d-none d-lg-inline">Next Week <small>(W)</small></span></a>
 						</li>
+						<?php } ?>
 
 						<?php if ($prevDay !== "none") { ?>
 							<li class="nav-item mr-4">

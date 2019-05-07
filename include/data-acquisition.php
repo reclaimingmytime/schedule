@@ -90,6 +90,14 @@ if($prevDay < createDate($minDate)) {
 	$prevDay = "none";
 }
 
+if($nextWeek > createDate($maxDate)) {
+	$nextWeek = "none";
+}
+
+if($nextDay > createDate($maxDate)) {
+	$nextDay = "none";
+}
+
 /* API connection */
 function validClass($class, $allowedClasses) {
 	return !empty($class) && in_array($class, $allowedClasses);

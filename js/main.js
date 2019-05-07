@@ -41,10 +41,10 @@ $(function () {
 	$("html").swipe({
 		swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
 			// fingerCount 0: No touchscreen detected
-			if (direction === "left" && (fingerCount === 1 || fingerCount === 0)) {
+			if (direction === "left" && (fingerCount === 1 || fingerCount === 0) && dataNotNone('nextweek')) {
 				redirectToHref('#nextDay');
 			}
-			if (direction === "left" && fingerCount === 2) {
+				if (direction === "left" && fingerCount === 2 && dataNotNone('nextweek')) {
 				redirectToHref('#nextWeek');
 			}
 
@@ -70,11 +70,15 @@ $(function () {
 					break;
 
 				case 68: // D
-					redirectToHref('#nextDay');
+					if (dataNotNone('nextday')) {
+						redirectToHref('#nextDay');
+					}
 					break;
 
 				case 87: // W
-					redirectToHref('#nextWeek');
+					if (dataNotNone('prevweek')) {
+						redirectToHref('#nextWeek');
+					}
 					break;
 
 				case 83: // S
