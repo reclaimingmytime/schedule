@@ -5,18 +5,23 @@ if(empty($minDate)) {
 	$minDate = date("d.m.Y", 0);
 }
 
-$min = new DateTime($minDate);
+if(empty($maxDate)) {
+	$maxDate = "31.12." . (date("Y") + 1000);
+}
 
-function validDate($min, $input) {
+$min = new DateTime($minDate);
+$max = new DateTime($maxDate);
+
+function validDate($min, $max, $input) {
 	//DateTime even detects 31st Feb and 31st Nov as errors
 	$date = DateTime::createFromFormat('Y-m-d', $input);
 	$date_errors = DateTime::getLastErrors();
-
-	return $date >= $min && $date_errors['warning_count'] === 0 && $date_errors['error_count'] === 0;
+	
+	return 	isBetween($date, $min, $max) && $date_errors['warning_count'] === 0 && $date_errors['error_count'] === 0;
 }
 
-function getCustomDate($param, $today, $min) {
-	if (isset($_GET[$param]) && validDate($min, $_GET[$param])) {
+function getCustomDate($param, $today, $min, $max) {
+	if (isset($_GET[$param]) && validDate($min, $max, $_GET[$param])) {
 		return $_GET[$param];
 	}
 	return $today;
@@ -38,7 +43,7 @@ function isWeekend($date) {
 $today = date("Y-m-d");
 $currentTime = date("H:i");
 
-$desiredDate = getCustomDate("date", $today, $min);
+$desiredDate = getCustomDate("date", $today, $min, $max);
 
 $weekBump = false;
 

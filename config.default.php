@@ -3,6 +3,7 @@
 //$timezone = 'Europe/London';
 
 //$minDate = "01.01.2000";
+//$maxDate = "01.01.2029";
 $excludeWeekends = false;
 
 /* API connection */
