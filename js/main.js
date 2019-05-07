@@ -4,7 +4,10 @@ $(function () {
 		window.location.href = url;
 	}
 	function redirectToHref(selector) {
-		redirect($(selector).attr('href'));
+		var target = $(selector).attr('href');
+		if(target.length) {
+			redirect(target);
+		}
 	}
 	function clickID(id) {
 		document.getElementById(id).click();
