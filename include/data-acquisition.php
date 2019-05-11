@@ -29,6 +29,7 @@ function getCustomDate($param, $today, $min, $max) {
 	  if(validDate($min, $max, $_GET[$param])) {
 		  return $_GET[$param];
     }
+    $_SESSION['validDate'] = false;
 	  redirect(".");
 	}
 	return $today;

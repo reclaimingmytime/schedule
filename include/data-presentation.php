@@ -9,7 +9,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 		<a class="dropdown-item<?php if ($desiredClass == $class) echo ' active font-weight-bold text-body bg-transparent'; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php echo !empty($keyCode) ? ' id="keyCode' . $keyCode . '"' : ''; ?>>
 			<i class="fas fa-folder-open"></i>
 			<?php echo $class;
-			
+
 			if(!empty($keyCode)) { ?>
 				<small class="text-muted d-none d-lg-inline">(<?php echo $i; ?>)</small>
 			<?php } ?>
@@ -17,6 +17,21 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 		<?php
 		++$i;
 	}
+}
+
+
+if (isset($_SESSION['validToken'])) {
+  if($_SESSION['validToken'] === false) {
+    $_SESSION["msg"] = "<strong>The class could not be changed.</strong><br>This link is invalid. Please try again.";
+  }
+  unset($_SESSION['validToken']);
+}
+
+if (isset($_SESSION['validDate'])) {
+  if($_SESSION['validDate'] === false) {
+    $_SESSION["msg"] = "<strong>The date could not be changed.</strong><br>The date is invalid. It must be in the format <strong>YYYY-MM-DD</strong> and between <strong>$minDate</strong> and <strong>$maxDate</strong>.";
+  }
+  unset($_SESSION['validDate']);
 }
 
 $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : false;
@@ -58,7 +73,7 @@ $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : f
 							<a class="nav-link" id="nextDay" href="?date=<?php echo $nextDay; ?>"><i class="fas fa-forward"></i> <span class="d-none d-lg-inline">Next Day <small><code class="text-secondary">(D)</code></small></span></a>
 						</li>
 						<?php } ?>
-						
+
 						<?php if ($nextWeek !== "none") { ?>
 						<li class="nav-item mr-4">
 							<a class="nav-link" id="nextWeek" href="?date=<?php echo $nextWeek; ?>"><i class="fas fa-step-forward"></i> <span class="d-none d-lg-inline">Next Week <small><code class="text-secondary">(W)</code></small></span></a>
@@ -76,7 +91,7 @@ $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : f
 							</li>
 						<?php } ?>
 
-						<?php if(!empty($allowedClasses)) { ?>
+						<?php if(!empty($allowedClasses) && !empty($desiredClass)) { ?>
 						<li class="nav-item d-none d-sm-inline-block dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="classNavButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?> <small>(C)</small></span>
@@ -89,20 +104,19 @@ $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : f
 					</ul>
 				</nav>
 			</header>
-			
+
 			<main>
 				<div class="row">
 					<div class="col-xl-6">
-						<?php if (isset($_SESSION['validToken']) && $_SESSION['validToken'] === false) { ?>
+						<?php if (!empty($_SESSION['msg'])) { ?>
 							<div class="alert alert-danger alert-dismissible fade show" role="alert">
-								<strong>The class could not be changed.</strong><br>
-								This link is invalid. Please try again.
+								<?php echo $_SESSION["msg"]; ?>
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
 						<?php }
-						unset($_SESSION['validToken']);
+						unset($_SESSION['msg']);
 						?>
 						<h1 class="text-muted h4 pb-1">
 							<span class="mr-2"><i class="fas fa-calendar-alt"></i></span>
@@ -182,7 +196,7 @@ $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : f
 			</footer>
 
 		</div>
-		
+
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha256-ZvOgfh+ptkpoa2Y4HkRY28ir89u/+VRyDE7sB7hEEcI=" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha256-CjSoeELFOcH0/uxWu6mC/Vlrc1AARqbm/jiiImDGV3s=" crossorigin="anonymous"></script>
