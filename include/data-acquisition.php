@@ -25,8 +25,11 @@ function validDate($min, $max, $input) {
 }
 
 function getCustomDate($param, $today, $min, $max) {
-	if (isset($_GET[$param]) && validDate($min, $max, $_GET[$param])) {
-		return $_GET[$param];
+	if (isset($_GET[$param])) {
+	  if(validDate($min, $max, $_GET[$param])) {
+		  return $_GET[$param];
+    }
+	  redirect(".");
 	}
 	return $today;
 }
