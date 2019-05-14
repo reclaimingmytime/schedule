@@ -43,7 +43,7 @@ $(function () {
 
 	/* Swipe */
 	$("html").swipe({
-		swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
+		swipe: function (event, direction, distance, duration, fingerCount) {
 			// fingerCount 0: No touchscreen detected
 			if (direction === "left" && (fingerCount === 1 || fingerCount === 0) && dataNotNone('nextday')) {
 				redirectToHref('#nextDay');
@@ -96,7 +96,7 @@ $(function () {
 						redirectToHref('#today');
 					}
 					break;
-				 
+
 				//1-9
 				case 49:
 				case 50:
@@ -115,12 +115,12 @@ $(function () {
 						clickIDIfExists('classNavButton'); //close menu when selecting link with active class
 					}
 					break;
-				
+
 				case 67: //C
 					clickIDIfExists('classNavButton');
 
 				default:
-					return; // exit this handler for other keys
+				return; // exit this handler for other keys
 			}
 			e.preventDefault(); // prevent the default action (scroll / move caret)
 		}
@@ -136,7 +136,7 @@ $(function () {
 			var start = $(this).data('start');
 			var end = $(this).data('end');
 			var highlightClasses = 'bg-dark text-light';
-			
+
 			if(isBetween(time, start, end)) {
 				$(this).addClass(highlightClasses);
 			} else {
@@ -147,7 +147,7 @@ $(function () {
 	}
 
 	var displayed = $('.currentTime').text();
-	
+
 	function updateTime() {
 		var dt = new Date();
 		var time = formatTime(dt.getHours(), dt.getMinutes());
