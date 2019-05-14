@@ -118,6 +118,7 @@ $(function () {
 
 				case 67: //C
 					clickIDIfExists('classNavButton');
+					break;
 
 				default:
 					return; // exit this handler for other keys
