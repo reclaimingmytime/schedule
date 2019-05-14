@@ -151,7 +151,7 @@ $(function () {
 	}
 
 	const clock = $('.currentTime');
-	let displayed = clock.text();
+	var displayed = clock.text();
 
 	function updateTime() {
 		const dt = new Date();
