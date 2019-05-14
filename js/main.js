@@ -5,7 +5,7 @@ $(function () {
 	}
 	function redirectToHref(selector) {
 		var target = $(selector).attr('href');
-		if(target.length) {
+		if (target.length) {
 			redirect(target);
 		}
 	}
@@ -13,7 +13,7 @@ $(function () {
 		document.getElementById(id).click();
 	}
 	function clickIDIfExists(id) {
-		if($("#" + id).length) {
+		if ($("#" + id).length) {
 			clickID(id);
 		}
 	}
@@ -48,7 +48,7 @@ $(function () {
 			if (direction === "left" && (fingerCount === 1 || fingerCount === 0) && dataNotNone('nextday')) {
 				redirectToHref('#nextDay');
 			}
-				if (direction === "left" && fingerCount === 2 && dataNotNone('nextweek')) {
+			if (direction === "left" && fingerCount === 2 && dataNotNone('nextweek')) {
 				redirectToHref('#nextWeek');
 			}
 
@@ -92,12 +92,12 @@ $(function () {
 					break;
 
 				case 13: // enter
-				 	if ($('head').data('today') !== $('head').data('desireddate')) {
+					if ($('head').data('today') !== $('head').data('desireddate')) {
 						redirectToHref('#today');
 					}
 					break;
 
-				//1-9
+					//1-9
 				case 49:
 				case 50:
 				case 51:
@@ -111,7 +111,7 @@ $(function () {
 					if ($(keyCodeElement).length && !$(keyCodeElement).hasActiveClass()) {
 						redirectToHref(keyCodeElement);
 					}
-					if($(keyCodeElement).hasActiveClass() && $(keyCodeElement).isVisible()) {
+					if ($(keyCodeElement).hasActiveClass() && $(keyCodeElement).isVisible()) {
 						clickIDIfExists('classNavButton'); //close menu when selecting link with active class
 					}
 					break;
@@ -120,7 +120,7 @@ $(function () {
 					clickIDIfExists('classNavButton');
 
 				default:
-				return; // exit this handler for other keys
+					return; // exit this handler for other keys
 			}
 			e.preventDefault(); // prevent the default action (scroll / move caret)
 		}
@@ -130,14 +130,14 @@ $(function () {
 	function formatTime(min, hours) {
 		return pad(min, 2) + ":" + pad(hours, 2);
 	}
-	
+
 	function updateEvents(time) {
-		$("div[data-start]").val(function(){ //for-each all divs with data-start
+		$("div[data-start]").val(function () { //for-each all divs with data-start
 			var start = $(this).data('start');
 			var end = $(this).data('end');
 			var highlightClasses = 'bg-dark text-light';
 
-			if(isBetween(time, start, end)) {
+			if (isBetween(time, start, end)) {
 				$(this).addClass(highlightClasses);
 			} else {
 				$(this).removeClass(highlightClasses);
@@ -155,16 +155,16 @@ $(function () {
 		if (displayed !== time) {
 			displayed = time;
 			$('.currentTime').html(time);
-			if($("head").data('highlightevents') === true) {
+			if ($("head").data('highlightevents') === true) {
 				updateEvents(time);
 			}
 		}
-		
+
 	}
 	setInterval(function () {
 		updateTime();
 	}, 5000);
-	
+
 	/* Automatic Scroll */
 	$("#infoBtn").click(function () {
 		if (!$('#weekendNotice').hasClass('show')) {
@@ -173,7 +173,7 @@ $(function () {
 			}, 250);
 		}
 	});
-	
+
 	/* Tooltip */
 	$('[data-toggle="tooltip"]').tooltip();
 });
