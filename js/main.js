@@ -1,10 +1,13 @@
 $(function () {
+	//Elements
+	const head = $('head');
+
 	// Redirect
 	function redirect(url) {
 		window.location.href = url;
 	}
 	function redirectToHref(selector) {
-		var target = $(selector).attr('href');
+		const target = $(selector).attr('href');
 		if (target.length) {
 			redirect(target);
 		}
@@ -29,7 +32,7 @@ $(function () {
 		return val !== "none";
 	}
 	function dataNotNone(data) {
-		var attr = $('head').data(data);
+		const attr = head.data(data);
 		return attr !== undefined && notNone(attr);
 	}
 	//Time
@@ -92,12 +95,12 @@ $(function () {
 					break;
 
 				case 13: // enter
-					if ($('head').data('today') !== $('head').data('desireddate')) {
+					if (head.data('today') !== head.data('desireddate')) {
 						redirectToHref('#today');
 					}
 					break;
 
-					//1-9
+				//1-9
 				case 49:
 				case 50:
 				case 51:
@@ -107,7 +110,7 @@ $(function () {
 				case 55:
 				case 56:
 				case 57:
-					var keyCodeElement = '#keyCode' + e.keyCode;
+					const keyCodeElement = '#keyCode' + e.keyCode;
 					if ($(keyCodeElement).length && !$(keyCodeElement).hasActiveClass()) {
 						redirectToHref(keyCodeElement);
 					}
@@ -134,9 +137,9 @@ $(function () {
 
 	function updateEvents(time) {
 		$("div[data-start]").val(function () { //for-each all divs with data-start
-			var start = $(this).data('start');
-			var end = $(this).data('end');
-			var highlightClasses = 'bg-dark text-light';
+			const start = $(this).data('start');
+			const end = $(this).data('end');
+			const highlightClasses = 'bg-dark text-light';
 
 			if (isBetween(time, start, end)) {
 				$(this).addClass(highlightClasses);
@@ -147,15 +150,16 @@ $(function () {
 		});
 	}
 
-	var displayed = $('.currentTime').text();
+	const clock = $('.currentTime');
+	let displayed = clock.text();
 
 	function updateTime() {
-		var dt = new Date();
-		var time = formatTime(dt.getHours(), dt.getMinutes());
+		const dt = new Date();
+		const time = formatTime(dt.getHours(), dt.getMinutes());
 
 		if (displayed !== time) {
 			displayed = time;
-			$('.currentTime').html(time);
+			clock.html(time);
 			if ($("head").data('highlightevents') === true) {
 				updateEvents(time);
 			}
