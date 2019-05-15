@@ -32,7 +32,7 @@ prepareMsg('validToken', "<strong>The class could not be changed.</strong><br>Th
 prepareMsg('validDate', "<strong>The date could not be changed.</strong><br>The date must be in the format <strong>YYYY-MM-DD</strong> and between <strong>$minDate</strong> and <strong>$maxDate</strong>.");
 
 function isBreak($currentTime, $thisEnd, $nextStart) {
-	return $nextEvent !== $nextStart && isBelowOrAbove($currentTime, $thisEnd, $nextStart);
+	return $thisEnd !== $nextStart && isBelowOrAbove($currentTime, $thisEnd, $nextStart);
 }
 
 $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : false;
