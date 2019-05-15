@@ -135,7 +135,7 @@ $(function () {
 		return pad(min, 2) + ":" + pad(hours, 2);
 	}
 
-	const highlightClasses = $("head").data('highlightclasses');
+	const highlightClasses = head.data('highlightclasses');
 	function updateEvents(time) {
 		$("div[data-start]").val(function () { //for-each all divs with data-start
 			const start = $(this).data('start');
@@ -160,7 +160,7 @@ $(function () {
 		if (displayed !== time) {
 			displayed = time;
 			clock.html(time);
-			if ($("head").data('highlightevents') === true) {
+			if (head.data('highlightevents') === true) {
 				updateEvents(time);
 			}
 		}
