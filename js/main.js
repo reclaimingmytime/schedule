@@ -100,7 +100,7 @@ $(function () {
 					}
 					break;
 
-				//1-9
+					//1-9
 				case 49:
 				case 50:
 				case 51:
@@ -135,11 +135,11 @@ $(function () {
 		return pad(min, 2) + ":" + pad(hours, 2);
 	}
 
+	const highlightClasses = $("head").data('highlightclasses');
 	function updateEvents(time) {
 		$("div[data-start]").val(function () { //for-each all divs with data-start
 			const start = $(this).data('start');
 			const end = $(this).data('end');
-			const highlightClasses = 'bg-dark text-light';
 
 			if (isBetween(time, start, end)) {
 				$(this).addClass(highlightClasses);

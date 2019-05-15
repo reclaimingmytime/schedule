@@ -35,10 +35,12 @@ if (isset($_SESSION['validDate'])) {
 }
 
 $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : false;
+
+$highlightClasses = 'bg-dark text-light';
 ?>
 <!DOCTYPE html>
 <html lang="en">
-	<head data-desireddate="<?php echo $desiredDate; ?>" data-today="<?php echo $today; ?>" data-nextday="<?php echo $nextDay; ?>" data-prevday="<?php echo $prevDay; ?>" data-nextweek="<?php echo $nextWeek; ?>" data-prevweek="<?php echo $prevWeek; ?>" data-highlightevents="<?php echo $highlightEvents ? 'true' : 'false'; ?>">
+	<head data-desireddate="<?php echo $desiredDate; ?>" data-today="<?php echo $today; ?>" data-nextday="<?php echo $nextDay; ?>" data-prevday="<?php echo $prevDay; ?>" data-nextweek="<?php echo $nextWeek; ?>" data-prevweek="<?php echo $prevWeek; ?>" data-highlightevents="<?php echo $highlightEvents ? 'true' : 'false'; ?>" data-highlightclasses="<?php echo $highlightClasses; ?>">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Calendar for <?php echo $displayedDateFull; ?></title>
@@ -133,7 +135,7 @@ $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : f
 						} else {
 								foreach ($schedule as $event) {
 									$timeRange = $event['start'] . " - " . $event['end'];
-									$headerClasses = isTrue($highlightEvents) && onGoingEvent($event, $currentTime) ? ' bg-dark text-light' : '';
+									$headerClasses = isTrue($highlightEvents) && onGoingEvent($event, $currentTime) ? ' ' . $highlightClasses : '';
 								?>
 								<div class="card mt-3">
 									<div class="card-header<?php echo $headerClasses; ?>" data-start="<?php echo $event['start'];?>" data-end="<?php echo $event['end'];?>">
