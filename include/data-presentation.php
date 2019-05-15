@@ -19,20 +19,17 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 	}
 }
 
-
-if (isset($_SESSION['validToken'])) {
-  if($_SESSION['validToken'] === false) {
-    $_SESSION["msg"] = "<strong>The class could not be changed.</strong><br>This link is invalid. Please try again.";
-  }
-  unset($_SESSION['validToken']);
+function prepareMsg($sessionName, $msg) {
+	if (isset($_SESSION[$sessionName])) {
+		if ($_SESSION[$sessionName] === false) {
+			$_SESSION["msg"] = $msg;
+		}
+		unset($_SESSION[$sessionName]);
+	}
 }
 
-if (isset($_SESSION['validDate'])) {
-  if($_SESSION['validDate'] === false) {
-    $_SESSION["msg"] = "<strong>The date could not be changed.</strong><br>The date is invalid. It must be in the format <strong>YYYY-MM-DD</strong> and between <strong>$minDate</strong> and <strong>$maxDate</strong>.";
-  }
-  unset($_SESSION['validDate']);
-}
+prepareMsg('validToken', "<strong>The class could not be changed.</strong><br>This link is invalid. Please try again.");
+prepareMsg('validDate', "<strong>The date could not be changed.</strong><br>The date is invalid. It must be in the format <strong>YYYY-MM-DD</strong> and between <strong>$minDate</strong> and <strong>$maxDate</strong>.");
 
 $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : false;
 
