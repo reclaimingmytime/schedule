@@ -30,6 +30,10 @@ function isBetween($x, $min, $max) {
 	return ($min <= $x) && ($x <= $max);
 }
 
+function isBelowOrAbove($x, $min, $max) {
+	return ($min < $x) && ($x < $max);
+}
+
 function equals($x, $y) {
 	return $x === $y;
 }
