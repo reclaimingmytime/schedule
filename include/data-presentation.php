@@ -176,7 +176,7 @@ $highlightClasses = 'bg-dark text-light';
 				</main>
 
 			<footer class="text-center my-4">
-				<?php if (!empty($allowedClasses)) { ?>
+				<?php if(!empty($allowedClasses) && !empty($desiredClass)) { ?>
 					<div class="d-block d-sm-none dropup d-inline">
 						<a class="btn btn-white shadow-none text-muted dropdown-toggle" href="#" role="button" id="classFooterButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="fas fa-folder"></i> <?php echo $desiredClass; ?>
