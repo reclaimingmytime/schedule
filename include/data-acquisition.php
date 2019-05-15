@@ -35,14 +35,6 @@ function getCustomDate($param, $today, $min, $max) {
 	return $today;
 }
 
-function createDate($date, $interval = "today") {
-	return date("Y-m-d", strtotime($interval, strtotime($date)));
-}
-
-function createTime($input) {
-	return DateTime::createFromFormat('H:i', $input);
-}
-
 function isWeekend($date) {
 	$weekDay = date('w', strtotime($date));
 	return ($weekDay == 0 || $weekDay == 6);

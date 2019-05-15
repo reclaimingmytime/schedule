@@ -91,6 +91,18 @@ function redirect($path = '.') {
 	die();
 }
 
+function createDate($date, $interval = "today") {
+	return date("Y-m-d", strtotime($interval, strtotime($date)));
+}
+
+function createTime($input) {
+	return DateTime::createFromFormat('H:i', $input);
+}
+
+function createTimeString($input) {
+	return DateTime::createFromFormat('H:i', $input);
+}
+
 /* CSRF Token */
 if(!isset($_SESSION['token'])) {
 	$_SESSION['token'] = bin2hex(random_bytes(16));
