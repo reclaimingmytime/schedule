@@ -162,8 +162,8 @@ $highlightClasses = 'bg-dark text-light';
 									</div>
 									<?php
 									if($highlightEvents && isset($schedule[$key + 1])) {
-										$nextEvent = $schedule[$key + 1];
 										$thisEnd = $event["end"];
+										$nextEvent = $schedule[$key + 1];
 										$nextStart = $nextEvent["start"];
 										?>
 										<div class="card mt-3<?php echo !isBreak($currentTime, $thisEnd, $nextStart) ? ' d-none' : '' ?>">
