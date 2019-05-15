@@ -31,8 +31,14 @@ function prepareMsg($sessionName, $msg) {
 prepareMsg('validToken', "<strong>The class could not be changed.</strong><br>This link is invalid. Please try again.");
 prepareMsg('validDate', "<strong>The date could not be changed.</strong><br>The date must be in the format <strong>YYYY-MM-DD</strong> and between <strong>$minDate</strong> and <strong>$maxDate</strong>.");
 
+function isBreak($currentTime, $thisEnd, $nextStart) {
+	return $nextEvent !== $nextStart && isBelowOrAbove($currentTime, $thisEnd, $nextStart);
+}
+
 $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : false;
 $highlightClasses = 'bg-dark text-light';
+
+$currentTime = "10:21";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -161,14 +167,13 @@ $highlightClasses = 'bg-dark text-light';
 										$nextEvent = $schedule[$key + 1];
 										$thisEnd = $event["end"];
 										$nextStart = $nextEvent["start"];
-
-										if($nextEvent !== $nextStart && isBelowOrAbove($currentTime, $thisEnd, $nextStart)) { ?>
-											<div class="card mt-3">
-												<div class="card-body <?php echo $highlightClasses; ?>">
-													<i class="fas fa-pause"></i> <strong class="text-center">Break</strong>
-												</div>
+										?>
+										<div class="card mt-3<?php echo !isBreak($currentTime, $thisEnd, $nextStart) ? ' d-none' : '' ?>">
+											<div class="card-body <?php echo $highlightClasses; ?>">
+												<i class="fas fa-pause"></i> <strong class="text-center">Break</strong>
 											</div>
-										<?php }
+										</div>
+										<?php
 									}
 								}
 							} ?>
