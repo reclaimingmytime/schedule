@@ -29,10 +29,9 @@ function prepareMsg($sessionName, $msg) {
 }
 
 prepareMsg('validToken', "<strong>The class could not be changed.</strong><br>This link is invalid. Please try again.");
-prepareMsg('validDate', "<strong>The date could not be changed.</strong><br>The date is invalid. It must be in the format <strong>YYYY-MM-DD</strong> and between <strong>$minDate</strong> and <strong>$maxDate</strong>.");
+prepareMsg('validDate', "<strong>The date could not be changed.</strong><br>The date must be in the format <strong>YYYY-MM-DD</strong> and between <strong>$minDate</strong> and <strong>$maxDate</strong>.");
 
 $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : false;
-
 $highlightClasses = 'bg-dark text-light';
 ?>
 <!DOCTYPE html>
