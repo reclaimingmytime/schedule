@@ -134,7 +134,7 @@ $(function () {
 	function formatTime(min, hours) {
 		return pad(min, 2) + ":" + pad(hours, 2);
 	}
-	
+
 	const highlightClasses = head.data('highlightclasses');
 	function updateEvents(time) {
 		$("div[data-start]").val(function () { //for-each all divs with data-start
@@ -151,7 +151,7 @@ $(function () {
 	}
 
 	const clock = $('.currentTime');
-	var displayed = clock.text();
+	var displayed = clock.text(); //cannot use let here, eslint forbids it in the global scope.
 
 	function updateTime() {
 		const dt = new Date();
