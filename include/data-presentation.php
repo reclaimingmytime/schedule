@@ -37,8 +37,6 @@ function isBreak($currentTime, $thisEnd, $nextStart) {
 
 $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : false;
 $highlightClasses = 'bg-dark text-light';
-
-$currentTime = "10:21";
 ?>
 <!DOCTYPE html>
 <html lang="en">
