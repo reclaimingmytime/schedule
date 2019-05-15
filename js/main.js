@@ -134,7 +134,7 @@ $(function () {
 	function formatTime(min, hours) {
 		return pad(min, 2) + ":" + pad(hours, 2);
 	}
-
+	
 	const highlightClasses = head.data('highlightclasses');
 	function updateEvents(time) {
 		$("div[data-start]").val(function () { //for-each all divs with data-start
