@@ -129,34 +129,48 @@ $highlightClasses = 'bg-dark text-light';
 							</div>
 							<?php
 						} else {
-								foreach ($schedule as $event) {
+								foreach ($schedule as $key => $event) {
 									$timeRange = $event['start'] . " - " . $event['end'];
 									$headerClasses = isTrue($highlightEvents) && onGoingEvent($event, $currentTime) ? ' ' . $highlightClasses : '';
-								?>
-								<div class="card mt-3">
-									<div class="card-header<?php echo $headerClasses; ?>" data-start="<?php echo $event['start'];?>" data-end="<?php echo $event['end'];?>">
-										<i class="fas fa-clock"></i>
-										<strong><?php echo $timeRange ?></strong>
-									</div>
+									?>
+									<div class="card mt-3">
+										<div class="card-header<?php echo $headerClasses; ?>" data-start="<?php echo $event['start'];?>" data-end="<?php echo $event['end'];?>">
+											<i class="fas fa-clock"></i>
+											<strong><?php echo $timeRange ?></strong>
+										</div>
 
-									<div class="card-body pt-3 pb-1">
-										<ul class="list-inline">
-											<?php if (!empty($event['subject'])) { ?>
-												<li class="list-inline-item pr-3 font-weight-bold"><?php echo $event['subject']; ?></li>
-											<?php }
-											if (!empty($event['room'])) { ?>
+										<div class="card-body pt-3 pb-1">
+											<ul class="list-inline">
+												<?php if (!empty($event['subject'])) { ?>
+													<li class="list-inline-item pr-3 font-weight-bold"><?php echo $event['subject']; ?></li>
+												<?php }
+												if (!empty($event['room'])) { ?>
 													<li class="list-inline-item pr-3"><?php echo $event['room']; ?></li>
-											<?php }
-											if (!empty($event['prof'])) { ?>
-												<li class="list-inline-item text-secondary pr-3"><?php echo $event['prof']; ?></li>
-											<?php }
-											if (!empty($event['info'])) { ?>
-												<li class="list-inline-item text-secondary"><?php echo $event['info']; ?></li>
-											<?php } ?>
-										</ul>
+												<?php }
+												if (!empty($event['prof'])) { ?>
+													<li class="list-inline-item text-secondary pr-3"><?php echo $event['prof']; ?></li>
+												<?php }
+												if (!empty($event['info'])) { ?>
+													<li class="list-inline-item text-secondary"><?php echo $event['info']; ?></li>
+												<?php } ?>
+											</ul>
+										</div>
 									</div>
-								</div>
-								<?php }
+									<?php
+									if($highlightEvents && isset($schedule[$key + 1])) {
+										$nextEvent = $schedule[$key + 1];
+										$thisEnd = $event["end"];
+										$nextStart = $nextEvent["start"];
+
+										if($nextEvent !== $nextStart && isBelowOrAbove($currentTime, $thisEnd, $nextStart)) { ?>
+											<div class="card mt-3">
+												<div class="card-body <?php echo $highlightClasses; ?>">
+													<i class="fas fa-pause"></i> <strong class="text-center">Break</strong>
+												</div>
+											</div>
+										<?php }
+									}
+								}
 							} ?>
 
 						<?php if (isset($weekBump) && $weekBump === true) { ?>
