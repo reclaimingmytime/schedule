@@ -167,7 +167,7 @@ $highlightClasses = 'bg-dark text-light';
 										$nextStart = $nextEvent["start"];
 										?>
 										<div class="card mt-3<?php echo !isBreak($currentTime, $thisEnd, $nextStart) ? ' d-none' : '' ?>">
-											<div class="card-body <?php echo $highlightClasses; ?>">
+											<div class="card-header <?php echo $highlightClasses; ?>">
 												<i class="fas fa-pause"></i> <strong class="text-center">Break</strong>
 											</div>
 										</div>
