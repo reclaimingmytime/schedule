@@ -39,7 +39,7 @@ $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : f
 $highlightClasses = 'bg-dark text-light';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html class="h-100" lang="en">
 	<head data-desireddate="<?php echo $desiredDate; ?>" data-today="<?php echo $today; ?>" data-nextday="<?php echo $nextDay; ?>" data-prevday="<?php echo $prevDay; ?>" data-nextweek="<?php echo $nextWeek; ?>" data-prevweek="<?php echo $prevWeek; ?>" data-highlightevents="<?php echo $highlightEvents ? 'true' : 'false'; ?>" data-highlightclasses="<?php echo $highlightClasses; ?>">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,9 +49,6 @@ $highlightClasses = 'bg-dark text-light';
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
 		<style>
-		body {
-			height: 100%;
-		}
 		.dropdown-toggle {
 			outline: none;
 		}
