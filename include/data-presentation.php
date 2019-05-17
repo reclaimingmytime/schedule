@@ -133,11 +133,16 @@ $highlightClasses = 'bg-dark text-light';
 							</div>
 							<?php
 						} else {
+								if(!empty($schedule[$key + 1])) {
+									$thisEnd = $event["end"];
+									$nextEvent = $schedule[$key + 1];
+									$nextStart = $nextEvent["start"];
+								}
 								foreach ($schedule as $key => $event) {
 									$timeRange = $event['start'] . " - " . $event['end'];
 									$headerClasses = isTrue($highlightEvents) && onGoingEvent($event, $currentTime) ? ' ' . $highlightClasses : '';
 									?>
-									<div class="card mt-3">
+									<div class="event card mt-3" id="event<?php echo $key; ?>">
 										<div class="card-header<?php echo $headerClasses; ?>" data-start="<?php echo $event['start'];?>" data-end="<?php echo $event['end'];?>">
 											<i class="fas fa-clock"></i>
 											<strong><?php echo $timeRange ?></strong>
@@ -161,12 +166,9 @@ $highlightClasses = 'bg-dark text-light';
 										</div>
 									</div>
 									<?php
-									if($highlightEvents && isset($schedule[$key + 1])) {
-										$thisEnd = $event["end"];
-										$nextEvent = $schedule[$key + 1];
-										$nextStart = $nextEvent["start"];
+									if($highlightEvents && isset($nextEvent)) {
 										?>
-										<div class="card mt-3<?php echo !isBreak($currentTime, $thisEnd, $nextStart) ? ' d-none' : '' ?>">
+										<div class="break card mt-3<?php echo !isBreak($currentTime, $thisEnd, $nextStart) ? ' d-none' : '' ?>">
 											<div class="card-header <?php echo $highlightClasses; ?>">
 												<i class="fas fa-pause"></i> <strong class="text-center">Break</strong>
 											</div>
