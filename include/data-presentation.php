@@ -137,7 +137,7 @@ $highlightClasses = 'bg-dark text-light';
 							<span class="mr-1"><?php echo $weekDay; ?></span>
 							<span class="mr-1"><?php echo $displayedDate; ?></span>
 						</span>
-						<h1 class="text-muted h4 pb-2 float-right d-inline-block d-sm-none">
+						<h1 class="text-muted h4 float-right d-sm-none">
 							<i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span>
 						</h1>
 
