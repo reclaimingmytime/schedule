@@ -119,8 +119,6 @@ $highlightClasses = 'bg-dark text-light';
 			</header>
 
 			<main>
-				<h1 class="text-muted h4 text-center pb-2 d-sm-none"><i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span></h1>
-				
 				<?php if (!empty($_SESSION['msg'])) { ?>
 					<div class="alert alert-danger alert-dismissible fade show" role="alert">
 						<?php echo $_SESSION["msg"]; ?>
@@ -139,6 +137,9 @@ $highlightClasses = 'bg-dark text-light';
 							<span class="mr-1"><?php echo $weekDay; ?></span>
 							<span class="mr-1"><?php echo $displayedDate; ?></span>
 						</span>
+						<h1 class="text-muted h4 pb-2 float-right d-inline-block d-sm-none">
+							<i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span>
+						</h1>
 
 						<?php if (empty($schedule)) { ?>
 							<div class="alert alert-secondary mt-3" role="alert">
