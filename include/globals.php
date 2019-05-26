@@ -95,7 +95,9 @@ function redirect($path = '.') {
 	die();
 }
 
-function createDate($date, $interval = "today") {
+/* Time */
+
+function formatIsoDate($date, $interval = "today") {
 	return date("Y-m-d", strtotime($interval, strtotime($date)));
 }
 
@@ -105,6 +107,16 @@ function createTime($input) {
 
 function createTimeString($input) {
 	return DateTime::createFromFormat('H:i', $input);
+}
+
+function formatWeekDay($date) {
+	$object = new DateTime($date);
+	return $object->format("D");
+}
+
+function formatReadableDate($date) {
+	$object = new DateTime($date);
+	return $object->format("d.m.y");
 }
 
 /* CSRF Token */

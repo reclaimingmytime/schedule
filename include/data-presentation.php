@@ -91,8 +91,19 @@ $highlightClasses = 'bg-dark text-light';
 							<li class="nav-item mr-4">
 								<a class="nav-link" id="prevWeek" href="?date=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> <span class="d-none d-lg-inline">Previous Week <small><code class="text-secondary">(S)</code></small></span></a>
 							</li>
-						<?php } ?>
-
+						<?php }
+						if ($weekOverview === true) {
+							$overviewType = "day";
+							$icon = "fas fa-calendar-day";
+							$text = "Day";
+						} else {
+							$overviewType = "week";
+							$icon = "fas fa-calendar-week";
+							$text = "Week";
+						}  ?>
+							<li class="nav-item mr-4">
+								<a class="nav-link" id="overviewType" href="?date=<?php echo $desiredDate; ?>&overview=<?php echo $overviewType . $tokenEmbed; ?>"><i class="<?php echo $icon; ?>"></i> <span class="d-none d-lg-inline"><?php echo $text;?> <small><code class="text-secondary">(T)</code></small></span></a>
+							</li>
 						<?php if(!empty($allowedClasses) && !empty($desiredClass)) { ?>
 						<li class="nav-item d-none d-sm-inline-block dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="classNavButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -109,7 +120,7 @@ $highlightClasses = 'bg-dark text-light';
 
 			<main>
 				<div class="row">
-					<div class="col-xl-6">
+					<div class="col-xl-<?php echo ($weekOverview === true) ? '2' : '6'; ?>">
 						<?php if (!empty($_SESSION['msg'])) { ?>
 							<div class="alert alert-danger alert-dismissible fade show" role="alert">
 								<?php echo $_SESSION["msg"]; ?>
@@ -139,6 +150,14 @@ $highlightClasses = 'bg-dark text-light';
 									$nextStart = $nextEvent["start"];
 								}
 								foreach ($schedule as $key => $event) {
+									if(isset($schedule[$key - 1]["date"]) && $schedule[$key - 1]["date"] !== $event["date"]) { ?>
+									</div><div class="col-xl-2 mt-4 mt-xl-0">
+										<h1 class="text-muted h4 pb-1">
+											<span class="mr-2"><i class="fas fa-calendar-alt"></i></span>
+											<span class="mr-2"><?php echo $event["weekDay"]; ?></span>
+											<span class="mr-2"><?php echo $event["date"]; ?></span>
+										</h1>
+									<?php }
 									$timeRange = $event['start'] . " - " . $event['end'];
 									$headerClasses = isTrue($highlightEvents) && onGoingEvent($event, $currentTime) ? ' ' . $highlightClasses : '';
 									?>

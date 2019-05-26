@@ -99,6 +99,10 @@ $(function () {
 						redirectToHref('#today');
 					}
 					break;
+				
+				case 84: // T
+					redirectToHref('#overviewType');
+					break;
 
 				//1-9
 				case 49:

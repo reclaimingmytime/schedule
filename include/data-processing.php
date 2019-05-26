@@ -100,8 +100,17 @@ $schedule = [];
 foreach ($calendar as $entry) {
 	$date = ($type == 'ical') ? extractIcalDate($entry[START]["date"])->format('Y-m-d') : extractDate($entry[START]);
 
-	if ($date == $desiredDate) {
+	if($weekOverview === true) {
+		$desiredDateTo = formatIsoDate($desiredDate, "+6 days");
+	} else {
+		$desiredDateTo = $desiredDate;
+	}
+	
+	if (isBetween($date, $desiredDate, $desiredDateTo)) {
 		$new = [];
+		
+		$new["date"] = formatReadableDate($date);
+		$new["weekDay"] = formatWeekDay($date);
 			
 		$new["start"] = ($type == 'ical') ? extractIcalDate($entry[START]["date"])->format('H:i') : extractTime($entry[START]);
 		$new["end"] = ($type == 'ical') ? extractIcalDate($entry[END]["date"])->format('H:i') : extractTime($entry[END]);

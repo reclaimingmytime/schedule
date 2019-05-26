@@ -49,12 +49,12 @@ $weekBump = false;
 
 if(isset($excludeWeekends) && isTrue($excludeWeekends)) {
 	if(isWeekend($desiredDate)) {
-		$desiredDate = createDate($desiredDate, "1 weekday");
+		$desiredDate = formatIsoDate($desiredDate, "1 weekday");
 		$weekBump = true;
 	}
 	
 	if(isWeekend($today)) {
-		$today = createDate($today, "1 weekday");
+		$today = formatIsoDate($today, "1 weekday");
 		if($today == $desiredDate) {
 			$weekBump = true;
 		}
@@ -65,32 +65,30 @@ if(isset($excludeWeekends) && isTrue($excludeWeekends)) {
 	$weekDayString = "day";
 }
 
-$desiredDateObj = new DateTime($desiredDate);
-
-$desiredDatePretty = $desiredDateObj->format("d.m.y");
-$weekDay = $desiredDateObj->format("D");
+$desiredDatePretty = formatReadableDate($desiredDate);
+$weekDay = formatWeekDay($desiredDate);
 $displayedDateFull = $weekDay . ", " . $desiredDatePretty;
 $displayedDate = $desiredDatePretty;
 
-$nextWeek = createDate($desiredDate, "1 week");
-$nextDay = createDate($desiredDate, "1 $weekDayString");
+$nextWeek = formatIsoDate($desiredDate, "1 week");
+$nextDay = formatIsoDate($desiredDate, "1 $weekDayString");
 
-$prevDay = createDate($desiredDate, "1 $weekDayString ago");
-$prevWeek = createDate($desiredDate, "1 week ago");
+$prevDay = formatIsoDate($desiredDate, "1 $weekDayString ago");
+$prevWeek = formatIsoDate($desiredDate, "1 week ago");
 
-if($prevWeek < createDate($minDate)) {
+if($prevWeek < formatIsoDate($minDate)) {
 	$prevWeek = "none";
 }
 
-if($prevDay < createDate($minDate)) {
+if($prevDay < formatIsoDate($minDate)) {
 	$prevDay = "none";
 }
 
-if($nextWeek > createDate($maxDate)) {
+if($nextWeek > formatIsoDate($maxDate)) {
 	$nextWeek = "none";
 }
 
-if($nextDay > createDate($maxDate)) {
+if($nextDay > formatIsoDate($maxDate)) {
 	$nextDay = "none";
 }
 
@@ -119,6 +117,24 @@ function getClass($defaultClass, $allowedClasses, $desiredDate, $token) {
 		return $classCookie;
 	}
 	return $defaultClass;
+}
+
+function setWeekPreference($token, $desiredDate) {
+	$overviewGET = getParameter("overview");
+	$overviewCookie = getCookie("overview");
+
+	$overview = getInput($overviewGET, $overviewCookie);
+	
+	if($overview === "week" || $overview === "day") {
+		if (!empty($overviewGET) && isDifferent($overviewGET, $overviewCookie)) {
+			if (validToken(getParameter("token"), $token)) {
+				writeCookie("overview", $overview, "1 year");
+			}
+			redirect("?date=" . $desiredDate);
+		}
+		return $overview === "week";
+	}
+	return false;
 }
 
 function getAPIUrl($api, $replace, $default) {
@@ -183,6 +199,12 @@ if(isset($type) && $type !== 'ical') {
 } else {
 	$desiredAPI = $api;
 	$cache_filename = "cache.json";
+}
+
+$weekOverview = setWeekPreference($token, $desiredDate);
+if($weekOverview === true) {
+	$nextDay = "none";
+	$prevDay = "none";
 }
 
 $folder = "cache/";
