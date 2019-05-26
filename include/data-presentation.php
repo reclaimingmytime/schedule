@@ -135,9 +135,9 @@ $highlightClasses = 'bg-dark text-light';
 				<div class="row">
 					<div class="col-xl-<?php echo ($weekOverview === true) ? '2' : '6'; ?>">
 						<span class="text-muted h4 pb-1">
-							<span class="mr-2"><i class="fas fa-calendar-alt"></i></span>
-							<span class="mr-2"><?php echo $weekDay; ?></span>
-							<span class="mr-2"><?php echo $displayedDate; ?></span>
+							<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
+							<span class="mr-1"><?php echo $weekDay; ?></span>
+							<span class="mr-1"><?php echo $displayedDate; ?></span>
 						</span>
 
 						<?php if (empty($schedule)) { ?>
@@ -155,9 +155,9 @@ $highlightClasses = 'bg-dark text-light';
 									if(isset($schedule[$key - 1]["date"]) && $schedule[$key - 1]["date"] !== $event["date"]) { ?>
 									</div><div class="col-xl-2 mt-4 mt-xl-0">
 										<span class="text-muted h4 pb-1">
-											<span class="mr-2"><i class="fas fa-calendar-alt"></i></span>
-											<span class="mr-2"><?php echo $event["weekDay"]; ?></span>
-											<span class="mr-2"><?php echo $event["date"]; ?></span>
+											<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
+											<span class="mr-1"><?php echo $event["weekDay"]; ?></span>
+											<span class="mr-1"><?php echo $event["date"]; ?></span>
 										</span>
 									<?php }
 									$timeRange = $event['start'] . " - " . $event['end'];
