@@ -62,7 +62,7 @@ $highlightClasses = 'bg-dark text-light';
 			<header>
 				<nav class="navbar navbar-expand navbar-light bg-light mt-3 mb-4">
 					<div class="navbar-header d-none d-sm-block">
-						<a class="navbar-brand<?php echo ($desiredDate == $today) ? ' active' : ''; ?>" href=".">Schedule</a>
+						<a class="navbar-brand<?php echo ($desiredDate == $today) ? ' active' : ''; ?>" href="."><i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span></a>
 					</div>
 
 					<ul class="navbar-nav m-auto ml-sm-0">
@@ -119,24 +119,24 @@ $highlightClasses = 'bg-dark text-light';
 			</header>
 
 			<main>
+					<?php if (!empty($_SESSION['msg'])) { ?>
+						<div class="alert alert-danger alert-dismissible fade show" role="alert">
+							<?php echo $_SESSION["msg"]; ?>
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+					<?php }
+					unset($_SESSION['msg']);
+					?>
+
 				<div class="row">
 					<div class="col-xl-<?php echo ($weekOverview === true) ? '2' : '6'; ?>">
-						<?php if (!empty($_SESSION['msg'])) { ?>
-							<div class="alert alert-danger alert-dismissible fade show" role="alert">
-								<?php echo $_SESSION["msg"]; ?>
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-						<?php }
-						unset($_SESSION['msg']);
-						?>
-						<h1 class="text-muted h4 pb-1">
+						<span class="text-muted h4 pb-1">
 							<span class="mr-2"><i class="fas fa-calendar-alt"></i></span>
 							<span class="mr-2"><?php echo $weekDay; ?></span>
 							<span class="mr-2"><?php echo $displayedDate; ?></span>
-							<span class="mr-2 currentTime"><?php echo $currentTime; ?></span>
-						</h1>
+						</span>
 
 						<?php if (empty($schedule)) { ?>
 							<div class="alert alert-secondary mt-3" role="alert">
@@ -152,11 +152,11 @@ $highlightClasses = 'bg-dark text-light';
 								foreach ($schedule as $key => $event) {
 									if(isset($schedule[$key - 1]["date"]) && $schedule[$key - 1]["date"] !== $event["date"]) { ?>
 									</div><div class="col-xl-2 mt-4 mt-xl-0">
-										<h1 class="text-muted h4 pb-1">
+										<span class="text-muted h4 pb-1">
 											<span class="mr-2"><i class="fas fa-calendar-alt"></i></span>
 											<span class="mr-2"><?php echo $event["weekDay"]; ?></span>
 											<span class="mr-2"><?php echo $event["date"]; ?></span>
-										</h1>
+										</span>
 									<?php }
 									$timeRange = $event['start'] . " - " . $event['end'];
 									$headerClasses = isTrue($highlightEvents) && onGoingEvent($event, $currentTime) ? ' ' . $highlightClasses : '';
