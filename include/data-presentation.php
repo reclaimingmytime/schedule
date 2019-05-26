@@ -126,35 +126,36 @@ $highlightClasses = 'bg-dark text-light';
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-				<?php }
-				unset($_SESSION['msg']);
-				?>
+					<?php }
+					unset($_SESSION['msg']);
+					?>
 
-				<div class="row">
-					<div class="col-xl-<?php echo ($weekOverview === true) ? '2' : '6'; ?>">
-						<span class="text-muted h4 pb-1">
-							<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
-							<span class="mr-1"><?php echo $weekDay; ?></span>
-							<span class="mr-1"><?php echo $displayedDate; ?></span>
-						</span>
-						<h1 class="text-muted h4 float-right d-sm-none">
-							<i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span>
-						</h1>
+					<div class="row">
+						<div class="col-xl-<?php echo ($weekOverview === true) ? '2' : '6'; ?>">
+							<span class="text-muted h4 pb-1">
+								<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
+								<span class="mr-1"><?php echo $weekDay; ?></span>
+								<span class="mr-1"><?php echo $displayedDate; ?></span>
+							</span>
+							<h1 class="text-muted h4 float-right d-sm-none">
+								<i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span>
+							</h1>
 
-						<?php if (empty($schedule)) { ?>
-							<div class="alert alert-secondary mt-3" role="alert">
-								No entries have been found for that day.
+							<?php if (empty($schedule)) { ?>
+								<div class="alert alert-secondary mt-3" role="alert">
+									No entries have been found for that day.
+								</div>
+								<?php
+							} else {
+									if($highlightEvents && isset($schedule[$key + 1])) {
+										$thisEnd = $event["end"];
+										$nextEvent = $schedule[$key + 1];
+										$nextStart = $nextEvent["start"];
+									}
+									foreach ($schedule as $key => $event) {
+										if(isset($schedule[$key - 1]["date"]) && $schedule[$key - 1]["date"] !== $event["date"]) { ?>
 							</div>
-							<?php
-						} else {
-								if($highlightEvents && isset($schedule[$key + 1])) {
-									$thisEnd = $event["end"];
-									$nextEvent = $schedule[$key + 1];
-									$nextStart = $nextEvent["start"];
-								}
-								foreach ($schedule as $key => $event) {
-									if(isset($schedule[$key - 1]["date"]) && $schedule[$key - 1]["date"] !== $event["date"]) { ?>
-									</div><div class="col-xl-2 mt-4 mt-xl-0">
+							<div class="col-xl-2 mt-4 mt-xl-0">
 										<span class="text-muted h4 pb-1">
 											<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
 											<span class="mr-1"><?php echo $event["weekDay"]; ?></span>
@@ -200,20 +201,20 @@ $highlightClasses = 'bg-dark text-light';
 								}
 							} ?>
 
-						<?php if (isset($weekBump) && $weekBump === true) { ?>
-							<p class="text-center text-sm-left mt-4">
-								<a class="btn btn-outline-secondary" data-toggle="collapse" href="#weekendNotice" id="infoBtn" role="button" aria-expanded="false" aria-controls="weekendNotice">
-									Info
-								</a>
-							</p>
-							<div class="collapse" id="weekendNotice">
-								<div class="card card-body pb-1">
-									<p>Weekends have been excluded from the schedule. You are now viewing the next week day.</p>
-								</div>
 							</div>
-						<?php } ?>
-						</div>
 					</div>
+					<?php if (isset($weekBump) && $weekBump === true) { ?>
+						<p class="text-center text-sm-left mt-4">
+							<a class="btn btn-outline-secondary" data-toggle="collapse" href="#weekendNotice" id="infoBtn" role="button" aria-expanded="false" aria-controls="weekendNotice">
+								Info
+							</a>
+						</p>
+						<div class="collapse" id="weekendNotice">
+							<div class="card card-body pb-1">
+								<p>Weekends have been excluded from the schedule. You are now viewing the next week day.</p>
+							</div>
+						</div>
+					<?php } ?>
 				</main>
 
 			<footer class="text-center my-4">
