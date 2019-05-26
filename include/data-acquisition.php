@@ -204,7 +204,8 @@ if(isset($type) && $type !== 'ical') {
 $weekOverview = setWeekPreference($token, $desiredDate);
 if($weekOverview === true) {
 	if(formatWeekDay($desiredDate) !== "Mon") {
-		redirect("?date=" . formatIsoDate($time, "last monday"));
+		$lastMonday = formatIsoDate($desiredDate, "last monday");
+		redirect("?date=" . $lastMonday);
 	}
 	
 	$nextDay = "none";
