@@ -31,7 +31,8 @@ function prepareMsg($sessionName, $msg) {
 prepareMsg('validToken', "<strong>The class could not be changed.</strong><br>This link is invalid. Please try again.");
 prepareMsg('validDate', "<strong>The date could not be changed.</strong><br>The date must be in the format <strong>YYYY-MM-DD</strong> and between <strong>$minDate</strong> and <strong>$maxDate</strong>.");
 
-//$currentTime = "12:14";
+$currentTime = "12:14";
+//$today = "2019-05-28";
 
 function isBreak($currentTime, $thisEnd, $nextStart) {
 	return $thisEnd !== $nextStart && isBelowOrAbove($currentTime, $thisEnd, $nextStart);
@@ -178,8 +179,8 @@ $highlightClasses = 'bg-dark text-light';
 									$timeRange = $event['start'] . " - " . $event['end'];
 									$headerClasses = isTrue($highlightEvents) && onGoingEvent($event, $currentTime, $today) ? ' ' . $highlightClasses : '';
 									?>
-									<div class="card my-3" data-type="event">
-										<div class="card-header<?php echo $headerClasses; ?>" data-start="<?php echo $event['start'];?>" data-end="<?php echo $event['end'];?>" data-date="<?php echo $event['date']; ?>" data-isToday="<?php echo isToday($event['date'], $today) ? 'true' : 'false'; ?>">
+									<div class="card my-3">
+										<div class="card-header<?php echo $headerClasses; ?>" data-start="<?php echo $event['start'];?>" data-end="<?php echo $event['end'];?>" data-date="<?php echo $event['date']; ?>" data-isToday="<?php echo isToday($event['date'], $today) ? 'true' : 'false'; ?>" data-type="event">
 											<i class="fas fa-clock"></i>
 											<strong><?php echo $timeRange ?></strong>
 										</div>
@@ -202,7 +203,7 @@ $highlightClasses = 'bg-dark text-light';
 										</div>
 									</div>
 									<?php
-									if(isset($nextEvent) && isToday($event['date'], $today)) {
+									if(isset($schedule[$key + 1]) && isToday($event['date'], $today)) {
 										$breakStart = formatTime($thisEnd, "+1 minute");
 										$breakEnd = formatTime($nextStart, "-1 minute");
 										?>
