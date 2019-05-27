@@ -179,7 +179,7 @@ $highlightClasses = 'bg-dark text-light';
 									$headerClasses = isTrue($highlightEvents) && onGoingEvent($event, $currentTime, $today) ? ' ' . $highlightClasses : '';
 									?>
 									<div class="card my-3">
-										<div class="card-header<?php echo $headerClasses; ?>" data-start="<?php echo $event['start'];?>" data-end="<?php echo $event['end'];?>" data-date="<?php echo $event['date']; ?>" data-isToday="<?php echo isToday($event['date'], $today) ? 'true' : 'false'; ?>" data-type="event">
+										<div class="card-header<?php echo $headerClasses . (isToday($event['date'], $today) ? ' today' : ''); ?>" data-start="<?php echo $event['start'];?>" data-end="<?php echo $event['end'];?>" data-date="<?php echo $event['date']; ?>" data-type="event">
 											<i class="fas fa-clock"></i>
 											<strong><?php echo $timeRange ?></strong>
 										</div>
@@ -206,7 +206,7 @@ $highlightClasses = 'bg-dark text-light';
 										$breakStart = formatTime($thisEnd, "+1 minute");
 										$breakEnd = formatTime($nextStart, "-1 minute");
 										?>
-										<div class="card mt-3<?php echo !isBreak($currentTime, $thisEnd, $nextStart) ? ' d-none' : '' ?>" data-start="<?php echo $breakStart;?>" data-end="<?php echo $breakEnd;?>" data-type="break">
+										<div class="card mt-3<?php echo !isBreak($currentTime, $thisEnd, $nextStart) ? ' d-none' : '' ?> today" data-start="<?php echo $breakStart;?>" data-end="<?php echo $breakEnd;?>" data-type="break">
 											<div class="card-header <?php echo $highlightClasses; ?>">
 												<i class="fas fa-pause"></i> <strong class="text-center">Break</strong>
 											</div>

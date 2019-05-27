@@ -141,15 +141,14 @@ $(function () {
 
 	const highlightClasses = head.data('highlightclasses');
 	function updateEvents(time) {
-		$("div[data-start]").val(function () { //for-each all divs with data-start
+		$("div[data-start].today").val(function () { //for-each all divs with data-start
 			const thisType = $(this).data('type');
 			
 			const thisStart = $(this).data('start');
 			const thisEnd = $(this).data('end');
-			const isToday = $(this).data('isToday');
 
 			if (thisType == "event") {
-				if (isBetween(time, thisStart, thisEnd) && isToday === 'true') {
+				if (isBetween(time, thisStart, thisEnd)) {
 					$(this).addClass(highlightClasses);
 				} else {
 					$(this).removeClass(highlightClasses);
