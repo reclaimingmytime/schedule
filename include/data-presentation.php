@@ -176,7 +176,7 @@ $highlightClasses = 'bg-dark text-light';
 									$timeRange = $event['start'] . " - " . $event['end'];
 									$headerClasses = isTrue($highlightEvents) && onGoingEvent($event, $currentTime, $today) ? ' ' . $highlightClasses : '';
 									?>
-									<div class="card mt-3" data-type="event">
+									<div class="card my-3" data-type="event">
 										<div class="card-header<?php echo $headerClasses; ?>" data-start="<?php echo $event['start'];?>" data-end="<?php echo $event['end'];?>" data-date="<?php echo $event['date']; ?>" data-isToday="<?php echo isToday($event['date'], $today) ? 'true' : 'false'; ?>">
 											<i class="fas fa-clock"></i>
 											<strong><?php echo $timeRange ?></strong>
