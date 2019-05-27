@@ -144,8 +144,9 @@ $(function () {
 		$("div[data-start]").val(function () { //for-each all divs with data-start
 			const thisStart = $(this).data('start');
 			const thisEnd = $(this).data('end');
+			const isToday = $(this).data('isToday');
 
-			if (isBetween(time, thisStart, thisEnd)) {
+			if (isBetween(time, thisStart, thisEnd) && isToday === 'true') {
 				$(this).addClass(highlightClasses);
 			} else {
 				$(this).removeClass(highlightClasses);
