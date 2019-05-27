@@ -44,19 +44,35 @@ $(function () {
 		return (min <= x) && (x <= max);
 	}
 
+	//Navigation
+	function redirectToNextDay() {
+		if (dataNotNone('nextday')) {
+			redirectToHref('#nextDay');
+		} else if (head.data('weekoverview') === true) {
+			redirectToHref('#prevWeek');
+		}
+	}
+	function redirectToPrevDay() {
+		if (dataNotNone('prevday')) {
+			redirectToHref('#prevDay');
+		} else if (head.data('weekoverview') === true) {
+			redirectToHref('#prevWeek');
+		}
+	}
+
 	/* Swipe */
 	$("body").swipe({
 		swipe: function (event, direction, distance, duration, fingerCount) {
 			// fingerCount 0: No touchscreen detected
-			if (direction === "left" && (fingerCount === 1 || fingerCount === 0) && dataNotNone('nextday')) {
-				redirectToHref('#nextDay');
+			if (direction === "left" && (fingerCount === 1 || fingerCount === 0)) {
+				redirectToNextDay();
 			}
 			if (direction === "left" && fingerCount === 2 && dataNotNone('nextweek')) {
 				redirectToHref('#nextWeek');
 			}
 
-			if (direction === "right" && (fingerCount === 1 || fingerCount === 0) && dataNotNone('prevday')) {
-				redirectToHref('#prevDay');
+			if (direction === "right" && (fingerCount === 1 || fingerCount === 0)) {
+				redirectToPrevDay();
 			}
 			if (direction === "right" && fingerCount === 2 && dataNotNone('prevweek')) {
 				redirectToHref('#prevWeek');
@@ -71,15 +87,11 @@ $(function () {
 		if (!e.ctrlKey && !e.metaKey && !e.shiftKey) {
 			switch (e.which) {
 				case 65: // A
-					if (dataNotNone('prevday')) {
-						redirectToHref('#prevDay');
-					}
+					redirectToPrevDay();
 					break;
 
 				case 68: // D
-					if (dataNotNone('nextday')) {
-						redirectToHref('#nextDay');
-					}
+					redirectToNextDay();
 					break;
 
 				case 87: // W
@@ -143,7 +155,7 @@ $(function () {
 	function updateEvents(time) {
 		$("div[data-start].today").val(function () { //for-each all divs with data-start
 			const thisType = $(this).data('type');
-			
+
 			const thisStart = $(this).data('start');
 			const thisEnd = $(this).data('end');
 
@@ -153,7 +165,7 @@ $(function () {
 				} else {
 					$(this).removeClass(highlightClasses);
 				}
-			} else if(thisType == "break") {
+			} else if (thisType == "break") {
 				if (isBetween(time, thisStart, thisEnd)) {
 					$(this).removeClass("d-none");
 				} else {
