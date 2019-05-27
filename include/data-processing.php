@@ -173,6 +173,10 @@ function timeIsBetween($time, $start, $end) {
 	return isBetween(createTime($time), createTime($start), createTime($end));
 }
 
-function onGoingEvent($event, $currentTime) {
-	return timeIsBetween($currentTime, $event['start'], $event['end']);
+function isToday($rawDate, $today) {
+	return $today === formatIsoDate($rawDate);
+}
+
+function onGoingEvent($event, $currentTime, $today) {
+	return timeIsBetween($currentTime, $event['start'], $event['end']) && isToday($event['date'], $today);
 }

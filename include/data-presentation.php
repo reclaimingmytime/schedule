@@ -39,7 +39,12 @@ function isNewDate($schedule, $key, $event) {
 	return isset($schedule[$key - 1]["date"]) && $schedule[$key - 1]["date"] !== $event["date"];
 }
 
-$highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : false;
+function highlightEvent($date, $today, $weekBump) {
+	return equals($date, $today) && isFalse($weekBump);
+}
+
+$highlightEvents = highlightEvent($desiredDate, $today, $weekBump);
+
 $highlightClasses = 'bg-dark text-light';
 ?>
 <!DOCTYPE html>
@@ -169,10 +174,10 @@ $highlightClasses = 'bg-dark text-light';
 										</span>
 									<?php }
 									$timeRange = $event['start'] . " - " . $event['end'];
-									$headerClasses = isTrue($highlightEvents) && onGoingEvent($event, $currentTime) ? ' ' . $highlightClasses : '';
+									$headerClasses = isTrue($highlightEvents) && onGoingEvent($event, $currentTime, $today) ? ' ' . $highlightClasses : '';
 									?>
 									<div class="event card mt-3" id="event<?php echo $key; ?>">
-										<div class="card-header<?php echo $headerClasses; ?>" data-start="<?php echo $event['start'];?>" data-end="<?php echo $event['end'];?>">
+										<div class="card-header<?php echo $headerClasses; ?>" data-start="<?php echo $event['start'];?>" data-end="<?php echo $event['end'];?>" data-date="<?php echo $event['date']; ?>" data-isToday="<?php echo isToday($event['date'], $today) ? 'true' : 'false'; ?>">
 											<i class="fas fa-clock"></i>
 											<strong><?php echo $timeRange ?></strong>
 										</div>
