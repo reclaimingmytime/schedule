@@ -105,10 +105,6 @@ function createTime($input) {
 	return DateTime::createFromFormat('H:i', $input);
 }
 
-function createTimeString($input) {
-	return DateTime::createFromFormat('H:i', $input);
-}
-
 function formatWeekDay($date) {
 	$object = new DateTime($date);
 	return $object->format("D");
