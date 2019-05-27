@@ -160,20 +160,6 @@ $(function () {
 					$(this).addClass("d-none");
 				}
 			}
-
-			/* Future feature: Dynamically disable and enable break
-			 const nextEvent = $(this).parent().nextUntil(".event").last().next().find(".card-header");
-			 //Debug: $("#event0 .card-header").parent().nextUntil(".event").last().next().find(".card-header").data("start")
-			 const nextStart = nextEvent.data("start");
-			 const nextBreak = $(this).parent().nextUntil(".break").last().next();
-			 //			console.log("nextEvent: " + nextEvent.data("start") + " - " + nextEvent.data("end"));
-			 
-			 //			if(thisEnd !== nextStart && isBetween(time, thisEnd, thisStart) && nextBreak.hasClass("d-none")) {
-			 //				nextBreak.removeClass("d-none");
-			 //			} else if(nextBreak.not(".d-none")) {
-			 //				nextBreak.addClass("d-none");	
-			 //			} */
-
 		});
 	}
 
