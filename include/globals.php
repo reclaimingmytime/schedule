@@ -101,6 +101,10 @@ function formatIsoDate($date, $interval = "today") {
 	return date("Y-m-d", strtotime($interval, strtotime($date)));
 }
 
+function formatTime($time, $interval = "now") {
+	return date("H:i", strtotime($interval, strtotime($time)));
+}
+
 function createTime($input) {
 	return DateTime::createFromFormat('H:i', $input);
 }
