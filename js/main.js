@@ -142,17 +142,19 @@ $(function () {
 	const highlightClasses = head.data('highlightclasses');
 	function updateEvents(time) {
 		$("div[data-start]").val(function () { //for-each all divs with data-start
+			const thisType = $(this).data('type');
+			
 			const thisStart = $(this).data('start');
 			const thisEnd = $(this).data('end');
 			const isToday = $(this).data('isToday');
 
-			if ($(this).hasClass("event")) {
+			if (thisType == "event") {
 				if (isBetween(time, thisStart, thisEnd) && isToday === 'true') {
 					$(this).addClass(highlightClasses);
 				} else {
 					$(this).removeClass(highlightClasses);
 				}
-			} else if($(this).hasClass("break")) {
+			} else if(thisType == "break") {
 				if (isBetween(time, thisStart, thisEnd)) {
 					$(this).removeClass("d-none");
 				} else {
