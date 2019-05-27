@@ -31,6 +31,8 @@ function prepareMsg($sessionName, $msg) {
 prepareMsg('validToken', "<strong>The class could not be changed.</strong><br>This link is invalid. Please try again.");
 prepareMsg('validDate', "<strong>The date could not be changed.</strong><br>The date must be in the format <strong>YYYY-MM-DD</strong> and between <strong>$minDate</strong> and <strong>$maxDate</strong>.");
 
+//$currentTime = "12:14";
+
 function isBreak($currentTime, $thisEnd, $nextStart) {
 	return $thisEnd !== $nextStart && isBelowOrAbove($currentTime, $thisEnd, $nextStart);
 }
@@ -141,7 +143,7 @@ $highlightClasses = 'bg-dark text-light';
 
 					<div class="row">
 						<div class="col-xl-<?php echo ($weekOverview === true) ? '2' : '6'; ?>">
-							<span class="text-muted h4 pb-1">
+							<span class="<?php echo !isToday($desiredDate, $today) ? 'text-muted ' : ''; ?>h4 pb-1">
 								<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
 								<span class="mr-1"><?php echo $weekDay; ?></span>
 								<span class="mr-1"><?php echo $displayedDate; ?></span>
@@ -167,7 +169,7 @@ $highlightClasses = 'bg-dark text-light';
 										if(isNewDate($schedule, $key, $event)) { ?>
 									</div>
 									<div class="col-xl-2 mt-4 mt-xl-0">
-										<span class="text-muted h4 pb-1">
+										<span class="<?php echo !isToday($event["date"], $today) ? 'text-muted ' : ''; ?>h4 pb-1">
 											<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
 											<span class="mr-1"><?php echo $event["weekDay"]; ?></span>
 											<span class="mr-1"><?php echo $event["date"]; ?></span>
