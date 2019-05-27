@@ -200,9 +200,11 @@ $highlightClasses = 'bg-dark text-light';
 										</div>
 									</div>
 									<?php
-									if(isset($nextEvent)) {
+									if(isset($nextEvent) && isToday($event['date'], $today)) {
+										$breakStart = formatTime($thisEnd, "+1 minute");
+										$breakEnd = formatTime($nextStart, "-1 minute");
 										?>
-										<div class="break card mt-3<?php echo !isBreak($currentTime, $thisEnd, $nextStart) ? ' d-none' : '' ?>">
+										<div class="break card mt-3<?php echo !isBreak($currentTime, $thisEnd, $nextStart) ? ' none' : '' ?>" data-start="<?php echo $breakStart;?>" data-end="<?php echo $breakEnd;?>">
 											<div class="card-header <?php echo $highlightClasses; ?>">
 												<i class="fas fa-pause"></i> <strong class="text-center">Break</strong>
 											</div>
