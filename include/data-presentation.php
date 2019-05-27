@@ -147,15 +147,17 @@ $highlightClasses = 'bg-dark text-light';
 								</div>
 								<?php
 							} else {
-									if($highlightEvents && isset($schedule[$key + 1])) {
-										$thisEnd = $event["end"];
-										$nextEvent = $schedule[$key + 1];
-										$nextStart = $nextEvent["start"];
-									}
 									foreach ($schedule as $key => $event) {
+										
+										if($highlightEvents && isset($schedule[$key + 1])) {
+											$thisEnd = $event["end"];
+											$nextEvent = $schedule[$key + 1];
+											$nextStart = $nextEvent["start"];
+										}
+										
 										if(isset($schedule[$key - 1]["date"]) && $schedule[$key - 1]["date"] !== $event["date"]) { ?>
-							</div>
-							<div class="col-xl-2 mt-4 mt-xl-0">
+									</div>
+									<div class="col-xl-2 mt-4 mt-xl-0">
 										<span class="text-muted h4 pb-1">
 											<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
 											<span class="mr-1"><?php echo $event["weekDay"]; ?></span>
