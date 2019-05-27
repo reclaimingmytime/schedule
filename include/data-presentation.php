@@ -35,6 +35,10 @@ function isBreak($currentTime, $thisEnd, $nextStart) {
 	return $thisEnd !== $nextStart && isBelowOrAbove($currentTime, $thisEnd, $nextStart);
 }
 
+function newDate($schedule, $key, $event) {
+	return isset($schedule[$key - 1]["date"]) && $schedule[$key - 1]["date"] !== $event["date"];
+}
+
 $highlightEvents = equals($desiredDate, $today) && isFalse($weekBump) ? true : false;
 $highlightClasses = 'bg-dark text-light';
 ?>
@@ -155,7 +159,7 @@ $highlightClasses = 'bg-dark text-light';
 											$nextStart = $nextEvent["start"];
 										}
 										
-										if(isset($schedule[$key - 1]["date"]) && $schedule[$key - 1]["date"] !== $event["date"]) { ?>
+										if(newDate($schedule, $key, $event)) { ?>
 									</div>
 									<div class="col-xl-2 mt-4 mt-xl-0">
 										<span class="text-muted h4 pb-1">
