@@ -97,7 +97,7 @@ function redirect($path = '.') {
 
 /* Time */
 
-function formatIsoDate($date, $interval = "today") {
+function getDateFromInterval($date, $interval = "today") {
 	return date("Y-m-d", strtotime($interval, strtotime($date)));
 }
 

@@ -101,7 +101,7 @@ foreach ($calendar as $entry) {
 	$date = ($type == 'ical') ? extractIcalDate($entry[START]["date"])->format('Y-m-d') : extractDate($entry[START]);
 
 	if($weekOverview === true) {
-		$desiredDateTo = formatIsoDate($desiredDate, "+6 days");
+		$desiredDateTo = getDateFromInterval($desiredDate, "+6 days");
 	} else {
 		$desiredDateTo = $desiredDate;
 	}
@@ -174,7 +174,7 @@ function timeIsBetween($time, $start, $end) {
 }
 
 function isToday($rawDate, $today) {
-	return $today === formatIsoDate($rawDate);
+	return $today === getDateFromInterval($rawDate);
 }
 
 function onGoingEvent($event, $currentTime, $today) {

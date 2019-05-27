@@ -49,12 +49,12 @@ $weekBump = false;
 
 if(isset($excludeWeekends) && isTrue($excludeWeekends)) {
 	if(isWeekend($desiredDate)) {
-		$desiredDate = formatIsoDate($desiredDate, "1 weekday");
+		$desiredDate = getDateFromInterval($desiredDate, "1 weekday");
 		$weekBump = true;
 	}
 	
 	if(isWeekend($today)) {
-		$today = formatIsoDate($today, "1 weekday");
+		$today = getDateFromInterval($today, "1 weekday");
 		if($today == $desiredDate) {
 			$weekBump = true;
 		}
@@ -70,25 +70,25 @@ $weekDay = formatWeekDay($desiredDate);
 $displayedDateFull = $weekDay . ", " . $desiredDatePretty;
 $displayedDate = $desiredDatePretty;
 
-$nextWeek = formatIsoDate($desiredDate, "1 week");
-$nextDay = formatIsoDate($desiredDate, "1 $weekDayString");
+$nextWeek = getDateFromInterval($desiredDate, "1 week");
+$nextDay = getDateFromInterval($desiredDate, "1 $weekDayString");
 
-$prevDay = formatIsoDate($desiredDate, "1 $weekDayString ago");
-$prevWeek = formatIsoDate($desiredDate, "1 week ago");
+$prevDay = getDateFromInterval($desiredDate, "1 $weekDayString ago");
+$prevWeek = getDateFromInterval($desiredDate, "1 week ago");
 
-if($prevWeek < formatIsoDate($minDate)) {
+if($prevWeek < getDateFromInterval($minDate)) {
 	$prevWeek = "none";
 }
 
-if($prevDay < formatIsoDate($minDate)) {
+if($prevDay < getDateFromInterval($minDate)) {
 	$prevDay = "none";
 }
 
-if($nextWeek > formatIsoDate($maxDate)) {
+if($nextWeek > getDateFromInterval($maxDate)) {
 	$nextWeek = "none";
 }
 
-if($nextDay > formatIsoDate($maxDate)) {
+if($nextDay > getDateFromInterval($maxDate)) {
 	$nextDay = "none";
 }
 
@@ -204,7 +204,7 @@ if(isset($type) && $type !== 'ical') {
 $weekOverview = setWeekPreference($token, $desiredDate);
 if($weekOverview === true) {
 	if(formatWeekDay($desiredDate) !== "Mon") {
-		$lastMonday = formatIsoDate($desiredDate, "last monday");
+		$lastMonday = getDateFromInterval($desiredDate, "last monday");
 		redirect("?date=" . $lastMonday);
 	}
 	
