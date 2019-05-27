@@ -99,12 +99,12 @@ $(function () {
 						redirectToHref('#today');
 					}
 					break;
-				
+
 				case 84: // T
 					redirectToHref('#overviewType');
 					break;
 
-				//1-9
+					//1-9
 				case 49:
 				case 50:
 				case 51:
@@ -146,25 +146,33 @@ $(function () {
 			const thisEnd = $(this).data('end');
 			const isToday = $(this).data('isToday');
 
-			if (isBetween(time, thisStart, thisEnd) && isToday === 'true') {
-				$(this).addClass(highlightClasses);
-			} else {
-				$(this).removeClass(highlightClasses);
+			if ($(this).hasClass("event")) {
+				if (isBetween(time, thisStart, thisEnd) && isToday === 'true') {
+					$(this).addClass(highlightClasses);
+				} else {
+					$(this).removeClass(highlightClasses);
+				}
+			} else if($(this).hasClass("break")) {
+				if (isBetween(time, thisStart, thisEnd)) {
+					$(this).removeClass("d-none");
+				} else {
+					$(this).addClass("d-none");
+				}
 			}
 
 			/* Future feature: Dynamically disable and enable break
-			const nextEvent = $(this).parent().nextUntil(".event").last().next().find(".card-header");
-			//Debug: $("#event0 .card-header").parent().nextUntil(".event").last().next().find(".card-header").data("start")
-			const nextStart = nextEvent.data("start");
-			const nextBreak = $(this).parent().nextUntil(".break").last().next();
-//			console.log("nextEvent: " + nextEvent.data("start") + " - " + nextEvent.data("end"));
+			 const nextEvent = $(this).parent().nextUntil(".event").last().next().find(".card-header");
+			 //Debug: $("#event0 .card-header").parent().nextUntil(".event").last().next().find(".card-header").data("start")
+			 const nextStart = nextEvent.data("start");
+			 const nextBreak = $(this).parent().nextUntil(".break").last().next();
+			 //			console.log("nextEvent: " + nextEvent.data("start") + " - " + nextEvent.data("end"));
+			 
+			 //			if(thisEnd !== nextStart && isBetween(time, thisEnd, thisStart) && nextBreak.hasClass("d-none")) {
+			 //				nextBreak.removeClass("d-none");
+			 //			} else if(nextBreak.not(".d-none")) {
+			 //				nextBreak.addClass("d-none");	
+			 //			} */
 
-//			if(thisEnd !== nextStart && isBetween(time, thisEnd, thisStart) && nextBreak.hasClass("d-none")) {
-//				nextBreak.removeClass("d-none");
-//			} else if(nextBreak.not(".d-none")) {
-//				nextBreak.addClass("d-none");	
-//			} */
-			
 		});
 	}
 
