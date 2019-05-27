@@ -165,6 +165,8 @@ $highlightClasses = 'bg-dark text-light';
 											$thisEnd = $event["end"];
 											$nextEvent = $schedule[$key + 1];
 											$nextStart = $nextEvent["start"];
+										} else {
+											$nextEvent = null; //prevent $nextEvent from previous loop persiting
 										}
 										
 										if(isNewDate($schedule, $key, $event)) { ?>
@@ -203,7 +205,7 @@ $highlightClasses = 'bg-dark text-light';
 										</div>
 									</div>
 									<?php
-									if(isset($schedule[$key + 1]) && isToday($event['date'], $today)) {
+									if(isset($nextEvent) && isToday($event['date'], $today)) {
 										$breakStart = formatTime($thisEnd, "+1 minute");
 										$breakEnd = formatTime($nextStart, "-1 minute");
 										?>
