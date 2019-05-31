@@ -107,7 +107,7 @@ $(function () {
 					break;
 
 				case 13: // enter
-					if (head.data('today') !== head.data('desireddate')) {
+					if (head.data('enabletodaylink') === true) {
 						redirectToHref('#today');
 					}
 					break;

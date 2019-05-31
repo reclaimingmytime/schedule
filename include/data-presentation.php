@@ -43,13 +43,19 @@ function highlightEvent($date, $today, $weekBump) {
 	return equals($date, $today) && isFalse($weekBump);
 }
 
+function enableTodayLink($today, $desiredDate, $desiredDateTo) {
+	return !isBetween($today, $desiredDate, $desiredDateTo);
+}
+
+$enableTodayLink = enableTodayLink($today, $desiredDate, $desiredDateTo);
+
 $highlightEvents = highlightEvent($desiredDate, $today, $weekBump);
 
 $highlightClasses = 'bg-dark text-light';
 ?>
 <!DOCTYPE html>
 <html class="h-100" lang="en">
-	<head data-desireddate="<?php echo $desiredDate; ?>" data-today="<?php echo $today; ?>" data-nextday="<?php echo $nextDay; ?>" data-prevday="<?php echo $prevDay; ?>" data-nextweek="<?php echo $nextWeek; ?>" data-prevweek="<?php echo $prevWeek; ?>" data-weekoverview="<?php echo $weekOverview === true ? "true" : "false"; ?>" data-highlightevents="<?php echo $highlightEvents ? 'true' : 'false'; ?>" data-highlightclasses="<?php echo $highlightClasses; ?>">
+	<head data-desireddate="<?php echo $desiredDate; ?>" data-today="<?php echo $today; ?>" data-nextday="<?php echo $nextDay; ?>" data-prevday="<?php echo $prevDay; ?>" data-nextweek="<?php echo $nextWeek; ?>" data-prevweek="<?php echo $prevWeek; ?>" data-weekoverview="<?php echo $weekOverview === true ? "true" : "false"; ?>" data-highlightevents="<?php echo $highlightEvents ? 'true' : 'false'; ?>" data-highlightclasses="<?php echo $highlightClasses; ?>" data-enabletodaylink="<?php echo $enableTodayLink === true ? "true" : "false";?>">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Calendar for <?php echo $displayedDateFull; ?></title>
@@ -71,11 +77,11 @@ $highlightClasses = 'bg-dark text-light';
 			<header>
 				<nav class="navbar navbar-expand navbar-light bg-light mt-3 mb-4">
 					<div class="navbar-header d-none d-sm-block">
-						<a class="navbar-brand<?php echo ($desiredDate == $today) ? ' active' : ''; ?>" href="."><i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span></a>
+						<a class="navbar-brand<?php echo (!$enableTodayLink) ? ' active' : ''; ?>" href="."><i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span></a>
 					</div>
 
 					<ul class="navbar-nav m-auto ml-sm-0">
-						<li class="nav-item mr-4 ml-3<?php echo ($desiredDate == $today) ? ' active' : ''; ?>">
+						<li class="nav-item mr-4 ml-3<?php echo (!$enableTodayLink) ? ' active' : ''; ?>">
 							<a class="nav-link" id="today" href="."><i class="fas fa-play"></i> <span class="d-none d-lg-inline">Today <small><code class="text-secondary">(Enter)</code></small></span></a>
 						</li>
 
