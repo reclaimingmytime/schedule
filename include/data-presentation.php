@@ -134,19 +134,18 @@ $highlightClasses = 'bg-dark text-light';
 			</header>
 
 			<main>
-				<?php if (!empty($_SESSION['msg'])) { ?>
-					<div class="alert alert-danger alert-dismissible fade show" role="alert">
-						<?php echo $_SESSION["msg"]; ?>
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<?php }
-					unset($_SESSION['msg']);
-					?>
-
-					<div class="row">
-						<div class="col-xl-<?php echo ($weekOverview === true) ? '2' : '6'; ?>">
+				<div class="row">
+					<div class="col-xl-<?php echo ($weekOverview === true) ? '2' : '6'; ?>">
+						<?php if (!empty($_SESSION['msg'])) { ?>
+							<div class="alert alert-danger alert-dismissible fade show" role="alert">
+								<?php echo $_SESSION["msg"]; ?>
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<?php }
+							unset($_SESSION['msg']);
+							?>
 							<span class="text-muted h4 pb-1">
 								<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
 								<span class="mr-1"><?php echo $weekDay; ?></span>
@@ -222,21 +221,21 @@ $highlightClasses = 'bg-dark text-light';
 								}
 							} ?>
 
-							</div>
-					</div>
-					<?php if (isset($weekBump) && $weekBump === true) { ?>
-						<p class="text-center text-sm-left mt-4">
-							<a class="btn btn-outline-secondary" data-toggle="collapse" href="#weekendNotice" id="infoBtn" role="button" aria-expanded="false" aria-controls="weekendNotice">
-								Info
-							</a>
-						</p>
-						<div class="collapse" id="weekendNotice">
-							<div class="card card-body pb-1">
-								<p>Weekends have been excluded from the schedule. You are now viewing the next week day.</p>
-							</div>
 						</div>
-					<?php } ?>
-				</main>
+					</div>
+				<?php if (isset($weekBump) && $weekBump === true) { ?>
+					<p class="text-center text-sm-left mt-4">
+						<a class="btn btn-outline-secondary" data-toggle="collapse" href="#weekendNotice" id="infoBtn" role="button" aria-expanded="false" aria-controls="weekendNotice">
+							Info
+						</a>
+					</p>
+					<div class="collapse" id="weekendNotice">
+						<div class="card card-body pb-1">
+							<p>Weekends have been excluded from the schedule. You are now viewing the next week day.</p>
+						</div>
+					</div>
+				<?php } ?>
+			</main>
 
 			<footer class="text-center my-4">
 				<?php if(!empty($allowedClasses) && !empty($desiredClass)) { ?>
