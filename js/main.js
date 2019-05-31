@@ -49,7 +49,7 @@ $(function () {
 		if (dataNotNone('nextday')) {
 			redirectToHref('#nextDay');
 		} else if (head.data('weekoverview') === true) {
-			redirectToHref('#prevWeek');
+			redirectToHref('#nextWeek');
 		}
 	}
 	function redirectToPrevDay() {
