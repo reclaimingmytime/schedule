@@ -46,7 +46,7 @@ $currentTime = date("H:i");
 $desiredDate = getCustomDate("date", $today, $min, $max);
 $desiredDateMidWeek = $desiredDate;
 
-$weekOverview = setWeekPreference($token, $desiredDate);
+$weekOverview = setWeekPreference($token, $desiredDate, $today);
 if($weekOverview === true) {
 	if(formatWeekDay($desiredDate) !== "Mon") {
 		$lastMonday = getDateFromInterval($desiredDate, "last monday");
@@ -134,7 +134,7 @@ function getClass($defaultClass, $allowedClasses, $desiredDate, $token) {
 	return $defaultClass;
 }
 
-function setWeekPreference($token, $desiredDate) {
+function setWeekPreference($token, $desiredDate, $today) {
 	$overviewGET = getParameter("overview");
 	$overviewCookie = getCookie("overview");
 
@@ -145,7 +145,11 @@ function setWeekPreference($token, $desiredDate) {
 			if (validToken(getParameter("token"), $token)) {
 				writeCookie("overview", $overview, "1 year");
 			}
-			redirect("?date=" . $desiredDate);
+			if($desiredDate == $today) {
+				redirect(".");
+			} else {
+				redirect("?date=" . $desiredDate);
+			}
 		}
 		return $overview === "week";
 	}
