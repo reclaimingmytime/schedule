@@ -135,7 +135,7 @@ $highlightClasses = 'bg-dark text-light';
 
 			<main>
 				<div class="row">
-					<div class="col-xl-<?php echo ($weekOverview === true) ? '2' : '6'; ?>">
+					<div class="col-xl-6">
 						<?php if (!empty($_SESSION['msg'])) { ?>
 							<div class="alert alert-danger alert-dismissible fade show" role="alert">
 								<?php echo $_SESSION["msg"]; ?>
@@ -146,6 +146,11 @@ $highlightClasses = 'bg-dark text-light';
 							<?php }
 							unset($_SESSION['msg']);
 							?>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-xl-<?php echo ($weekOverview === true) ? '2' : '6'; ?>">
 							<span class="text-muted h4 pb-1">
 								<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
 								<span class="mr-1"><?php echo $weekDay; ?></span>
