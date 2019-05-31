@@ -117,7 +117,7 @@ $highlightClasses = 'bg-dark text-light';
 							$text = "Week";
 						}  ?>
 							<li class="nav-item mr-4">
-								<a class="nav-link" id="overviewType" href="?date=<?php echo $desiredDateMidWeek; ?>&overview=<?php echo $overviewType . $tokenEmbed; ?>"><i class="<?php echo $icon; ?>"></i> <span class="d-none d-lg-inline"><?php echo $text;?> <small><code class="text-secondary">(T)</code></small></span></a>
+								<a class="nav-link" id="overviewType" href="?<?php echo $desiredDateMidWeek !== $today ? 'date=' . $desiredDateMidWeek . '&' : ''; ?>overview=<?php echo $overviewType . $tokenEmbed; ?>"><i class="<?php echo $icon; ?>"></i> <span class="d-none d-lg-inline"><?php echo $text;?> <small><code class="text-secondary">(T)</code></small></span></a>
 							</li>
 						<?php if(!empty($allowedClasses) && !empty($desiredClass)) { ?>
 						<li class="nav-item d-none d-sm-inline-block dropdown">
