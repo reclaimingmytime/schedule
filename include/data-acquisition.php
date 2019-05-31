@@ -44,6 +44,16 @@ $today = date("Y-m-d");
 $currentTime = date("H:i");
 
 $desiredDate = getCustomDate("date", $today, $min, $max);
+$desiredDateMidWeek = $desiredDate;
+
+$weekOverview = setWeekPreference($token, $desiredDate);
+if($weekOverview === true) {
+	if(formatWeekDay($desiredDate) !== "Mon") {
+		$lastMonday = getDateFromInterval($desiredDate, "last monday");
+		$desiredDateMidWeek = $desiredDate;
+		$desiredDate = $lastMonday;
+	}
+}
 
 $weekBump = false;
 
@@ -90,6 +100,11 @@ if($nextWeek > getDateFromInterval($maxDate)) {
 
 if($nextDay > getDateFromInterval($maxDate)) {
 	$nextDay = "none";
+}
+
+if($weekOverview === true) {
+	$nextDay = "none";
+	$prevDay = "none";
 }
 
 /* API connection */
@@ -201,16 +216,7 @@ if(isset($type) && $type !== 'ical') {
 	$cache_filename = "cache.json";
 }
 
-$weekOverview = setWeekPreference($token, $desiredDate);
-if($weekOverview === true) {
-	if(formatWeekDay($desiredDate) !== "Mon") {
-		$lastMonday = getDateFromInterval($desiredDate, "last monday");
-		redirect("?date=" . $lastMonday);
-	}
-	
-	$nextDay = "none";
-	$prevDay = "none";
-}
+
 
 $folder = "cache/";
 createCache($folder);
