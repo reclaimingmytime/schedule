@@ -75,7 +75,7 @@ ensureAllDefined(['SUBJECT', 'START', 'END', 'ROOM']);
 
 //Duplicate check
 function sameEvent($e, $new) {
-	return equals($e["start"], $new["start"]) && equals($e["end"], $new["end"]) && equals($e["subject"], $new["subject"]);
+	return equals($e["date"], $new["date"]) && equals($e["start"], $new["start"]) && equals($e["end"], $new["end"]) && equals($e["subject"], $new["subject"]);
 }
 
 function validProf($profs, $emptyProfs) {
