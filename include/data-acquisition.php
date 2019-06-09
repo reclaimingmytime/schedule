@@ -153,7 +153,7 @@ function setWeekPreference($token, $desiredDate, $today) {
 		}
 		return $overview === "week";
 	}
-	return false;
+	return true; // fall back to week overview
 }
 
 function getAPIUrl($api, $replace, $default) {
