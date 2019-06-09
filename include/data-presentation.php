@@ -236,7 +236,7 @@ $highlightClasses = 'bg-dark text-light';
 					</p>
 					<div class="collapse" id="weekendNotice">
 						<div class="card card-body pb-1">
-							<p>Weekends have been excluded from the schedule. You are now viewing the next week day.</p>
+							<p>Weekends have been excluded from the schedule. You are now viewing the next week.</p>
 						</div>
 					</div>
 				<?php } ?>
