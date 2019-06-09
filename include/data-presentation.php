@@ -151,10 +151,19 @@ $highlightClasses = 'bg-dark text-light';
 				
 				<div class="row">
 					<div class="col-xl-<?php echo ($weekOverview === true) ? '2' : '6'; ?>">
+							<?php
+							if(!empty($schedule[0])) {
+								$firstEventWeekDay = $schedule[0]["weekDay"];
+								$firstEventDate = $schedule[0]["date"];
+							} else {
+								$firstEventWeekDay = $weekDay;
+								$firstEventDate = $displayedDate;
+							}
+							?>
 							<span class="text-muted h4 pb-1">
 								<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
-								<span class="mr-1"><?php echo $weekDay; ?></span>
-								<span class="mr-1"><?php echo $displayedDate; ?></span>
+								<span class="mr-1"><?php echo $firstEventWeekDay; ?></span>
+								<span class="mr-1"><?php echo $firstEventDate; ?></span>
 							</span>
 							<h1 class="text-muted h4 float-right d-sm-none">
 								<i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span>
