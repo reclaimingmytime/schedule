@@ -119,6 +119,11 @@ function formatReadableDate($date) {
 	return $object->format("d.m.y");
 }
 
+function readableToIsoDate($date) {
+	$object = DateTime::createFromFormat('d.m.y', $date);
+	return $object->format("Y-m-d");
+}
+
 /* CSRF Token */
 if(!isset($_SESSION['token'])) {
 	$_SESSION['token'] = bin2hex(random_bytes(16));

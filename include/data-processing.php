@@ -174,7 +174,7 @@ function timeIsBetween($time, $start, $end) {
 }
 
 function isToday($rawDate, $today) {
-	return $today === getDateFromInterval($rawDate);
+	return $today === readableToIsoDate($rawDate);
 }
 
 function onGoingEvent($event, $currentTime, $today) {
