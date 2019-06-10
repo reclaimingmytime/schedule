@@ -161,7 +161,7 @@ $highlightClasses = 'bg-dark text-light';
 								$firstEventDate = $displayedDate;
 							}
 							?>
-							<span class="text-secondary h4 pb-1">
+							<span class="<?php echo !isToday($firstEventDate, $today) ? 'text-secondary ' : ''; ?>h4 pb-1">
 								<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
 								<span class="mr-1"><?php echo $firstEventWeekDay; ?></span>
 								<span class="mr-1"><?php echo $firstEventDate; ?></span>
@@ -189,7 +189,7 @@ $highlightClasses = 'bg-dark text-light';
 										if(isNewDate($schedule, $key, $event)) { ?>
 									</div>
 									<div class="col-xl-2 mt-4 mt-xl-0">
-										<span class="text-secondary h4 pb-1">
+										<span class="<?php echo !isToday($event['date'], $today) ? 'text-secondary ' : ''; ?>h4 pb-1">
 											<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
 											<span class="mr-1"><?php echo $event["weekDay"]; ?></span>
 											<span class="mr-1"><?php echo $event["date"]; ?></span>
