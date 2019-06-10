@@ -11,7 +11,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 			<?php echo $class;
 
 			if(!empty($keyCode)) { ?>
-				<small class="text-muted d-none d-lg-inline">(<?php echo $i; ?>)</small>
+				<small class="text-secondary d-none d-lg-inline">(<?php echo $i; ?>)</small>
 			<?php } ?>
 		</a>
 		<?php
@@ -160,12 +160,12 @@ $highlightClasses = 'bg-dark text-light';
 								$firstEventDate = $displayedDate;
 							}
 							?>
-							<span class="text-muted h4 pb-1">
+							<span class="text-secondary h4 pb-1">
 								<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
 								<span class="mr-1"><?php echo $firstEventWeekDay; ?></span>
 								<span class="mr-1"><?php echo $firstEventDate; ?></span>
 							</span>
-							<h1 class="text-muted h4 float-right d-sm-none">
+							<h1 class="text-secondary h4 float-right d-sm-none">
 								<i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span>
 							</h1>
 
@@ -188,7 +188,7 @@ $highlightClasses = 'bg-dark text-light';
 										if(isNewDate($schedule, $key, $event)) { ?>
 									</div>
 									<div class="col-xl-2 mt-4 mt-xl-0">
-										<span class="text-muted h4 pb-1">
+										<span class="text-secondary h4 pb-1">
 											<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
 											<span class="mr-1"><?php echo $event["weekDay"]; ?></span>
 											<span class="mr-1"><?php echo $event["date"]; ?></span>
@@ -254,7 +254,7 @@ $highlightClasses = 'bg-dark text-light';
 			<footer class="text-center my-4">
 				<?php if(!empty($allowedClasses) && !empty($desiredClass)) { ?>
 					<div class="d-block d-sm-none dropup d-inline">
-						<a class="btn btn-white shadow-none text-muted dropdown-toggle" href="#" role="button" id="classFooterButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<a class="btn btn-white shadow-none text-secondary dropdown-toggle" href="#" role="button" id="classFooterButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="fas fa-folder"></i> <?php echo $desiredClass; ?>
 						</a>
 						<div class="dropdown-menu" id="classFooterMenu" aria-labelledby="classFooterButton">
