@@ -134,20 +134,21 @@ $highlightClasses = 'bg-dark text-light';
 			</header>
 
 			<main>
-				<div class="row">
-					<div class="col-xl-6">
-						<?php if (!empty($_SESSION['msg'])) { ?>
+				<?php if (!empty($_SESSION['msg'])) { ?>
+					<div class="row">
+						<div class="col-xl-6">
 							<div class="alert alert-danger alert-dismissible fade show" role="alert">
 								<?php echo $_SESSION["msg"]; ?>
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
-							<?php }
-							unset($_SESSION['msg']);
-							?>
+						</div>
 					</div>
-				</div>
+				<?php
+				}
+				unset($_SESSION['msg']);
+				?>
 				
 				<div class="row">
 					<div class="col-xl-<?php echo ($weekOverview === true) ? '2' : '6'; ?>">
