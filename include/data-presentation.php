@@ -221,7 +221,7 @@ $highlightClasses = 'bg-dark text-light';
 										</div>
 									</div>
 									<?php
-									if(isset($nextEvent) && isToday($event['date'], $today)) {
+									if(isset($nextEvent) && isToday($nextEvent['date'], $today)) {
 										$breakStart = formatTime($thisEnd, "+1 minute");
 										$breakEnd = formatTime($nextStart, "-1 minute");
 										?>
