@@ -39,17 +39,13 @@ function isNewDate($schedule, $key, $event) {
 	return isset($schedule[$key - 1]["date"]) && $schedule[$key - 1]["date"] !== $event["date"];
 }
 
-function highlightEvent($date, $today, $weekBump) {
-	return equals($date, $today) && isFalse($weekBump);
-}
-
 function enableTodayLink($today, $desiredDate, $desiredDateTo) {
 	return !isBetween($today, $desiredDate, $desiredDateTo);
 }
 
 $enableTodayLink = enableTodayLink($today, $desiredDate, $desiredDateTo);
 
-$highlightEvents = highlightEvent($desiredDate, $today, $weekBump);
+$highlightEvents = isFalse($weekBump) ? true : false;
 
 $highlightClasses = 'bg-dark text-light';
 ?>
@@ -178,7 +174,7 @@ $highlightClasses = 'bg-dark text-light';
 							} else {
 									foreach ($schedule as $key => $event) {
 										
-										if($highlightEvents && isset($schedule[$key + 1])) {
+										if(isset($schedule[$key + 1])) {
 											$thisEnd = $event["end"];
 											$nextEvent = $schedule[$key + 1];
 											$nextStart = $nextEvent["start"];
@@ -222,7 +218,7 @@ $highlightClasses = 'bg-dark text-light';
 										</div>
 									</div>
 									<?php
-									if(isset($nextEvent) && isToday($nextEvent['date'], $today)) {
+									if(isset($nextEvent) && isTrue($highlightEvents) && isToday($nextEvent['date'], $today)) {
 										$breakStart = formatTime($thisEnd, "+1 minute");
 										$breakEnd = formatTime($nextStart, "-1 minute");
 										?>
