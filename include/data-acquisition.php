@@ -222,8 +222,8 @@ if(isset($type) && $type !== 'ical') {
 
 
 
-$folder = "cache/";
-createCache($folder);
+$cache_folder = "cache/";
+createCache($cache_folder);
 
-$cache_file = $folder . $cache_filename;
+$cache_file = $cache_folder . $cache_filename;
 $calendar = retrieveData($desiredAPI, $cache_file, $type);
