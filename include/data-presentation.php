@@ -162,7 +162,7 @@ $highlightClasses = 'bg-dark text-light';
 								<span class="mr-1"><?php echo $firstEventWeekDay; ?></span>
 								<span class="mr-1"><?php echo $firstEventDate; ?></span>
 							</span>
-							<h1 class="text-secondary h4 float-right d-sm-none">
+							<h1 class="<?php echo !isToday($firstEventDate, $today) ? 'text-secondary ' : ''; ?> h4 float-right d-sm-none">
 								<i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span>
 							</h1>
 
