@@ -157,14 +157,16 @@ $highlightClasses = 'bg-dark text-light';
 								$firstEventDate = $displayedDate;
 							}
 							?>
-							<span class="<?php echo !isToday($firstEventDate, $today) ? 'text-secondary ' : ''; ?>h4 pb-1">
-								<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
-								<span class="mr-1"><?php echo $firstEventWeekDay; ?></span>
-								<span class="mr-1"><?php echo $firstEventDate; ?></span>
-							</span>
-							<h1 class="<?php echo !isToday($firstEventDate, $today) ? 'text-secondary ' : ''; ?> h4 float-right d-sm-none">
-								<i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span>
-							</h1>
+							<div class="<?php echo !isToday($firstEventDate, $today) ? 'text-secondary ' : ''; ?>">
+								<span class="h4 pb-1">
+									<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
+									<span class="mr-1"><?php echo $firstEventWeekDay; ?></span>
+									<span class="mr-1"><?php echo $firstEventDate; ?></span>
+								</span>
+								<h1 class="h4 float-right d-sm-none">
+									<i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span>
+								</h1>
+							</div>
 
 							<?php if (empty($schedule)) { ?>
 								<div class="alert alert-secondary mt-3" role="alert">
