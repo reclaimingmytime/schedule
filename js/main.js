@@ -61,7 +61,7 @@ $(function () {
 	}
 
 	/* Swipe */
-	$("body").swipe({
+	$("html").swipe({
 		swipe: function (event, direction, distance, duration, fingerCount) {
 			// fingerCount 0: No touchscreen detected
 			if (direction === "left" && (fingerCount === 1 || fingerCount === 0)) {
