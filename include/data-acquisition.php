@@ -182,25 +182,25 @@ function retrieveData($api, $cache_filename, $type) {
 	$cal = new CalFileParser();
 	
 	if (is_writable($cache_filename) && (filemtime($cache_filename) > strtotime('now -1 day'))) {
-		$cache_file = file_get_contents($cache_filename);
+		$calendar_json = file_get_contents($cache_filename);
 	} else {
 		try {
-			$cache_file = file_get_contents($api);
+			$calendar_json = file_get_contents($api);
 		} catch (Exception $ex) {
 			die("Unable to reach API.");
 		}
 		//refresh cache
 		if($type == 'ical') {
-			$cache_file = $cal->parse($api, 'json');
+			$calendar_json = $cal->parse($api, 'json');
 		}
-		file_put_contents($cache_filename, $cache_file, LOCK_EX);
+		file_put_contents($cache_filename, $calendar_json, LOCK_EX);
 	}
 
-	if (empty($cache_file) || $cache_file === false) {
+	if (empty($calendar_json) || $calendar_json === false) {
 		die("Error connecting to API.");
 	}
 
-	$calendar = json_decode($cache_file, true);
+	$calendar = json_decode($calendar_json, true);
 	return defined('CALENDAR') ? $calendar[CALENDAR] : $calendar;
 }
 
