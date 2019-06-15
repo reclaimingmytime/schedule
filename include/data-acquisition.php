@@ -182,26 +182,27 @@ function retrieveData($api, $cache_filename, $type) {
 	$cal = new CalFileParser();
 	
 	if (is_writable($cache_filename) && (filemtime($cache_filename) > strtotime('now -1 day'))) {
-		$calendar_json = file_get_contents($cache_filename);
+		//retrieve cache
+		$calendar = file_get_contents($cache_filename);
 	} else {
+		//refresh or create cache
 		try {
-			$calendar_json = file_get_contents($api);
-			if (empty($calendar_json) || $calendar_json === false) {
+			$calendar = file_get_contents($api);
+			if (empty($calendar) || $calendar === false) {
 				die("Error connecting to API.");
 			}
 		} catch (Exception $ex) {
 			die("Unable to reach API.");
 		}
 		if($type == 'ical') {
-			file_put_contents($cache_filename, $calendar_json, LOCK_EX); // write tmp file for CalFileParser to process
-			$calendar_json = $cal->parse($cache_filename, 'json');
+			file_put_contents($cache_filename, $calendar, LOCK_EX); // write tmp file for CalFileParser to process
+			$calendar = $cal->parse($cache_filename, 'json');
 		}
-		//refresh or create cache
-		file_put_contents($cache_filename, $calendar_json, LOCK_EX);
+		file_put_contents($cache_filename, $calendar, LOCK_EX);
 	}
 
-	$calendar = json_decode($calendar_json, true);
-	return defined('CALENDAR') ? $calendar[CALENDAR] : $calendar;
+	$calendarArray = json_decode($calendar, true);
+	return defined('CALENDAR') ? $calendarArray[CALENDAR] : $calendarArray;
 }
 
 if(!isset($allowedClasses)) {
