@@ -192,10 +192,11 @@ function retrieveData($api, $cache_filename, $type) {
 		} catch (Exception $ex) {
 			die("Unable to reach API.");
 		}
-		//refresh cache
 		if($type == 'ical') {
-			$calendar_json = $cal->parse($calendar_json, 'json');
+			file_put_contents($cache_filename, $calendar_json, LOCK_EX); // write tmp file for CalFileParser to process
+			$calendar_json = $cal->parse($cache_filename, 'json');
 		}
+		//refresh or create cache
 		file_put_contents($cache_filename, $calendar_json, LOCK_EX);
 	}
 
