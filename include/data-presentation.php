@@ -77,10 +77,23 @@ $highlightClasses = 'bg-dark text-light';
 					</div>
 
 					<ul class="navbar-nav m-auto ml-sm-0">
-						<li class="nav-item mr-4 ml-3<?php echo (!$enableTodayLink) ? ' active' : ''; ?>">
+						
+						<?php if ($prevWeek !== "none") { ?>
+							<li class="nav-item mr-4 ml-3">
+								<a class="nav-link" id="prevWeek" href="?date=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> <span class="d-none d-lg-inline">Previous Week <small><code class="text-secondary">(S)</code></small></span></a>
+							</li>
+						<?php } ?>
+
+						<?php if ($prevDay !== "none") { ?>
+							<li class="nav-item mr-4">
+								<a class="nav-link" id="prevDay" href="?date=<?php echo $prevDay; ?>"><i class="fas fa-backward"></i> <span class="d-none d-lg-inline">Previous Day <small><code class="text-secondary">(A)</code></small></span></a>
+							</li>
+						<?php } ?>
+						
+						<li class="nav-item mr-4<?php echo (!$enableTodayLink) ? ' active' : ''; ?>">
 							<a class="nav-link" id="today" href="."><i class="fas fa-play"></i> <span class="d-none d-lg-inline">Today <small><code class="text-secondary">(Enter)</code></small></span></a>
 						</li>
-
+						
 						<?php if ($nextDay !== "none") { ?>
 						<li class="nav-item mr-4">
 							<a class="nav-link" id="nextDay" href="?date=<?php echo $nextDay; ?>"><i class="fas fa-forward"></i> <span class="d-none d-lg-inline">Next Day <small><code class="text-secondary">(D)</code></small></span></a>
@@ -93,17 +106,7 @@ $highlightClasses = 'bg-dark text-light';
 						</li>
 						<?php } ?>
 
-						<?php if ($prevDay !== "none") { ?>
-							<li class="nav-item mr-4">
-								<a class="nav-link" id="prevDay" href="?date=<?php echo $prevDay; ?>"><i class="fas fa-backward"></i> <span class="d-none d-lg-inline">Previous Day <small><code class="text-secondary">(A)</code></small></span></a>
-							</li>
-						<?php }
-						if ($prevWeek !== "none") { ?>
-							<li class="nav-item mr-4">
-								<a class="nav-link" id="prevWeek" href="?date=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> <span class="d-none d-lg-inline">Previous Week <small><code class="text-secondary">(S)</code></small></span></a>
-							</li>
-						<?php }
-						if ($weekOverview === true) {
+						<?php if ($weekOverview === true) {
 							$overviewType = "day";
 							$icon = "fas fa-calendar-day";
 							$text = "Day";
