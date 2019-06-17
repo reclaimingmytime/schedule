@@ -75,7 +75,10 @@ ensureAllDefined(['SUBJECT', 'START', 'END', 'ROOM']);
 
 //Duplicate check
 function sameEvent($e, $new) {
-	return equals($e["date"], $new["date"]) && equals($e["start"], $new["start"]) && equals($e["end"], $new["end"]) && equals($e["subject"], $new["subject"]);
+	return equals($e["date"], $new["date"]) &&
+					equals($e["start"], $new["start"]) &&
+					equals($e["end"], $new["end"]) &&
+					equals($e["subject"], $new["subject"]);
 }
 
 function validProf($profs, $emptyProfs) {
@@ -87,7 +90,9 @@ function containsNewRoom($existing, $new) {
 }
 
 function containsNewProf($existing, $new, $emptyProfs) {
-	return !empty($existing["prof"]) && notExists($existing["prof"], $new["prof"]) && validProf($new["prof"], $emptyProfs);
+	return !empty($existing["prof"]) &&
+					notExists($existing["prof"], $new["prof"]) &&
+					validProf($new["prof"], $emptyProfs);
 }
 
 function containsNewInfo($existing, $new) {
