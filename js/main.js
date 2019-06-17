@@ -116,7 +116,7 @@ $(function () {
 					redirectToHref('#overviewType');
 					break;
 
-				//1-9
+					//1-9
 				case 49:
 				case 50:
 				case 51:
