@@ -110,8 +110,14 @@ foreach ($calendar as $entry) {
 	} else {
 		$desiredDateTo = $desiredDate;
 	}
+			
+	$class = stringRange($entry[LESSONCLASS], CLASSSECTION[0], CLASSSECTION[1]);
+	$isCorrectClass = true;
+	if(isset($desiredClass) && notExists($class, $desiredClass)) {
+		$isCorrectClass = false;
+	}
 	
-	if (isBetween($date, $desiredDate, $desiredDateTo)) {
+	if (isBetween($date, $desiredDate, $desiredDateTo) && $isCorrectClass) {
 		$new = [];
 		
 		$new["date"] = formatReadableDate($date);

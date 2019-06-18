@@ -28,7 +28,7 @@ function prepareMsg($sessionName, $msg) {
 	}
 }
 
-prepareMsg('validToken', "<strong>The class could not be changed.</strong><br>This link is invalid. Please try again.");
+prepareMsg('validToken', "<strong>The setting could not be changed.</strong><br>This link is invalid. Please try again.");
 prepareMsg('validDate', "<strong>The date could not be changed.</strong><br>The date must be in the format <strong>YYYY-MM-DD</strong> and between <strong>$minDate</strong> and <strong>$maxDate</strong>.");
 
 function isBreak($currentTime, $thisEnd, $nextStart) {

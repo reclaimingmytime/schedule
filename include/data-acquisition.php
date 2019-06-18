@@ -119,9 +119,11 @@ function getClass($defaultClass, $allowedClasses, $desiredDate, $token) {
 	$class = getInput($classGET, $classCookie);
 
 	if (validClass($class, $allowedClasses)) {
-		if (!empty($classGET) && isDifferent($classGET, $classCookie)) {
+		if (!empty($classGET)) {
 			if (validToken(getParameter("token"), $token)) {
-				writeCookie("class", $class, "1 year");
+				 if(isDifferent($classGET, $classCookie)) {
+					writeCookie("class", $class, "1 year");
+				 }
 			}
 			redirect("?date=" . $desiredDate);
 		}
@@ -141,9 +143,11 @@ function setWeekPreference($token, $desiredDate, $today) {
 	$overview = getInput($overviewGET, $overviewCookie);
 	
 	if($overview === "week" || $overview === "day") {
-		if (!empty($overviewGET) && isDifferent($overviewGET, $overviewCookie)) {
+		if (!empty($overviewGET)) {
 			if (validToken(getParameter("token"), $token)) {
-				writeCookie("overview", $overview, "1 year");
+				if(isDifferent($overviewGET, $overviewCookie)) {
+					writeCookie("overview", $overview, "1 year");
+				}
 			}
 			if($desiredDate == $today) {
 				redirect(".");
@@ -152,6 +156,11 @@ function setWeekPreference($token, $desiredDate, $today) {
 			}
 		}
 		return $overview === "week";
+	}
+	
+	//use cookie as fallback
+	if ($overviewCookie === "week" || $overviewCookie === "day") {
+		return $overviewCookie;
 	}
 	return true; // fall back to week overview
 }
@@ -209,14 +218,20 @@ if(!isset($allowedClasses)) {
 	$allowedClasses = [];
 }
 
+if(!isset($api)) {
+	die('Undefined API');
+}
 if(isset($type) && $type !== 'ical') {
-	if((!isset($defaultClass) || !isset($api))) {
-		die('Empty or invalid API. Please specify $api and $defaultClass in your config file in the following format:<br><b>$api</b> = https://example.com/api.json?class=<b>$defaultClass</b>');
+	if((!isset($defaultClass))) {
+		die('A default class is required for the JSON api.');
 	}
 	$desiredClass = getClass($defaultClass, $allowedClasses, $desiredDate, $token);
 	$desiredAPI = getAPIUrl($api, $desiredClass, $defaultClass);
 	$cache_filename = $desiredClass . ".json";
 } else {
+	if(isset($defaultClass)) {
+		$desiredClass = getClass($defaultClass, $allowedClasses, $desiredDate, $token);
+	}
 	$desiredAPI = $api;
 	$cache_filename = "cache.json";
 }
