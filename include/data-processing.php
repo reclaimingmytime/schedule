@@ -111,10 +111,12 @@ foreach ($calendar as $entry) {
 		$desiredDateTo = $desiredDate;
 	}
 			
-	$class = stringRange($entry[LESSONCLASS], CLASSSECTION[0], CLASSSECTION[1]);
 	$isCorrectClass = true;
-	if(isset($desiredClass) && notExists($class, $desiredClass)) {
-		$isCorrectClass = false;
+	if(isset($desiredClass)) {
+		$class = stringRange($entry[LESSONCLASS], CLASSSECTION[0], CLASSSECTION[1]);
+		if(notExists($class, $desiredClass)) {
+			$isCorrectClass = false;
+		}
 	}
 	
 	if (isBetween($date, $desiredDate, $desiredDateTo) && $isCorrectClass) {
