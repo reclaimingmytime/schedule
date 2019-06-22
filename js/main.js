@@ -61,24 +61,27 @@ $(function () {
 	}
 
 	/* Swipe */
+	// fingerCount 0: No touchscreen detected
 	$("html").swipe({
-		swipe: function (event, direction, distance, duration, fingerCount) {
-			// fingerCount 0: No touchscreen detected
-			if (direction === "left" && (fingerCount === 1 || fingerCount === 0)) {
+		swipeLeft: function (event, direction, distance, duration, fingerCount) {
+			if (fingerCount === 1 || fingerCount === 0) {
 				redirectToNextDay();
 			}
-			if (direction === "left" && fingerCount === 2 && dataNotNone('nextweek')) {
+			if (fingerCount === 2 && dataNotNone('nextweek')) {
 				redirectToHref('#nextWeek');
 			}
-
-			if (direction === "right" && (fingerCount === 1 || fingerCount === 0)) {
+		},
+		swipeRight: function (event, direction, distance, duration, fingerCount) {
+			// fingerCount 0: No touchscreen detected
+			if (fingerCount === 1 || fingerCount === 0) {
 				redirectToPrevDay();
 			}
-			if (direction === "right" && fingerCount === 2 && dataNotNone('prevweek')) {
+			if (fingerCount === 2 && dataNotNone('prevweek')) {
 				redirectToHref('#prevWeek');
 			}
 		},
-		fingers: 'all'
+		fingers: 'all',
+		threshold: '125'
 	});
 
 	/* Keyboard navigation */
