@@ -52,10 +52,20 @@ $(function () {
 			redirectToHref('#nextWeek');
 		}
 	}
+	function redirectToNextWeek() {
+		if (dataNotNone('nextweek')) {
+			redirectToHref('#nextWeek');
+		}
+	}
 	function redirectToPrevDay() {
 		if (dataNotNone('prevday')) {
 			redirectToHref('#prevDay');
 		} else if (head.data('weekoverview') === true) {
+			redirectToHref('#prevWeek');
+		}
+	}
+	function redirectToPrevWeek() {
+		if (dataNotNone('prevweek')) {
 			redirectToHref('#prevWeek');
 		}
 	}
@@ -67,8 +77,8 @@ $(function () {
 			if (fingerCount === 1 || fingerCount === 0) {
 				redirectToNextDay();
 			}
-			if (fingerCount === 2 && dataNotNone('nextweek')) {
-				redirectToHref('#nextWeek');
+			if (fingerCount === 2) {
+				redirectToNextWeek();
 			}
 		},
 		swipeRight: function (event, direction, distance, duration, fingerCount) {
@@ -76,8 +86,8 @@ $(function () {
 			if (fingerCount === 1 || fingerCount === 0) {
 				redirectToPrevDay();
 			}
-			if (fingerCount === 2 && dataNotNone('prevweek')) {
-				redirectToHref('#prevWeek');
+			if (fingerCount === 2) {
+				redirectToPrevWeek();
 			}
 		},
 		fingers: 'all',
