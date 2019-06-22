@@ -43,6 +43,10 @@ $(function () {
 	function isBetween(x, min, max) {
 		return (min <= x) && (x <= max);
 	}
+	//Other
+	$.fn.capitalizeFirstLetter = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+	};
 
 	//Navigation
 	function redirectToNextDay() {
