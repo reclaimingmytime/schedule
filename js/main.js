@@ -78,8 +78,7 @@ $(function () {
 				redirectToHref('#prevWeek');
 			}
 		},
-		fingers: 'all',
-		threshold: 50
+		fingers: 'all'
 	});
 
 	/* Keyboard navigation */
