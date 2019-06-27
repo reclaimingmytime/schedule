@@ -72,14 +72,14 @@ $highlightClasses = 'bg-dark text-light';
 		<div class="container-fluid">
 			<header>
 				<nav class="navbar navbar-expand navbar-light bg-light mt-3 mb-4">
-					<div class="navbar-header d-none d-sm-block">
+					<div class="navbar-header d-none d-sm-block mr-3">
 						<a class="navbar-brand<?php echo (!$enableTodayLink) ? ' active' : ''; ?>" href="."><i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span></a>
 					</div>
 
 					<ul class="navbar-nav m-auto ml-sm-0">
 						
 						<?php if ($prevWeek !== "none") { ?>
-							<li class="nav-item mr-4 ml-3">
+							<li class="nav-item mr-4">
 								<a class="nav-link" id="prevWeek" href="?date=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> <span class="d-none d-lg-inline">Previous Week <small><code class="text-secondary">(S)</code></small></span></a>
 							</li>
 						<?php } ?>
