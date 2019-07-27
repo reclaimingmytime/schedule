@@ -18,6 +18,10 @@ function trimRoom($raw, $roomPrefix) {
 	return !empty($roomPrefix) ? str_replace($roomPrefix, "", $raw) : $raw;	
 }
 
+if(!isset($infos)) {
+	$infos = [];
+}
+
 //Prof Functions
 function trimPlaceholders($raw, $placeholders) {
 	if (in_array($raw, $placeholders)) {
@@ -139,7 +143,8 @@ foreach ($calendar as $entry) {
 		$new["subject"] = !empty($subjects) ? lookup($thisSubject, $subjects) : $thisSubject;
 		
 		if(defined('INFO')) {
-			$new["info"] = stringRange($entry[INFO], INFOSECTION[0], INFOSECTION[1]);
+			$rawInfo = stringRange($entry[INFO], INFOSECTION[0], INFOSECTION[1]);
+			$new["info"] = lookup($rawInfo, $infos);
 		}
 		
 		if($displayProfs === true) {
