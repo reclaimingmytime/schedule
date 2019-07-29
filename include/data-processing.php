@@ -2,11 +2,11 @@
 /* Schedule preparation */
 
 //General Functions
-function lookup($room, $rooms) {
-	if(array_key_exists($room, $rooms)) {
-		return $rooms[$room];
+function lookup($key, $array) {
+	if(array_key_exists($key, $array)) {
+		return $array[$key];
 	}
-	return $room;
+	return $key;
 }
 
 if(!isset($infos)) {
