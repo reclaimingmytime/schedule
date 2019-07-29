@@ -101,6 +101,7 @@ Note: The directory of the script and the folder "cache/" (created by the script
 | `START`, `END`, `SUBJECT`, `ROOM` and `PROF` | **Required**. Array index for the respective data. START and END are used for time and date and assume the following format: *YYYY-MM-DD HH:MM:SS*. |
 | `INFO` | *Optional*. Part of the ical file containing the descripton. |
 | `SUBJECTSECTION`, `PROFSECTION` and `INFOSECTION` | **Required when `$type` is ical**. Associative array of the part containing the relevant content. |
+| `$ignoredSubjects`                                | *Optional.* Array of subjects that should be ignored. |
 | `$emptyProfs`                                | *Optional.* Array of names that should be considered empty, such as "-". |
 | `$subjects`                                  | *Optional.* Associative array of preferred names for subjects, e.g. "Break" instead of "Recess" |
 | `$profs`                                     | *Optional.* Associative array of initials to full names.     |
