@@ -158,7 +158,7 @@ foreach ($calendar as $entry) {
 		if($displayProfs === true) {
 			if($type == 'ical') {
 				$thisProf = stringRange($entry[PROF], PROFSECTION[0], PROFSECTION[1]);
-			} else {$
+			} else {
 				$thisProf = $entry[PROF];
 			}
 			$new["prof"] = !empty($emptyProfs) && !empty($profs) ? lookupProfs($thisProf, $emptyProfs, $profs) : $entry[PROF];
