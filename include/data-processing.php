@@ -9,6 +9,14 @@ function lookup($room, $rooms) {
 	return $room;
 }
 
+if(!isset($infos)) {
+	$infos = [];
+}
+
+if(!isset($ignoredSubjects)) {
+	$ignoredSubjects = [];
+}
+
 //Room Functions
 if(!isset($roomPrefix)) {
 	$roomPrefix = "";
@@ -16,10 +24,6 @@ if(!isset($roomPrefix)) {
 
 function trimRoom($raw, $roomPrefix) {
 	return !empty($roomPrefix) ? str_replace($roomPrefix, "", $raw) : $raw;	
-}
-
-if(!isset($infos)) {
-	$infos = [];
 }
 
 //Prof Functions
@@ -89,6 +93,10 @@ function validProf($profs, $emptyProfs) {
 	return !in_array($profs, $emptyProfs);
 }
 
+function validSubject($subject, $ignoredSubjects) {
+	return !in_array($subject, $ignoredSubjects);
+}
+
 function containsNewRoom($existing, $new) {
 	return !empty($existing["room"]) && notExists($existing["room"], $new["room"]);
 }
@@ -150,13 +158,17 @@ foreach ($calendar as $entry) {
 		if($displayProfs === true) {
 			if($type == 'ical') {
 				$thisProf = stringRange($entry[PROF], PROFSECTION[0], PROFSECTION[1]);
-			} else {
+			} else {$
 				$thisProf = $entry[PROF];
 			}
 			$new["prof"] = !empty($emptyProfs) && !empty($profs) ? lookupProfs($thisProf, $emptyProfs, $profs) : $entry[PROF];
 		}
 
 		$add = true;
+		
+		if(!validSubject($new["subject"], $ignoredSubjects)) {
+			$add = false;
+		}
 
 		foreach ($schedule as $key => $existing) {
 			if (sameEvent($existing, $new)) {
