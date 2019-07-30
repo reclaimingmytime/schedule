@@ -233,7 +233,7 @@ if(isset($type) && $type !== 'ical') {
 		$desiredClass = getClass($defaultClass, $allowedClasses, $desiredDate, $token);
 	}
 	$desiredAPI = $api;
-	$cache_filename = "cache.json";
+	$cache_filename = "api.json";
 }
 
 
