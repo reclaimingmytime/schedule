@@ -217,7 +217,7 @@ $highlightClasses = 'bg-dark text-light';
 													<li class="list-inline-item pr-3 text-secondary"><?php echo $event['prof']; ?></li>
 												<?php }
 												if (!empty($event['info'])) { ?>
-													<li class="list-inline-item text-secondary"><?php echo $event['info']; ?></li>
+													<li class="list-inline-item text-secondary font-italic"><?php echo $event['info']; ?></li>
 												<?php } ?>
 											</ul>
 										</div>
