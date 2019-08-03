@@ -47,8 +47,13 @@ if(!isset($emptyProfs)) {
 }
 
 function lookupProfs($prof, $emptyProfs, $profs) {
-	$realProf = trimPlaceholders($prof, $emptyProfs);
-	return lookup($realProf, $profs);
+	if(!empty($emptyProfs)) {
+		$prof = trimPlaceholders($prof, $emptyProfs);
+	}
+	if(!empty($profs)) {
+		$prof = lookup($prof, $profs);
+	}
+	return $prof;
 }
 
 //Time functions
@@ -161,7 +166,8 @@ foreach ($calendar as $entry) {
 			} else {
 				$thisProf = $entry[PROF];
 			}
-			$new["prof"] = !empty($emptyProfs) && !empty($profs) ? lookupProfs($thisProf, $emptyProfs, $profs) : $entry[PROF];
+			
+			$new["prof"] = lookupProfs($thisProf, $emptyProfs, $profs);
 		}
 
 		$add = true;
