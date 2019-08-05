@@ -160,7 +160,7 @@ $highlightClasses = 'bg-dark text-light';
 								$firstEventDate = $displayedDate;
 							}
 							?>
-							<div class="<?php echo !isToday($firstEventDate, $today) ? 'text-secondary ' : ''; ?>">
+							<div<?php echo !isToday($firstEventDate, $today) ? ' class="text-secondary"' : ''; ?>>
 								<span class="h4 pb-1">
 									<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
 									<span class="mr-1"><?php echo $firstEventWeekDay; ?></span>
