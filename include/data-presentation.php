@@ -161,14 +161,14 @@ $highlightClasses = 'bg-dark text-light';
 							}
 							?>
 							<div<?php echo !isToday($firstEventDate, $today) ? ' class="text-secondary"' : ''; ?>>
-								<span class="h4 pb-1">
+								<h1 class="h4 pb-1">
 									<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
 									<span class="mr-1"><?php echo $firstEventWeekDay; ?></span>
 									<span class="mr-1"><?php echo $firstEventDate; ?></span>
-								</span>
-								<h1 class="h4 float-right d-sm-none">
-									<i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span>
 								</h1>
+								<span class="h4 float-right d-sm-none">
+									<i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span>
+								</span>
 							</div>
 
 							<?php if (empty($schedule)) { ?>
