@@ -24,12 +24,12 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 	}
 }
 
-function printExtraEventToggle($extraEvents, $displayExtraEvents, $desiredDate, $tokenEmbed, $inNav = false) {
+function printExtraEventToggle($extraEvents, $displayExtraEvents, $desiredDate, $extraEventsText, $tokenEmbed, $inNav = false) {
 	if (!empty($extraEvents)) {
 		?>
 			<a class="<?php echo $inNav === true ? "nav-item " : ""; ?>btn btn-white text-secondary" href="?extraEvents=<?php echo printBoolean(!$displayExtraEvents); ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php echo $inNav === true ? 'id="extraEventToggle"' : ""; ?>>
 				<i class="fas <?php echo $displayExtraEvents ? "fa-check-square" : "fa-square"; ?>"></i>
-				<span class="d-none d-lg-inline">Extra Events <small><code class="text-secondary">(X)</code></small></span></span>
+				<span class="d-none d-lg-inline"><?php echo $extraEventsText; ?> <small><code class="text-secondary">(X)</code></small></span></span>
 			</a>
 	<?php
 	}
@@ -64,6 +64,10 @@ $enableTodayLink = enableTodayLink($today, $desiredDate, $desiredDateTo);
 $highlightEvents = isFalse($weekBump) ? true : false;
 
 $highlightClasses = 'bg-dark text-light';
+
+if(!isset($extraEventsText)) {
+	$extraEventsText = "Extra Events";
+}
 ?>
 <!DOCTYPE html>
 <html class="h-100" lang="en">
@@ -145,7 +149,7 @@ $highlightClasses = 'bg-dark text-light';
 						</li>
 						<?php } ?>
 						<li class="nav-item d-none d-sm-inline-block">
-							<?php printExtraEventToggle($extraEvents, $displayExtraEvents, $desiredDate, $tokenEmbed, true); ?>
+							<?php printExtraEventToggle($extraEvents, $displayExtraEvents, $desiredDate, $extraEventsText, $tokenEmbed, true); ?>
 						</li>
 					</ul>
 				</nav>
