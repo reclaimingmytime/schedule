@@ -1,6 +1,24 @@
 $(function () {
 	//Elements
 	const head = $('head');
+	
+	const A_KEY = 65;
+	const C_KEY = 65;
+	const D_KEY = 68;
+	const S_KEY = 83;
+	const T_KEY = 84;
+	const W_KEY = 87;
+	const ENTER_KEY = 13;
+	const ZERO_KEY = 13;
+	const ONE_KEY = 49;
+	const TWO_KEY = 50;
+	const THREE_KEY = 51;
+	const FOUR_KEY = 52;
+	const FIVE_KEY = 53;
+	const SIX_KEY = 54;
+	const SEVEN_KEY = 55;
+	const EIGHT_KEY = 56;
+	const NINE_KEY = 57;
 
 	// Redirect
 	function redirect(url) {
@@ -97,51 +115,50 @@ $(function () {
 		fingers: 'all',
 		threshold: '125'
 	});
-
+	
 	/* Keyboard navigation */
 	$(document).keydown(function (e) {
 		if (!e.ctrlKey && !e.metaKey && !e.shiftKey) {
 			switch (e.which) {
-				case 65: // A
+				case A_KEY:
 					redirectToPrevDay();
 					break;
 
-				case 68: // D
+				case D_KEY:
 					redirectToNextDay();
 					break;
 
-				case 87: // W
+				case W_KEY:
 					if (dataNotNone('nextweek')) {
 						redirectToHref('#nextWeek');
 					}
 					break;
 
-				case 83: // S
+				case S_KEY:
 					if (dataNotNone('prevweek')) {
 						redirectToHref('#prevWeek');
 					}
 					break;
 
-				case 13: // enter
+				case ENTER_KEY:
 					if (head.data('enabletodaylink') === true) {
 						redirectToHref('#today');
 					}
 					break;
 
-				case 84: // T
+				case T_KEY:
 					redirectToHref('#overviewType');
 					break;
 
-					//1-9
-				case 49:
-				case 50:
-				case 51:
-				case 52:
-				case 53:
-				case 54:
-				case 55:
-				case 56:
-				case 57:
+				case ONE_KEY:
+				case TWO_KEY:
+				case THREE_KEY:
+				case FOUR_KEY:
+				case FIVE_KEY:
+				case SIX_KEY:
+				case SEVEN_KEY:
+				case EIGHT_KEY:
+				case NINE_KEY:
 					const keyCodeElement = '#keyCode' + e.keyCode;
 					if ($(keyCodeElement).length && !$(keyCodeElement).hasActiveClass()) {
 						redirectToHref(keyCodeElement);
@@ -151,7 +168,7 @@ $(function () {
 					}
 					break;
 
-				case 67: //C
+				case C_KEY:
 					clickIDIfExists('classNavButton');
 					break;
 
