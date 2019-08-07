@@ -1,6 +1,7 @@
 .DS_Store
 cache/
 config.php
-.htaccess
 nbproject/
 favicon.ico
+.htaccess
+robots.txt
