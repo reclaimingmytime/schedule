@@ -3,11 +3,12 @@ $(function () {
 	const head = $('head');
 	
 	const A_KEY = 65;
-	const C_KEY = 65;
+	const C_KEY = 67;
 	const D_KEY = 68;
 	const S_KEY = 83;
 	const T_KEY = 84;
 	const W_KEY = 87;
+	const X_KEY = 88;
 	const ENTER_KEY = 13;
 	const ZERO_KEY = 13;
 	const ONE_KEY = 49;
@@ -170,6 +171,10 @@ $(function () {
 
 				case C_KEY:
 					clickIDIfExists('classNavButton');
+					break;
+					
+				case X_KEY:
+					clickIDIfExists('extraEventToggle');
 					break;
 
 				default:

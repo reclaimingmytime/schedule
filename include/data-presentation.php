@@ -27,9 +27,9 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 function printExtraEventToggle($extraEvents, $displayExtraEvents, $desiredDate, $tokenEmbed, $inNav = false) {
 	if (!empty($extraEvents)) {
 		?>
-			<a class="<?php echo $inNav === true ? "nav-item " : ""; ?>btn btn-white text-secondary" href="?extraEvents=<?php echo printBoolean(!$displayExtraEvents); ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>">
+			<a class="<?php echo $inNav === true ? "nav-item " : ""; ?>btn btn-white text-secondary" href="?extraEvents=<?php echo printBoolean(!$displayExtraEvents); ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php echo $inNav === true ? 'id="extraEventToggle"' : ""; ?>>
 				<i class="fas <?php echo $displayExtraEvents ? "fa-check-square" : "fa-square"; ?>"></i>
-				<span class="d-none d-lg-inline">Extra Events</span>
+				<span class="d-none d-lg-inline">Extra Events <small><code class="text-secondary">(X)</code></small></span></span>
 			</a>
 	<?php
 	}
@@ -144,10 +144,9 @@ $highlightClasses = 'bg-dark text-light';
 							</div>
 						</li>
 						<?php } ?>
-							<li class="nav-item d-none d-sm-inline-block">
-							<?php printExtraEventToggle($extraEvents, $displayExtraEvents, $desiredDate, $tokenEmbed, true);
-						?>
-							</li>
+						<li class="nav-item d-none d-sm-inline-block">
+							<?php printExtraEventToggle($extraEvents, $displayExtraEvents, $desiredDate, $tokenEmbed, true); ?>
+						</li>
 					</ul>
 				</nav>
 			</header>
