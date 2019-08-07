@@ -27,7 +27,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 function printExtraEventToggle($extraEvents, $displayExtraEvents, $desiredDate, $extraEventsText, $tokenEmbed, $inNav = false) {
 	if (!empty($extraEvents)) {
 		?>
-			<a class="<?php echo $inNav === true ? "nav-item " : ""; ?>btn btn-white text-secondary" href="?extraEvents=<?php echo printBoolean(!$displayExtraEvents); ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php echo $inNav === true ? 'id="extraEventToggle"' : ""; ?>>
+			<a class="<?php echo $inNav === true ? "nav-link" : "btn btn-white"; ?> text-secondary" href="?extraEvents=<?php echo printBoolean(!$displayExtraEvents); ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php echo $inNav === true ? 'id="extraEventToggle"' : ""; ?>>
 				<i class="fas <?php echo $displayExtraEvents ? "fa-check-square" : "fa-square"; ?>"></i>
 				<span class="d-none d-lg-inline"><?php echo $extraEventsText; ?> <small><code class="text-secondary">(X)</code></small></span></span>
 			</a>
