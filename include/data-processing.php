@@ -135,14 +135,13 @@ foreach ($calendar as $entry) {
 		
 		if(notContains($class, $desiredClass)) {
 			$isCorrectClass = false;
-			
 			if(isset($displayExtraEvents) && isTrue($displayExtraEvents)) {
 				foreach ($extraEvents as $extraClass => $value) {
 					if(contains($class, $extraClass)) {
 						$isCorrectClass = true;
 						$isExtraClass = true;
-						$extraClass = $extraClass;
 					}
+					break;
 				}
 			}
 		}
