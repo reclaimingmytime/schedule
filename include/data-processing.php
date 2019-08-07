@@ -116,6 +116,10 @@ function containsNewInfo($existing, $new) {
 	return !empty($new["info"]) && notContains($existing["info"], $new["info"]);
 }
 
+function isExtraSubject($subject, $weekDay, $extraEvents, $extraClass) {
+	return isset($extraEvents[$extraClass][$weekDay]) && in_array($subject, $extraEvents[$extraClass][$weekDay]);
+}
+
 //Populating schedule array
 $schedule = [];
 
@@ -191,7 +195,7 @@ foreach ($calendar as $entry) {
 		$add = true;
 		
 		if($isExtraClass) {
-			if(!isset($extraEvents[$extraClass][$new["weekDay"]]) || !in_array($new["subject"], $extraEvents[$extraClass][$new["weekDay"]])) { //if is pre-defined EXTRA subject
+			if(!isExtraSubject($new["subject"], $new["weekDay"], $extraEvents, $extraClass)) {
 				$add = false;
 			}
 		}
