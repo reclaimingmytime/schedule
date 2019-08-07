@@ -24,6 +24,17 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 	}
 }
 
+function printExtraEventToggle($extraEvents, $displayExtraEvents, $desiredDate, $tokenEmbed, $inNav = false) {
+	if (!empty($extraEvents)) {
+		?>
+			<a class="<?php echo $inNav === true ? "nav-item " : ""; ?>btn btn-white text-secondary" href="?extraEvents=<?php echo printBoolean(!$displayExtraEvents); ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>">
+				<i class="fas <?php echo $displayExtraEvents ? "fa-check-square" : "fa-square"; ?>"></i>
+				<span class="d-none d-lg-inline">Extra Events</span>
+			</a>
+	<?php
+	}
+}
+
 function prepareMsg($sessionName, $msg) {
 	if (isset($_SESSION[$sessionName])) {
 		if ($_SESSION[$sessionName] === false) {
@@ -133,6 +144,10 @@ $highlightClasses = 'bg-dark text-light';
 							</div>
 						</li>
 						<?php } ?>
+							<li class="nav-item d-none d-sm-inline-block">
+							<?php printExtraEventToggle($extraEvents, $displayExtraEvents, $desiredDate, $tokenEmbed, true);
+						?>
+							</li>
 					</ul>
 				</nav>
 			</header>
@@ -284,7 +299,7 @@ $highlightClasses = 'bg-dark text-light';
 				<?php /* Extra Events */ ?>
 				<?php if(!empty($extraEvents)) {
 					?>
-					<a class="btn btn-white text-secondary" href="?extraEvents=<?php echo printBoolean(!$displayExtraEvents); ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>" role="button">
+					<a class="d-block d-sm-none btn btn-white text-secondary" href="?extraEvents=<?php echo printBoolean(!$displayExtraEvents); ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>" role="button">
 						<i class="fas <?php echo $displayExtraEvents ? "fa-check-square" : "fa-square"; ?>"></i>
 						 Extra Events
 					</a>
