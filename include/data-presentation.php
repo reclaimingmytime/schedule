@@ -24,12 +24,12 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 	}
 }
 
-function printExtraEventToggle($extraEvents, $displayExtraEvents, $desiredDate, $extraEventsText, $tokenEmbed, $inNav = false) {
+function printExtraEventToggle($extraEvents, $displayExtraEvents, $desiredDate, $extraEventsText, $tokenEmbed) {
 	if (!empty($extraEvents)) {
 		?>
-			<a class="<?php echo $inNav === true ? "nav-link" : "btn btn-white"; ?> text-secondary" href="?extraEvents=<?php echo printBoolean(!$displayExtraEvents); ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php echo $inNav === true ? 'id="extraEventToggle"' : ""; ?>>
+			<a class="nav-link text-secondary" href="?extraEvents=<?php echo printBoolean(!$displayExtraEvents); ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>" id="extraEventToggle">
 				<i class="fas <?php echo $displayExtraEvents ? "fa-check-square" : "fa-square"; ?>"></i>
-				<span class="d-none d-lg-inline"><?php echo $extraEventsText; ?> <small><code class="text-secondary">(X)</code></small></span></span>
+				<span class="d-none d-lg-inline"><?php echo $extraEventsText; ?> <small><code class="text-secondary">(X)</code></small></span>
 			</a>
 	<?php
 	}
@@ -148,7 +148,7 @@ if(!isset($extraEventsText)) {
 							</div>
 						</li>
 						<?php } ?>
-						<li class="nav-item d-none d-sm-inline-block">
+						<li class="nav-item">
 							<?php printExtraEventToggle($extraEvents, $displayExtraEvents, $desiredDate, $extraEventsText, $tokenEmbed, true); ?>
 						</li>
 					</ul>
@@ -297,15 +297,6 @@ if(!isset($extraEventsText)) {
 						
 						
 					</div>
-				<?php } ?>
-				
-				<?php /* Extra Events */ ?>
-				<?php if(!empty($extraEvents)) {
-					?>
-					<a class="d-block d-sm-none btn btn-white text-secondary" href="?extraEvents=<?php echo printBoolean(!$displayExtraEvents); ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>" role="button">
-						<i class="fas <?php echo $displayExtraEvents ? "fa-check-square" : "fa-square"; ?>"></i>
-						 Extra Events
-					</a>
 				<?php } ?>
 				
 				<div class="d-block d-sm-none mt-2">
