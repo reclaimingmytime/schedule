@@ -103,17 +103,17 @@ function validSubject($subject, $ignoredSubjects) {
 }
 
 function containsNewRoom($existing, $new) {
-	return !empty($existing["room"]) && notExists($existing["room"], $new["room"]);
+	return !empty($existing["room"]) && notContains($existing["room"], $new["room"]);
 }
 
 function containsNewProf($existing, $new, $emptyProfs) {
 	return !empty($existing["prof"]) &&
-					notExists($existing["prof"], $new["prof"]) &&
+					notContains($existing["prof"], $new["prof"]) &&
 					validProf($new["prof"], $emptyProfs);
 }
 
 function containsNewInfo($existing, $new) {
-	return !empty($new["info"]) && notExists($existing["info"], $new["info"]);
+	return !empty($new["info"]) && notContains($existing["info"], $new["info"]);
 }
 
 //Populating schedule array
@@ -129,10 +129,22 @@ foreach ($calendar as $entry) {
 	}
 			
 	$isCorrectClass = true;
+	$isExtraClass = false;
 	if(isset($desiredClass)) {
 		$class = stringRange($entry[LESSONCLASS], CLASSSECTION[0], CLASSSECTION[1]);
-		if(notExists($class, $desiredClass)) {
+		
+		if(notContains($class, $desiredClass)) {
 			$isCorrectClass = false;
+			
+			if(isset($displayExtraEvents)) { //TODO: if $class CONTAINS key
+				foreach ($extraEvents as $extraClass => $value) {
+					if(contains($class, $extraClass)) {
+						$isCorrectClass = true;
+						$isExtraClass = true;
+						$extraClass = $extraClass;
+					}
+				}
+			}
 		}
 	}
 	
@@ -169,8 +181,21 @@ foreach ($calendar as $entry) {
 			
 			$new["prof"] = lookupProfs($thisProf, $emptyProfs, $profs);
 		}
+		
+		if($isExtraClass) {
+			$new["extra"] = true;
+		} else {
+			$new["extra"] = false;
+		}
+		
 
 		$add = true;
+		
+		if($isExtraClass) {
+			if(!isset($extraEvents[$extraClass][$new["weekDay"]]) || !in_array($new["subject"], $extraEvents[$extraClass][$new["weekDay"]])) { //if is pre-defined EXTRA subject
+				$add = false;
+			}
+		}
 		
 		if(!validSubject($new["subject"], $ignoredSubjects)) {
 			$add = false;

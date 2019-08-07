@@ -38,16 +38,16 @@ function equals($x, $y) {
 	return $x === $y;
 }
 
-function exists($x, $y) {
-	return strpos($x, $y) === true;
+function contains($x, $y) {
+	return strpos($x, $y) !== false;
 }
 
-function notExists($x, $y) {
+function notContains($x, $y) {
 	return strpos($x, $y) === false;
 }
 
 function isTrue($x) {
-	return $x === true;
+	return (bool)$x === true;
 }
 
 function isFalse($x) {
