@@ -54,6 +54,10 @@ function isFalse($x) {
 	return $x === false;
 }
 
+function printBoolean($x) {
+	return $x === true ? "true" : "false";
+}
+
 function escape($a) {
 	return htmlspecialchars($a, ENT_QUOTES);
 }

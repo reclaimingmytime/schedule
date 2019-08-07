@@ -125,8 +125,8 @@ function getClass($defaultClass, $allowedClasses, $desiredDate, $token) {
 					writeCookie("class", $class, "1 year");
 				 }
 			}
-			redirect("?date=" . $desiredDate);
-		}
+				redirect("?date=" . $desiredDate);
+			}
 		return $class;
 	}
 	//use cookie as fallback
@@ -135,6 +135,8 @@ function getClass($defaultClass, $allowedClasses, $desiredDate, $token) {
 	}
 	return $defaultClass;
 }
+
+$displayExtraEvents = setExtraEventsPreference($token, $desiredDate);
 
 function setWeekPreference($token, $desiredDate, $today) {
 	$overviewGET = getParameter("overview");
@@ -163,6 +165,31 @@ function setWeekPreference($token, $desiredDate, $today) {
 		return $overviewCookie;
 	}
 	return true; // fall back to week overview
+}
+
+function setExtraEventsPreference($token, $desiredDate) {
+	$extraEventsGET = getParameter("extraEvents");
+	$extraEventsCookie = getCookie("extraEvents");
+
+	$extraEvents = getInput($extraEventsGET, $extraEventsCookie);
+	
+	if($extraEvents === "true" || $extraEvents === "false") {
+		if (!empty($extraEventsGET)) {
+			if (validToken(getParameter("token"), $token)) {
+				if(isDifferent($extraEventsGET, $extraEventsCookie)) {
+					writeCookie("extraEvents", $extraEvents, "1 year");
+				}
+			}
+			redirect("?date=" . $desiredDate);
+		}
+		return $extraEvents === "true";
+	}
+	
+	//use cookie as fallback
+	if ($extraEventsCookie === "true" || $extraEventsCookie === "false") {
+		return $extraEventsCookie === "true";
+	}
+	return false;
 }
 
 function getAPIUrl($api, $replace, $default) {

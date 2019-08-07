@@ -4,9 +4,14 @@
 function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, $showIDs = false) {
 	$i = 1;
 	foreach ($allowedClasses as $class) {
-		$keyCode = $showIDs === true && $i <= 9 ? $i + 48 : null;
+		$keyCode = ($showIDs === true && $i <= 9) ? $i + 48 : null;
+		
+		$classSwitcherClasses = "dropdown-item";
+		if ($desiredClass == $class) {
+			$classSwitcherClasses .= ' active font-weight-bold text-body bg-transparent';
+		}
 		?>
-		<a class="dropdown-item<?php if ($desiredClass == $class) echo ' active font-weight-bold text-body bg-transparent'; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php echo !empty($keyCode) ? ' id="keyCode' . $keyCode . '"' : ''; ?>>
+		<a class="<?php echo $classSwitcherClasses; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php echo !empty($keyCode) ? ' id="keyCode' . $keyCode . '"' : ''; ?>>
 			<i class="fas fa-folder-open"></i>
 			<?php echo $class;
 
@@ -51,7 +56,7 @@ $highlightClasses = 'bg-dark text-light';
 ?>
 <!DOCTYPE html>
 <html class="h-100" lang="en">
-	<head data-desireddate="<?php echo $desiredDate; ?>" data-today="<?php echo $today; ?>" data-nextday="<?php echo $nextDay; ?>" data-prevday="<?php echo $prevDay; ?>" data-nextweek="<?php echo $nextWeek; ?>" data-prevweek="<?php echo $prevWeek; ?>" data-weekoverview="<?php echo $weekOverview === true ? "true" : "false"; ?>" data-highlightevents="<?php echo $highlightEvents ? 'true' : 'false'; ?>" data-highlightclasses="<?php echo $highlightClasses; ?>" data-enabletodaylink="<?php echo $enableTodayLink === true ? "true" : "false";?>">
+	<head data-desireddate="<?php echo $desiredDate; ?>" data-today="<?php echo $today; ?>" data-nextday="<?php echo $nextDay; ?>" data-prevday="<?php echo $prevDay; ?>" data-nextweek="<?php echo $nextWeek; ?>" data-prevweek="<?php echo $prevWeek; ?>" data-weekoverview="<?php echo $weekOverview === true ? "true" : "false"; ?>" data-highlightevents="<?php echo $highlightEvents ? 'true' : 'false'; ?>" data-highlightclasses="<?php echo $highlightClasses; ?>" data-enabletodaylink="<?php echo printBoolean($enableTodayLink);?>">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Calendar for <?php echo $displayedDateFull; ?></title>
@@ -262,6 +267,7 @@ $highlightClasses = 'bg-dark text-light';
 			</main>
 
 			<footer class="text-center my-4">
+				<?php /* Class Dropdown */ ?>
 				<?php if(!empty($allowedClasses) && !empty($desiredClass)) { ?>
 					<div class="d-block d-sm-none dropup d-inline">
 						<a class="btn btn-white shadow-none text-secondary dropdown-toggle" href="#" role="button" id="classFooterButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -270,8 +276,20 @@ $highlightClasses = 'bg-dark text-light';
 						<div class="dropdown-menu" id="classFooterMenu" aria-labelledby="classFooterButton">
 							<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed); ?>
 						</div>
+						
+						
 					</div>
 				<?php } ?>
+				
+				<?php /* Extra Events */ ?>
+				<?php if(!empty($extraEvents)) {
+					?>
+					<a class="btn btn-white text-secondary" href="?extraEvents=<?php echo printBoolean(!$displayExtraEvents); ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>" role="button">
+						<i class="fas <?php echo $displayExtraEvents ? "fa-check-square" : "fa-square"; ?>"></i>
+						 Extra Events
+					</a>
+				<?php } ?>
+				
 				<div class="d-block d-sm-none mt-2">
 					<span class="text-muted" <?php if($weekOverview === false) { ?>data-toggle="tooltip" data-placement="bottom" title="One-finger swipes change the day. Two-finger swipes change the week." <?php } ?>>
 						<small>Navigate by swiping left and right. <?php if($weekOverview === false) { ?><i class="fas fa-info-circle"></i><?php } ?></small>
