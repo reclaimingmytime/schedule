@@ -139,7 +139,7 @@ if(!isset($extraEventsText)) {
 								<a class="nav-link" id="overviewType" href="?<?php echo $desiredDateMidWeek !== $today ? 'date=' . $desiredDateMidWeek . '&' : ''; ?>overview=<?php echo $overviewType . $tokenEmbed; ?>"><i class="<?php echo $icon; ?>"></i> <span class="d-none d-lg-inline"><?php echo $text;?> <small><code class="text-secondary">(T)</code></small></span></a>
 							</li>
 						<?php if(!empty($allowedClasses) && !empty($desiredClass)) { ?>
-						<li class="nav-item d-none d-sm-inline-block dropdown">
+						<li class="nav-item mr-4 d-none d-sm-inline-block dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="classNavButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?> <small>(C)</small></span>
 							</a>
