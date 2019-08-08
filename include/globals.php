@@ -6,24 +6,15 @@ if (!empty($timezone)) {
 
 /* Functions */
 
-function stringPart($string, $startString) {
-	$pos = strpos($string, $startString);
-	if($pos == 0) {
-		return;
-	}
-	$start = $pos + strlen($startString);
-	return substr($string, $start);
-}
-
 function stringRange($string, $startString, $endString) {
-	if($endString == false) {
-		return stringPart($string, $startString);
+	$r = explode($startString, $string);
+	if (isset($r[1])){
+			if($endString == false) return $r[1];
+			
+			$r = explode($endString, $r[1]);
+			return $r[0];
 	}
-	
-	$start = strpos($string, $startString) + strlen($startString); //select start point and don't include start text
-	$end = strpos($string, $endString); //select end point by selecting next delimiter
-	
-	return substr($string, $start, $end - $start);
+	return '';
 }
 
 function isBetween($x, $min, $max) {
