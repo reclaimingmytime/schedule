@@ -112,7 +112,7 @@ function validClass($class, $allowedClasses) {
 	return !empty($class) && in_array($class, $allowedClasses);
 }
 
-function getClass($defaultClass, $allowedClasses, $desiredDate, $token) {
+function getClass($defaultClass, $allowedClasses, $desiredDate, $today, $token) {
 	$classGET = getParameter("class");
 	$classCookie = getCookie("class");
 
@@ -125,8 +125,8 @@ function getClass($defaultClass, $allowedClasses, $desiredDate, $token) {
 					writeCookie("class", $class, "1 year");
 				 }
 			}
-				redirect("?date=" . $desiredDate);
-			}
+			redirectToDate($desiredDate, $today);
+		}
 		return $class;
 	}
 	//use cookie as fallback
@@ -136,7 +136,7 @@ function getClass($defaultClass, $allowedClasses, $desiredDate, $token) {
 	return $defaultClass;
 }
 
-$displayExtraEvents = setExtraEventsPreference($token, $desiredDate);
+$displayExtraEvents = setExtraEventsPreference($token, $desiredDate, $today);
 
 function setWeekPreference($token, $desiredDate, $today) {
 	$overviewGET = getParameter("overview");
@@ -151,11 +151,7 @@ function setWeekPreference($token, $desiredDate, $today) {
 					writeCookie("overview", $overview, "1 year");
 				}
 			}
-			if($desiredDate == $today) {
-				redirect(".");
-			} else {
-				redirect("?date=" . $desiredDate);
-			}
+			redirectToDate($desiredDate, $today);
 		}
 		return $overview === "week";
 	}
@@ -167,7 +163,7 @@ function setWeekPreference($token, $desiredDate, $today) {
 	return true; // fall back to week overview
 }
 
-function setExtraEventsPreference($token, $desiredDate) {
+function setExtraEventsPreference($token, $desiredDate, $today) {
 	$extraEventsGET = getParameter("extraEvents");
 	$extraEventsCookie = getCookie("extraEvents");
 
@@ -180,7 +176,7 @@ function setExtraEventsPreference($token, $desiredDate) {
 					writeCookie("extraEvents", $extraEvents, "1 year");
 				}
 			}
-			redirect("?date=" . $desiredDate);
+			redirectToDate($desiredDate, $today);
 		}
 		return $extraEvents === "true";
 	}
@@ -252,12 +248,12 @@ if(isset($type) && $type !== 'ical') {
 	if((!isset($defaultClass))) {
 		die('A default class is required for the JSON api.');
 	}
-	$desiredClass = getClass($defaultClass, $allowedClasses, $desiredDate, $token);
+	$desiredClass = getClass($defaultClass, $allowedClasses, $desiredDate, $today, $token);
 	$desiredAPI = getAPIUrl($api, $desiredClass, $defaultClass);
 	$cache_filename = $desiredClass . ".json";
 } else {
 	if(isset($defaultClass)) {
-		$desiredClass = getClass($defaultClass, $allowedClasses, $desiredDate, $token);
+		$desiredClass = getClass($defaultClass, $allowedClasses, $desiredDate, $today, $token);
 	}
 	$desiredAPI = $api;
 	$cache_filename = "api.json";

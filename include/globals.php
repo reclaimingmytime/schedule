@@ -99,6 +99,14 @@ function redirect($path = '.') {
 	die();
 }
 
+function redirectToDate($desiredDate, $today) {
+	if ($desiredDate == $today) {
+		redirect(".");
+	} else {
+		redirect("?date=" . $desiredDate);
+	}
+}
+
 /* Time */
 
 function getDateFromInterval($date, $interval = "today") {
