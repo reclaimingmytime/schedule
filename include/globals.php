@@ -9,7 +9,7 @@ if (!empty($timezone)) {
 function stringRange($string, $startString, $endString) {
 	$r = explode($startString, $string);
 	if (isset($r[1])){
-			if($endString == false) return $r[1];
+			if($endString === false) return $r[1];
 			
 			$r = explode($endString, $r[1]);
 			return $r[0];
