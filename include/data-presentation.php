@@ -16,7 +16,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 			<?php echo $class;
 
 			if(!empty($keyCode)) { ?>
-				<small class="text-secondary d-none d-lg-inline">(<?php echo $i; ?>)</small>
+				<small class="d-none d-lg-inline"><code class="text-secondary">(<?php echo $i; ?>)</code></small>
 			<?php } ?>
 		</a>
 		<?php
@@ -141,7 +141,7 @@ if(!isset($extraEventsText)) {
 						<?php if(!empty($allowedClasses) && !empty($desiredClass)) { ?>
 						<li class="nav-item mr-4 d-none d-sm-inline-block dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="classNavButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?> <small>(C)</small></span>
+								<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?> <small><code class="text-secondary">(C)</code></small></span>
 							</a>
 							<div class="dropdown-menu" id="classNavMenu" aria-labelledby="classNavButton">
 								<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, true); ?>
