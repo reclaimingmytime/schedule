@@ -59,10 +59,11 @@ function escapeArray(&$array) {
 	});
 }
 
-function printArray($rawInput, $lowercase = false) {
-	if(empty($rawInput)) return "none";
-	$input = $lowercase === true ? strtolower($rawInput) : $rawInput;
-	return is_array($input) ? implode(",", $input) : $input;
+function printArray($array, $lowercase = false) {
+	if(empty($array)) return "none";
+	if(is_array($array)) $array = implode(",", $array);
+	if($lowercase === true) $array = strtolower($array);
+	return $array;
 }
 
 function getArrayWith($array, $string) {
