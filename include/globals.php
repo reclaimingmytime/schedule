@@ -60,6 +60,7 @@ function escapeArray(&$array) {
 }
 
 function printArray($rawInput, $lowercase = false) {
+	if(empty($rawInput)) return "none";
 	$input = $lowercase === true ? strtolower($rawInput) : $rawInput;
 	return is_array($input) ? implode(",", $input) : $input;
 }
