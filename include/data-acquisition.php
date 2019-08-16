@@ -260,6 +260,25 @@ if(isset($type) && $type !== 'ical') {
 }
 
 
+function getExtraSubjects($extraEvents) {
+	$extraSubjects = [];
+
+	foreach ($extraEvents as $classes) {
+		foreach ($classes as $days) {
+			foreach ($days as $subjects) {
+					if (!in_array($subjects, $extraSubjects)) {
+						$extraSubjects[] = $subjects;
+					}
+			}
+		}
+	}
+	return $extraSubjects;
+}
+
+if(!empty($extraEvents)) {
+	$extraSubjects = getExtraSubjects($extraEvents);
+}
+
 
 $cache_folder = "cache/";
 createCache($cache_folder);
