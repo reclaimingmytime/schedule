@@ -64,6 +64,13 @@ function printArray($rawInput, $lowercase = false) {
 	return is_array($input) ? implode(",", $input) : $input;
 }
 
+function getArrayWith($array, $string) {
+	if(!is_array($array)) return $array . $string;
+	
+	$array[] = $string;
+	return $array;
+}
+
 function writeCookie($name, $val, $time) {
 	$expTime = new DateTime($time);
 	$exp = $expTime->getTimestamp();
