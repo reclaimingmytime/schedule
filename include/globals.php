@@ -71,6 +71,13 @@ function getArrayWith($array, $string) {
 	return $array;
 }
 
+function getArrayWithout($array, $string) {
+	if (($key = array_search($string, $array)) !== false) {
+		unset($array[$key]);
+	}
+	return $array;
+}
+
 function writeCookie($name, $val, $time) {
 	$expTime = new DateTime($time);
 	$exp = $expTime->getTimestamp();
