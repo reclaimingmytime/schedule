@@ -59,6 +59,11 @@ function escapeArray(&$array) {
 	});
 }
 
+function printArray($rawInput, $lowercase = false) {
+	$input = $lowercase === true ? strtolower($rawInput) : $rawInput;
+	return is_array($input) ? implode(",", $input) : $input;
+}
+
 function writeCookie($name, $val, $time) {
 	$expTime = new DateTime($time);
 	$exp = $expTime->getTimestamp();
