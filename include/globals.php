@@ -61,9 +61,10 @@ function escapeArray(&$array) {
 
 function printArray($array, $lowercase = false) {
 	if(empty($array)) return "none";
-	if(is_array($array)) $array = implode(",", $array);
-	if($lowercase === true) $array = strtolower($array);
-	return $array;
+	
+	$output = (is_array($array)) ? implode(",", $array) : $array;
+	if($lowercase === true) return strtolower($output);
+	return $output;
 }
 
 function getArrayWith($array, $string) {
