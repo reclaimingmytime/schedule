@@ -29,7 +29,7 @@ function printExtraEventToggle($extraEvents, $displayExtraEvents, $desiredDate, 
 		?>
 			<a class="nav-link text-secondary" href="?extraEvents=<?php echo printBoolean(!$displayExtraEvents); ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>" id="extraEventToggle">
 				<i class="fas <?php echo $displayExtraEvents ? "fa-check-square" : "fa-square"; ?>"></i>
-				<span class="d-none d-lg-inline"><?php echo $extraEventsText; ?> <small><code class="text-secondary">(X)</code></small></span>
+				<span class="d-none d-lg-inline"><?php echo escape($extraEventsText); ?> <small><code class="text-secondary">(X)</code></small></span>
 			</a>
 	<?php
 	}
