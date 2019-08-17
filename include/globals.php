@@ -81,7 +81,7 @@ function getArrayWithout($array, $string) {
 	return $array;
 }
 
-function writeCookie($name, $val, $time) {
+function writeCookie($name, $val, $time = "1 year") {
 	$expTime = new DateTime($time);
 	$exp = $expTime->getTimestamp();
 
