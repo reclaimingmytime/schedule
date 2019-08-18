@@ -127,10 +127,6 @@ function getClass($defaultClass, $allowedClasses, $desiredDate, $today, $token) 
 		}
 		return $class;
 	}
-	//use cookie as fallback
-	if (validClass($classCookie, $allowedClasses)) {
-		return $classCookie;
-	}
 	return $defaultClass;
 }
 
@@ -152,10 +148,6 @@ function setWeekPreference($token, $desiredDate, $today) {
 		return $overview === "week";
 	}
 	
-	//use cookie as fallback
-	if ($overviewCookie === "week" || $overviewCookie === "day") {
-		return $overviewCookie;
-	}
 	return true; // fall back to week overview
 }
 
@@ -175,10 +167,6 @@ function setExtraEventsPreference($token, $desiredDate, $today) {
 		return $extraEvents === "true";
 	}
 	
-	//use cookie as fallback
-	if ($extraEventsCookie === "true" || $extraEventsCookie === "false") {
-		return $extraEventsCookie === "true";
-	}
 	return false;
 }
 
