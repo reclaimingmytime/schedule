@@ -29,8 +29,8 @@ function equals($x, $y) {
 	return $x === $y;
 }
 
-function contains($x, $y) {
-	return strpos($x, $y) !== false;
+function contains($haystack, $needle) {
+	return strpos($haystack, $needle) !== false;
 }
 
 function notContains($x, $y) {
