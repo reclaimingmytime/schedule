@@ -1,5 +1,22 @@
 <?php
 
+/* General functions */
+function getOption($name, $fallback, $allowedValues, $token, $desiredDate, $today) {
+	$get = getParameter($name);
+	$cookie = getCookie($name);
+
+	$value = getInput($get, $cookie);
+
+	if (validOption($value, $allowedValues)) {
+		if (!empty($get)) {
+			getToCookie($name, $value, $token);
+			redirectToDate($desiredDate, $today);
+		}
+		return $value;
+	}
+	return $fallback;
+}
+
 /* Date preparation */
 if(empty($minDate)) {
 	$minDate = date("d.m.Y", 0);
@@ -46,7 +63,9 @@ $currentTime = date("H:i");
 $desiredDate = getCustomDate("date", $today, $min, $max);
 $desiredDateMidWeek = $desiredDate;
 
-$weekOverview = setWeekPreference($token, $desiredDate, $today);
+$overviewType = getOption("overview", "week", ["week", "day"], $token, $desiredDate, $today);;
+$weekOverview = $overviewType === "week";
+
 if($weekOverview === true) {
 	if(formatWeekDay($desiredDate) !== "Mon") {
 		$lastMonday = getDateFromInterval($desiredDate, "last monday");
@@ -108,61 +127,12 @@ if($weekOverview === true) {
 }
 
 /* API connection */
-function validClass($class, $allowedClasses) {
+function validOption($class, $allowedClasses) {
 	return !empty($class) && in_array($class, $allowedClasses);
 }
 
-function getClass($defaultClass, $allowedClasses, $desiredDate, $today, $token) {
-	$classGET = getParameter("class");
-	$classCookie = getCookie("class");
-
-	$class = getInput($classGET, $classCookie);
-
-	if (validClass($class, $allowedClasses)) {
-		if (!empty($classGET)) {
-			getToCookie("class", $class, $token);
-			redirectToDate($desiredDate, $today);
-		}
-		return $class;
-	}
-	return $defaultClass;
-}
-
-$displayExtraEvents = setExtraEventsPreference($token, $desiredDate, $today);
-
-function setWeekPreference($token, $desiredDate, $today) {
-	$overviewGET = getParameter("overview");
-	$overviewCookie = getCookie("overview");
-
-	$overview = getInput($overviewGET, $overviewCookie);
-	
-	if($overview === "week" || $overview === "day") {
-		if (!empty($overviewGET)) {
-			getToCookie("overview", $overview, $token);
-			redirectToDate($desiredDate, $today);
-		}
-		return $overview === "week";
-	}
-	
-	return true; // fall back to week overview
-}
-
-function setExtraEventsPreference($token, $desiredDate, $today) {
-	$extraEventsGET = getParameter("extraEvents");
-	$extraEventsCookie = getCookie("extraEvents");
-
-	$extraEvents = getInput($extraEventsGET, $extraEventsCookie);
-	
-	if($extraEvents === "true" || $extraEvents === "false") {
-		if (!empty($extraEventsGET)) {
-			getToCookie("extraEvents", $extraEvents, $token);
-			redirectToDate($desiredDate, $today);
-		}
-		return $extraEvents === "true";
-	}
-	
-	return false;
-}
+$extraEventsOption = getOption("extraEvents", "false", ["true", "false"], $token, $desiredDate, $today);
+$displayExtraEvents = $extraEventsOption === "true";
 
 function getAPIUrl($api, $replace, $default) {
 	return str_replace($default, $replace, $api);
@@ -224,12 +194,12 @@ if(isset($type) && $type !== 'ical') {
 	if((!isset($defaultClass))) {
 		die('A default class is required for the JSON api.');
 	}
-	$desiredClass = getClass($defaultClass, $allowedClasses, $desiredDate, $today, $token);
+	$desiredClass = getOption("class", $defaultClass, $allowedClasses, $token, $desiredDate, $today);
 	$desiredAPI = getAPIUrl($api, $desiredClass, $defaultClass);
 	$cache_filename = $desiredClass . ".json";
 } else {
 	if(isset($defaultClass)) {
-		$desiredClass = getClass($defaultClass, $allowedClasses, $desiredDate, $today, $token);
+		$desiredClass = getOption("class", $defaultClass, $allowedClasses, $token, $desiredDate, $today);
 	}
 	$desiredAPI = $api;
 	$cache_filename = "api.json";
