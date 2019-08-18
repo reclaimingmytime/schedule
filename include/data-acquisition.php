@@ -1,6 +1,10 @@
 <?php
 
 /* General functions */
+function validOption($option, $allowedValues) {
+	return !empty($option) && in_array($option, $allowedValues);
+}
+
 function getOption($name, $fallback, $allowedValues, $token, $desiredDate, $today) {
 	$get = getParameter($name);
 	$cookie = getCookie($name);
@@ -127,10 +131,6 @@ if($weekOverview === true) {
 }
 
 /* API connection */
-function validOption($class, $allowedClasses) {
-	return !empty($class) && in_array($class, $allowedClasses);
-}
-
 $extraEventsOption = getOption("extraEvents", "false", ["true", "false"], $token, $desiredDate, $today);
 $displayExtraEvents = $extraEventsOption === "true";
 
@@ -223,6 +223,7 @@ function getExtraSubjects($extraEvents) {
 
 if(!empty($extraEvents)) {
 	$extraSubjects = getExtraSubjects($extraEvents);
+	$chosenExtraSubjects = getOption("extraSubjects", [], $extraSubjects, $token, $desiredDate, $today);
 }
 
 
