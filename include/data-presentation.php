@@ -162,7 +162,7 @@ if(!isset($extraEventsText)) {
 							</li>
 						<?php } ?>
 						
-						<?php if(!empty($extraSubjects) && !empty($chosenExtraSubjects)) { ?>
+						<?php if(!empty($extraSubjects)) { ?>
 							<li class="nav-item mr-4 d-none d-sm-inline-block dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="extraEventsButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $extraEventsText; ?> <small><code class="text-secondary">(X)</code></small></span>
@@ -314,6 +314,17 @@ if(!isset($extraEventsText)) {
 						</a>
 						<div class="dropdown-menu" id="classFooterMenu" aria-labelledby="classFooterButton">
 							<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed); ?>
+						</div>
+					</div>
+				<?php } ?>
+				
+				<?php if(!empty($extraSubjects)) { ?>
+					<div class="d-block d-sm-none dropup d-inline">
+						<a class="btn btn-white shadow-none text-secondary dropdown-toggle" href="#" role="button" id="extraEventsButtonFooter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fas fa-folder"></i> <?php echo $extraEventsText; ?>
+						</a>
+						<div class="dropdown-menu" id="extraEventsMenuFooter" aria-labelledby="extraEventsButtonFooter">
+							<?php printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed); ?>
 						</div>
 					</div>
 				<?php } ?>
