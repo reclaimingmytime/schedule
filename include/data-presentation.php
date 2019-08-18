@@ -77,6 +77,9 @@ $highlightClasses = 'bg-dark text-light';
 if(!isset($extraEventsText)) {
 	$extraEventsText = "Extra Events";
 }
+if(!isset($extraEventsIcon)) {
+	$extraEventsIcon = "fas fa-folder";
+}
 ?>
 <!DOCTYPE html>
 <html class="h-100" lang="en">
@@ -162,7 +165,7 @@ if(!isset($extraEventsText)) {
 						<?php if(!empty($extraSubjects)) { ?>
 							<li class="nav-item mr-4 d-none d-sm-inline-block dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="extraEventsButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $extraEventsText; ?> <small><code class="text-secondary">(X)</code></small></span>
+									<i class="<?php echo $extraEventsIcon; ?>"></i> <span class="d-none d-lg-inline"><?php echo $extraEventsText; ?> <small><code class="text-secondary">(X)</code></small></span>
 								</a>
 								<div class="dropdown-menu" id="extraEventsMenu" aria-labelledby="extraEventsButton">
 									<?php	printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed); ?>
@@ -318,7 +321,7 @@ if(!isset($extraEventsText)) {
 				<?php if(!empty($extraSubjects)) { ?>
 					<div class="d-block d-sm-none dropup d-inline">
 						<a class="btn btn-white shadow-none text-secondary dropdown-toggle" href="#" role="button" id="extraEventsButtonFooter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<i class="fas fa-folder"></i> <?php echo $extraEventsText; ?>
+							<i class="<?php echo $extraEventsIcon; ?>"></i> <?php echo $extraEventsText; ?>
 						</a>
 						<div class="dropdown-menu" id="extraEventsMenuFooter" aria-labelledby="extraEventsButtonFooter">
 							<?php printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed); ?>
