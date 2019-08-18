@@ -174,7 +174,7 @@ $(function () {
 					break;
 					
 				case X_KEY:
-					clickIDIfExists('extraEventToggle');
+					clickIDIfExists('extraEventsButton');
 					break;
 
 				default:
