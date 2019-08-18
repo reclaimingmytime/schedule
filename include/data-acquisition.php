@@ -223,7 +223,7 @@ function getExtraSubjects($extraEvents) {
 
 if(!empty($extraEvents)) {
 	$extraSubjects = getExtraSubjects($extraEvents);
-	$chosenExtraSubjects = getOption("extraSubjects", [], $extraSubjects, $token, $desiredDate, $today);
+	$chosenExtraSubjects = getOption("extraSubjects", [], lowercaseArray($extraSubjects), $token, $desiredDate, $today);
 }
 
 

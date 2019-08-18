@@ -59,6 +59,10 @@ function escapeArray(&$array) {
 	});
 }
 
+function lowercaseArray(&$array) {
+	return array_map('strtolower', $array);
+}
+
 function printArray($array, $lowercase = false) {
 	if(empty($array)) return "none";
 	
