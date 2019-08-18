@@ -37,8 +37,9 @@ function printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredD
 				$link = printArray(getArrayWith($chosenExtraSubjects, $extraSubject), true);
 			}
 		}
-		
-		echo '<a class="dropdown-item" href="?extraSubjects=' . $link . '&amp;date=' . $desiredDate . $tokenEmbed . '"><i class="' . $icon . '"></i> ' . $extraSubject . '</a>';
+		?>
+			<a class="dropdown-item" href="?extraSubjects=<?php echo $link; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"><i class="<?php echo $icon; ?>"></i> <?php echo $extraSubject; ?></a>
+		<?php 
 	}
 }
 
