@@ -63,12 +63,23 @@ function lowercaseArray(&$array) {
 	return array_map('strtolower', $array);
 }
 
+function uppercaseArray(&$array) {
+	return array_map('strtoupper', $array);
+}
+
 function printArray($array, $lowercase = false) {
 	if(empty($array)) return "none";
 	
 	$output = (is_array($array)) ? implode(",", $array) : $array;
 	if($lowercase === true) return strtolower($output);
 	return $output;
+}
+
+function getArray($string) {
+	if($string === "none") return [];
+	
+	if(contains($string, ",")) return explode(",", $string);
+	return (array)$string;
 }
 
 function getArrayWith($array, $string) {
