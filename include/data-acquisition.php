@@ -120,9 +120,7 @@ function getClass($defaultClass, $allowedClasses, $desiredDate, $today, $token) 
 
 	if (validClass($class, $allowedClasses)) {
 		if (!empty($classGET)) {
-			if (validToken(getParameter("token"), $token)) {
-					writeCookie("class", $class, "1 year");
-			}
+			getToCookie("class", $class, $token);
 			redirectToDate($desiredDate, $today);
 		}
 		return $class;
@@ -140,9 +138,7 @@ function setWeekPreference($token, $desiredDate, $today) {
 	
 	if($overview === "week" || $overview === "day") {
 		if (!empty($overviewGET)) {
-			if (validToken(getParameter("token"), $token)) {
-				writeCookie("overview", $overview, "1 year");
-			}
+			getToCookie("overview", $overview, $token);
 			redirectToDate($desiredDate, $today);
 		}
 		return $overview === "week";
@@ -159,9 +155,7 @@ function setExtraEventsPreference($token, $desiredDate, $today) {
 	
 	if($extraEvents === "true" || $extraEvents === "false") {
 		if (!empty($extraEventsGET)) {
-			if (validToken(getParameter("token"), $token)) {
-				writeCookie("extraEvents", $extraEvents, "1 year");
-			}
+			getToCookie("extraEvents", $extraEvents, $token);
 			redirectToDate($desiredDate, $today);
 		}
 		return $extraEvents === "true";

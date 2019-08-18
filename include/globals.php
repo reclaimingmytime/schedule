@@ -88,6 +88,12 @@ function writeCookie($name, $val, $time = "1 year") {
 	setcookie($name, $val, $exp, '/', null, false, true);
 }
 
+function getToCookie($name, $value, $token) {
+	if (validToken(getParameter("token"), $token)) {
+		writeCookie($name, $value, "1 year");
+	}
+}
+
 function isDifferent($x, $y) {
 	return !empty($x) && $x !== $y;
 }
