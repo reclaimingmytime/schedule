@@ -167,7 +167,7 @@ if(!isset($extraEventsText)) {
 								<a class="nav-link dropdown-toggle" href="#" id="extraEventsButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $extraEventsText; ?> <small><code class="text-secondary">(X)</code></small></span>
 								</a>
-								<div class="dropdown-menu" id="extraEventsMenu" aria-labelledby="classNavButton">
+								<div class="dropdown-menu" id="extraEventsMenu" aria-labelledby="extraEventsButton">
 									<?php	printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed); ?>
 								</div>
 							</li>
