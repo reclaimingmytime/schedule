@@ -67,7 +67,7 @@ $currentTime = date("H:i");
 $desiredDate = getCustomDate("date", $today, $min, $max);
 $desiredDateMidWeek = $desiredDate;
 
-$overviewType = getOption("overview", "week", ["week", "day"], $token, $desiredDate, $today);;
+$overviewType = getOption("overview", "week", ["week", "day"], $token, $desiredDate, $today);
 $weekOverview = $overviewType === "week";
 
 if($weekOverview === true) {
