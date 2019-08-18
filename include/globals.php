@@ -75,10 +75,18 @@ function printArray($array, $lowercase = false) {
 	return $output;
 }
 
-function getArray($string) {
+function getArray($string, $unique = false, $uppercase = false, $lowercase = false) {
 	if(strtolower($string) === "none") return [];
 	
-	if(contains($string, ",")) return explode(",", $string);
+	if($uppercase === true) $string = strtoupper($string);
+	if($lowercase === true) $string = strtolower($string);
+	
+	if(contains($string, ",")) {
+		$array = explode(",", $string);
+		if($unique === true) return array_unique($array);
+		return $array;
+	}
+	
 	return (array)$string;
 }
 

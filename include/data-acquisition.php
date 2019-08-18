@@ -227,8 +227,10 @@ function getExtraSubjects($extraEvents) {
 
 if(!empty($extraEvents)) {
 	$extraSubjects = getExtraSubjects($extraEvents);
-	$chosenExtraSubjectsString = getOption("extraSubjects", "", lowercaseArray($extraSubjects), $token, $desiredDate, $today);
-	$chosenExtraSubjects = getArray(strtoupper($chosenExtraSubjectsString));
+	
+	$allowedSubjectsInput = getArrayWith(lowercaseArray($extraSubjects), "none");
+	$chosenExtraSubjectsString = getOption("extraSubjects", "", $allowedSubjectsInput, $token, $desiredDate, $today);
+	$chosenExtraSubjects = getArray($chosenExtraSubjectsString, true, true);
 }
 
 
