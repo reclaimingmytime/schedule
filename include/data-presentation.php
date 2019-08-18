@@ -24,16 +24,28 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 	}
 }
 
-function printExtraEventToggle($extraEvents, $displayExtraEvents, $desiredDate, $extraEventsText, $tokenEmbed) {
-	if (!empty($extraEvents)) {
-		?>
-			<a class="nav-link text-secondary" href="?extraEvents=<?php echo printBoolean(!$displayExtraEvents); ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>" id="extraEventToggle">
-				<i class="fas <?php echo $displayExtraEvents ? "fa-check-square" : "fa-square"; ?>"></i>
-				<span class="d-none d-lg-inline"><?php echo escape($extraEventsText); ?> <small><code class="text-secondary">(X)</code></small></span>
-			</a>
-	<?php
+function printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed) {
+	foreach ($extraSubjects as $extraSubject) {
+		$icon = "fas fa-square";
+		$link = strtolower($extraSubject);
+
+		if (!empty($chosenExtraSubjects) && strlen($chosenExtraSubjects[0]) !== 0) {
+			if (in_array($extraSubject, $chosenExtraSubjects)) {
+				$icon = "fas fa-check-square";
+				$link = printArray(getArrayWithout($chosenExtraSubjects, $extraSubject), true);
+			} else {
+				$link = printArray(getArrayWith($chosenExtraSubjects, $extraSubject), true);
+			}
+		}
+		
+		$classes = "dropdown-item";
+		if (in_array($extraSubject, $chosenExtraSubjects)) {
+			$classes .= ' active font-weight-bold text-body bg-transparent';
+		}
+		echo '<a class=' . $classes . ' href="?extraSubjects=' . $link . '&amp;date=' . $desiredDate . $tokenEmbed . '"><i class="' . $icon . '"></i> ' . $extraSubject . '</a>';
 	}
 }
+
 
 function prepareMsg($sessionName, $msg) {
 	if (isset($_SESSION[$sessionName])) {
@@ -135,21 +147,28 @@ if(!isset($extraEventsText)) {
 							$icon = "fas fa-calendar-week";
 							$text = "Week";
 						}  ?>
-							<li class="nav-item mr-4">
-								<a class="nav-link" id="overviewType" href="?<?php echo $desiredDateMidWeek !== $today ? 'date=' . $desiredDateMidWeek . '&' : ''; ?>overview=<?php echo $overviewType . $tokenEmbed; ?>"><i class="<?php echo $icon; ?>"></i> <span class="d-none d-lg-inline"><?php echo $text;?> <small><code class="text-secondary">(T)</code></small></span></a>
-							</li>
-						<?php if(!empty($allowedClasses) && !empty($desiredClass)) { ?>
-						<li class="nav-item mr-4 d-none d-sm-inline-block dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="classNavButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?> <small><code class="text-secondary">(C)</code></small></span>
-							</a>
-							<div class="dropdown-menu" id="classNavMenu" aria-labelledby="classNavButton">
-								<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, true); ?>
-							</div>
+						<li class="nav-item mr-4">
+							<a class="nav-link" id="overviewType" href="?<?php echo $desiredDateMidWeek !== $today ? 'date=' . $desiredDateMidWeek . '&' : ''; ?>overview=<?php echo $overviewType . $tokenEmbed; ?>"><i class="<?php echo $icon; ?>"></i> <span class="d-none d-lg-inline"><?php echo $text;?> <small><code class="text-secondary">(T)</code></small></span></a>
 						</li>
+						
+						<?php if(!empty($allowedClasses) && !empty($desiredClass)) { ?>
+							<li class="nav-item mr-4 d-none d-sm-inline-block dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="classNavButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?> <small><code class="text-secondary">(C)</code></small></span>
+								</a>
+								<div class="dropdown-menu" id="classNavMenu" aria-labelledby="classNavButton">
+									<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, true); ?>
+								</div>
+							</li>
 						<?php } ?>
-						<li class="nav-item">
-							<?php printExtraEventToggle($extraEvents, $displayExtraEvents, $desiredDate, $extraEventsText, $tokenEmbed, true); ?>
+							
+						<li class="nav-item mr-4 d-none d-sm-inline-block dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="extraEventsButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $extraEventsText; ?> <small><code class="text-secondary">(X)</code></small></span>
+							</a>
+							<div class="dropdown-menu" id="extraEventsMenu" aria-labelledby="classNavButton">
+								<?php	printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed); ?>
+							</div>
 						</li>
 					</ul>
 				</nav>
