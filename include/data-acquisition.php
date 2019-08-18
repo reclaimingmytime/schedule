@@ -223,9 +223,9 @@ function getExtraSubjects($extraEvents) {
 
 if(!empty($extraEvents)) {
 	$extraSubjects = getExtraSubjects($extraEvents);
-	$chosenExtraSubjects = getOption("extraSubjects", [], lowercaseArray($extraSubjects), $token, $desiredDate, $today);
+	$chosenExtraSubjectsString = getOption("extraSubjects", "none", lowercaseArray($extraSubjects), $token, $desiredDate, $today);
+	$chosenExtraSubjects = getArray($chosenExtraSubjectsString);
 }
-
 
 $cache_folder = "cache/";
 createCache($cache_folder);
