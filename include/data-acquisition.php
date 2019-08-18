@@ -2,6 +2,10 @@
 
 /* General functions */
 function validOption($option, $allowedValues) {
+	if(contains($option, ",")) {
+		$option = getArray($option);
+		return containsAllValues($option, $allowedValues);
+	}
 	return !empty($option) && in_array($option, $allowedValues);
 }
 
@@ -223,8 +227,8 @@ function getExtraSubjects($extraEvents) {
 
 if(!empty($extraEvents)) {
 	$extraSubjects = getExtraSubjects($extraEvents);
-	$chosenExtraSubjectsString = getOption("extraSubjects", "none", lowercaseArray($extraSubjects), $token, $desiredDate, $today);
-	$chosenExtraSubjects = getArray($chosenExtraSubjectsString);
+	$chosenExtraSubjectsString = getOption("extraSubjects", "", lowercaseArray($extraSubjects), $token, $desiredDate, $today);
+	$chosenExtraSubjects = getArray(strtoupper($chosenExtraSubjectsString));
 }
 
 $cache_folder = "cache/";

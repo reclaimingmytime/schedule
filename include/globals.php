@@ -96,6 +96,10 @@ function getArrayWithout($array, $string) {
 	return $array;
 }
 
+function containsAllValues($needle, $haystack) {
+	return !array_diff($needle, $haystack);
+}
+
 function writeCookie($name, $val, $time = "1 year") {
 	$expTime = new DateTime($time);
 	$exp = $expTime->getTimestamp();
