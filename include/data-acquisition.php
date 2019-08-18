@@ -231,6 +231,7 @@ if(!empty($extraEvents)) {
 	$chosenExtraSubjects = getArray(strtoupper($chosenExtraSubjectsString));
 }
 
+
 $cache_folder = "cache/";
 createCache($cache_folder);
 
