@@ -161,15 +161,17 @@ if(!isset($extraEventsText)) {
 								</div>
 							</li>
 						<?php } ?>
-							
-						<li class="nav-item mr-4 d-none d-sm-inline-block dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="extraEventsButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $extraEventsText; ?> <small><code class="text-secondary">(X)</code></small></span>
-							</a>
-							<div class="dropdown-menu" id="extraEventsMenu" aria-labelledby="classNavButton">
-								<?php	printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed); ?>
-							</div>
-						</li>
+						
+						<?php if(!empty($extraSubjects) && !empty($chosenExtraSubjects)) { ?>
+							<li class="nav-item mr-4 d-none d-sm-inline-block dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="extraEventsButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $extraEventsText; ?> <small><code class="text-secondary">(X)</code></small></span>
+								</a>
+								<div class="dropdown-menu" id="extraEventsMenu" aria-labelledby="classNavButton">
+									<?php	printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed); ?>
+								</div>
+							</li>
+						<?php } ?>
 					</ul>
 				</nav>
 			</header>
@@ -313,8 +315,6 @@ if(!isset($extraEventsText)) {
 						<div class="dropdown-menu" id="classFooterMenu" aria-labelledby="classFooterButton">
 							<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed); ?>
 						</div>
-						
-						
 					</div>
 				<?php } ?>
 				
