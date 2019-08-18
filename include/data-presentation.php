@@ -42,7 +42,7 @@ function printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredD
 		if (in_array($extraSubject, $chosenExtraSubjects)) {
 			$classes .= ' active font-weight-bold text-body bg-transparent';
 		}
-		echo '<a class=' . $classes . ' href="?extraSubjects=' . $link . '&amp;date=' . $desiredDate . $tokenEmbed . '"><i class="' . $icon . '"></i> ' . $extraSubject . '</a>';
+		echo '<a class="' . $classes . '" href="?extraSubjects=' . $link . '&amp;date=' . $desiredDate . $tokenEmbed . '"><i class="' . $icon . '"></i> ' . $extraSubject . '</a>';
 	}
 }
 
