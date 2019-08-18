@@ -135,8 +135,8 @@ if($weekOverview === true) {
 }
 
 /* API connection */
-$extraEventsOption = getOption("extraEvents", "false", ["true", "false"], $token, $desiredDate, $today);
-$displayExtraEvents = $extraEventsOption === "true";
+//$extraEventsOption = getOption("extraEvents", "false", ["true", "false"], $token, $desiredDate, $today);
+//$displayExtraEvents = $extraEventsOption === "true"; //now handled by $chosenExtraSubjects
 
 function getAPIUrl($api, $replace, $default) {
 	return str_replace($default, $replace, $api);
@@ -231,6 +231,7 @@ if(!empty($extraEvents)) {
 	$allowedSubjectsInput = getArrayWith(lowercaseArray($extraSubjects), "none");
 	$chosenExtraSubjectsString = getOption("extraSubjects", "", $allowedSubjectsInput, $token, $desiredDate, $today);
 	$chosenExtraSubjects = getArray($chosenExtraSubjectsString, true, true);
+	$displayExtraEvents = !empty($chosenExtraSubjects);
 }
 
 
