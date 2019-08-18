@@ -76,7 +76,7 @@ function printArray($array, $lowercase = false) {
 }
 
 function getArray($string) {
-	if($string === "none") return [];
+	if(strtolower($string) === "none") return [];
 	
 	if(contains($string, ",")) return explode(",", $string);
 	return (array)$string;
