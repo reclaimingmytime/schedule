@@ -86,6 +86,14 @@ function ensureAllDefined($constants) {
 
 ensureAllDefined(['SUBJECT', 'START', 'END', 'ROOM']);
 
+//Get data from event
+function getSubject($type, $wholeString) {
+	if ($type == 'ical') {
+		return stringRange($wholeString, SUBJECTSECTION[0], SUBJECTSECTION[1]);
+	}
+	return $wholeString;
+}
+
 //Duplicate check
 function sameEvent($e, $new) {
 	return equals($e["date"], $new["date"]) &&
@@ -163,11 +171,7 @@ foreach ($calendar as $entry) {
 		$shortRoom = !empty($roomPrefix) ? trimRoom($entry[ROOM], $roomPrefix) : $entry[ROOM];
 		$new["room"] = lookup($shortRoom , $rooms);
 		
-		if($type == 'ical') {
-			$thisSubject = stringRange($entry[SUBJECT], SUBJECTSECTION[0], SUBJECTSECTION[1]);
-		} else {
-			$thisSubject = $entry[SUBJECT];
-		}
+		$thisSubject = getSubject($type, $entry[SUBJECT]);
 		$new["subject"] = !empty($subjects) ? lookup($thisSubject, $subjects) : $thisSubject;
 		
 		if(defined('INFO')) {
@@ -195,7 +199,7 @@ foreach ($calendar as $entry) {
 		$add = true;
 		
 		if($isExtraClass) {
-			if(!isExtraSubject($new["subject"], $new["weekDay"], $extraEvents, $extraClass, $chosenExtraSubjects)) {
+			if(!isExtraSubject($thisSubject, $new["weekDay"], $extraEvents, $extraClass, $chosenExtraSubjects)) {
 				$add = false;
 			}
 		}
@@ -228,7 +232,9 @@ foreach ($calendar as $entry) {
 	}
 	
 	if (empty($schedule) && empty($nextEventDate) && $date > $desiredDateTo && $isCorrectClass) {
-		$nextEventDate = $date;
+		if(!$isExtraClass || ($isExtraClass && isExtraSubject(getSubject($type, $entry[SUBJECT]), formatWeekDay($date), $extraEvents, $extraClass, $chosenExtraSubjects))) {
+			$nextEventDate = $date;
+		}
 	}
 }
 
