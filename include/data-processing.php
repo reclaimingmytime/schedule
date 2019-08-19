@@ -226,6 +226,10 @@ foreach ($calendar as $entry) {
 			$schedule[] = $new;
 		}
 	}
+	
+	if (empty($schedule) && empty($nextEventDate) && $date > $desiredDateTo && $isCorrectClass) {
+		$nextEventDate = $date;
+	}
 }
 
 if (!empty($schedule)) {

@@ -224,7 +224,12 @@ if(!isset($extraEventsIcon)) {
 								<div class="alert alert-secondary mt-3" role="alert">
 									No entries have been found for that day.
 								</div>
-								<?php
+								<?php if(!empty($nextEventDate)) {?>
+								<div class="text-center">
+									<a class="btn btn-success text-white" href="?date=<?php echo $nextEventDate; ?>">Go to next event on <?php echo formatReadableDate($nextEventDate); ?></a>
+								</div>
+								<?php }
+								
 							} else {
 									foreach ($schedule as $key => $event) {
 										
