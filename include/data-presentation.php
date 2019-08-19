@@ -37,8 +37,13 @@ function printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredD
 				$link = printArray(getArrayWith($chosenExtraSubjects, $extraSubject), true);
 			}
 		}
+		
+		$classes = "dropdown-item";
+		if (in_array($extraSubject, $chosenExtraSubjects)) {
+			$classes .= ' font-weight-bold';
+		}
 		?>
-			<a class="dropdown-item" href="?extraSubjects=<?php echo $link; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"><i class="<?php echo $icon; ?>"></i> <?php echo $extraSubject; ?></a>
+		<a class="<?php echo $classes; ?>" href="?extraSubjects=<?php echo $link; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"><i class="<?php echo $icon; ?>"></i> <?php echo $extraSubject; ?></a>
 		<?php 
 	}
 }
