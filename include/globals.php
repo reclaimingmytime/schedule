@@ -75,6 +75,10 @@ function printArray($array, $lowercase = false) {
 	return $output;
 }
 
+function arrayContains($array, $string) {
+	return in_array(strtolower($string), $array) || in_array(strtoupper($string), $array);
+}
+
 function getArray($string, $unique = false, $uppercase = false, $lowercase = false) {
 	if(strtolower($string) === "none") return [];
 	
@@ -83,6 +87,7 @@ function getArray($string, $unique = false, $uppercase = false, $lowercase = fal
 	
 	if(contains($string, ",")) {
 		$array = explode(",", $string);
+		if(arrayContains($array, "none")) return [];
 		if($unique === true) return array_unique($array);
 		return $array;
 	}
