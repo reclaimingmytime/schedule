@@ -9,7 +9,7 @@ function validOption($option, $allowedValues) {
 	return !empty($option) && in_array($option, $allowedValues);
 }
 
-function getOption($name, $fallback, $allowedValues, $token, $desiredDate, $today) {
+function getOption($name, $allowedValues, $fallback, $token, $desiredDate, $today) {
 	$get = getParameter($name);
 	$cookie = getCookie($name);
 
@@ -71,7 +71,7 @@ $currentTime = date("H:i");
 $desiredDate = getCustomDate("date", $today, $min, $max);
 $desiredDateMidWeek = $desiredDate;
 
-$overviewType = getOption("overview", "week", ["week", "day"], $token, $desiredDate, $today);
+$overviewType = getOption("overview", ["week", "day"], "week", $token, $desiredDate, $today);
 $weekOverview = $overviewType === "week";
 
 if($weekOverview === true) {
@@ -135,7 +135,7 @@ if($weekOverview === true) {
 }
 
 /* API connection */
-//$extraEventsOption = getOption("extraEvents", "false", ["true", "false"], $token, $desiredDate, $today);
+//$extraEventsOption = getOption("extraEvents", ["true", "false"], "false", $token, $desiredDate, $today);
 //$displayExtraEvents = $extraEventsOption === "true"; //now handled by $chosenExtraSubjects
 
 function getAPIUrl($api, $replace, $default) {
@@ -198,12 +198,12 @@ if(isset($type) && $type !== 'ical') {
 	if((!isset($defaultClass))) {
 		die('A default class is required for the JSON api.');
 	}
-	$desiredClass = getOption("class", $defaultClass, $allowedClasses, $token, $desiredDate, $today);
+	$desiredClass = getOption("class", $allowedClasses, $defaultClass, $token, $desiredDate, $today);
 	$desiredAPI = getAPIUrl($api, $desiredClass, $defaultClass);
 	$cache_filename = $desiredClass . ".json";
 } else {
 	if(isset($defaultClass)) {
-		$desiredClass = getOption("class", $defaultClass, $allowedClasses, $token, $desiredDate, $today);
+		$desiredClass = getOption("class", $allowedClasses, $defaultClass, $token, $desiredDate, $today);
 	}
 	$desiredAPI = $api;
 	$cache_filename = "api.json";
@@ -229,7 +229,7 @@ if(!empty($extraEvents)) {
 	$extraSubjects = getExtraSubjects($extraEvents);
 	
 	$allowedSubjectsInput = getArrayWith(lowercaseArray($extraSubjects), "none");
-	$chosenExtraSubjectsString = getOption("extraSubjects", "", $allowedSubjectsInput, $token, $desiredDate, $today);
+	$chosenExtraSubjectsString = getOption("extraSubjects", $allowedSubjectsInput, "", $token, $desiredDate, $today);
 	$chosenExtraSubjects = getArray($chosenExtraSubjectsString, true, true);
 	$displayExtraEvents = !empty($chosenExtraSubjects);
 }
