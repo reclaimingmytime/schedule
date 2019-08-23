@@ -157,7 +157,7 @@ if(!isset($extraEventsIcon)) {
 						</li>
 						
 						<?php if(!empty($allowedClasses) && !empty($desiredClass)) { ?>
-							<li class="nav-item mr-4 d-none d-sm-inline-block dropdown">
+							<li class="nav-item mr-3 d-none d-sm-inline-block dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="classNavButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?> <small><code class="text-secondary">(C)</code></small></span>
 								</a>
@@ -168,7 +168,7 @@ if(!isset($extraEventsIcon)) {
 						<?php } ?>
 						
 						<?php if(!empty($extraSubjects)) { ?>
-							<li class="nav-item mr-4 d-none d-sm-inline-block dropdown">
+							<li class="nav-item mr-3 d-none d-sm-inline-block dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="extraEventsButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<i class="<?php echo $extraEventsIcon; ?>"></i> <span class="d-none d-lg-inline"><?php echo $extraEventsText; ?> <small><code class="text-secondary">(X)</code></small></span>
 								</a>
