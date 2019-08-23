@@ -257,7 +257,7 @@ if(!isset($extraEventsIcon)) {
 									} else if(isTrue($event['extra'])) {
 										$headerClasses .= ' bg-info text-light';
 									}
-									if((isToday($event['date'], $today))) {
+									if(isToday($event['date'], $today)) {
 										$headerClasses .= ' today';
 									}
 									?>
