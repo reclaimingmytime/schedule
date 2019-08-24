@@ -190,6 +190,7 @@ $(function () {
 	}
 
 	const highlightClasses = head.data('highlightclasses');
+	const extraHighlightClasses = head.data('extrahighlightclasses');
 	function updateEvents(time) {
 		$("div[data-start].today").val(function () { //for-each all divs with data-start and class today
 			const thisType = $(this).data('type');
@@ -197,7 +198,7 @@ $(function () {
 			const thisStart = $(this).data('start');
 			const thisEnd = $(this).data('end');
 
-			if (thisType == "event") {
+			if (thisType == "event" || thisType == "extraEvent") {
 				if (isBetween(time, thisStart, thisEnd)) {
 					$(this).addClass(highlightClasses);
 				} else {
