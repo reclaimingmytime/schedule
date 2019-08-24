@@ -191,7 +191,7 @@ $(function () {
 
 	const highlightClasses = head.data('highlightclasses');
 	function updateEvents(time) {
-		$("div[data-start].today").val(function () { //for-each all divs with data-start
+		$("div[data-start].today").val(function () { //for-each all divs with data-start and class today
 			const thisType = $(this).data('type');
 
 			const thisStart = $(this).data('start');
