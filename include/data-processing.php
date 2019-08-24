@@ -190,9 +190,9 @@ foreach ($calendar as $entry) {
 		}
 		
 		if($isExtraClass) {
-			$new["extra"] = true;
+			$new["type"] = "extraEvent";
 		} else {
-			$new["extra"] = false;
+			$new["type"] = "event";
 		}
 		
 
