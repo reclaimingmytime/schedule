@@ -1,7 +1,7 @@
 $(function () {
 	//Elements
 	const head = $('head');
-	
+
 	const A_KEY = 65;
 	const C_KEY = 67;
 	const D_KEY = 68;
@@ -63,8 +63,8 @@ $(function () {
 		return (min <= x) && (x <= max);
 	}
 	//Other
-	$.fn.capitalizeFirstLetter = function() {
-    return this.charAt(0).toUpperCase() + this.slice(1);
+	$.fn.capitalizeFirstLetter = function () {
+		return this.charAt(0).toUpperCase() + this.slice(1);
 	};
 
 	//Navigation
@@ -93,6 +93,16 @@ $(function () {
 		}
 	}
 	
+	function highlightEvent(element, time, start, end, highlight, normal) {
+		if (isBetween(time, start, end)) {
+			if(normal !== undefined) $(element).removeClass(normal);	
+			if(highlight !== undefined) $(element).addClass(highlight);
+		} else {
+			if(highlight !== undefined) $(element).removeClass(highlight);
+			if(normal !== undefined) $(element).addClass(normal);
+		}
+	}
+
 	/* Swipe */
 	// fingerCount 0: No touchscreen detected
 	$("html").swipe({
@@ -116,7 +126,7 @@ $(function () {
 		fingers: 'all',
 		threshold: '125'
 	});
-	
+
 	/* Keyboard navigation */
 	$(document).keydown(function (e) {
 		if (!e.ctrlKey && !e.metaKey && !e.shiftKey) {
@@ -172,7 +182,7 @@ $(function () {
 				case C_KEY:
 					clickIDIfExists('classNavButton');
 					break;
-					
+
 				case X_KEY:
 					clickIDIfExists('extraEventsButton');
 					break;
@@ -199,23 +209,11 @@ $(function () {
 			const thisEnd = $(this).data('end');
 
 			if (thisType == "event") {
-				if (isBetween(time, thisStart, thisEnd)) {
-					$(this).addClass(highlightClasses);
-				} else {
-					$(this).removeClass(highlightClasses);
-				}
+				highlightEvent(this, time, thisStart, thisEnd, highlightClasses, undefined);
 			} else if (thisType == "extraEvent") {
-				if (isBetween(time, thisStart, thisEnd)) {
-					$(this).removeClass(extraClasses).addClass(highlightClasses);
-				} else {
-					$(this).removeClass(highlightClasses).addClass(extraClasses);
-				}
+				highlightEvent(this, time, thisStart, thisEnd, highlightClasses, extraClasses);
 			} else if (thisType == "break") {
-				if (isBetween(time, thisStart, thisEnd)) {
-					$(this).removeClass("d-none");
-				} else {
-					$(this).addClass("d-none");
-				}
+				highlightEvent(this, time, thisStart, thisEnd, undefined, "d-none");
 			}
 		});
 	}
@@ -226,7 +224,7 @@ $(function () {
 	function updateTime() {
 		const dt = new Date();
 		const time = formatTime(dt.getHours(), dt.getMinutes());
-		
+
 		if (displayed !== time) {
 			displayed = time;
 			clock.html(time);
@@ -237,7 +235,7 @@ $(function () {
 
 	}
 	setInterval(function () {
-//		updateTime();
+		updateTime();
 	}, 5000);
 
 	/* Automatic Scroll */
