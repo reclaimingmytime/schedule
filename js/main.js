@@ -92,7 +92,7 @@ $(function () {
 			redirectToHref('#prevWeek');
 		}
 	}
-
+	
 	/* Swipe */
 	// fingerCount 0: No touchscreen detected
 	$("html").swipe({
@@ -198,11 +198,17 @@ $(function () {
 			const thisStart = $(this).data('start');
 			const thisEnd = $(this).data('end');
 
-			if (thisType == "event" || thisType == "extraEvent") {
+			if (thisType == "event") {
 				if (isBetween(time, thisStart, thisEnd)) {
 					$(this).addClass(highlightClasses);
 				} else {
 					$(this).removeClass(highlightClasses);
+				}
+			} else if (thisType == "extraEvent") {
+				if (isBetween(time, thisStart, thisEnd)) {
+					$(this).addClass(extraHighlightClasses);
+				} else {
+					$(this).removeClass(extraHighlightClasses);
 				}
 			} else if (thisType == "break") {
 				if (isBetween(time, thisStart, thisEnd)) {
