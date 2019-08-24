@@ -259,6 +259,7 @@ if(!isset($extraEventsIcon)) {
 										$headerClasses .= ' ' . $highlightClasses;
 									} else if(isTrue($event['extra'])) {
 										$headerClasses .= ' ' . $highlightExtraEventsClasses;
+//										$type = 'extraEvent';
 									}
 									if(isToday($event['date'], $today)) {
 										$headerClasses .= ' today';
