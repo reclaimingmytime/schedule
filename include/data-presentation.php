@@ -252,7 +252,9 @@ if(!isset($extraEventsIcon)) {
 										</span>
 									<?php }
 									$timeRange = $event['start'] . " - " . $event['end'];
-									$headerClasses = "";
+									
+									$headerClasses = 'card-header';
+									$type = 'event';
 									if(isTrue($highlightEvents) && onGoingEvent($event, $currentTime, $today)) {
 										$headerClasses .= ' ' . $highlightClasses;
 									} else if(isTrue($event['extra'])) {
@@ -263,7 +265,7 @@ if(!isset($extraEventsIcon)) {
 									}
 									?>
 									<div class="card my-3">
-										<div class="card-header<?php echo $headerClasses; ?>" data-start="<?php echo $event['start'];?>" data-end="<?php echo $event['end'];?>" data-type="event">
+										<div class="<?php echo $headerClasses; ?>" data-start="<?php echo $event['start'];?>" data-end="<?php echo $event['end'];?>" data-type="<?php echo $type; ?>">
 											<i class="fas fa-clock"></i>
 											<strong><?php echo $timeRange ?></strong>
 										</div>
