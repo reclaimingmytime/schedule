@@ -190,7 +190,7 @@ $(function () {
 	}
 
 	const highlightClasses = head.data('highlightclasses');
-	const extraHighlightClasses = head.data('extrahighlightclasses');
+	const extraClasses = head.data('extraclasses');
 	function updateEvents(time) {
 		$("div[data-start].today").val(function () { //for-each all divs with data-start and class today
 			const thisType = $(this).data('type');
@@ -206,9 +206,9 @@ $(function () {
 				}
 			} else if (thisType == "extraEvent") {
 				if (isBetween(time, thisStart, thisEnd)) {
-					$(this).addClass(extraHighlightClasses);
+					$(this).removeClass(extraClasses).addClass(highlightClasses);
 				} else {
-					$(this).removeClass(extraHighlightClasses);
+					$(this).removeClass(highlightClasses).addClass(extraClasses);
 				}
 			} else if (thisType == "break") {
 				if (isBetween(time, thisStart, thisEnd)) {
@@ -226,7 +226,7 @@ $(function () {
 	function updateTime() {
 		const dt = new Date();
 		const time = formatTime(dt.getHours(), dt.getMinutes());
-
+		
 		if (displayed !== time) {
 			displayed = time;
 			clock.html(time);
@@ -237,7 +237,7 @@ $(function () {
 
 	}
 	setInterval(function () {
-		updateTime();
+//		updateTime();
 	}, 5000);
 
 	/* Automatic Scroll */
