@@ -75,10 +75,11 @@ function enableTodayLink($today, $desiredDate, $desiredDateTo) {
 
 $enableTodayLink = enableTodayLink($today, $desiredDate, $desiredDateTo);
 
-$highlightEvents = isFalse($weekBump) ? true : false;
-
-$highlightClasses = 'bg-dark text-light';
 $extraClasses = 'bg-info text-light';
+
+$highlightEvents = isFalse($weekBump) ? true : false;
+$highlightClasses = 'bg-dark text-light';
+
 
 if(!isset($extraEventsText)) {
 	$extraEventsText = "Extra Events";
