@@ -77,7 +77,7 @@ $enableTodayLink = enableTodayLink($today, $desiredDate, $desiredDateTo);
 
 $extraClasses = 'bg-info text-light';
 
-$highlightEvents = isFalse($weekBump) ? true : false;
+$highlightEvents = !$weekBump;
 $highlightClasses = 'bg-dark text-light';
 
 
