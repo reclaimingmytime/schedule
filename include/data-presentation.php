@@ -262,10 +262,15 @@ if(!isset($extraEventsIcon)) {
 									if(isToday($event['date'], $today)) {
 										$headerClasses .= ' today';
 									}
+									
+									$clockIcon = "fas fa-clock";
+									if($event['type'] == 'extraEvent' && !empty($extraEventIcon)) {
+										$clockIcon = $extraEventIcon;
+									}
 									?>
 									<div class="card my-3">
 										<div class="<?php echo $headerClasses; ?>" data-start="<?php echo $event['start'];?>" data-end="<?php echo $event['end'];?>" data-type="<?php echo $event['type']; ?>">
-											<i class="fas fa-clock"></i>
+											<i class="<?php echo $clockIcon; ?>"></i>
 											<strong><?php echo $timeRange ?></strong>
 										</div>
 
