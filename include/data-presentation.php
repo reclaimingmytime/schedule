@@ -80,7 +80,6 @@ $extraClasses = 'bg-info text-light';
 $highlightEvents = !$weekBump;
 $highlightClasses = 'bg-dark text-light';
 
-
 if(!isset($extraEventsText)) {
 	$extraEventsText = "Extra Events";
 }
