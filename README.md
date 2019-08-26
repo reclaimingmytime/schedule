@@ -38,17 +38,18 @@ A few shortcuts are available for quick navigation.
 | `Enter`  | Current Week  |
 | `C`      | Open class switcher (if available)  |
 | `1-9`    | Change class (if available)  |
+| `C` | Open extra events switcher (if available) |
 
 Note: Arrow keys as a shortcut would interfere with keyboard-based scrolling.
 
 ### Touch navigation
 
-| Gesture                      | Action        |
-| ---------------------------- | ------------- |
-| Swipe left with one finger   | Next day      |
-| Swipe right with one finger  | Previous day  |
-| Swipe left with two fingers  | Next week     |
-| Swipe right with two fingers | Previous week |
+| Gesture                                          | Action        |
+| ------------------------------------------------ | ------------- |
+| Swipe left with one finger                       | Next day      |
+| Swipe right with one finger                      | Previous day  |
+| Swipe left with two fingers (day overview only)  | Next week     |
+| Swipe right with two fingers (day overview only) | Previous week |
 
 ## Installation
 As an alternative to downloading the files manually from GitHub, you can use the command-line.
@@ -86,12 +87,16 @@ Note: The directory of the script and the folder "cache/" (created by the script
 | `$excludeWeekends` | *Optional*. Weekends will be skipped with an appropriate notice. *Default: false.* |
 #### API Connection
 
-| Variable          | Description                                                  |
-| ----------------- | ------------------------------------------------------------ |
-| `$defaultClass`   | **Required**. Default class when fetching the API.           |
-| `$allowedClasses` | *Optional*. Array of allowed classes. If undefined or empty, only $defaultClass is allowed and the class switcher is hidden. |
-| `$api`            | **Required**. URL of the API. Must be and accessible URL. Assumes the API serves JSON. |
-| `$type`           | *Optional*. Type of the API. Can be "*json*" or "*ical*".    |
+| Variable           | Description                                                  |
+| ------------------ | ------------------------------------------------------------ |
+| `$api`             | **Required**. URL of the API. Must be an accessible URL. Assumes the API serves JSON, unless specified otherwise in `$type`. |
+| `$type`            | *Optional*. Type of the API. Can be "*json*" or "*ical*".    |
+| `$defaultClass`    | **Required**. Default class when fetching the API.           |
+| `$allowedClasses`  | *Optional*. Array of allowed classes. If undefined or empty, only $defaultClass is allowed and the class switcher is hidden. |
+| `$extraEvents`     | *Optional.* Associative array of extra events in the following format: `[$class][$weekDays][$subjects]`, e.g. `"[Class-A" => "Mon" => "INF", "ENG"]` |
+| `$extraEventsText` | *Optional.* Text for the switcher.                           |
+| `$extraEventsIcon` | *Optional.* Font Awesome icon for the switcher.              |
+| `$extraEventIcon`  | *Optional.* Font Awesome icon for the extra event instead of the default clock. |
 
 #### Handling Data
 
@@ -99,12 +104,13 @@ Note: The directory of the script and the folder "cache/" (created by the script
 | -------------------------------------------- | ------------------------------------------------------------ |
 | `CALENDAR`                                   | *Optional.* The array index of the calendar events.          |
 | `START`, `END`, `SUBJECT`, `ROOM` and `PROF` | **Required**. Array index for the respective data. START and END are used for time and date and assume the following format: *YYYY-MM-DD HH:MM:SS*. |
-| `INFO` | *Optional*. Part of the ical file containing the descripton. |
-| `SUBJECTSECTION`, `PROFSECTION` and `INFOSECTION` | **Required when `$type` is ical**. Associative array of the part containing the relevant content. |
-| `$ignoredSubjects`                                | *Optional.* Array of subjects that should be ignored. |
+| `SUBJECTSECTION` and `PROFSECTION`           | **Required when `$type` is ical**. Associative array of the part containing the relevant content. |
+| `INFO` and `INFOSECTION`                     | *Optional*. Part of the ical file containing extra information about each event. |
+| `LESSONCLASS` and `CLASSSECTION`             | *Optional*. Part of the ical file containing the subject for each event. |
+| `$ignoredSubjects`                           | *Optional.* Array of subjects that should be ignored.        |
 | `$emptyProfs`                                | *Optional.* Array of names that should be considered empty, such as "-". |
 | `$subjects`                                  | *Optional.* Associative array of preferred names for subjects, e.g. "Break" instead of "Recess" |
-| `$infos`                                  | *Optional.* Associative array of preferred names for infos. |
+| `$infos`                                     | *Optional.* Associative array of preferred names for infos.  |
 | `$profs`                                     | *Optional.* Associative array of initials to full names.     |
 | `$roomPrefix`                                | *Optional.* A prefix that might seem redundant, such as "Room-". |
 | `$rooms`                                     | *Optional.* Associative array of rooms to custom names.      |
