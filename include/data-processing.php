@@ -57,18 +57,32 @@ function lookupProfs($prof, $emptyProfs, $profs) {
 }
 
 //Time functions
-function extractTime($dateTime) {
+function extractJsonTime($dateTime) {
 	$info = explode(" ", $dateTime);
 	return substr($info[1], 0, -3);
 }
 
-function extractDate($dateTime) {
-	$info = explode(" ", $dateTime);
-	return $info[0];
+function extractIcalDate($string, $format = 'Y-m-d') {
+	return DateTime::createFromFormat('Y-m-d H:i:s.000000', $string)->format($format);
 }
 
-function extractIcalDate($string) {
-	return DateTime::createFromFormat('Y-m-d H:i:s.000000', $string);
+function extractApiTime($type, $singleEntry) {
+	if($type == 'ical') {
+		return extractIcalDate($singleEntry["date"], 'H:i');
+	}
+	return extractJsonTime($singleEntry);
+}
+
+function extractApiDate($type, $singleEntry) {
+	if($type == 'ical') {
+		return extractIcalDate($singleEntry["date"]);
+	}
+	return extractJsonDate($singleEntry);
+}
+
+function extractJsonDate($dateTime) {
+	$info = explode(" ", $dateTime);
+	return $info[0];
 }
 
 //Ensure defined constants
@@ -132,7 +146,7 @@ function isExtraSubject($subject, $weekDay, $extraEvents, $extraClass, $chosenEx
 $schedule = [];
 
 foreach ($calendar as $entry) {
-	$date = ($type == 'ical') ? extractIcalDate($entry[START]["date"])->format('Y-m-d') : extractDate($entry[START]);
+	$date = extractApiDate($type, $entry[START]);
 
 	if($weekOverview === true) {
 		$desiredDateTo = getDateFromInterval($desiredDate, "+6 days");
@@ -164,9 +178,9 @@ foreach ($calendar as $entry) {
 		
 		$new["date"] = formatReadableDate($date);
 		$new["weekDay"] = formatWeekDay($date);
-			
-		$new["start"] = ($type == 'ical') ? extractIcalDate($entry[START]["date"])->format('H:i') : extractTime($entry[START]);
-		$new["end"] = ($type == 'ical') ? extractIcalDate($entry[END]["date"])->format('H:i') : extractTime($entry[END]);
+
+		$new["start"] = extractApiTime($type, $entry[START]);
+		$new["end"] = extractApiTime($type, $entry[END]);
 		
 		$shortRoom = !empty($roomPrefix) ? trimRoom($entry[ROOM], $roomPrefix) : $entry[ROOM];
 		$new["room"] = lookup($shortRoom , $rooms);
