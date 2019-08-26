@@ -62,7 +62,7 @@ function getCustomDate($param, $today, $min, $max) {
 
 function isWeekend($date) {
 	$weekDay = date('w', strtotime($date));
-	return ($weekDay == 0 || $weekDay == 6);
+	return ($weekDay == "0" || $weekDay == "6");
 }
 
 $today = date("Y-m-d");
