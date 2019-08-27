@@ -255,7 +255,7 @@ $(function () {
 	$('[data-toggle="tooltip"]').tooltip();
 
 	/* Service Worker */
-	if ('serviceWorker' in navigator) {
+	if ('serviceWorker' in navigator && head.data('hasmanifest') === true) {
 		navigator.serviceWorker.register('serviceworker.min.js').
 						then(function (registration) {
 							console.log('ServiceWorker registration successful with scope: ',
