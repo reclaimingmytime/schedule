@@ -92,14 +92,18 @@ $(function () {
 			redirectToHref('#prevWeek');
 		}
 	}
-	
+
 	function highlightEvent(element, time, start, end, highlight, normal) {
 		if (isBetween(time, start, end)) {
-			if(normal !== undefined) $(element).removeClass(normal);	
-			if(highlight !== undefined) $(element).addClass(highlight);
+			if (normal !== undefined)
+				$(element).removeClass(normal);
+			if (highlight !== undefined)
+				$(element).addClass(highlight);
 		} else {
-			if(highlight !== undefined) $(element).removeClass(highlight);
-			if(normal !== undefined) $(element).addClass(normal);
+			if (highlight !== undefined)
+				$(element).removeClass(highlight);
+			if (normal !== undefined)
+				$(element).addClass(normal);
 		}
 	}
 
@@ -249,4 +253,16 @@ $(function () {
 
 	/* Tooltip */
 	$('[data-toggle="tooltip"]').tooltip();
+
+	/* Service Worker */
+	if ('serviceWorker' in navigator) {
+		navigator.serviceWorker.register('/serviceworker.min.js').
+						then(function (registration) {
+							console.log('ServiceWorker registration successful with scope: ',
+											registration.scope);
+						}).catch(function (err) {
+			console.log('ServiceWorker registration failed: ', err);
+		});
+	}
+
 });
