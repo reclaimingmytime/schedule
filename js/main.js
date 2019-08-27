@@ -256,7 +256,7 @@ $(function () {
 
 	/* Service Worker */
 	if ('serviceWorker' in navigator) {
-		navigator.serviceWorker.register('/serviceworker.min.js').
+		navigator.serviceWorker.register('serviceworker.min.js').
 						then(function (registration) {
 							console.log('ServiceWorker registration successful with scope: ',
 											registration.scope);

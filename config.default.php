@@ -38,3 +38,19 @@ $roomPrefix = 'Room-';
 $rooms = [
 		"001" => "Entrance Hall"
 ];
+
+$manifest = [
+		"name" => "Schedule",
+		"short_name" => "Schedule",
+		/* "icons" => [
+				[
+						"src" => "img/icon-192.png",
+						"sizes" => "192x192",
+						"type" => "image/png",
+				],
+		], */
+		"theme_color" => "#ffffff",
+		"background_color" => "#ffffff",
+		"start_url" => "/",
+		"display" => "standalone",
+];

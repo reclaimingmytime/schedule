@@ -2,6 +2,9 @@
 cache/
 config.php
 nbproject/
+
 favicon.ico
+img/
+
 .htaccess
 robots.txt

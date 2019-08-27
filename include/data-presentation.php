@@ -96,6 +96,9 @@ if(!isset($extraEventsIcon)) {
 
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha256-YLGeXaapI0/5IgZopewRJcFXomhRMlYYjugPLSyNjTY=" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.2/css/all.min.css" integrity="sha256-zmfNZmXoNWBMemUOo1XUGFfc0ihGGLYdgtJS3KCr/l0=" crossorigin="anonymous">
+		<?php if(isset($manifest) && !empty($manifest)) { ?>
+			<link rel="manifest" href="site.webmanifest.php">	
+		<?php } ?>
 
 		<style>
 		.dropdown-toggle {
