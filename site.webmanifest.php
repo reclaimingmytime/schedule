@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: application/manifest+json');
 
 require_once('config.php');
 
