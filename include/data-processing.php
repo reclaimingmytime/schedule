@@ -182,11 +182,13 @@ foreach ($calendar as $entry) {
 		$new["start"] = extractApiTime($type, $entry[START]);
 		$new["end"] = extractApiTime($type, $entry[END]);
 		
-		$shortRoom = !empty($roomPrefix) ? trimRoom($entry[ROOM], $roomPrefix) : $entry[ROOM];
-		$new["room"] = lookup($shortRoom , $rooms);
-		
 		$thisSubject = getSubject($type, $entry[SUBJECT]);
 		$new["subject"] = !empty($subjects) ? lookup($thisSubject, $subjects) : $thisSubject;
+		
+		if(!isset($excludedRoomSubjects) || isset($excludedRoomSubjects) && !in_array($new["subject"], $excludedRoomSubjects)) {
+			$shortRoom = !empty($roomPrefix) ? trimRoom($entry[ROOM], $roomPrefix) : $entry[ROOM];
+			$new["room"] = lookup($shortRoom , $rooms);
+		}
 		
 		if(defined('INFO')) {
 			$rawInfo = stringRange($entry[INFO], INFOSECTION[0], INFOSECTION[1]);
