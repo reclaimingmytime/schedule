@@ -39,6 +39,7 @@ $rooms = [
 		"001" => "Entrance Hall"
 ];
 
+/* Icons */
 $manifest = [
 		"name" => "Schedule",
 		"short_name" => "Schedule",
@@ -54,3 +55,13 @@ $manifest = [
 		"start_url" => "/",
 		"display" => "standalone",
 ];
+/*
+ $touchIconPath = "img/apple-touch-icon.png";
+ $favicons = [
+		[
+				"src" => "img/icon-32.png",
+				"sizes" => "32x32",
+				"type" => "image/png",
+		]
+];
+*/
