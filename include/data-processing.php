@@ -146,14 +146,13 @@ function isExtraSubject($subject, $weekDay, $extraEvents, $extraClass, $chosenEx
 $schedule = [];
 
 $desiredDateTo = $desiredDate;
+if($weekOverview === true) {
+	$desiredDateTo = getDateFromInterval($desiredDate, "+6 days");
+}
 
 foreach ($calendar as $entry) {
 	$date = extractApiDate($type, $entry[START]);
 
-	if($weekOverview === true) {
-		$desiredDateTo = getDateFromInterval($desiredDate, "+6 days");
-	}
-			
 	$isCorrectClass = true;
 	$isExtraClass = false;
 	if(isset($desiredClass)) {
