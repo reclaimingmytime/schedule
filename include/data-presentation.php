@@ -12,7 +12,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 		}
 		?>
 		<a class="<?php echo $classSwitcherClasses; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php echo !empty($keyCode) ? ' id="keyCode' . $keyCode . '"' : ''; ?>>
-			<i class="fas fa-folder-open"></i>
+			<i class="fas fa-chalkboard"></i>
 			<?php echo $class;
 
 			if(!empty($keyCode)) { ?>
@@ -170,7 +170,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 						<?php if(!empty($allowedClasses) && !empty($desiredClass)) { ?>
 							<li class="nav-item mr-3 d-none d-sm-inline-block dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="classNavButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<i class="fas fa-folder"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?> <small><code class="text-secondary">(C)</code></small></span>
+									<i class="fas fa-chalkboard-teacher"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?> <small><code class="text-secondary">(C)</code></small></span>
 								</a>
 								<div class="dropdown-menu" id="classNavMenu" aria-labelledby="classNavButton">
 									<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, true); ?>
@@ -337,7 +337,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 				<?php if(!empty($allowedClasses) && !empty($desiredClass)) { ?>
 					<div class="d-block d-sm-none dropup d-inline">
 						<a class="btn btn-white shadow-none text-secondary dropdown-toggle" href="#" role="button" id="classFooterButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<i class="fas fa-folder"></i> <?php echo $desiredClass; ?>
+							<i class="fas fa-chalkboard-teacher"></i> <?php echo $desiredClass; ?>
 						</a>
 						<div class="dropdown-menu" id="classFooterMenu" aria-labelledby="classFooterButton">
 							<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed); ?>
