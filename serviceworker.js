@@ -10,13 +10,13 @@ e.waitUntil(
 });
 
 self.addEventListener('activate', event => {
-event.waitUntil(self.clients.claim());
+	event.waitUntil(self.clients.claim());
 });
 
-self.addEventListener('fetch', event => {
- event.respondWith(
-   caches.match(event.request).then(response => {
-       return response || fetch(event.request);
-   })
- );
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    fetch(event.request).catch(function() {
+      return caches.match(event.request);
+    })
+  );
 });
