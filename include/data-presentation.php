@@ -230,8 +230,12 @@ $hasManifest = isset($manifest) && !empty($manifest);
 									<i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span>
 								</span>
 							</div>
-
-							<?php if (empty($schedule)) { ?>
+							
+							<?php if(empty($calendar)) { ?>
+								<div class="alert alert-warning mt-3" role="alert">
+									No events exist for this class yet. Please check back later.
+								</div>
+							<?php } else if (empty($schedule)) { ?>
 								<div class="alert alert-info mt-3" role="alert">
 									No entries have been found for that day.
 								</div>
