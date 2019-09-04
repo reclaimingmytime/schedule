@@ -124,8 +124,8 @@ function validSubject($subject, $ignoredSubjects) {
 	return !in_array($subject, $ignoredSubjects);
 }
 
-function containsNewRoom($existing, $new) {
-	return !empty($existing["room"]) && notContains($existing["room"], $new["room"]);
+function isNewRoom($new, $existing) {
+	return !in_array($new, $existing["room"]);
 }
 
 function containsNewProf($existing, $new, $emptyProfs) {
@@ -186,7 +186,8 @@ foreach ($calendar as $entry) {
 		
 		if(!isset($excludedRoomSubjects) || isset($excludedRoomSubjects) && !in_array($new["subject"], $excludedRoomSubjects)) {
 			$shortRoom = !empty($roomPrefix) ? trimRoom($entry[ROOM], $roomPrefix) : $entry[ROOM];
-			$new["room"] = lookup($shortRoom , $rooms);
+			$roomName = lookup($shortRoom , $rooms);
+			$new["room"] = !empty($roomDelimiter) ? getIndividualEntries($roomDelimiter, $roomName) : $roomName;
 		}
 		
 		if(defined('INFO')) {
@@ -226,8 +227,15 @@ foreach ($calendar as $entry) {
 		foreach ($schedule as $key => $existing) {
 			if (sameEvent($existing, $new)) {
 				$add = false;
-				if (containsNewRoom($existing, $new)) {
-					$schedule[$key]["room"] .= ", " . $new["room"];
+
+				foreach ($new["room"] as $room) {
+					if (isNewRoom($room, $existing)) {
+						if(is_array($room)) {
+							array_merge($schedule[$key]["room"], $room);
+						} else {
+							$schedule[$key]["room"][] = $room;
+						}
+					}
 				}
 				if (containsNewProf($existing, $new, $emptyProfs)) {
 					$schedule[$key]["prof"] .= ", " . $new["prof"];

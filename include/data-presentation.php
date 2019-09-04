@@ -293,8 +293,10 @@ $hasManifest = isset($manifest) && !empty($manifest);
 												<?php if (!empty($event['subject'])) { ?>
 													<li class="list-inline-item pr-3 font-weight-bold"><?php echo $event['subject']; ?></li>
 												<?php }
-												if (!empty($event['room'])) { ?>
-													<li class="list-inline-item pr-3"><?php echo $event['room']; ?></li>
+												if (isset($event['room'][0]) && !empty($event['room'][0])) { ?>
+														<li class="list-inline-item pr-3"><?php
+															echo prettyPrintArray($event['room']); ?>
+														</li>
 												<?php }
 												if (!empty($event['prof'])) { ?>
 													<li class="list-inline-item pr-3 text-secondary"><?php echo $event['prof']; ?></li>
