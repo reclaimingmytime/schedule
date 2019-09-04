@@ -75,6 +75,10 @@ function printArray($array, $lowercase = false) {
 	return $output;
 }
 
+function prettyPrintArray($array) {
+	return (is_array($array)) ? implode(", ", $array) : $array;
+}
+
 function arrayContains($array, $string) {
 	return in_array(strtolower($string), $array) || in_array(strtoupper($string), $array);
 }
@@ -111,6 +115,16 @@ function getArrayWithout($array, $string) {
 
 function containsAllValues($needle, $haystack) {
 	return !array_diff($needle, $haystack);
+}
+
+function getIndividualEntries($delimiter, $string) {
+	$array = [];
+	
+	if(!empty($string) && contains($string, $delimiter)) {
+		return explode($delimiter, $string);
+	}
+	$array[] = $string;
+	return $array;
 }
 
 function writeCookie($name, $val, $time = "1 year") {
