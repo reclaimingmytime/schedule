@@ -41,10 +41,6 @@ function isTrue($x) {
 	return (bool)$x === true;
 }
 
-function isFalse($x) {
-	return $x === false;
-}
-
 function printBoolean($x) {
 	return $x === true ? "true" : "false";
 }
