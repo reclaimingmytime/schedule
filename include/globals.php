@@ -4,18 +4,7 @@ if (!empty($timezone)) {
 	date_default_timezone_set($timezone);
 }
 
-/* Functions */
-
-function stringRange($string, $startString, $endString) {
-	$r = explode($startString, $string);
-	if (isset($r[1])){
-			if($endString === false) return $r[1];
-			
-			$r = explode($endString, $r[1]);
-			return $r[0];
-	}
-	return '';
-}
+/* Conditions */
 
 function isBetween($x, $min, $max) {
 	return ($min <= $x) && ($x <= $max);
@@ -41,6 +30,31 @@ function isTrue($x) {
 	return (bool)$x === true;
 }
 
+function isDifferent($x, $y) {
+	return !empty($x) && $x !== $y;
+}
+
+function containsAllValues($needle, $haystack) {
+	return !array_diff($needle, $haystack);
+}
+
+function arrayContains($array, $string) {
+	return in_array(strtolower($string), $array) || in_array(strtoupper($string), $array);
+}
+
+/* Various Functions */
+
+function stringRange($string, $startString, $endString) {
+	$r = explode($startString, $string);
+	if (isset($r[1])){
+			if($endString === false) return $r[1];
+			
+			$r = explode($endString, $r[1]);
+			return $r[0];
+	}
+	return '';
+}
+
 function printBoolean($x) {
 	return $x === true ? "true" : "false";
 }
@@ -49,6 +63,8 @@ function escape($a) {
 	return htmlspecialchars($a, ENT_QUOTES);
 }
 
+
+/* Array Functions */
 function escapeArray(&$array) {
 	array_walk_recursive($array, function(&$item) {
 		$item = escape($item);
@@ -73,10 +89,6 @@ function printArray($array, $lowercase = false) {
 
 function prettyPrintArray($array) {
 	return (is_array($array)) ? implode(", ", $array) : $array;
-}
-
-function arrayContains($array, $string) {
-	return in_array(strtolower($string), $array) || in_array(strtoupper($string), $array);
 }
 
 function getArray($string, $unique = false, $uppercase = false, $lowercase = false) {
@@ -109,10 +121,6 @@ function getArrayWithout($array, $string) {
 	return $array;
 }
 
-function containsAllValues($needle, $haystack) {
-	return !array_diff($needle, $haystack);
-}
-
 function getIndividualEntries($delimiter, $string) {
 	$array = [];
 	
@@ -122,6 +130,8 @@ function getIndividualEntries($delimiter, $string) {
 	$array[] = $string;
 	return $array;
 }
+
+/* Cookie, Get and Post */
 
 function writeCookie($name, $val, $time = "1 year") {
 	$expTime = new DateTime($time);
@@ -136,10 +146,6 @@ function getToCookie($name, $value, $token) {
 	}
 }
 
-function isDifferent($x, $y) {
-	return !empty($x) && $x !== $y;
-}
-		
 function getParameter($string) {
 	return !empty($_GET[$string]) ? $_GET[$string] : '';
 }
@@ -154,6 +160,8 @@ function getInput($get, $cookie) {
 	}
 	return $cookie;
 }
+
+/* Redirect */
 
 function redirect($path = '.') {
 	header('Location:' . $path);
