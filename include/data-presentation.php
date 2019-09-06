@@ -150,7 +150,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 
 						<?php if ($nextWeek !== "none") { ?>
 						<li class="nav-item mr-4">
-						<a class="nav-link" id="nextWeek" href="?date=<?php echo $nextWeek; ?>"><i class="fas fa-step-forward"></i> <span class="d-none d-lg-inline">Next Week <small><code class="text-secondary">(<?php echo ($weekOverview === false) ? "W" : "D"; ?>)</code></small></span></a>
+							<a class="nav-link" id="nextWeek" href="?date=<?php echo $nextWeek; ?>"><i class="fas fa-step-forward"></i> <span class="d-none d-lg-inline">Next Week <small><code class="text-secondary">(<?php echo ($weekOverview === false) ? "W" : "D"; ?>)</code></small></span></a>
 						</li>
 						<?php } ?>
 
