@@ -121,16 +121,6 @@ function getArrayWithout($array, $string) {
 	return $array;
 }
 
-function getIndividualEntries($delimiter, $string) {
-	$array = [];
-	
-	if(!empty($string) && contains($string, $delimiter)) {
-		return explode($delimiter, $string);
-	}
-	$array[] = $string;
-	return $array;
-}
-
 /* Cookie, Get and Post */
 
 function writeCookie($name, $val, $time = "1 year") {
