@@ -329,7 +329,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 						</a>
 					</p>
 					<div class="collapse" id="weekendNotice">
-						<div class="card card-body pb-1">
+						<div class="card card-body mb-4 pb-1">
 							<p>Weekends have been excluded from the schedule. You are now viewing the next week.</p>
 						</div>
 					</div>
