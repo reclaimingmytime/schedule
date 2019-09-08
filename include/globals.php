@@ -14,10 +14,6 @@ function isBelowOrAbove($x, $min, $max) {
 	return ($min < $x) && ($x < $max);
 }
 
-function equals($x, $y) {
-	return $x === $y;
-}
-
 function contains($haystack, $needle) {
 	return strpos($haystack, $needle) !== false;
 }

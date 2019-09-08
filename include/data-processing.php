@@ -110,10 +110,10 @@ function getSubject($type, $wholeString) {
 
 //Duplicate check
 function sameEvent($e, $new) {
-	return equals($e["date"], $new["date"]) &&
-					equals($e["start"], $new["start"]) &&
-					equals($e["end"], $new["end"]) &&
-					equals($e["subject"], $new["subject"]);
+	return $e["date"] == $new["date"] &&
+					$e["start"] == $new["start"] &&
+					$e["end"] ==  $new["end"] &&
+					$e["subject"] ==  $new["subject"];
 }
 
 function validProf($profs, $emptyProfs) {
