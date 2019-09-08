@@ -84,7 +84,7 @@ if($weekOverview === true) {
 
 $weekBump = false;
 
-if(isset($excludeWeekends) && isTrue($excludeWeekends)) {
+if(isset($excludeWeekends) && $excludeWeekends == true) {
 	if(isWeekend($desiredDateMidWeek)) {
 		$desiredDate = getDateFromInterval($desiredDateMidWeek, "1 weekday");
 		$weekBump = true;

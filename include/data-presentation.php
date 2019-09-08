@@ -268,7 +268,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 									$timeRange = $event['start'] . " - " . $event['end'];
 									
 									$headerClasses = 'card-header';
-									if(isTrue($highlightEvents) && onGoingEvent($event, $currentTime, $today)) {
+									if($highlightEvents == true && onGoingEvent($event, $currentTime, $today)) {
 										$headerClasses .= ' ' . $highlightClasses;
 									} else if($event['type'] == 'extraEvent') {
 										$headerClasses .= ' ' . $extraClasses;
@@ -306,7 +306,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 										</div>
 									</div>
 									<?php
-									if(isset($nextEvent) && isTrue($highlightEvents) && isToday($nextEvent['date'], $today)) {
+									if(isset($nextEvent) && $highlightEvents == true && isToday($nextEvent['date'], $today)) {
 										$breakStart = formatTime($thisEnd, "+1 minute");
 										$breakEnd = formatTime($nextStart, "-1 minute");
 										?>

@@ -22,10 +22,6 @@ function notContains($haystack, $needle) {
 	return strpos($haystack, $needle) === false;
 }
 
-function isTrue($x) {
-	return (bool)$x === true;
-}
-
 function isDifferent($x, $y) {
 	return !empty($x) && $x !== $y;
 }
