@@ -187,7 +187,7 @@ foreach ($calendar as $entry) {
 		if(!isset($excludedRoomSubjects) || isset($excludedRoomSubjects) && !in_array($new["subject"], $excludedRoomSubjects)) {
 			$shortRoom = !empty($roomPrefix) ? trimRoom($entry[ROOM], $roomPrefix) : $entry[ROOM];
 			$descriptiveRoom = lookup($shortRoom, $rooms);
-			$new["room"] = str_replace($roomDelimiter, ", ", $descriptiveRoom);
+			$new["room"] = !empty($roomDelimiter) ? str_replace($roomDelimiter, ", ", $descriptiveRoom) : $descriptiveRoom;
 		}
 		
 		if(defined('INFO')) {
