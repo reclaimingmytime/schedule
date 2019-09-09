@@ -113,6 +113,7 @@ Note: The directory of the script and the folder "cache/" (created by the script
 | `$infos`                                     | *Optional.* Associative array of preferred names for infos.  |
 | `$profs`                                     | *Optional.* Associative array of initials to full names.     |
 | `$roomPrefix`                                | *Optional.* A prefix that might seem redundant, such as "Room-". |
+| `$roomDelimiter`                             | *Optional.* A delimiter for different rooms that should be replaced with ", ". For example, with a delimiter of "|", "1|2" becomes "1, 2". |
 | `$rooms`                                     | *Optional.* Associative array of rooms to custom names.      |
 | `$excludedRoomSubjects`                      | *Optional.* Array of subjects not to display rooms for.      |
 
