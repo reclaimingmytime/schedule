@@ -219,7 +219,7 @@ foreach ($calendar as $entry) {
 				$add = false;
 			}
 		}
-		
+
 		if(!validSubject($new["subject"], $ignoredSubjects)) {
 			$add = false;
 		}
@@ -255,6 +255,19 @@ foreach ($calendar as $entry) {
 }
 
 if (!empty($schedule)) {
+	//remove overlapping events
+	foreach ($schedule as $key => $extraEvent) {
+		if ($extraEvent['type'] == "extraEvent") {
+			foreach ($schedule as $event) {
+				if ($event['type'] == "event" &&
+						$extraEvent["date"] == $event["date"] &&
+						isBetween($extraEvent["start"], $event["start"], $event["end"]) &&
+						isBetween($extraEvent["end"], $event["start"], $event["end"])) {
+					unset($schedule[$key]);
+				}
+			}
+		}
+	}
 	//Sanitize input
 	escapeArray($schedule);
 }
