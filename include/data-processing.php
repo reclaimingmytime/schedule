@@ -160,7 +160,7 @@ foreach ($calendar as $entry) {
 		
 		if(notContains($class, $desiredClass)) {
 			$isCorrectClass = false;
-			if(isset($displayExtraEvents) && $displayExtraEvents == true) {
+			if($displayExtraEvents == true) {
 				foreach ($extraEvents as $extraClass => $value) {
 					if(contains($class, $extraClass)) {
 						$isCorrectClass = true;
@@ -256,14 +256,16 @@ foreach ($calendar as $entry) {
 
 if (!empty($schedule)) {
 	//remove overlapping events
-	foreach ($schedule as $key => $extraEvent) {
-		if ($extraEvent['type'] == "extraEvent") {
-			foreach ($schedule as $event) {
-				if ($event['type'] == "event" &&
-						$extraEvent["date"] == $event["date"] &&
-						isBetween($extraEvent["start"], $event["start"], $event["end"]) &&
-						isBetween($extraEvent["end"], $event["start"], $event["end"])) {
-					unset($schedule[$key]);
+	if ($displayExtraEvents == true) {
+		foreach ($schedule as $key => $extraEvent) {
+			if ($extraEvent['type'] == "extraEvent") {
+				foreach ($schedule as $event) {
+					if ($event['type'] == "event" &&
+							$extraEvent["date"] == $event["date"] &&
+							isBetween($extraEvent["start"], $event["start"], $event["end"]) &&
+							isBetween($extraEvent["end"], $event["start"], $event["end"])) {
+						unset($schedule[$key]);
+					}
 				}
 			}
 		}
