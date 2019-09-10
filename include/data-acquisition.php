@@ -231,8 +231,8 @@ if(!empty($extraEvents)) {
 	$allowedSubjectsInput = getArrayWith(lowercaseArray($extraSubjects), "none");
 	$chosenExtraSubjectsString = getOption("extraSubjects", $allowedSubjectsInput, "", $token, $desiredDate, $today); //not-entirely-processed user input
 	$chosenExtraSubjects = getArray($chosenExtraSubjectsString, true, true); //cleans up duplicates and turns "none" into empty array
-	$displayExtraEvents = !empty($chosenExtraSubjects);
 }
+$displayExtraEvents = !empty($chosenExtraSubjects);
 
 
 $cache_folder = "cache/";
