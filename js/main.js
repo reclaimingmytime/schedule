@@ -258,10 +258,10 @@ $(function () {
 	if ('serviceWorker' in navigator && head.data('hasmanifest') === true) {
 		navigator.serviceWorker.register('serviceworker.min.js').
 						then(function (registration) {
-							console.log('ServiceWorker registration successful with scope: ',
-											registration.scope);
+							/* console.log('ServiceWorker registration successful with scope: ',
+											registration.scope); */
 						}).catch(function (err) {
-			console.log('ServiceWorker registration failed: ', err);
+			/* console.log('ServiceWorker registration failed: ', err); */
 		});
 	}
 
