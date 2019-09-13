@@ -159,11 +159,11 @@ function createCache($folder) {
 	}
 }
 
-function retrieveData($api, $cache_filename, $type) {
+function retrieveData($api, $cache_filename, $type, $cache_time) {
 	include('classes/CalFileParser.php');
 	$cal = new CalFileParser();
 	
-	if (is_writable($cache_filename) && (filemtime($cache_filename) > strtotime('now -1 day'))) {
+	if (is_writable($cache_filename) && (filemtime($cache_filename) > strtotime('now -' . $cache_time))) {
 		//retrieve cache
 		$calendar = file_get_contents($cache_filename);
 	} else {
@@ -239,4 +239,5 @@ $cache_folder = "cache/";
 createCache($cache_folder);
 
 $cache_file = $cache_folder . $cache_filename;
-$calendar = retrieveData($desiredAPI, $cache_file, $type);
+$cache_time = "1 day";
+$calendar = retrieveData($desiredAPI, $cache_file, $type, $cache_time);
