@@ -109,27 +109,35 @@ $(function () {
 
 	/* Swipe */
 	// fingerCount 0: No touchscreen detected
-	$("html").swipe({
-		swipeLeft: function (event, direction, distance, duration, fingerCount) {
-			if (fingerCount === 1 || fingerCount === 0) {
-				redirectToNextDay();
-			}
-			if (fingerCount === 2) {
-				redirectToNextWeek();
-			}
-		},
-		swipeRight: function (event, direction, distance, duration, fingerCount) {
-			// fingerCount 0: No touchscreen detected
-			if (fingerCount === 1 || fingerCount === 0) {
-				redirectToPrevDay();
-			}
-			if (fingerCount === 2) {
-				redirectToPrevWeek();
-			}
-		},
-		fingers: 'all',
-		threshold: '125'
-	});
+
+	function hasTouch() {
+	  try{ document.createEvent("TouchEvent"); return true; }
+	  catch(e){ return false; }
+	}
+
+	if(hasTouch() == true) {
+		$("html").swipe({
+			swipeLeft: function (event, direction, distance, duration, fingerCount) {
+				if (fingerCount === 1 || fingerCount === 0) {
+					redirectToNextDay();
+				}
+				if (fingerCount === 2) {
+					redirectToNextWeek();
+				}
+			},
+			swipeRight: function (event, direction, distance, duration, fingerCount) {
+				// fingerCount 0: No touchscreen detected
+				if (fingerCount === 1 || fingerCount === 0) {
+					redirectToPrevDay();
+				}
+				if (fingerCount === 2) {
+					redirectToPrevWeek();
+				}
+			},
+			fingers: 'all',
+			threshold: '125'
+		});
+	}
 
 	/* Keyboard navigation */
 	$(document).keydown(function (e) {
