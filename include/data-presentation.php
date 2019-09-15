@@ -327,7 +327,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 			<footer class="text-center my-4">
 				<?php if (isset($weekBump) && $weekBump === true) { ?>
 				<div class="d-block my-3">
-					<span class="text-muted" data-toggle="tooltip" data-placement="bottom" title="Weekends have been excluded from the schedule. You are now viewing the next week.">
+					<span class="text-muted" data-toggle="tooltip" data-placement="bottom" title="Weekends are not part of the schedule. You are now viewing the next week.">
 						<small>Weekend skipped. <i class="fas fa-info-circle"></i></small>
 					</span>
 				</div>
