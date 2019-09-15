@@ -322,21 +322,17 @@ $hasManifest = isset($manifest) && !empty($manifest);
 
 						</div>
 					</div>
-				<?php if (isset($weekBump) && $weekBump === true) { ?>
-					<p class="text-center text-sm-left mt-4">
-						<a class="btn btn-outline-secondary" data-toggle="collapse" href="#weekendNotice" id="infoBtn" role="button" aria-expanded="false" aria-controls="weekendNotice">
-							Info
-						</a>
-					</p>
-					<div class="collapse" id="weekendNotice">
-						<div class="card card-body mb-4 pb-1">
-							<p>Weekends have been excluded from the schedule. You are now viewing the next week.</p>
-						</div>
-					</div>
-				<?php } ?>
 			</main>
 
 			<footer class="text-center my-4">
+				<?php if (isset($weekBump) && $weekBump === true) { ?>
+				<div class="d-block my-3">
+					<span class="text-muted" data-toggle="tooltip" data-placement="bottom" title="Weekends have been excluded from the schedule. You are now viewing the next week.">
+						<small>Weekend skipped. <i class="fas fa-info-circle"></i></small>
+					</span>
+				</div>
+				<?php } ?>
+				
 				<?php /* Class Dropdown */ ?>
 				<?php if(!empty($allowedClasses) && !empty($desiredClass)) { ?>
 					<div class="d-block d-sm-none dropup d-inline">
