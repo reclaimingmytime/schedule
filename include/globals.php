@@ -195,10 +195,6 @@ $token = $_SESSION['token'];
 $tokenEmbed = '&amp;token=' . $token;
 
 function validToken($input, $token) {
-	if($input !== $token) {
-		$_SESSION['validToken'] = false;
-		return false;
-	}
-	$_SESSION['validToken'] = true;
-	return true;
+	$_SESSION['validToken'] = $input === $token;
+	return $_SESSION['validToken'];
 }
