@@ -198,8 +198,7 @@ function validToken($input, $token) {
 	if($input !== $token) {
 		$_SESSION['validToken'] = false;
 		return false;
-	} else {
-		$_SESSION['validToken'] = true;
 	}
+	$_SESSION['validToken'] = true;
 	return true;
 }
