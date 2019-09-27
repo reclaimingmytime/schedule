@@ -312,8 +312,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 										?>
 										<div class="card mt-3<?php echo !isBreak($currentTime, $thisEnd, $nextStart) ? ' d-none' : '' ?> today" data-start="<?php echo $breakStart;?>" data-end="<?php echo $breakEnd;?>" data-type="break">
 											<div class="card-header <?php echo $highlightClasses; ?>">
-												<i class="far fa-clock"></i> <strong><?php echo $breakStart; ?> - <?php echo $breakEnd; ?></strong>
-												<span class="float-right"><i class="fas fa-pause"></i> <strong>Break</strong></span>
+												<i class="fas fa-pause"></i> <strong>Break until <?php echo $breakEnd; ?></strong></span>
 											</div>
 										</div>
 										<?php
