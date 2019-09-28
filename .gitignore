@@ -1,12 +1,16 @@
+# macOS
 .DS_Store
+
+# IDE
+.idea/
+nbproject/
+
+# Site-Specific
+.htaccess
+robots.txt
+
 cache/
 config.php
 
-nbproject/
-.idea/
-
 favicon.ico
 img/
-
-.htaccess
-robots.txt
