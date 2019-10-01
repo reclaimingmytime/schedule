@@ -80,6 +80,13 @@ function extractApiDate($type, $singleEntry) {
 	return extractJsonDate($singleEntry);
 }
 
+function extractApiDateTime($type, $singleEntry) {
+	if($type == 'ical') {
+		return extractIcalDate($singleEntry["date"], "M j, Y H:i:s");
+	}
+	return extractJsonDate($singleEntry);
+}
+
 function extractJsonDate($dateTime) {
 	$info = explode(" ", $dateTime);
 	return $info[0];
@@ -180,6 +187,8 @@ foreach ($calendar as $entry) {
 
 		$new["start"] = extractApiTime($type, $entry[START]);
 		$new["end"] = extractApiTime($type, $entry[END]);
+		$new["startDateTime"] = extractApiDateTime($type, $entry[START]);
+		$new["endDateTime"] = extractApiDateTime($type, $entry[END]);
 		
 		$thisSubject = getSubject($type, $entry[SUBJECT]);
 		$new["subject"] = !empty($subjects) ? lookup($thisSubject, $subjects) : $thisSubject;
