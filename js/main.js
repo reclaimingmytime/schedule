@@ -203,12 +203,7 @@ $(function () {
 	function millisecondsToMins(time) {
 		return Math.round(time / 60000);
 	}
-
-	function computeRemainingMilliseconds(destination, timeMilliseconds) {
-		var countDownDate = new Date(destination).getTime();
-		return countDownDate - timeMilliseconds;
-	}
-
+	
 	function formatRemainingTime(remaining) {
 		var minutesRemaining = millisecondsToMins(remaining);
 		return minutesRemaining + " m remaining";
@@ -221,6 +216,11 @@ $(function () {
 		} else {
 			timeRemainingIndicator.html(timeRemaining);
 		}
+	}
+	
+	function computeRemainingMilliseconds(destination, timeMilliseconds) {
+		var countDownDate = new Date(destination).getTime();
+		return countDownDate - timeMilliseconds;
 	}
 
 	function updateRemainingTime(jsEnd, timeMilliseconds, card) {
