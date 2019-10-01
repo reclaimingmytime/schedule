@@ -142,15 +142,11 @@ $(function () {
 					break;
 
 				case W_KEY:
-					if (dataNotNone('nextweek')) {
-						redirectToHref('#nextWeek');
-					}
+					redirectToNextWeek();
 					break;
 
 				case S_KEY:
-					if (dataNotNone('prevweek')) {
-						redirectToHref('#prevWeek');
-					}
+					redirectToPrevWeek();
 					break;
 
 				case ENTER_KEY:
