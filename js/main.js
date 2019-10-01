@@ -201,7 +201,7 @@ $(function () {
 		return pad(min, 2) + ":" + pad(hours, 2);
 	}
 	function millisecondsToMins(time) {
-		return Math.round(time / 60000);
+		return Math.ceil(time / 60000);
 	}
 	
 	function formatRemainingTime(remaining) {
