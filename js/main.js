@@ -284,7 +284,7 @@ $(function () {
 
 	function updateTime() {
 		const dt = new Date();
-//		const dt = new Date("Oct 1, 2019 10:22:00");
+//		const dt = new Date("Oct 1, 2019 10:22:59");
 		const time = formatTime(dt.getHours(), dt.getMinutes());
 		const timeMilliseconds = dt.getTime();
 
