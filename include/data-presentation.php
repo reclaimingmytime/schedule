@@ -13,7 +13,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 			$classSwitcherClasses .= ' active font-weight-bold text-body bg-transparent';
 		}
 		?>
-		<a class="<?php echo $classSwitcherClasses; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php echo !empty($keyCode) ? ' id="keyCode' . $keyCode . '"' : ''; ?>>
+		<a class="<?php echo $classSwitcherClasses; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php if(!empty($keyCode)) echo ' id="keyCode' . $keyCode . '"'; ?>>
 			<i class="fas fa-chalkboard"></i>
 			<?php echo $class;
 
