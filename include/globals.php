@@ -40,9 +40,9 @@ function stringRange($string, $startString, $endString) {
 	$r = explode($startString, $string);
 	if (isset($r[1])){
 			if($endString === false) return $r[1];
-			
-			$r = explode($endString, $r[1]);
-			return $r[0];
+
+		$r = explode($endString, $r[1]);
+		return $r[0];
 	}
 	return '';
 }
@@ -55,8 +55,8 @@ function escape($a) {
 	return htmlspecialchars($a, ENT_QUOTES);
 }
 
-
 /* Array Functions */
+
 function escapeArray(&$array) {
 	array_walk_recursive($array, function(&$item) {
 		$item = escape($item);
@@ -72,10 +72,12 @@ function uppercaseArray(&$array) {
 }
 
 function printArray($array, $lowercase = false) {
-	if(empty($array)) return "none";
-	
+	if (empty($array))
+		return "none";
+
 	$output = (is_array($array)) ? implode(",", $array) : $array;
-	if($lowercase === true) return strtolower($output);
+	if ($lowercase === true)
+		return strtolower($output);
 	return $output;
 }
 
@@ -84,24 +86,30 @@ function prettyPrintArray($array) {
 }
 
 function getArray($string, $unique = false, $uppercase = false, $lowercase = false) {
-	if(strtolower($string) === "none") return [];
-	
-	if($uppercase === true) $string = strtoupper($string);
-	if($lowercase === true) $string = strtolower($string);
-	
-	if(contains($string, ",")) {
+	if (strtolower($string) === "none")
+		return [];
+
+	if ($uppercase === true)
+		$string = strtoupper($string);
+	if ($lowercase === true)
+		$string = strtolower($string);
+
+	if (contains($string, ",")) {
 		$array = explode(",", $string);
-		if(arrayContains($array, "none")) return [];
-		if($unique === true) return array_unique($array);
+		if (arrayContains($array, "none"))
+			return [];
+		if ($unique === true)
+			return array_unique($array);
 		return $array;
 	}
-	
-	return (array)$string;
+
+	return (array) $string;
 }
 
 function getArrayWith($array, $string) {
-	if(!is_array($array)) return $array . $string;
-	
+	if (!is_array($array))
+		return $array . $string;
+
 	$array[] = $string;
 	return $array;
 }
@@ -187,8 +195,12 @@ function readableToIsoDate($date) {
 	return $object->format("Y-m-d");
 }
 
+function createJsTime($date) {
+	return date("M j, Y H:i:s", strtotime($date));
+}
+
 /* CSRF Token */
-if(!isset($_SESSION['token'])) {
+if (!isset($_SESSION['token'])) {
 	$_SESSION['token'] = bin2hex(random_bytes(16));
 }
 $token = $_SESSION['token'];
