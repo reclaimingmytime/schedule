@@ -209,7 +209,7 @@ $(function () {
 		return minutesRemaining + " m remaining";
 	}
 
-	function displayReaminingTime(card, timeRemaining) {
+	function displayRemainingTime(card, timeRemaining) {
 		var timeRemainingIndicator = card.find('.timeRemaining');
 		if (timeRemainingIndicator.length === 0) {
 			card.append('<div class="card-footer text-muted"><i class="fas fa-business-time"></i> <span class="timeRemaining">' + timeRemaining + '</span></div>');
@@ -228,7 +228,7 @@ $(function () {
 
 		if (remaining >= 0) {
 			var timeRemaining = formatRemainingTime(remaining);
-			displayReaminingTime(card, timeRemaining);
+			displayRemainingTime(card, timeRemaining);
 		}
 	}
 
