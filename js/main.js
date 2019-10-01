@@ -231,21 +231,24 @@ $(function () {
 			displayReaminingTime(card, timeRemaining);
 		}
 	}
-	
+
+	function swapClasses(element, toBeRemoved, toBeAdded) {
+		if (toBeRemoved !== undefined) {
+			$(element).removeClass(toBeRemoved);
+		}
+		if (toBeAdded !== undefined) {
+			$(element).addClass(toBeAdded);
+		}
+	}
+
 	function highlightEvent(element, time, timeMilliseconds, start, end, jsEnd, highlight, normal) {
 		if (isBetween(time, start, end)) {
 			var card = $(element).closest('.card');
 			updateRemainingTime(jsEnd, timeMilliseconds, card);
-
-			if (normal !== undefined)
-				$(element).removeClass(normal);
-			if (highlight !== undefined)
-				$(element).addClass(highlight);
+			
+			swapClasses(element, normal, highlight);
 		} else {
-			if (highlight !== undefined)
-				$(element).removeClass(highlight);
-			if (normal !== undefined)
-				$(element).addClass(normal);
+			swapClasses(element, highlight, normal);
 		}
 	}
 
