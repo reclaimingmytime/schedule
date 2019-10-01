@@ -92,6 +92,11 @@ $(function () {
 			redirectToHref('#prevWeek');
 		}
 	}
+	function redirectToToday() {
+		if (head.data('enabletodaylink') === true) {
+			redirectToHref('#today');
+		}
+	}
 
 	/* Swipe */
 	// fingerCount 0: No touchscreen detected
@@ -150,9 +155,7 @@ $(function () {
 					break;
 
 				case ENTER_KEY:
-					if (head.data('enabletodaylink') === true) {
-						redirectToHref('#today');
-					}
+					redirectToToday();
 					break;
 
 				case T_KEY:
@@ -199,7 +202,7 @@ $(function () {
 	function millisecondsToMins(time) {
 		return Math.ceil(time / 60000);
 	}
-	
+
 	function formatRemainingTime(remaining) {
 		var minutesRemaining = millisecondsToMins(remaining);
 		return minutesRemaining + " m remaining";
@@ -213,10 +216,10 @@ $(function () {
 			timeRemainingIndicator.html(timeRemaining);
 		}
 	}
-	function hideRemainingTime(card){
+	function hideRemainingTime(card) {
 		card.find('.timeRemaining').hide();
 	}
-	
+
 	function computeRemainingMilliseconds(destination, timeMilliseconds) {
 		var countDownDate = new Date(destination).getTime();
 		return countDownDate - timeMilliseconds;
@@ -242,7 +245,7 @@ $(function () {
 
 	function highlightEvent(element, time, timeMilliseconds, start, end, jsEnd, highlight, normal) {
 		var card = $(element).closest('.card');
-		
+
 		if (isBetween(time, start, end)) {
 			updateRemainingTime(jsEnd, timeMilliseconds, card);
 			swapClasses(element, normal, highlight);
