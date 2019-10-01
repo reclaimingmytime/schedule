@@ -217,6 +217,9 @@ $(function () {
 			timeRemainingIndicator.html(timeRemaining);
 		}
 	}
+	function hideRemainingTime(card){
+		card.find('.timeRemaining').hide();
+	}
 	
 	function computeRemainingMilliseconds(destination, timeMilliseconds) {
 		var countDownDate = new Date(destination).getTime();
@@ -242,12 +245,13 @@ $(function () {
 	}
 
 	function highlightEvent(element, time, timeMilliseconds, start, end, jsEnd, highlight, normal) {
+		var card = $(element).closest('.card');
+		
 		if (isBetween(time, start, end)) {
-			var card = $(element).closest('.card');
 			updateRemainingTime(jsEnd, timeMilliseconds, card);
-			
 			swapClasses(element, normal, highlight);
 		} else {
+			hideRemainingTime(card);
 			swapClasses(element, highlight, normal);
 		}
 	}
