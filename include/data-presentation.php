@@ -4,7 +4,9 @@
 function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, $showIDs = false) {
 	$i = 1;
 	foreach ($allowedClasses as $class) {
-		$keyCode = ($showIDs === true && $i <= 9) ? $i + 48 : null;
+		if($showIDs === true && $i <= 9) {
+			$keyCode = $i + 48;
+		}
 		
 		$classSwitcherClasses = "dropdown-item";
 		if ($desiredClass == $class) {
