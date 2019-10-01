@@ -195,8 +195,8 @@ function readableToIsoDate($date) {
 	return $object->format("Y-m-d");
 }
 
-function createJsTime($date) {
-	return date("M j, Y H:i:s", strtotime($date));
+function createJsTime($time) {
+	return date("M j, Y H:i:s", strtotime($time));
 }
 
 /* CSRF Token */
