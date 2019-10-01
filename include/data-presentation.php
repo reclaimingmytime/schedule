@@ -289,7 +289,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 												 data-start="<?php echo $event['start'];?>" 
 												 data-end="<?php echo $event['end'];?>"
 												 data-type="<?php echo $event['type']; ?>"
-												 data-jsend="<?php echo createJsTime($event['end']); ?>"> <?php /* new $data index: endDateTime */ ?>
+												 data-jsend="<?php echo $event['endDateTime']; ?>">
 											<i class="<?php echo $clockIcon; ?>"></i>
 											<strong><?php echo $timeRange ?></strong>
 										</div>
