@@ -93,29 +93,19 @@ $(function () {
 		}
 	}
 
-	function highlightEvent(element, time, start, end, highlight, normal) {
-		if (isBetween(time, start, end)) {
-			if (normal !== undefined)
-				$(element).removeClass(normal);
-			if (highlight !== undefined)
-				$(element).addClass(highlight);
-		} else {
-			if (highlight !== undefined)
-				$(element).removeClass(highlight);
-			if (normal !== undefined)
-				$(element).addClass(normal);
-		}
-	}
-
 	/* Swipe */
 	// fingerCount 0: No touchscreen detected
 
 	function hasTouch() {
-	  try{ document.createEvent("TouchEvent"); return true; }
-	  catch(e){ return false; }
+		try {
+			document.createEvent("TouchEvent");
+			return true;
+		} catch (e) {
+			return false;
+		}
 	}
 
-	if(hasTouch() == true) {
+	if (hasTouch() == true) {
 		$("html").swipe({
 			swipeLeft: function (event, direction, distance, duration, fingerCount) {
 				if (fingerCount === 1 || fingerCount === 0) {
@@ -210,22 +200,78 @@ $(function () {
 	function formatTime(min, hours) {
 		return pad(min, 2) + ":" + pad(hours, 2);
 	}
+	function millisecondsToMins(time) {
+		return Math.round(time / 60000);
+	}
+
+	function computeRemainingMilliseconds(destination, timeMilliseconds) {
+		var countDownDate = new Date(destination).getTime();
+		return countDownDate - timeMilliseconds;
+	}
+
+	function formatRemainingTime(remaining) {
+		var minutesRemaining = millisecondsToMins(remaining);
+		return minutesRemaining + " m remaining";
+	}
+
+	function displayReaminingTime(card, timeRemaining) {
+		var timeRemainingIndicator = card.find('.timeRemaining');
+		if (timeRemainingIndicator.length === 0) {
+			card.append('<div class="card-footer text-muted"><i class="fas fa-business-time"></i> <span class="timeRemaining">' + timeRemaining + '</span></div>');
+		} else {
+			timeRemainingIndicator.html(timeRemaining);
+		}
+	}
+
+	function updateRemainingTime(jsEnd, timeMilliseconds, card) {
+		var remaining = computeRemainingMilliseconds(jsEnd, timeMilliseconds);
+
+		if (remaining >= 0) {
+			var timeRemaining = formatRemainingTime(remaining);
+			displayReaminingTime(card, timeRemaining);
+		}
+	}
+	
+	function highlightEvent(element, time, timeMilliseconds, start, end, jsEnd, highlight, normal) {
+		if (isBetween(time, start, end)) {
+			var card = $(element).closest('.card');
+			updateRemainingTime(jsEnd, timeMilliseconds, card);
+
+			if (normal !== undefined)
+				$(element).removeClass(normal);
+			if (highlight !== undefined)
+				$(element).addClass(highlight);
+		} else {
+			if (highlight !== undefined)
+				$(element).removeClass(highlight);
+			if (normal !== undefined)
+				$(element).addClass(normal);
+		}
+	}
 
 	const highlightClasses = head.data('highlightclasses');
 	const extraClasses = head.data('extraclasses');
-	function updateEvents(time) {
+
+	function updateEvents(time, timeMilliseconds) {
 		$("div[data-start].today").val(function () { //for-each all divs with data-start and class today
 			const thisType = $(this).data('type');
 
 			const thisStart = $(this).data('start');
 			const thisEnd = $(this).data('end');
+			const jsEnd = $(this).data('jsend');
 
 			if (thisType == "event") {
-				highlightEvent(this, time, thisStart, thisEnd, highlightClasses, undefined);
+				highlightEvent(this, time, timeMilliseconds,
+								thisStart, thisEnd, jsEnd,
+								highlightClasses, undefined);
 			} else if (thisType == "extraEvent") {
-				highlightEvent(this, time, thisStart, thisEnd, highlightClasses, extraClasses);
+				highlightEvent(this, time, timeMilliseconds,
+								thisStart, thisEnd, jsEnd,
+								highlightClasses, extraClasses);
 			} else if (thisType == "break") {
-				highlightEvent(this, time, thisStart, thisEnd, undefined, "d-none");
+				highlightEvent(this, time, timeMilliseconds,
+								thisStart, thisEnd, jsEnd,
+								undefined, "d-none");
 			}
 		});
 	}
@@ -236,16 +282,18 @@ $(function () {
 	function updateTime() {
 		const dt = new Date();
 		const time = formatTime(dt.getHours(), dt.getMinutes());
+		const timeMilliseconds = dt.getTime();
 
 		if (displayed !== time) {
 			displayed = time;
 			clock.html(time);
 			if (head.data('highlightevents') === true) {
-				updateEvents(time);
+				updateEvents(time, timeMilliseconds);
 			}
 		}
 
 	}
+	updateTime();
 	setInterval(function () {
 		updateTime();
 	}, 5000);
@@ -267,7 +315,7 @@ $(function () {
 		navigator.serviceWorker.register('serviceworker.min.js').
 						then(function (registration) {
 							/* console.log('ServiceWorker registration successful with scope: ',
-											registration.scope); */
+							 registration.scope); */
 						}).catch(function (err) {
 			/* console.log('ServiceWorker registration failed: ', err); */
 		});
