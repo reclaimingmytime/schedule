@@ -280,6 +280,7 @@ $(function () {
 	var displayed = clock.text(); //cannot use let here, eslint forbids it in the global scope.
 
 	function updateTime() {
+//		const dt = new Date("Oct 1, 2019 10:22:00");
 		const dt = new Date();
 		const time = formatTime(dt.getHours(), dt.getMinutes());
 		const timeMilliseconds = dt.getTime();
