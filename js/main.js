@@ -203,8 +203,7 @@ $(function () {
 		return Math.ceil(time / 60000);
 	}
 
-	function formatRemainingTime(remaining) {
-		var minutesRemaining = millisecondsToMins(remaining);
+	function formatRemainingTime(minutesRemaining) {
 		return minutesRemaining + " m remaining";
 	}
 
@@ -228,8 +227,9 @@ $(function () {
 	function updateRemainingTime(jsEnd, timeMilliseconds, card) {
 		var remaining = computeRemainingMilliseconds(jsEnd, timeMilliseconds);
 
-		if (remaining >= 0) {
-			var timeRemaining = formatRemainingTime(remaining);
+		var minutesRemaining = millisecondsToMins(remaining);
+		if (minutesRemaining >= 0) {
+			var timeRemaining = formatRemainingTime(minutesRemaining);
 			displayRemainingTime(card, timeRemaining);
 		}
 	}
