@@ -210,10 +210,10 @@ $(function () {
 	function displayRemainingTime(card, timeRemaining) {
 		var cardFooter = card.find('.card-footer');
 		cardFooter.find('.timeRemaining').html(timeRemaining);
-		cardFooter.show();
+		cardFooter.removeClass('d-none');
 	}
 	function hideRemainingTime(card) {
-		card.find('.card-footer').hide();
+		card.find('.card-footer').addClass('d-none');
 	}
 
 	function computeRemainingMilliseconds(destination, timeMilliseconds) {
