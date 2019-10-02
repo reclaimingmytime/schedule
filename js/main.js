@@ -209,15 +209,15 @@ $(function () {
 	}
 
 	function displayRemainingTime(card, timeRemaining) {
-		var timeRemainingIndicator = card.find('.timeRemaining');
-		if (timeRemainingIndicator.length === 0) {
+		var cardFooter = card.find('.footer');
+		if (cardFooter.length === 0) {
 			card.append('<div class="card-footer text-muted"><i class="fas fa-business-time"></i> <span class="timeRemaining">' + timeRemaining + '</span></div>');
 		} else {
-			timeRemainingIndicator.html(timeRemaining);
+			cardFooter.find('.timeRemaining').html(timeRemaining);
 		}
 	}
 	function hideRemainingTime(card) {
-		card.find('.timeRemaining').hide();
+		card.find('.card-footer').hide();
 	}
 
 	function computeRemainingMilliseconds(destination, timeMilliseconds) {
