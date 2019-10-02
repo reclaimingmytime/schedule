@@ -209,11 +209,8 @@ $(function () {
 
 	function displayRemainingTime(card, timeRemaining) {
 		var cardFooter = card.find('.card-footer');
-		if (cardFooter.length === 0) {
-			card.append('<div class="card-footer text-muted"><i class="fas fa-business-time"></i> <span class="timeRemaining">' + timeRemaining + '</span></div>');
-		} else {
-			cardFooter.find('.timeRemaining').html(timeRemaining);
-		}
+		cardFooter.find('.timeRemaining').html(timeRemaining);
+		cardFooter.show();
 	}
 	function hideRemainingTime(card) {
 		card.find('.card-footer').hide();

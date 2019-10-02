@@ -310,6 +310,11 @@ $hasManifest = isset($manifest) && !empty($manifest);
 												<?php } ?>
 											</ul>
 										</div>
+										<?php if(isToday($event['date'], $today) && $highlightEvents == true) { ?>
+											<div class="card-footer text-muted<?php echo !onGoingEvent($event, $currentTime, $today) ? ' d-none' : ''; ?>">
+												<i class="fas fa-business-time"></i> <span class="timeRemaining"></span>
+											</div>
+										<?php } ?>
 									</div>
 									<?php
 									if(isset($nextEvent) && $highlightEvents == true && isToday($nextEvent['date'], $today)) {
@@ -323,6 +328,9 @@ $hasManifest = isset($manifest) && !empty($manifest);
 												 data-type="break">
 											<div class="card-header <?php echo $highlightClasses; ?>">
 												<i class="fas fa-pause"></i> <strong>Break until <?php echo $nextStart; ?></strong></span>
+											</div>
+											<div class="card-footer text-muted">
+												<i class="fas fa-business-time"></i> <span class="timeRemaining"></span>
 											</div>
 										</div>
 										<?php
