@@ -218,8 +218,8 @@ $(function () {
 		if (minutes < 60) {
 			return minutes + " m";
 		}
-		var m = removeHours(minutes);
 		var h = removeMinutes(minutes);
+		var m = removeHours(minutes);
 		return h + " h " + m + " m";
 	}
 
