@@ -221,8 +221,8 @@ $(function () {
 		return countDownDate - timeMilliseconds;
 	}
 
-	function updateRemainingTime(jsEnd, timeMilliseconds, card) {
-		var remaining = computeRemainingMilliseconds(jsEnd, timeMilliseconds);
+	function updateRemainingTime(endDateTime, timeMilliseconds, card) {
+		var remaining = computeRemainingMilliseconds(endDateTime, timeMilliseconds);
 
 		var minutesRemaining = millisecondsToMins(remaining);
 		if (minutesRemaining >= 0) {
@@ -240,11 +240,11 @@ $(function () {
 		}
 	}
 
-	function highlightEvent(element, time, timeMilliseconds, start, end, jsEnd, highlight, normal) {
+	function highlightEvent(element, time, timeMilliseconds, start, end, endDateTime, highlight, normal) {
 		var card = $(element).closest('.card');
 
 		if (isBetween(time, start, end)) {
-			updateRemainingTime(jsEnd, timeMilliseconds, card);
+			updateRemainingTime(endDateTime, timeMilliseconds, card);
 			swapClasses(element, normal, highlight);
 		} else {
 			hideRemainingTime(card);
@@ -261,19 +261,19 @@ $(function () {
 
 			const thisStart = $(this).data('start');
 			const thisEnd = $(this).data('end');
-			const jsEnd = $(this).data('jsend');
+			const endDateTime = $(this).data('enddatetime');
 
 			if (thisType == "event") {
 				highlightEvent(this, time, timeMilliseconds,
-								thisStart, thisEnd, jsEnd,
+								thisStart, thisEnd, endDateTime,
 								highlightClasses, undefined);
 			} else if (thisType == "extraEvent") {
 				highlightEvent(this, time, timeMilliseconds,
-								thisStart, thisEnd, jsEnd,
+								thisStart, thisEnd, endDateTime,
 								highlightClasses, extraClasses);
 			} else if (thisType == "break") {
 				highlightEvent(this, time, timeMilliseconds,
-								thisStart, thisEnd, jsEnd,
+								thisStart, thisEnd, endDateTime,
 								undefined, "d-none");
 			}
 		});

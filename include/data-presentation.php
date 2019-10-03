@@ -289,7 +289,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 												 data-start="<?php echo $event['start'];?>" 
 												 data-end="<?php echo $event['end'];?>"
 												 data-type="<?php echo $event['type']; ?>"
-												 data-jsend="<?php echo $event['endDateTime']; ?>">
+												 data-enddatetime="<?php echo $event['endDateTime']; ?>">
 											<i class="<?php echo $clockIcon; ?>"></i>
 											<strong><?php echo $timeRange ?></strong>
 										</div>
@@ -324,7 +324,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 										<div class="card mt-3<?php echo !isBreak($currentTime, $thisEnd, $nextStart) ? ' d-none' : '' ?> today"
 												 data-start="<?php echo $breakStart;?>"
 												 data-end="<?php echo $breakEnd;?>"
-												 data-jsend="<?php echo createJsTime($nextStart);?>"
+												 data-enddatetime="<?php echo createJsTime($nextStart);?>"
 												 data-type="break">
 											<div class="card-header <?php echo $highlightClasses; ?>">
 												<i class="fas fa-pause"></i> <strong>Break until <?php echo $nextStart; ?></strong></span>
