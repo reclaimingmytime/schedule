@@ -202,9 +202,26 @@ $(function () {
 	function millisecondsToMins(time) {
 		return Math.ceil(time / 60000);
 	}
+	function removeHours(minutes) {
+		return minutes % 60;
+	}
+	function removeMinutes(minutes) {
+		return Math.floor(minutes / 60);
+	}
 
-	function formatRemainingTime(minutesRemaining) {
-		return minutesRemaining + " m remaining";
+	function computeRemainingMilliseconds(destination, timeMilliseconds) {
+		var countDownDate = new Date(destination).getTime();
+		return countDownDate - timeMilliseconds;
+	}
+
+	function formatRemainingTime(minutes) {
+		console.log(minutes + " mins");
+		if (minutes < 60) {
+			return minutes + " m remaining";
+		}
+		var m = removeHours(minutes);
+		var h = removeMinutes(minutes);
+		return h + " h " + m + " m remaining";
 	}
 
 	function displayRemainingTime(card, timeRemaining) {
@@ -214,11 +231,6 @@ $(function () {
 	}
 	function hideRemainingTime(card) {
 		card.find('.card-footer').addClass('d-none');
-	}
-
-	function computeRemainingMilliseconds(destination, timeMilliseconds) {
-		var countDownDate = new Date(destination).getTime();
-		return countDownDate - timeMilliseconds;
 	}
 
 	function updateRemainingTime(endDateTime, timeMilliseconds, card) {
