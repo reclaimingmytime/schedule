@@ -215,7 +215,6 @@ $(function () {
 	}
 
 	function formatRemainingTime(minutes) {
-		console.log(minutes + " mins");
 		if (minutes < 60) {
 			return minutes + " m remaining";
 		}
