@@ -105,9 +105,12 @@ $hasManifest = isset($manifest) && !empty($manifest);
 		<?php if(!empty($touchIconPath)) { ?>
 			<link rel="apple-touch-icon" href="<?php echo $touchIconPath; ?>">	
 		<?php } ?>
-		<?php foreach ($favicons as $icon) {?>
-			<link rel="icon" type="<?php echo $icon["type"]; ?>" sizes="<?php echo $icon["sizes"]; ?>" href="<?php echo $icon["src"]; ?>">
-		<?php } ?>
+		<?php if (isset($manifest["icons"])) {
+			foreach ($manifest["icons"] as $icon) {
+				?>
+				<link rel="icon" type="<?php echo $icon["type"]; ?>" sizes="<?php echo $icon["sizes"]; ?>" href="<?php echo $icon["src"]; ?>">
+			<?php }
+		} ?>
 
 		<style>
 		.dropdown-toggle {
