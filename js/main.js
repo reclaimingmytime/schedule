@@ -213,14 +213,18 @@ $(function () {
 		var countDownDate = new Date(destination).getTime();
 		return countDownDate - timeMilliseconds;
 	}
-
-	function formatRemainingTime(minutes) {
+	
+	function prettyPrintMinutes(minutes) {
 		if (minutes < 60) {
-			return minutes + " m remaining";
+			return minutes + " m";
 		}
 		var m = removeHours(minutes);
 		var h = removeMinutes(minutes);
-		return h + " h " + m + " m remaining";
+		return h + " h " + m + " m";
+	}
+
+	function formatRemainingTime(minutes) {
+		return prettyPrintMinutes(minutes) + " remaining";
 	}
 
 	function displayRemainingTime(card, timeRemaining) {
