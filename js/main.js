@@ -218,9 +218,7 @@ $(function () {
 		if (minutes < 60) {
 			return minutes + " m";
 		}
-		var h = removeMinutes(minutes);
-		var m = removeHours(minutes);
-		return h + " h " + m + " m";
+		return removeMinutes(minutes) + " h " + removeHours(minutes) + " m";
 	}
 
 	function formatRemainingTime(minutes) {
