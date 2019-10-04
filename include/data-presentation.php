@@ -278,7 +278,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 									} else if($event['type'] == 'extraEvent') {
 										$headerClasses .= ' ' . $extraClasses;
 									}
-									if(isToday($event['date'], $today)) {
+									if(isToday($event['date'], $today) && $highlightEvents == true) {
 										$headerClasses .= ' today';
 									}
 									
