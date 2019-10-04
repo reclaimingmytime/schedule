@@ -288,7 +288,6 @@ function timeIsBetween($time, $start, $end) {
 }
 
 function isToday($rawDate, $today) {
-//	return true;
 	return $today === readableToIsoDate($rawDate);
 }
 
