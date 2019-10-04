@@ -320,7 +320,10 @@ $hasManifest = isset($manifest) && !empty($manifest);
 										<?php } ?>
 									</div>
 									<?php
-									if(isset($nextEvent) && $highlightEvents == true && isToday($nextEvent['date'], $today)) {
+									if(isset($nextEvent)
+													&& $highlightEvents == true
+													&& isToday($event['date'], $today)
+													&& isToday($nextEvent['date'], $today)) {
 										$breakStart = formatTime($thisEnd, "+1 minute");
 										$breakEnd = formatTime($nextStart, "-1 minute");
 										?>
