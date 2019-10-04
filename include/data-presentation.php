@@ -333,7 +333,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 												 data-enddatetime="<?php echo createJsTime($nextStart);?>"
 												 data-type="break">
 											<div class="card-header <?php echo $highlightClasses; ?>">
-												<i class="fas fa-pause"></i> <strong>Break until <?php echo $nextStart; ?></strong></span>
+												<i class="fas fa-pause"></i> <strong>Break until <?php echo $nextStart; ?></strong>
 											</div>
 											<div class="card-footer text-muted">
 												<i class="fas fa-business-time"></i> <span class="timeRemaining"></span>
