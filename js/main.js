@@ -135,7 +135,7 @@ $(function () {
 	}
 
 	/* Keyboard navigation */
-	$(document).keydown(function (e) {
+	$(document).on("keydown", function (e) {
 		if (!e.ctrlKey && !e.metaKey && !e.shiftKey) {
 			switch (e.which) {
 				case A_KEY:
@@ -318,7 +318,7 @@ $(function () {
 	}, 5000);
 
 	/* Automatic Scroll */
-	$("#infoBtn").click(function () {
+	$("#infoBtn").on("click", function () {
 		if (!$('#weekendNotice').hasClass('show')) {
 			$([document.documentElement, document.body]).animate({
 				scrollTop: $("footer").offset().top //cannot scroll to hidden weekendNotice directly
