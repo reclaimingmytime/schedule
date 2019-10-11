@@ -200,7 +200,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 			<main>
 				<?php if (!empty($_SESSION['msg'])) { ?>
 					<div class="row">
-						<div class="col-xl-6">
+						<div class="col-xl-4">
 							<div class="alert alert-danger alert-dismissible fade show" role="alert">
 								<?php echo $_SESSION["msg"]; ?>
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -215,7 +215,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 				?>
 				
 				<div class="row">
-					<div class="col-xl-<?php echo ($weekOverview === true) ? '2' : '6'; ?>">
+					<div class="col-xl-<?php echo ($weekOverview === true) ? '2' : '4'; ?>">
 							<?php
 							if(!empty($schedule[0])) {
 								$firstEventWeekDay = $schedule[0]["weekDay"];
