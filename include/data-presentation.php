@@ -18,7 +18,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 			<?php echo $class;
 
 			if(!empty($keyCode)) { ?>
-				<small class="d-none d-lg-inline"><code class="text-secondary">(<?php echo $i; ?>)</code></small>
+				<small class="d-none d-lg-inline"><code class="text-secondary d-none d-xl-inline">(<?php echo $i; ?>)</code></small>
 			<?php } ?>
 		</a>
 		<?php
@@ -133,29 +133,29 @@ $hasManifest = isset($manifest) && !empty($manifest);
 						
 						<?php if ($prevWeek !== "none") { ?>
 							<li class="nav-item mr-4">
-								<a class="nav-link" id="prevWeek" href="?date=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> <span class="d-none d-lg-inline">Previous Week <small><code class="text-secondary">(<?php echo ($weekOverview === false) ? "S" : "A"; ?>)</code></small></span></a>
+								<a class="nav-link" id="prevWeek" href="?date=<?php echo $prevWeek; ?>"><i class="fas fa-step-backward"></i> <span class="d-none d-lg-inline">Previous Week <small><code class="text-secondary d-none d-xl-inline">(<?php echo ($weekOverview === false) ? "S" : "A"; ?>)</code></small></span></a>
 							</li>
 						<?php } ?>
 
 						<?php if ($prevDay !== "none") { ?>
 							<li class="nav-item mr-4">
-								<a class="nav-link" id="prevDay" href="?date=<?php echo $prevDay; ?>"><i class="fas fa-backward"></i> <span class="d-none d-lg-inline">Previous Day <small><code class="text-secondary">(A)</code></small></span></a>
+								<a class="nav-link" id="prevDay" href="?date=<?php echo $prevDay; ?>"><i class="fas fa-backward"></i> <span class="d-none d-lg-inline">Previous Day <small><code class="text-secondary d-none d-xl-inline">(A)</code></small></span></a>
 							</li>
 						<?php } ?>
 						
 						<li class="nav-item mr-4<?php echo (!$enableTodayLink) ? ' active' : ''; ?>">
-							<a class="nav-link" id="today" href="."><i class="fas fa-play"></i> <span class="d-none d-lg-inline">Today <small><code class="text-secondary">(Enter)</code></small></span></a>
+							<a class="nav-link" id="today" href="."><i class="fas fa-play"></i> <span class="d-none d-lg-inline">Today <small><code class="text-secondary d-none d-xl-inline">(Enter)</code></small></span></a>
 						</li>
 						
 						<?php if ($nextDay !== "none") { ?>
 						<li class="nav-item mr-4">
-							<a class="nav-link" id="nextDay" href="?date=<?php echo $nextDay; ?>"><i class="fas fa-forward"></i> <span class="d-none d-lg-inline">Next Day <small><code class="text-secondary">(D)</code></small></span></a>
+							<a class="nav-link" id="nextDay" href="?date=<?php echo $nextDay; ?>"><i class="fas fa-forward"></i> <span class="d-none d-lg-inline">Next Day <small><code class="text-secondary d-none d-xl-inline">(D)</code></small></span></a>
 						</li>
 						<?php } ?>
 
 						<?php if ($nextWeek !== "none") { ?>
 						<li class="nav-item mr-4">
-							<a class="nav-link" id="nextWeek" href="?date=<?php echo $nextWeek; ?>"><i class="fas fa-step-forward"></i> <span class="d-none d-lg-inline">Next Week <small><code class="text-secondary">(<?php echo ($weekOverview === false) ? "W" : "D"; ?>)</code></small></span></a>
+							<a class="nav-link" id="nextWeek" href="?date=<?php echo $nextWeek; ?>"><i class="fas fa-step-forward"></i> <span class="d-none d-lg-inline">Next Week <small><code class="text-secondary d-none d-xl-inline">(<?php echo ($weekOverview === false) ? "W" : "D"; ?>)</code></small></span></a>
 						</li>
 						<?php } ?>
 
@@ -169,13 +169,13 @@ $hasManifest = isset($manifest) && !empty($manifest);
 							$text = "Week";
 						}  ?>
 						<li class="nav-item mr-4">
-							<a class="nav-link" id="overviewType" href="?<?php echo $desiredDateMidWeek !== $today ? 'date=' . $desiredDateMidWeek . '&' : ''; ?>overview=<?php echo $overviewType . $tokenEmbed; ?>"><i class="<?php echo $icon; ?>"></i> <span class="d-none d-lg-inline"><?php echo $text;?> <small><code class="text-secondary">(T)</code></small></span></a>
+							<a class="nav-link" id="overviewType" href="?<?php echo $desiredDateMidWeek !== $today ? 'date=' . $desiredDateMidWeek . '&' : ''; ?>overview=<?php echo $overviewType . $tokenEmbed; ?>"><i class="<?php echo $icon; ?>"></i> <span class="d-none d-lg-inline"><?php echo $text;?> <small><code class="text-secondary d-none d-xl-inline">(T)</code></small></span></a>
 						</li>
 						
-						<?php if(!empty($allowedClasses) && !empty($desiredClass)) { ?>
+						<?php if(!empty($allowedClasses) && !empty($desiredClass) && $weekOverview == true) { ?>
 							<li class="nav-item mr-3 d-none d-sm-inline-block dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="classNavButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<i class="fas fa-chalkboard-teacher"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?> <small><code class="text-secondary">(C)</code></small></span>
+									<i class="fas fa-chalkboard-teacher"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?> <small><code class="text-secondary d-none d-xl-inline">(C)</code></small></span>
 								</a>
 								<div class="dropdown-menu" id="classNavMenu" aria-labelledby="classNavButton">
 									<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, true); ?>
@@ -183,10 +183,10 @@ $hasManifest = isset($manifest) && !empty($manifest);
 							</li>
 						<?php } ?>
 						
-						<?php if(!empty($extraSubjects)) { ?>
+						<?php if(!empty($extraSubjects) && $weekOverview == true) { ?>
 							<li class="nav-item mr-3 d-none d-sm-inline-block dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="extraEventsButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<i class="<?php echo $extraEventsIcon; ?>"></i> <span class="d-none d-lg-inline"><?php echo $extraEventsText; ?> <small><code class="text-secondary">(X)</code></small></span>
+									<i class="<?php echo $extraEventsIcon; ?>"></i> <span class="d-none d-lg-inline"><?php echo $extraEventsText; ?> <small><code class="text-secondary d-none d-xl-inline">(X)</code></small></span>
 								</a>
 								<div class="dropdown-menu" id="extraEventsMenu" aria-labelledby="extraEventsButton">
 									<?php	printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed); ?>
@@ -359,7 +359,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 				
 				<?php /* Class Dropdown */ ?>
 				<?php if(!empty($allowedClasses) && !empty($desiredClass)) { ?>
-					<div class="d-block d-sm-none dropup d-inline">
+					<div class="d-block <?php echo $weekOverview == true ? "d-sm-none " : "" ?>dropup d-inline">
 						<a class="btn btn-white shadow-none text-secondary dropdown-toggle" href="#" role="button" id="classFooterButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="fas fa-chalkboard-teacher"></i> <?php echo $desiredClass; ?>
 						</a>
@@ -370,7 +370,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 				<?php } ?>
 				
 				<?php if(!empty($extraSubjects)) { ?>
-					<div class="d-block d-sm-none dropup d-inline">
+					<div class="d-block <?php echo $weekOverview == true ? "d-sm-none " : "" ?>dropup d-inline">
 						<a class="btn btn-white shadow-none text-secondary dropdown-toggle" href="#" role="button" id="extraEventsButtonFooter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="<?php echo $extraEventsIcon; ?>"></i> <?php echo $extraEventsText; ?>
 						</a>
