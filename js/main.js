@@ -9,6 +9,8 @@ $(function () {
 	const T_KEY = 84;
 	const W_KEY = 87;
 	const X_KEY = 88;
+	const LEFT_KEY = 37;
+	const RIGHT_KEY = 39;
 	const ENTER_KEY = 13;
 	const ZERO_KEY = 13;
 	const ONE_KEY = 49;
@@ -139,10 +141,12 @@ $(function () {
 		if (!e.ctrlKey && !e.metaKey && !e.shiftKey) {
 			switch (e.which) {
 				case A_KEY:
+				case LEFT_KEY:
 					redirectToPrevDay();
 					break;
 
 				case D_KEY:
+				case RIGHT_KEY:
 					redirectToNextDay();
 					break;
 
