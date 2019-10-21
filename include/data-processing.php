@@ -243,7 +243,7 @@ foreach ($calendar as $entry) {
 					$schedule[$key]["prof"] .= ", " . $new["prof"];
 				}
 				if (containsNewInfo($existing, $new)) {
-					if(isset($existing['info'])) {
+					if(!empty($existing['info'])) {
 						$schedule[$key]["info"] .= ", ";
 					}
 					$schedule[$key]["info"] .= $new["info"];
