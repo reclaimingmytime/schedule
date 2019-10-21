@@ -2,12 +2,6 @@
 /* Schedule preparation */
 
 //General Functions
-function lookup($key, $array) {
-	if(array_key_exists($key, $array)) {
-		return $array[$key];
-	}
-	return $key;
-}
 
 if(!isset($infos)) {
 	$infos = [];

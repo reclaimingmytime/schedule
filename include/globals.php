@@ -34,6 +34,13 @@ function arrayContains($array, $string) {
 	return in_array(strtolower($string), $array) || in_array(strtoupper($string), $array);
 }
 
+function lookup($key, $array) {
+	if(array_key_exists($key, $array)) {
+		return $array[$key];
+	}
+	return $key;
+}
+
 /* Various Functions */
 
 function stringRange($string, $startString, $endString) {
