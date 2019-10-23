@@ -121,7 +121,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 		}
 		</style>
 	</head>
-	<body>
+	<body class="mb-4">
 		<div class="container-fluid">
 			<header>
 				<nav class="navbar navbar-expand navbar-light bg-light mt-3 mb-4">
