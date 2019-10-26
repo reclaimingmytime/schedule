@@ -95,7 +95,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 	<head data-desireddate="<?php echo $desiredDate; ?>" data-today="<?php echo $today; ?>" data-nextday="<?php echo $nextDay; ?>" data-prevday="<?php echo $prevDay; ?>" data-nextweek="<?php echo $nextWeek; ?>" data-prevweek="<?php echo $prevWeek; ?>" data-weekoverview="<?php echo printBoolean($weekOverview); ?>" data-highlightevents="<?php echo printBoolean($highlightEvents); ?>" data-highlightclasses="<?php echo $highlightClasses; ?>" data-extraclasses="<?php echo $extraClasses; ?>" data-enabletodaylink="<?php echo printBoolean($enableTodayLink);?>" data-hasmanifest="<?php echo printBoolean($hasManifest); ?>">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Calendar for <?php echo $displayedDateFull; ?></title>
+		<title>Schedule for <?php echo $displayedDateFull; ?></title>
 
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha256-YLGeXaapI0/5IgZopewRJcFXomhRMlYYjugPLSyNjTY=" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
