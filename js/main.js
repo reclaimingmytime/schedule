@@ -138,7 +138,7 @@ $(function () {
 
 	/* Keyboard navigation */
 	$(document).on("keydown", function (e) {
-		if (!e.ctrlKey && !e.metaKey && !e.shiftKey) {
+		if (!e.ctrlKey && !e.metaKey && !e.altKey && !e.shiftKey) {
 			switch (e.which) {
 				case A_KEY:
 				case LEFT_ARROW_KEY:
