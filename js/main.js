@@ -154,11 +154,11 @@ $(function () {
 				case "7":
 				case "8":
 				case "9":
-					const keyCodeElement = '#keyCode' + e.keyCode;
-					if ($(keyCodeElement).length && !$(keyCodeElement).hasActiveClass()) {
-						redirectToHref(keyCodeElement);
+					const keyElement = '#key' + e.key;
+					if ($(keyElement).length && !$(keyElement).hasActiveClass()) {
+						redirectToHref(keyElement);
 					}
-					if ($(keyCodeElement).hasActiveClass() && $(keyCodeElement).isVisible()) {
+					if ($(keyElement).hasActiveClass() && $(keyElement).isVisible()) {
 						clickIDIfExists('classNavButton'); //close menu when selecting link with active class
 					}
 					break;
