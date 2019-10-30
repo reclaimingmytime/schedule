@@ -154,6 +154,7 @@ $(function () {
 				case "7":
 				case "8":
 				case "9":
+				{
 					const keyElement = '#key' + e.key;
 					if ($(keyElement).length && !$(keyElement).hasActiveClass()) {
 						redirectToHref(keyElement);
@@ -162,6 +163,7 @@ $(function () {
 						clickIDIfExists('classNavButton'); //close menu when selecting link with active class
 					}
 					break;
+				}
 
 				case "c":
 					clickIDIfExists('classNavButton');
@@ -196,7 +198,7 @@ $(function () {
 		var countDownDate = new Date(destination).getTime();
 		return countDownDate - timeMilliseconds;
 	}
-	
+
 	function prettyPrintMinutes(minutes) {
 		if (minutes < 1) {
 			return '< 1 m';
@@ -302,12 +304,12 @@ $(function () {
 
 	/* Automatic Scroll */
 	/* $("#infoBtn").on("click", function () {
-		if (!$('#notice').hasClass('show')) {
-			$([document.documentElement, document.body]).animate({
-				scrollTop: $("footer").offset().top //cannot scroll to hidden weekendNotice directly
-			}, 250);
-		}
-	}); */
+	 if (!$('#notice').hasClass('show')) {
+	 $([document.documentElement, document.body]).animate({
+	 scrollTop: $("footer").offset().top //cannot scroll to hidden weekendNotice directly
+	 }, 250);
+	 }
+	 }); */
 
 	/* Tooltip */
 	$('[data-toggle="tooltip"]').tooltip();
