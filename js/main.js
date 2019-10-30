@@ -2,26 +2,6 @@ $(function () {
 	//Elements
 	const head = $('head');
 
-	const A_KEY = 65;
-	const C_KEY = 67;
-	const D_KEY = 68;
-	const S_KEY = 83;
-	const T_KEY = 84;
-	const W_KEY = 87;
-	const X_KEY = 88;
-	const LEFT_ARROW_KEY = 37;
-	const RIGHT_ARROW_KEY = 39;
-	const ENTER_KEY = 13;
-	const ONE_KEY = 49;
-	const TWO_KEY = 50;
-	const THREE_KEY = 51;
-	const FOUR_KEY = 52;
-	const FIVE_KEY = 53;
-	const SIX_KEY = 54;
-	const SEVEN_KEY = 55;
-	const EIGHT_KEY = 56;
-	const NINE_KEY = 57;
-
 	// Redirect
 	function redirect(url) {
 		window.location.href = url;
@@ -138,42 +118,42 @@ $(function () {
 	/* Keyboard navigation */
 	$(document).on("keydown", function (e) {
 		if (!e.ctrlKey && !e.metaKey && !e.altKey && !e.shiftKey) {
-			switch (e.which) {
-				case A_KEY:
-				case LEFT_ARROW_KEY:
+			switch (e.key) {
+				case "a":
+				case "ArrowLeft":
 					redirectToPrevDay();
 					break;
 
-				case D_KEY:
-				case RIGHT_ARROW_KEY:
+				case "d":
+				case "ArrowRight":
 					redirectToNextDay();
 					break;
 
-				case W_KEY:
+				case "w":
 					redirectToNextWeek();
 					break;
 
-				case S_KEY:
+				case "s":
 					redirectToPrevWeek();
 					break;
 
-				case ENTER_KEY:
+				case "Enter":
 					redirectToToday();
 					break;
 
-				case T_KEY:
+				case "t":
 					redirectToHref('#overviewType');
 					break;
 
-				case ONE_KEY:
-				case TWO_KEY:
-				case THREE_KEY:
-				case FOUR_KEY:
-				case FIVE_KEY:
-				case SIX_KEY:
-				case SEVEN_KEY:
-				case EIGHT_KEY:
-				case NINE_KEY:
+				case "1":
+				case "2":
+				case "3":
+				case "4":
+				case "5":
+				case "6":
+				case "7":
+				case "8":
+				case "9":
 					const keyCodeElement = '#keyCode' + e.keyCode;
 					if ($(keyCodeElement).length && !$(keyCodeElement).hasActiveClass()) {
 						redirectToHref(keyCodeElement);
@@ -183,11 +163,11 @@ $(function () {
 					}
 					break;
 
-				case C_KEY:
+				case "c":
 					clickIDIfExists('classNavButton');
 					break;
 
-				case X_KEY:
+				case "x":
 					clickIDIfExists('extraEventsButton');
 					break;
 
