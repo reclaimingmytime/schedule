@@ -12,7 +12,6 @@ $(function () {
 	const LEFT_ARROW_KEY = 37;
 	const RIGHT_ARROW_KEY = 39;
 	const ENTER_KEY = 13;
-	const ZERO_KEY = 13;
 	const ONE_KEY = 49;
 	const TWO_KEY = 50;
 	const THREE_KEY = 51;
