@@ -2,27 +2,25 @@
 /* Display Schedule */
 
 function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, $showIDs = false) {
-	$i = 1;
+	$key = 1;
 	foreach ($allowedClasses as $class) {
-		if($showIDs === true && $i <= 9) {
-			$key = $i;
-		}
+		$enableShortcut = $showIDs === true && $key <= 9;
 		
 		$classSwitcherClasses = "dropdown-item";
 		if ($desiredClass == $class) {
 			$classSwitcherClasses .= ' active font-weight-bold text-body bg-transparent';
 		}
 		?>
-		<a class="<?php echo $classSwitcherClasses; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php if(!empty($key)) { ?> id="key<?php echo $key; ?>"<?php } ?>>
+		<a class="<?php echo $classSwitcherClasses; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php if($enableShortcut === true) { ?> id="key<?php echo $key; ?>"<?php } ?>>
 			<i class="fas fa-chalkboard"></i>
 			<?php echo $class;
 
-			if(!empty($key)) { ?>
-				<small class="d-none d-lg-inline"><code class="text-secondary d-none d-xl-inline">(<?php echo $i; ?>)</code></small>
+			if($enableShortcut === true) { ?>
+				<small class="d-none d-lg-inline"><code class="text-secondary d-none d-xl-inline">(<?php echo $key; ?>)</code></small>
 			<?php } ?>
 		</a>
 		<?php
-		++$i;
+		++$key;
 	}
 }
 
