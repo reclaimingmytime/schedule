@@ -304,7 +304,16 @@ $hasManifest = isset($manifest) && !empty($manifest);
 													<li class="list-inline-item pr-3"><?php echo $event['room']; ?></li>
 												<?php }
 												if (!empty($event['prof'])) { ?>
-													<li class="list-inline-item pr-3 text-secondary"><?php echo $event['prof']; ?></li>
+													<li class="list-inline-item pr-3 text-secondary">
+														<?php
+														if(strlen($event['prof']) <= 50) {
+															echo $event['prof'];
+														} else { ?>
+															<span data-toggle="tooltip" data-placement="bottom" title="<?php echo $event['prof']; ?>">
+																<i class="fas fa-user-tie"></i>
+															</span>
+														<?php } ?>
+													</li>
 												<?php }
 												if (!empty($event['info'])) { ?>
 													<li class="list-inline-item font-italic"><?php echo $event['info']; ?></li>
