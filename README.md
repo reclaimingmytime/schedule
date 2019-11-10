@@ -29,15 +29,15 @@ A few shortcuts are available for quick navigation.
 
 ### Keyboard navigation
 
-| Shortcut | Action        |
-| -------- | ------------- |
-| `D`      | Next Day      |
-| `A`      | Previous Day  |
-| `S`      | Previous Week |
-| `W`      | Next Week     |
-| `Enter`  | Current Week  |
-| `C`      | Open class switcher (if available)  |
-| `1-9`    | Change class (if available)  |
+| Shortcut | Action                                    |
+| -------- | ----------------------------------------- |
+| `D`      | Next Day                                  |
+| `A`      | Previous Day                              |
+| `S`      | Previous Week                             |
+| `W`      | Next Week                                 |
+| `Enter`  | Current Week                              |
+| `C`      | Open class switcher (if available)        |
+| `1-9`    | Change class (if available)               |
 | `X`      | Open extra events switcher (if available) |
 
 Note: Arrow keys as a shortcut would interfere with keyboard-based scrolling.
@@ -82,7 +82,7 @@ Note: The directory of the script and the folder "cache/" (created by the script
 | Variable           | Description                                                  |
 | ------------------ | ------------------------------------------------------------ |
 | `$timezone`        | *Optional*. The timezone that should be used for displaying the event time. *Default: Server setting.* |
-| `$minDate`         | *Optional*. All dates below the minimum date are considered invalid. Useful if your API only serves the current year, e.g. `"01.01." . date("Y")` *Default: 1.1.1970 (unix time)*|
+| `$minDate`         | *Optional*. All dates below the minimum date are considered invalid. Useful if your API only serves the current year, e.g. `"01.01." . date("Y")` *Default: 1.1.1970 (unix time)* |
 | `$maxDate`         | *Optional*. All dates above the maximum date are considered invalid. *Default: New year's day 100 years from today* |
 | `$excludeWeekends` | *Optional*. Weekends will be skipped with an appropriate notice. *Default: false.* |
 #### API Connection
@@ -113,7 +113,7 @@ Note: The directory of the script and the folder "cache/" (created by the script
 | `$infos`                                     | *Optional.* Associative array of preferred names for infos.  |
 | `$profs`                                     | *Optional.* Associative array of initials to full names.     |
 | `$roomPrefix`                                | *Optional.* A prefix that might seem redundant, such as "Room-". |
-| `$roomDelimiter`                             | *Optional.* A delimiter for different rooms that should be replaced with ", ". For example, with a delimiter of "|", "1|2" becomes "1, 2". |
+| `$roomDelimiter`                             | *Optional.* A delimiter for different rooms that should be replaced with ", ". For example, with a delimiter of " |
 | `$rooms`                                     | *Optional.* Associative array of rooms to custom names.      |
 | `$excludedRoomSubjects`                      | *Optional.* Array of subjects not to display rooms for.      |
 
