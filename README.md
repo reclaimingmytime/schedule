@@ -38,7 +38,7 @@ A few shortcuts are available for quick navigation.
 | `Enter`  | Current Week  |
 | `C`      | Open class switcher (if available)  |
 | `1-9`    | Change class (if available)  |
-| `C` | Open extra events switcher (if available) |
+| `X`      | Open extra events switcher (if available) |
 
 Note: Arrow keys as a shortcut would interfere with keyboard-based scrolling.
 
