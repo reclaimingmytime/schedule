@@ -43,8 +43,14 @@ function lookup($key, $array) {
 
 /* Various Functions */
 
-function stringRange($string, $startString, $endString) {
+function removeLineBreaks($string) {
+	return preg_replace("/\r|\n/", "", $string);
+}
+
+function stringRange($rawString, $startString, $endString) {
+	$string = removeLineBreaks($rawString);
 	$r = explode($startString, $string);
+
 	if (isset($r[1])){
 			if($endString === false) return $r[1];
 
