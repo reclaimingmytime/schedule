@@ -282,12 +282,17 @@ $(function () {
 
 	const clock = $('.currentTime');
 	var displayed = clock.text(); //cannot use let here, eslint forbids it in the global scope.
+	var displayedDt = (new Date()).getDate();
 
 	function updateTime() {
 		const dt = new Date();
 		const time = formatTime(dt.getHours(), dt.getMinutes());
 		const timeMilliseconds = dt.getTime();
-
+		
+		if(displayedDt != dt.getDate()) {
+			window.location.reload();
+		}
+		
 		if (displayed !== time) {
 			displayed = time;
 			clock.html(time);

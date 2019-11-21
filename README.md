@@ -1,5 +1,5 @@
 # schedule
-A PHP script that creates a study schedule based on an API.
+A PHP script that creates a course schedule based on an API.
 
 The script has been kept simple by design.
 
@@ -29,16 +29,16 @@ A few shortcuts are available for quick navigation.
 
 ### Keyboard navigation
 
-| Shortcut | Action        |
-| -------- | ------------- |
-| `D`      | Next Day      |
-| `A`      | Previous Day  |
-| `S`      | Previous Week |
-| `W`      | Next Week     |
-| `Enter`  | Current Week  |
-| `C`      | Open class switcher (if available)  |
-| `1-9`    | Change class (if available)  |
-| `C` | Open extra events switcher (if available) |
+| Shortcut | Action                                    |
+| -------- | ----------------------------------------- |
+| `D`      | Next Day                                  |
+| `A`      | Previous Day                              |
+| `S`      | Previous Week                             |
+| `W`      | Next Week                                 |
+| `Enter`  | Current Week                              |
+| `C`      | Open class switcher (if available)        |
+| `1-9`    | Change class (if available)               |
+| `X`      | Open extra events switcher (if available) |
 
 Note: Arrow keys as a shortcut would interfere with keyboard-based scrolling.
 
@@ -93,7 +93,7 @@ Note: The directory of the script and the folder "cache/" (created by the script
 | `$type`            | *Optional*. Type of the API. Can be "*json*" or "*ical*".    |
 | `$defaultClass`    | **Required**. Default class when fetching the API.           |
 | `$allowedClasses`  | *Optional*. Array of allowed classes. If undefined or empty, only $defaultClass is allowed and the class switcher is hidden. |
-| `$extraEvents`     | *Optional.* Associative array of extra events in the following format: `[$class][$weekDays][$subjects]`, e.g. `"[Class-A" => "Mon" => "INF", "ENG"]` |
+| `$extraEvents`     | *Optional.* Associative array of extra events in the following format: `[$class][$weekDays][$subjects]`, e.g. `["Class-A" => "Mon" => "INF", "ENG"]` |
 | `$extraEventsText` | *Optional.* Text for the switcher.                           |
 | `$extraEventsIcon` | *Optional.* Font Awesome icon for the switcher.              |
 | `$extraEventIcon`  | *Optional.* Font Awesome icon for the extra event instead of the default clock. |
@@ -113,7 +113,7 @@ Note: The directory of the script and the folder "cache/" (created by the script
 | `$infos`                                     | *Optional.* Associative array of preferred names for infos.  |
 | `$profs`                                     | *Optional.* Associative array of initials to full names.     |
 | `$roomPrefix`                                | *Optional.* A prefix that might seem redundant, such as "Room-". |
-| `$roomDelimiter`                             | *Optional.* A delimiter for different rooms that should be replaced with ", ". For example, with a delimiter of "|", "1|2" becomes "1, 2". |
+| `$roomDelimiter`                             | *Optional.* A delimiter for different rooms that should be replaced with ", ". For example, with a delimiter of " |
 | `$rooms`                                     | *Optional.* Associative array of rooms to custom names.      |
 | `$excludedRoomSubjects`                      | *Optional.* Array of subjects not to display rooms for.      |
 
