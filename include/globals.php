@@ -42,9 +42,7 @@ function lookup($key, $array) {
 }
 
 function compareDate($a, $b) {
-		$t1 = strtotime($a['date']);
-		$t2 = strtotime($b['date']);
-		return $t1 - $t2;
+		return new DateTime($a['date']) <=> new DateTime($b['date']);
 	}
 
 /* Various Functions */
