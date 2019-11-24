@@ -35,7 +35,7 @@ function arrayContains($array, $string) {
 }
 
 function lookup($key, $array) {
-	if(isset($key[$array])) {
+	if(isset($array[$key])) {
 		return $array[$key];
 	}
 	return $key;
