@@ -212,8 +212,8 @@ $hasManifest = isset($manifest) && !empty($manifest);
 				unset($_SESSION['msg']);
 				?>
 				
-				<div class="row">
-					<div class="col-xl-<?php echo ($weekOverview === true) ? '2' : '4'; ?>">
+				<div class="row row-cols-1 row-cols-xl-6 row-cols-lg-5">
+					<div class="col">
 							<?php
 							if(!empty($schedule[0])) {
 								$firstEventWeekDay = $schedule[0]["weekDay"];
@@ -261,7 +261,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 										
 										if(isNewDate($schedule, $key, $event)) { ?>
 									</div>
-									<div class="col-xl-2 mt-4 mt-xl-0">
+									<div class="col mt-4 mt-lg-0">
 										<span class="<?php echo !isToday($event['date'], $today) ? 'text-secondary ' : ''; ?>h4 pb-1">
 											<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
 											<span class="mr-1"><?php echo $event["weekDay"]; ?></span>
