@@ -104,7 +104,7 @@ if(isset($excludeWeekends) && $excludeWeekends == true) {
 
 $desiredDatePretty = formatReadableDate($desiredDate);
 $weekDay = formatWeekDay($desiredDate);
-$displayedDateFull = $weekDay . ", " . $desiredDatePretty;
+$displayedDateFull = formatFullReadableDate($desiredDate);
 $displayedDate = $desiredDatePretty;
 
 $nextWeek = getDateFromInterval($desiredDate, "1 week");

@@ -207,6 +207,10 @@ function formatReadableDate($date) {
 	return $object->format("d.m.y");
 }
 
+function formatFullReadableDate($desiredDate) {
+	return formatWeekDay($desiredDate) . ", " . formatReadableDate($desiredDate);
+}
+
 function readableToIsoDate($date) {
 	$object = DateTime::createFromFormat('d.m.y', $date);
 	return $object->format("Y-m-d");
