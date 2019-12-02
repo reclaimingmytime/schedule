@@ -1,23 +1,24 @@
 <?php
+
 /* Schedule preparation */
 
 //General Functions
 
-if(!isset($infos)) {
+if (!isset($infos)) {
 	$infos = [];
 }
 
-if(!isset($ignoredSubjects)) {
+if (!isset($ignoredSubjects)) {
 	$ignoredSubjects = [];
 }
 
 //Room Functions
-if(!isset($roomPrefix)) {
+if (!isset($roomPrefix)) {
 	$roomPrefix = "";
 }
 
 function trimRoom($raw, $roomPrefix) {
-	return !empty($roomPrefix) ? str_replace($roomPrefix, "", $raw) : $raw;	
+	return !empty($roomPrefix) ? str_replace($roomPrefix, "", $raw) : $raw;
 }
 
 //Prof Functions
@@ -28,23 +29,23 @@ function trimPlaceholders($raw, $placeholders) {
 	return $raw;
 }
 
-if(!isset($displayProfs)) {
+if (!isset($displayProfs)) {
 	$displayProfs = false;
 }
 
-if(!isset($profs) && $displayProfs === true) {
+if (!isset($profs) && $displayProfs === true) {
 	$profs = [];
 }
 
-if(!isset($emptyProfs)) {
+if (!isset($emptyProfs)) {
 	$emptyProfs = [];
 }
 
 function lookupProfs($prof, $emptyProfs, $profs) {
-	if(!empty($emptyProfs)) {
+	if (!empty($emptyProfs)) {
 		$prof = trimPlaceholders($prof, $emptyProfs);
 	}
-	if(!empty($profs)) {
+	if (!empty($profs)) {
 		$prof = lookup($prof, $profs);
 	}
 	return $prof;
@@ -61,21 +62,21 @@ function extractIcalDate($string, $format = 'Y-m-d') {
 }
 
 function extractApiTime($type, $singleEntry) {
-	if($type == 'ical') {
+	if ($type == 'ical') {
 		return extractIcalDate($singleEntry["date"], 'H:i');
 	}
 	return extractJsonTime($singleEntry);
 }
 
 function extractApiDate($type, $singleEntry) {
-	if($type == 'ical') {
+	if ($type == 'ical') {
 		return extractIcalDate($singleEntry["date"]);
 	}
 	return extractJsonDate($singleEntry);
 }
 
 function extractApiDateTime($type, $singleEntry) {
-	if($type == 'ical') {
+	if ($type == 'ical') {
 		return extractIcalDate($singleEntry["date"], "M j, Y H:i:s");
 	}
 	return extractJsonDate($singleEntry);
@@ -113,8 +114,8 @@ function getSubject($type, $wholeString) {
 function sameEvent($e, $new) {
 	return $e["date"] == $new["date"] &&
 					$e["start"] == $new["start"] &&
-					$e["end"] ==  $new["end"] &&
-					$e["subject"] ==  $new["subject"];
+					$e["end"] == $new["end"] &&
+					$e["subject"] == $new["subject"];
 }
 
 function validProf($profs, $emptyProfs) {
@@ -147,7 +148,7 @@ function isExtraSubject($subject, $weekDay, $extraEvents, $extraClass, $chosenEx
 $schedule = [];
 
 $desiredDateTo = $desiredDate;
-if($weekOverview === true) {
+if ($weekOverview === true) {
 	$desiredDateTo = getDateFromInterval($desiredDate, "+6 days");
 }
 
@@ -156,14 +157,14 @@ foreach ($calendar as $entry) {
 
 	$isCorrectClass = true;
 	$isExtraClass = false;
-	if(isset($desiredClass)) {
+	if (isset($desiredClass)) {
 		$class = stringRange($entry[LESSONCLASS], CLASSSECTION[0], CLASSSECTION[1]);
-		
-		if(notContains($class, $desiredClass)) {
+
+		if (notContains($class, $desiredClass)) {
 			$isCorrectClass = false;
-			if($displayExtraEvents == true) {
+			if ($displayExtraEvents == true) {
 				foreach ($extraEvents as $extraClass => $value) {
-					if(contains($class, $extraClass)) {
+					if (contains($class, $extraClass)) {
 						$isCorrectClass = true;
 						$isExtraClass = true;
 					}
@@ -172,10 +173,10 @@ foreach ($calendar as $entry) {
 			}
 		}
 	}
-	
+
 	if (isBetween($date, $desiredDate, $desiredDateTo) && $isCorrectClass) {
 		$new = [];
-		
+
 		$new["date"] = formatReadableDate($date);
 		$new["weekDay"] = formatWeekDay($date);
 
@@ -183,47 +184,47 @@ foreach ($calendar as $entry) {
 		$new["end"] = extractApiTime($type, $entry[END]);
 		$new["startDateTime"] = extractApiDateTime($type, $entry[START]);
 		$new["endDateTime"] = extractApiDateTime($type, $entry[END]);
-		
+
 		$thisSubject = getSubject($type, $entry[SUBJECT]);
 		$new["subject"] = !empty($subjects) ? lookup($thisSubject, $subjects) : $thisSubject;
-		
-		if(!isset($excludedRoomSubjects) || isset($excludedRoomSubjects) && !in_array($new["subject"], $excludedRoomSubjects)) {
+
+		if (!isset($excludedRoomSubjects) || isset($excludedRoomSubjects) && !in_array($new["subject"], $excludedRoomSubjects)) {
 			$shortRoom = !empty($roomPrefix) ? trimRoom($entry[ROOM], $roomPrefix) : $entry[ROOM];
 			$descriptiveRoom = lookup($shortRoom, $rooms);
 			$new["room"] = !empty($roomDelimiter) ? str_replace($roomDelimiter, ", ", $descriptiveRoom) : $descriptiveRoom;
 		}
-		
-		if(defined('INFO')) {
+
+		if (defined('INFO')) {
 			$rawInfo = stringRange($entry[INFO], INFOSECTION[0], INFOSECTION[1]);
 			$new["info"] = lookup($rawInfo, $infos);
 		}
-		
-		if($displayProfs === true) {
-			if($type == 'ical') {
+
+		if ($displayProfs === true) {
+			if ($type == 'ical') {
 				$thisProf = stringRange($entry[PROF], PROFSECTION[0], PROFSECTION[1]);
 			} else {
 				$thisProf = $entry[PROF];
 			}
-			
+
 			$new["prof"] = lookupProfs($thisProf, $emptyProfs, $profs);
 		}
-		
-		if($isExtraClass) {
+
+		if ($isExtraClass) {
 			$new["type"] = "extraEvent";
 		} else {
 			$new["type"] = "event";
 		}
-		
+
 
 		$add = true;
-		
-		if($isExtraClass) {
-			if(!isExtraSubject($thisSubject, $new["weekDay"], $extraEvents, $extraClass, $chosenExtraSubjects)) {
+
+		if ($isExtraClass) {
+			if (!isExtraSubject($thisSubject, $new["weekDay"], $extraEvents, $extraClass, $chosenExtraSubjects)) {
 				$add = false;
 			}
 		}
 
-		if(!validSubject($new["subject"], $ignoredSubjects)) {
+		if (!validSubject($new["subject"], $ignoredSubjects)) {
 			$add = false;
 		}
 
@@ -237,7 +238,7 @@ foreach ($calendar as $entry) {
 					$schedule[$key]["prof"] .= " / " . $new["prof"];
 				}
 				if (containsNewInfo($existing, $new)) {
-					if(!empty($existing['info'])) {
+					if (!empty($existing['info'])) {
 						$schedule[$key]["info"] .= ", ";
 					}
 					$schedule[$key]["info"] .= $new["info"];
@@ -249,9 +250,9 @@ foreach ($calendar as $entry) {
 			$schedule[] = $new;
 		}
 	}
-	
+
 	if (empty($schedule) && empty($nextEventDate) && $date > $desiredDateTo && $isCorrectClass) {
-		if(!$isExtraClass || ($isExtraClass && isExtraSubject(getSubject($type, $entry[SUBJECT]), formatWeekDay($date), $extraEvents, $extraClass, $chosenExtraSubjects))) {
+		if (!$isExtraClass || ($isExtraClass && isExtraSubject(getSubject($type, $entry[SUBJECT]), formatWeekDay($date), $extraEvents, $extraClass, $chosenExtraSubjects))) {
 			$nextEventDate = $date;
 		}
 	}
@@ -264,15 +265,19 @@ if (!empty($schedule)) {
 			if ($extraEvent['type'] == "extraEvent") {
 				foreach ($schedule as $event) {
 					if ($event['type'] == "event" &&
-							$extraEvent["date"] == $event["date"] &&
-							isBetween($extraEvent["start"], $event["start"], $event["end"]) &&
-							isBetween($extraEvent["end"], $event["start"], $event["end"])) {
+									$extraEvent["date"] == $event["date"] &&
+									isBetween($extraEvent["start"], $event["start"], $event["end"]) &&
+									isBetween($extraEvent["end"], $event["start"], $event["end"])) {
 						unset($schedule[$key]);
 					}
 				}
 			}
 		}
 	}
+
+	//sort by date
+	usort($schedule, 'compareDate');
+
 	//Sanitize input
 	escapeArray($schedule);
 }

@@ -35,10 +35,14 @@ function arrayContains($array, $string) {
 }
 
 function lookup($key, $array) {
-	if(array_key_exists($key, $array)) {
+	if(isset($array[$key])) {
 		return $array[$key];
 	}
 	return $key;
+}
+
+function compareDate($a, $b) {
+	return new DateTime($a['startDateTime']) <=> new DateTime($b['startDateTime']);
 }
 
 /* Various Functions */
@@ -201,6 +205,10 @@ function formatWeekDay($date) {
 function formatReadableDate($date) {
 	$object = new DateTime($date);
 	return $object->format("d.m.y");
+}
+
+function formatFullReadableDate($desiredDate) {
+	return formatWeekDay($desiredDate) . ", " . formatReadableDate($desiredDate);
 }
 
 function readableToIsoDate($date) {
