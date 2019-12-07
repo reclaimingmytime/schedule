@@ -130,7 +130,7 @@ function containsNewRoom($existing, $new) {
 	return !empty($existing["room"]) && notContains($existing["room"], $new["room"]);
 }
 
-function containsNewProf($existing, $new, $emptyProfs) {
+function containsNewValidProf($existing, $new, $emptyProfs) {
 	return !empty($existing["prof"]) &&
 					notContains($existing["prof"], $new["prof"]) &&
 					validProf($new["prof"], $emptyProfs);
@@ -234,8 +234,8 @@ foreach ($calendar as $entry) {
 				if (containsNewRoom($existing, $new)) {
 					$schedule[$key]["room"] .= ", " . $new["room"];
 				}
-				if (containsNewProf($existing, $new, $emptyProfs)) {
-					$schedule[$key]["prof"] .= ", " . $new["prof"];
+				if (containsNewValidProf($existing, $new, $emptyProfs)) {
+					$schedule[$key]["prof"] .= " / " . $new["prof"];
 				}
 				if (containsNewInfo($existing, $new)) {
 					if (!empty($existing['info'])) {
