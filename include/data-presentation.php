@@ -240,7 +240,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 								</div>
 							<?php } else if (empty($schedule)) { ?>
 								<div class="alert alert-info mt-3" role="alert">
-									No entries have been found.
+									No events have been found.
 								</div>
 								<?php if(!empty($nextEventDate)) {?>
 									<div class="text-center">
@@ -268,8 +268,6 @@ $hasManifest = isset($manifest) && !empty($manifest);
 											
 											while($undisplayedDate < $nextEventDate) {
 											$undisplayedDate = $prevEventDate->modify("+1 day");
-											print_r($undisplayedDate->format("Y-m-d"));
-											print_r(", " . $today);
 												?>
 										</div>
 										<div class="col mt-4 mt-lg-0">
@@ -278,8 +276,15 @@ $hasManifest = isset($manifest) && !empty($manifest);
 												<span class="mr-1"><?php echo $undisplayedDate->format("D"); ?></span>
 												<span class="mr-1"><?php echo $undisplayedDate->format("d.m.y"); ?></span>
 											</span>
+											
+											<?php 
+											if($undisplayedDate != $nextEventDate) { ?>
+												<div class="alert alert-info mt-3" role="alert">
+													No events on that day.
+												</div>
+											<?php }
 												
-											<?php } ?>
+											} ?>
 									
 									<?php }
 									$timeRange = $event['start'] . " - " . $event['end'];
