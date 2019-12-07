@@ -224,14 +224,14 @@ $hasManifest = isset($manifest) && !empty($manifest);
 							}
 							?>
 							<div<?php echo !isToday($firstEventDate, $today) ? ' class="text-secondary"' : ''; ?>>
-								<h1 class="h4 pb-1 d-inline">
-									<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
-									<span class="mr-1"><?php echo $firstEventWeekDay; ?></span>
-									<span class="mr-1"><?php echo $firstEventDate; ?></span>
-								</h1>
 								<span class="h4 float-right d-sm-none">
 									<i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span>
 								</span>
+								<h1 class="h4 pb-1 d-inline">
+									<i class="fas fa-calendar-alt mr-1"></i>
+									<?php if(empty($schedule) && $weekOverview == true) { ?>Week of <?php } ?>
+									<span class="mr-1"><?php echo $firstEventWeekDay . " " . $firstEventDate; ?></span>
+								</h1>
 							</div>
 							
 							<?php if(empty($calendar)) { ?>
@@ -240,7 +240,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 								</div>
 							<?php } else if (empty($schedule)) { ?>
 								<div class="alert alert-info mt-3" role="alert">
-									No entries have been found for that day.
+									No entries have been found.
 								</div>
 								<?php if(!empty($nextEventDate)) {?>
 									<div class="text-center">
@@ -260,13 +260,13 @@ $hasManifest = isset($manifest) && !empty($manifest);
 										}
 										
 										if(isNewDate($schedule, $key, $event)) { ?>
-									</div>
-									<div class="col mt-4 mt-lg-0">
+										</div>
+										<div class="col mt-4 mt-lg-0">
 										<span class="<?php echo !isToday($event['date'], $today) ? 'text-secondary ' : ''; ?>h4 pb-1">
-											<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
+												<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
 											<span class="mr-1"><?php echo $event["weekDay"]; ?></span>
 											<span class="mr-1"><?php echo $event["date"]; ?></span>
-										</span>
+											</span>
 									<?php }
 									$timeRange = $event['start'] . " - " . $event['end'];
 									
