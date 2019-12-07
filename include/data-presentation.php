@@ -81,7 +81,7 @@ $highlightEvents = !$weekBump;
 $highlightClasses = 'bg-dark text-light';
 
 if(!isset($extraEventsText)) {
-	$extraEventsText = "Extra Events";
+	$extraEventsText = "Extra Events"; //TODO Starting with PHP 7.4: use $var ??= "default"
 }
 if(!isset($extraEventsIcon)) {
 	$extraEventsIcon = "fas fa-folder";
@@ -259,14 +259,28 @@ $hasManifest = isset($manifest) && !empty($manifest);
 											$nextEvent = null; //prevent $nextEvent from previous loop persiting
 										}
 										
-										if(isNewDate($schedule, $key, $event)) { ?>
+										
+										if(isNewDate($schedule, $key, $event)) {
+											$prevEventDate = DateTime::createFromFormat('d.m.y', $schedule[$key - 1]["date"]);
+											$undisplayedDate = $prevEventDate;
+											$nextEventDate = DateTime::createFromFormat('d.m.y', $event["date"]);
+											
+											
+											while($undisplayedDate < $nextEventDate) {
+											$undisplayedDate = $prevEventDate->modify("+1 day");
+											print_r($undisplayedDate->format("Y-m-d"));
+											print_r(", " . $today);
+												?>
 										</div>
 										<div class="col mt-4 mt-lg-0">
-										<span class="<?php echo !isToday($event['date'], $today) ? 'text-secondary ' : ''; ?>h4 pb-1">
+											<span class="<?php echo ($undisplayedDate->format("Y-m-d") == $today) ? '' : 'text-secondary '; ?>h4 pb-1">
 												<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
-											<span class="mr-1"><?php echo $event["weekDay"]; ?></span>
-											<span class="mr-1"><?php echo $event["date"]; ?></span>
+												<span class="mr-1"><?php echo $undisplayedDate->format("D"); ?></span>
+												<span class="mr-1"><?php echo $undisplayedDate->format("d.m.y"); ?></span>
 											</span>
+												
+											<?php } ?>
+									
 									<?php }
 									$timeRange = $event['start'] . " - " . $event['end'];
 									
