@@ -81,7 +81,7 @@ $highlightEvents = !$weekBump;
 $highlightClasses = 'bg-dark text-light';
 
 if(!isset($extraEventsText)) {
-	$extraEventsText = "Extra Events"; //TODO Starting with PHP 7.4: use $var ??= "default"
+	$extraEventsText = "Extra Events"; //TODO Starting with PHP 7.4: replace if statement with $var ??= "default"
 }
 if(!isset($extraEventsIcon)) {
 	$extraEventsIcon = "fas fa-folder";
