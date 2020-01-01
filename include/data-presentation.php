@@ -240,7 +240,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 								</div>
 							<?php } else if (empty($schedule)) { ?>
 								<div class="alert alert-info mt-3" role="alert">
-									No events in that <?php echo $weekOverview === true ? "week" : "day"; ?>.
+									No events <?php echo $weekOverview === true ? "in that week" : "on that day"; ?>.
 								</div>
 								<?php if(!empty($nextEventDate)) {?>
 									<div class="text-center">
