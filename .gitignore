@@ -14,3 +14,6 @@ config.php
 
 favicon.ico
 img/
+
+# Tmp files
+*_*.php

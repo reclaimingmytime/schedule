@@ -81,7 +81,7 @@ $highlightEvents = !$weekBump;
 $highlightClasses = 'bg-dark text-light';
 
 if(!isset($extraEventsText)) {
-	$extraEventsText = "Extra Events";
+	$extraEventsText = "Extra Events"; //TODO Starting with PHP 7.4: replace if statement with $var ??= "default"
 }
 if(!isset($extraEventsIcon)) {
 	$extraEventsIcon = "fas fa-folder";
@@ -96,7 +96,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 		<title>Schedule for <?php echo $displayedDateFull; ?></title>
 
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha256-L/W5Wfqfa0sdBNIKN9cG6QA5F2qx4qICmU2VgLruv9Y=" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous">
 		<?php if($hasManifest == true) { ?>
 			<link rel="manifest" href="site.webmanifest.php">	
 		<?php } ?>
@@ -224,14 +224,14 @@ $hasManifest = isset($manifest) && !empty($manifest);
 							}
 							?>
 							<div<?php echo !isToday($firstEventDate, $today) ? ' class="text-secondary"' : ''; ?>>
-								<h1 class="h4 pb-1 d-inline">
-									<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
-									<span class="mr-1"><?php echo $firstEventWeekDay; ?></span>
-									<span class="mr-1"><?php echo $firstEventDate; ?></span>
-								</h1>
 								<span class="h4 float-right d-sm-none">
 									<i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span>
 								</span>
+								<h1 class="h4 pb-1 d-inline">
+									<i class="fas fa-calendar-alt mr-1"></i>
+									<?php if(empty($schedule) && $weekOverview == true) { ?>Week of <?php } ?>
+									<span class="mr-1"><?php echo $firstEventWeekDay . " " . $firstEventDate; ?></span>
+								</h1>
 							</div>
 							
 							<?php if(empty($calendar)) { ?>
@@ -240,7 +240,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 								</div>
 							<?php } else if (empty($schedule)) { ?>
 								<div class="alert alert-info mt-3" role="alert">
-									No entries have been found for that day.
+									No events on	that <?php echo $weekOverview === true ? "week" : "day"; ?>.
 								</div>
 								<?php if(!empty($nextEventDate)) {?>
 									<div class="text-center">
@@ -259,14 +259,33 @@ $hasManifest = isset($manifest) && !empty($manifest);
 											$nextEvent = null; //prevent $nextEvent from previous loop persiting
 										}
 										
-										if(isNewDate($schedule, $key, $event)) { ?>
-									</div>
-									<div class="col mt-4 mt-lg-0">
-										<span class="<?php echo !isToday($event['date'], $today) ? 'text-secondary ' : ''; ?>h4 pb-1">
-											<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
-											<span class="mr-1"><?php echo $event["weekDay"]; ?></span>
-											<span class="mr-1"><?php echo $event["date"]; ?></span>
-										</span>
+										
+										if(isNewDate($schedule, $key, $event)) {
+											$prevEventDate = DateTime::createFromFormat('d.m.y', $schedule[$key - 1]["date"]);
+											$undisplayedDate = $prevEventDate;
+											$nextEventDate = DateTime::createFromFormat('d.m.y', $event["date"]);
+											
+											
+											while($undisplayedDate < $nextEventDate) {
+											$undisplayedDate = $prevEventDate->modify("+1 day");
+												?>
+										</div>
+										<div class="col mt-4 mt-lg-0">
+											<span class="<?php echo ($undisplayedDate->format("Y-m-d") == $today) ? '' : 'text-secondary '; ?>h4 pb-1">
+												<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
+												<span class="mr-1"><?php echo $undisplayedDate->format("D"); ?></span>
+												<span class="mr-1"><?php echo $undisplayedDate->format("d.m.y"); ?></span>
+											</span>
+											
+											<?php 
+											if($undisplayedDate != $nextEventDate) { ?>
+												<div class="alert alert-info mt-3" role="alert">
+													No events on that day.
+												</div>
+											<?php }
+												
+											} ?>
+									
 									<?php }
 									$timeRange = $event['start'] . " - " . $event['end'];
 									
