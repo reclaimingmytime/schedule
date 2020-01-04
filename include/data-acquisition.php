@@ -164,7 +164,7 @@ function retrieveData($api, $cache_filename, $type, $cache_time) {
 	$cal = new CalFileParser();
 	
 	$configFileAge = filemtime("config.php");
-	$cacheAge = filemtime($cache_file);
+	$cacheAge = filemtime($cache_filename);
 	$refreshAt = strtotime('now -' . $cache_time);
 
 	if (is_writable($cache_filename) && $configFileAge < $cacheAge && $cacheAge > $refreshAt) { //consider cache outdated when config file changed, API might have changed
