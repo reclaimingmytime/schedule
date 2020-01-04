@@ -163,7 +163,9 @@ function retrieveData($api, $cache_filename, $type, $cache_time) {
 	include('classes/CalFileParser.php');
 	$cal = new CalFileParser();
 	
-	if (is_writable($cache_filename) && (filemtime($cache_filename) > strtotime('now -' . $cache_time))) {
+	$cacheAge = filemtime($cache_filename);
+	$refreshAt = strtotime('now -' . $cache_time);
+	if (is_writable($cache_filename) && $cacheAge > $refreshAt) {
 		//retrieve cache
 		$calendar = file_get_contents($cache_filename);
 	} else {
