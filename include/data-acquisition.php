@@ -163,13 +163,16 @@ function retrieveData($api, $cache_filename, $type, $cache_time) {
 	include('classes/CalFileParser.php');
 	$cal = new CalFileParser();
 	
-	$configFileAge = filemtime("config.php");
-	$cacheAge = filemtime($cache_filename);
-	$refreshAt = strtotime('now -' . $cache_time);
+	if (is_writable($cache_filename)) {
+		$configFileAge = filemtime("config.php");
+		$cacheAge = filemtime($cache_filename);
+		$refreshAt = strtotime('now -' . $cache_time);
+		
+	 	if($configFileAge < $cacheAge && //re-cache on config change
+						$cacheAge > $refreshAt) {
+			$calendar = file_get_contents($cache_filename);
+		}
 
-	if (is_writable($cache_filename) && $configFileAge < $cacheAge && $cacheAge > $refreshAt) { //consider cache outdated when config file changed, API might have changed
-		//retrieve cache
-		$calendar = file_get_contents($cache_filename);
 	} else {
 		//refresh or create cache
 		try {
