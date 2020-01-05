@@ -161,7 +161,7 @@ function createCache($folder) {
 
 function retrieveData($api, $cache_filename, $type, $cache_time) {
 	include('classes/CalFileParser.php');
-	$cal = new CalFileParser();
+	$calFileParser = new CalFileParser();
 	
 	if (is_writable($cache_filename)) {
 		$configFileAge = filemtime("config.php");
@@ -185,7 +185,7 @@ function retrieveData($api, $cache_filename, $type, $cache_time) {
 		}
 		if($type == 'ical') {
 			file_put_contents($cache_filename, $calendar, LOCK_EX); // write tmp file for CalFileParser to process
-			$calendar = $cal->parse($cache_filename, 'json');
+			$calendar = $calFileParser->parse($cache_filename, 'json');
 		}
 		file_put_contents($cache_filename, $calendar, LOCK_EX);
 	}
