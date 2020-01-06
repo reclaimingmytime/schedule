@@ -159,20 +159,21 @@ function createCache($folder) {
 	}
 }
 
+function cacheIsUpToDate($config_filename, $cache_filename, $cache_time) {
+		$configFileAge = filemtime($config_filename);
+		$cacheAge = filemtime($cache_filename);
+		$refreshAt = strtotime('now -' . $cache_time);
+		
+	 	return $configFileAge < $cacheAge && //re-cache on config change
+						$cacheAge > $refreshAt;
+}
+
 function retrieveData($api, $cache_filename, $type, $cache_time) {
 	include('classes/CalFileParser.php');
 	$calFileParser = new CalFileParser();
 	
-	if (is_writable($cache_filename)) {
-		$configFileAge = filemtime("config.php");
-		$cacheAge = filemtime($cache_filename);
-		$refreshAt = strtotime('now -' . $cache_time);
-		
-	 	if($configFileAge < $cacheAge && //re-cache on config change
-						$cacheAge > $refreshAt) {
-			$calendar = file_get_contents($cache_filename);
-		}
-
+	if (is_writable($cache_filename) && cacheIsUpToDate("config.php", $cache_filename, $cache_time)) {
+		$calendar = file_get_contents($cache_filename);
 	} else {
 		//refresh or create cache
 		try {
