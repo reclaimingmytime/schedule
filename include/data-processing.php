@@ -23,10 +23,10 @@ function trimRoom($raw, $roomPrefix) {
 
 //Prof Functions
 function trimPlaceholders($raw, $placeholders) {
-	if (in_array($raw, $placeholders)) {
-		return "";
+	foreach ($placeholders as $placeholder) {
+		$processed = str_replace($placeholder, "", $raw);
 	}
-	return $raw;
+	return $processed;
 }
 
 if (!isset($displayProfs)) {
