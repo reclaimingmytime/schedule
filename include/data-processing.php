@@ -47,7 +47,9 @@ function lookupProfs($prof, $emptyProfs, $profs) {
 		$prof = trimPlaceholders($prof, $emptyProfs);
 	}
 	if (!empty($profs)) {
-		$prof = lookup($prof, $profs);
+    foreach ($profs as $profInitial => $profName) {
+      $prof = str_replace($profInitial, $profName, $prof);
+    }
 	}
 	return $prof;
 }
