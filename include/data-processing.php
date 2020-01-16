@@ -25,7 +25,7 @@ function trimRoom($raw, $roomPrefix) {
 function trimPlaceholders($raw, $placeholders) {
 	$processed = $raw;
 	foreach ($placeholders as $placeholder) {
-		$processed = str_replace($placeholder, "", $processed);
+		$processed = removeFromString($placeholder, $processed);
 	}
 	return $processed;
 }

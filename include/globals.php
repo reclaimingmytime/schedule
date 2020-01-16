@@ -34,6 +34,10 @@ function arrayContains($array, $string) {
 	return in_array(strtolower($string), $array) || in_array(strtoupper($string), $array);
 }
 
+function removeFromString($search, $subject) {
+  return str_replace($search, "", $subject);
+}
+
 function lookup($key, $array) {
 	if(isset($array[$key])) {
 		return $array[$key];
