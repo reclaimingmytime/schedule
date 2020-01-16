@@ -24,8 +24,10 @@ function trimRoom($raw, $roomPrefix) {
 //Prof Functions
 function trimPlaceholders($raw, $placeholders) {
 	if(!is_array($placeholders)) return "";
+
+	$processed = $raw;
 	foreach ($placeholders as $placeholder) {
-		$processed = str_replace($placeholder, "", $raw);
+		$processed = str_replace($placeholder, "", $processed);
 	}
 	return $processed;
 }
