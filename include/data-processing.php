@@ -130,11 +130,11 @@ function validSubject($subject, $ignoredSubjects) {
 }
 
 function containsNewRoom($existing, $new) {
-	return !empty($existing["room"]) && notContains($existing["room"], $new["room"]);
+	return !empty($new["room"]) && notContains($existing["room"], $new["room"]);
 }
 
 function containsNewValidProf($existing, $new, $emptyProfs) {
-	return !empty($existing["prof"]) && !empty($new["prof"]) &&
+	return !empty($new["prof"]) &&
 					notContains($existing["prof"], $new["prof"]) &&
 					validProf($new["prof"], $emptyProfs);
 }
