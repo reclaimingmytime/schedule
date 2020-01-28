@@ -134,7 +134,7 @@ function containsNewRoom($existing, $new) {
 }
 
 function containsNewValidProf($existing, $new, $emptyProfs) {
-	return !empty($existing["prof"]) &&
+	return !empty($existing["prof"]) && !empty($new["prof"]) &&
 					notContains($existing["prof"], $new["prof"]) &&
 					validProf($new["prof"], $emptyProfs);
 }
