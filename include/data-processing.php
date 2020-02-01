@@ -254,7 +254,9 @@ foreach ($calendar as $entry) {
 		}
 	}
 
-	if (empty($schedule) && empty($nextEventDate) && $date > $desiredDateTo && $isCorrectClass) {
+	if (empty($schedule) &&
+					(empty($nextEventDate) && $date > $desiredDateTo && $isCorrectClass) ||
+					isset($nextEventDate) && $date < $nextEventDate) {
 		if (!$isExtraClass || ($isExtraClass && isExtraSubject(getSubject($type, $entry[SUBJECT]), formatWeekDay($date), $extraEvents, $extraClass, $chosenExtraSubjects))) {
 			$nextEventDate = $date;
 		}
