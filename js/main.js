@@ -292,7 +292,7 @@ $(function () {
 		const time = formatTime(dt.getHours(), dt.getMinutes());
 		const timeMilliseconds = dt.getTime();
 		
-		if(displayedDt != dt.getDate() && head.data('weekoverview') === true) {
+		if(displayedDt != dt.getDate()) {
 			window.location.reload();
 		}
 		
