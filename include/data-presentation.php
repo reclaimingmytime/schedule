@@ -30,7 +30,7 @@ function printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredD
 		$link = strtolower($extraSubject);
 
 		if (!empty($chosenExtraSubjects) && strlen($chosenExtraSubjects[0]) !== 0) {
-			if (in_array($extraSubject, $chosenExtraSubjects)) {
+			if (inArray($extraSubject, $chosenExtraSubjects)) {
 				$icon = "fas fa-check-square";
 				$link = printArray(getArrayWithout($chosenExtraSubjects, $extraSubject), true);
 			} else {
@@ -39,7 +39,7 @@ function printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredD
 		}
 		
 		$classes = "dropdown-item";
-		if (in_array($extraSubject, $chosenExtraSubjects)) {
+		if (inArray($extraSubject, $chosenExtraSubjects)) {
 			$classes .= ' font-weight-bold';
 		}
 		?>
