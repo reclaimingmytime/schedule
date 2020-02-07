@@ -163,6 +163,8 @@ foreach ($calendar as $entry) {
 	if (isset($desiredClass)) {
 		$class = stringRange($entry[LESSONCLASS], CLASSSECTION[0], CLASSSECTION[1]);
 
+//		echo '<p>$class: ' . $class;
+//		echo '<br>$desiredClass: ' . $desiredClass;
 		if (notContains($class, $desiredClass)) {
 			$isCorrectClass = false;
 			if ($displayExtraEvents == true) {
@@ -254,9 +256,10 @@ foreach ($calendar as $entry) {
 		}
 	}
 
-	if (empty($schedule) &&
-					(empty($nextEventDate) && $date > $desiredDateTo && $isCorrectClass) ||
-					isset($nextEventDate) && $date < $nextEventDate) {
+	if (empty($schedule) && $isCorrectClass &&
+					$date > $desiredDateTo && //"next event" = later than desired date
+					(empty($nextEventDate) ||
+					isset($nextEventDate) && $date < $nextEventDate)) {
 		if (!$isExtraClass || ($isExtraClass && isExtraSubject(getSubject($type, $entry[SUBJECT]), formatWeekDay($date), $extraEvents, $extraClass, $chosenExtraSubjects))) {
 			$nextEventDate = $date;
 		}
