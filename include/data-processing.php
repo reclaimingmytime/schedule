@@ -267,7 +267,7 @@ foreach ($calendar as $entry) {
 }
 
 if (!empty($schedule)) {
-	//remove overlapping events
+	/* //remove overlapping events // might be intended
 	if ($displayExtraEvents == true) {
 		foreach ($schedule as $key => $extraEvent) {
 			if ($extraEvent['type'] == "extraEvent") {
@@ -281,7 +281,7 @@ if (!empty($schedule)) {
 				}
 			}
 		}
-	}
+	} */
 
 	//sort by date
 	usort($schedule, 'compareDate');
