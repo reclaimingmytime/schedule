@@ -92,6 +92,10 @@ function uppercaseArray(&$array) {
 	return array_map('strtoupper', $array);
 }
 
+function inArray($needle, $haystack) { //Case-insensitive
+	return in_array(strtolower($needle), array_map('strtolower', $haystack));
+}
+
 function printArray($array, $lowercase = false) {
 	if (empty($array))
 		return "none";
