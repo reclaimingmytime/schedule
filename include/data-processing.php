@@ -163,8 +163,6 @@ foreach ($calendar as $entry) {
 	if (isset($desiredClass)) {
 		$class = stringRange($entry[LESSONCLASS], CLASSSECTION[0], CLASSSECTION[1]);
 
-//		echo '<p>$class: ' . $class;
-//		echo '<br>$desiredClass: ' . $desiredClass;
 		if (notContains($class, $desiredClass)) {
 			$isCorrectClass = false;
 			if ($displayExtraEvents == true) {
