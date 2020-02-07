@@ -26,11 +26,13 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 
 function printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed) {
 	foreach ($extraSubjects as $extraSubject) {
+		$classes = "dropdown-item";
 		$icon = "fas fa-square";
 		$link = strtolower($extraSubject);
 
 		if (!empty($chosenExtraSubjects) && strlen($chosenExtraSubjects[0]) !== 0) {
 			if (inArray($extraSubject, $chosenExtraSubjects)) {
+				$classes .= ' font-weight-bold';
 				$icon = "fas fa-check-square";
 				$link = printArray(getArrayWithout($chosenExtraSubjects, $extraSubject), true);
 			} else {
@@ -38,10 +40,6 @@ function printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredD
 			}
 		}
 		
-		$classes = "dropdown-item";
-		if (inArray($extraSubject, $chosenExtraSubjects)) {
-			$classes .= ' font-weight-bold';
-		}
 		?>
 		<a class="<?php echo $classes; ?>" href="?extraSubjects=<?php echo $link; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"><i class="<?php echo $icon; ?>"></i> <?php echo $extraSubject; ?></a>
 		<?php 
