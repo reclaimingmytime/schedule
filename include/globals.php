@@ -96,6 +96,10 @@ function inArray($needle, $haystack) { //Case-insensitive
 	return in_array(strtolower($needle), array_map('strtolower', $haystack));
 }
 
+function arraySearch($needle, $haystack) { //Case-insensitive
+	return array_search(strtolower($needle), array_map('strtolower', $haystack));
+}
+
 function printArray($array, $lowercase = false) {
 	if (empty($array))
 		return "none";
@@ -140,7 +144,7 @@ function getArrayWith($array, $string) {
 }
 
 function getArrayWithout($array, $string) {
-	if (($key = array_search($string, $array)) !== false) {
+	if (($key = arraySearch($string, $array)) !== false) {
 		unset($array[$key]);
 	}
 	return $array;
