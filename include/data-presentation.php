@@ -39,9 +39,10 @@ function printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredD
 				$link = printArray(getArrayWith($chosenExtraSubjects, $extraSubject), true);
 			}
 		}
+		$encodedLink = urlencode($link);
 		
 		?>
-		<a class="<?php echo $classes; ?>" href="?extraSubjects=<?php echo $link; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"><i class="<?php echo $icon; ?>"></i> <?php echo $extraSubject; ?></a>
+		<a class="<?php echo $classes; ?>" href="?extraSubjects=<?php echo $encodedLink; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"><i class="<?php echo $icon; ?>"></i> <?php echo $extraSubject; ?></a>
 		<?php 
 	}
 }
