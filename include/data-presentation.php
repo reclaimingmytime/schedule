@@ -409,7 +409,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 				
 				<div class="d-block d-sm-none mt-2">
 					<span class="text-muted" <?php if($weekOverview === false) { ?>data-toggle="tooltip" data-placement="bottom" title="One-finger swipes change the day. Two-finger swipes change the week." <?php } ?>>
-						<small>Navigate by swiping left and right.<?php if($weekOverview === false) { ?><i class="fas fa-info-circle"></i><?php } ?></small>
+						<small>Navigate by swiping left and right.<?php if($weekOverview === false) { ?> <i class="fas fa-info-circle"></i><?php } ?></small>
 					</span>
 				</div>
 			</footer>
