@@ -7,12 +7,14 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 		$enableShortcut = $showIDs === true && $key <= 9;
 		
 		$classSwitcherClasses = "dropdown-item";
+		$icon = "fas fa-chalkboard";
 		if ($desiredClass == $class) {
 			$classSwitcherClasses .= ' active font-weight-bold text-body bg-transparent';
+			$icon = "fas fa-chalkboard-teacher";
 		}
 		?>
 		<a class="<?php echo $classSwitcherClasses; ?>" href="?class=<?php echo $class; ?>&amp;date=<?php echo $desiredDate . $tokenEmbed; ?>"<?php if($enableShortcut === true) { ?> id="key<?php echo $key; ?>"<?php } ?>>
-			<i class="fas fa-chalkboard"></i>
+			<i class="<?php echo $icon; ?>"></i>
 			<?php echo $class;
 
 			if($enableShortcut === true) { ?>
