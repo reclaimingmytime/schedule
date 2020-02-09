@@ -116,9 +116,15 @@ function getSubject($type, $wholeString) {
 //Duplicate check
 function sameEvent($e, $new) {
 	return $e["date"] == $new["date"] &&
+					$e["subject"] == $new["subject"] &&
 					$e["start"] == $new["start"] &&
-					$e["end"] == $new["end"] &&
-					$e["subject"] == $new["subject"];
+					$e["end"] == $new["end"];
+}
+function splitupEvent($e, $new) {
+	return $e["date"] == $new["date"] &&
+					$e["subject"] == $new["subject"] &&
+					$e["room"] == $new["room"] &&
+					($e["start"] != $new["start"] || $e["end"] != $new["end"]);
 }
 
 function validProf($profs, $emptyProfs) {
@@ -247,6 +253,11 @@ foreach ($calendar as $entry) {
 					}
 					$schedule[$key]["info"] .= $new["info"];
 				}
+			}
+			if(splitupEvent($existing, $new)) {
+				$add = false;
+				$schedule[$key]["start"] = min($existing["start"], $new["start"]);
+				$schedule[$key]["end"] = max($existing["end"], $new["end"]);
 			}
 		}
 
