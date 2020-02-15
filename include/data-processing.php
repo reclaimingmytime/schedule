@@ -120,11 +120,17 @@ function sameEvent($e, $new) {
 					$e["start"] == $new["start"] &&
 					$e["end"] == $new["end"];
 }
-function splitupEvent($e, $new) {
-	return $e["date"] == $new["date"] &&
-					$e["subject"] == $new["subject"] &&
-					$e["room"] == $new["room"] &&
-					($e["start"] != $new["start"] || $e["end"] != $new["end"]);
+function isSameProf($displayProfs, $existing, $new) {
+	return $displayProfs == true ? $existing["prof"] == $new["prof"] : true;
+}
+function splitupEvent($prev, $current) {
+	global $displayProfs;
+	return $prev["date"] == $current["date"] &&
+					$prev["subject"] == $current["subject"] &&
+					$prev["info"] == $current["info"] &&
+					$prev["room"] == $current["room"] &&
+					isSameProf($displayProfs, $prev, $current) && 
+					($prev["start"] != $current["start"] || $prev["end"] != $current["end"]);
 }
 
 function validProf($profs, $emptyProfs) {
@@ -254,11 +260,6 @@ foreach ($calendar as $entry) {
 					$schedule[$key]["info"] .= $new["info"];
 				}
 			}
-			if(splitupEvent($existing, $new)) {
-				$add = false;
-				$schedule[$key]["start"] = min($existing["start"], $new["start"]);
-				$schedule[$key]["end"] = max($existing["end"], $new["end"]);
-			}
 		}
 
 		if ($add === true) {
@@ -293,9 +294,20 @@ if (!empty($schedule)) {
 		}
 	} */
 
+	//merge events
+	foreach ($schedule as $key => $event) {
+		if (isset($schedule[$key - 1]) && splitupEvent($schedule[$key - 1], $event)) {
+			$prevEvent = $schedule[$key - 1];
+			
+			$schedule[$key - 1]["start"] = min($prevEvent["start"], $event["start"]);
+			$schedule[$key - 1]["end"] = max($prevEvent["end"], $event["end"]);
+			unset($schedule[$key]);
+		}
+	}
+	
 	//sort by date
 	usort($schedule, 'compareDate');
-
+	
 	//Sanitize input
 	escapeArray($schedule);
 }
