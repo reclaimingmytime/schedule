@@ -201,15 +201,15 @@ $(function () {
 
 	function prettyPrintMinutes(minutes) {
 		if (minutes < 1) {
-			return '< 1 m';
+			return '< 1 min';
 		}
 		if (minutes < 60) {
-			return minutes + " m";
+			return minutes + " min";
 		}
 		if (minutes % 60 == 0) {
 			return removeMinutes(minutes) + " h";
 		}
-		return removeMinutes(minutes) + " h " + removeHours(minutes) + " m";
+		return removeMinutes(minutes) + " h " + removeHours(minutes) + " min";
 	}
 
 	function formatRemainingTime(minutes) {
