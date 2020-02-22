@@ -46,8 +46,8 @@ function lookup($key, $array) {
 }
 
 function compareDate($a, $b) {
-	return new DateTime($a['startDateTime']) <=> new DateTime($b['startDateTime']);
-}
+		return new DateTime($a['startDateTime']) <=> new DateTime($b['startDateTime']);
+	}
 
 /* Various Functions */
 

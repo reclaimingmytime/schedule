@@ -21,6 +21,12 @@ function trimRoom($raw, $roomPrefix) {
 	return !empty($roomPrefix) ? str_replace($roomPrefix, "", $raw) : $raw;
 }
 
+function sortRooms($rooms) {
+	$array = explode(', ', $rooms);
+	natsort($array);
+	return implode(', ', $array);
+}
+
 //Prof Functions
 function trimPlaceholders($raw, $placeholders) {
 	$processed = $raw;
@@ -293,10 +299,15 @@ if (!empty($schedule)) {
 			}
 		}
 	} */
-
-	//merge events
+	
 	foreach ($schedule as $key => $event) {
-		if (isset($schedule[$key - 1]) && splitupEvent($schedule[$key - 1], $event)) {
+		/* Sort rooms */
+		if(!empty($schedule[$key]["room"])) {
+			$schedule[$key]["room"] = sortRooms($schedule[$key]["room"]);
+		}
+		
+		/* Merge events */
+		if (isset($schedule[$key - 1]) && splitupEvent($schedule[$key - 1], $schedule[$key])) {
 			$prevEvent = $schedule[$key - 1];
 			
 			$schedule[$key - 1]["start"] = min($prevEvent["start"], $event["start"]);
