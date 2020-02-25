@@ -130,25 +130,33 @@ $hasManifest = isset($manifest) && !empty($manifest);
 
 					<ul class="navbar-nav m-auto ml-sm-0">
 						
-						<li class="nav-item mr-4">
-							<a class="nav-link<?php if ($prevWeek == "none") echo ' disabled'; ?>" id="prevWeek" href="?date=<?php echo $prevWeek; ?>"><i class="fas fa-angle-double-left"></i> <span class="d-none d-lg-inline">Previous Week <small><code class="text-secondary d-none d-xl-inline">(<?php echo ($weekOverview === false) ? "S" : "A"; ?>)</code></small></span></a>
-						</li>
+						<?php if ($prevWeek !== "none") { ?>
+							<li class="nav-item mr-4">
+								<a class="nav-link" id="prevWeek" href="?date=<?php echo $prevWeek; ?>"><i class="fas fa-angle-double-left"></i> <span class="d-none d-lg-inline">Previous Week <small><code class="text-secondary d-none d-xl-inline">(<?php echo ($weekOverview === false) ? "S" : "A"; ?>)</code></small></span></a>
+							</li>
+						<?php } ?>
 
-						<li class="nav-item mr-4">
-							<a class="nav-link<?php if ($prevDay == "none") echo ' disabled'; ?>" id="prevDay" href="?date=<?php echo $prevDay; ?>"><i class="fas fa-angle-left"></i> <span class="d-none d-lg-inline">Previous Day <small><code class="text-secondary d-none d-xl-inline">(A)</code></small></span></a>
-						</li>
+						<?php if ($prevDay !== "none") { ?>
+							<li class="nav-item mr-4">
+								<a class="nav-link" id="prevDay" href="?date=<?php echo $prevDay; ?>"><i class="fas fa-angle-left"></i> <span class="d-none d-lg-inline">Previous Day <small><code class="text-secondary d-none d-xl-inline">(A)</code></small></span></a>
+							</li>
+						<?php } ?>
 						
 						<li class="nav-item mr-4<?php echo (!$enableTodayLink) ? ' active' : ''; ?>">
 							<a class="nav-link" id="today" href="."><i class="fas fa-home"></i> <span class="d-none d-lg-inline">Today <small><code class="text-secondary d-none d-xl-inline">(Enter)</code></small></span></a>
 						</li>
 						
+						<?php if ($nextDay !== "none") { ?>
 						<li class="nav-item mr-4">
-							<a class="nav-link<?php if ($nextDay == "none") echo ' disabled'; ?>" id="nextDay" href="?date=<?php echo $nextDay; ?>"><i class="fas fa-angle-right"></i> <span class="d-none d-lg-inline">Next Day <small><code class="text-secondary d-none d-xl-inline">(D)</code></small></span></a>
+							<a class="nav-link" id="nextDay" href="?date=<?php echo $nextDay; ?>"><i class="fas fa-angle-right"></i> <span class="d-none d-lg-inline">Next Day <small><code class="text-secondary d-none d-xl-inline">(D)</code></small></span></a>
 						</li>
+						<?php } ?>
 
+						<?php if ($nextWeek !== "none") { ?>
 						<li class="nav-item mr-4">
-							<a class="nav-link <?php if ($nextWeek == "none") echo ' disabled'; ?>" id="nextWeek" href="?date=<?php echo $nextWeek; ?>"><i class="fas fa-angle-double-right"></i> <span class="d-none d-lg-inline">Next Week <small><code class="text-secondary d-none d-xl-inline">(<?php echo ($weekOverview === false) ? "W" : "D"; ?>)</code></small></span></a>
+							<a class="nav-link" id="nextWeek" href="?date=<?php echo $nextWeek; ?>"><i class="fas fa-angle-double-right"></i> <span class="d-none d-lg-inline">Next Week <small><code class="text-secondary d-none d-xl-inline">(<?php echo ($weekOverview === false) ? "W" : "D"; ?>)</code></small></span></a>
 						</li>
+						<?php } ?>
 
 						<?php if ($weekOverview === true) {
 							$overviewType = "day";
