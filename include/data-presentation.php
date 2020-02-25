@@ -237,11 +237,11 @@ $hasManifest = isset($manifest) && !empty($manifest);
 							
 							<?php if(empty($calendar)) { ?>
 								<div class="alert alert-warning mt-3" role="alert">
-									No events exist for this class yet. Please check back later.
+									<i class="fas fa-exclamation-circle"></i> No events exist for this class yet. Please check back later.
 								</div>
 							<?php } else if (empty($schedule)) { ?>
 								<div class="alert alert-info mt-3" role="alert">
-									No events <?php echo $weekOverview === true ? "in that week" : "on that day"; ?>.
+									<i class="fas fa-info-circle"></i> No events <?php echo $weekOverview === true ? "in that week" : "on that day"; ?>.
 								</div>
 								<?php if(!empty($nextEventDate)) {?>
 									<div class="text-center">
@@ -281,7 +281,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 											<?php 
 											if($undisplayedDate != $nextEventDate) { ?>
 												<div class="alert alert-info mt-3" role="alert">
-													No events on that day.
+													<i class="fas fa-info-circle"></i> No events on that day.
 												</div>
 											<?php }
 												
