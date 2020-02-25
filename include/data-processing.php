@@ -52,7 +52,7 @@ function lookupProfs($prof, $emptyProfs, $profs) {
 	if (!empty($emptyProfs)) {
 		$prof = trimPlaceholders($prof, $emptyProfs);
 	}
-	if (!empty($profs)) {
+	if (!empty($profs) && !empty($prof)) {
     foreach ($profs as $profInitial => $profName) {
       $prof = str_replace($profInitial, $profName, $prof);
     }
