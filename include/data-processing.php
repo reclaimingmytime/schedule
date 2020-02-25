@@ -254,7 +254,10 @@ foreach ($calendar as $entry) {
 			if (sameEvent($existing, $new)) {
 				$add = false;
 				if (containsNewRoom($existing, $new)) {
-					$schedule[$key]["room"] .= ", " . $new["room"];
+					if(!empty($existing["room"])) {
+						$schedule[$key]["room"] .= ", ";
+					}
+					$schedule[$key]["room"] .= $new["room"];
 				}
 				if (containsNewValidProf($existing, $new, $emptyProfs)) {
 					if(!empty($existing["prof"])) {
