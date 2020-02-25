@@ -201,6 +201,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 					<div class="row">
 						<div class="col-xl-4">
 							<div class="alert alert-danger alert-dismissible fade show" role="alert">
+								<i class="fas fa-exclamation-circle"></i>
 								<?php echo $_SESSION["msg"]; ?>
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
