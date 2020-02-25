@@ -245,7 +245,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 								</div>
 								<?php if(!empty($nextEventDate)) {?>
 									<div class="text-center">
-										<a class="btn btn-success text-white" href="?date=<?php echo $nextEventDate; ?>">Go to next event on <?php echo formatReadableDate($nextEventDate); ?></a>
+										<a class="btn btn-success text-white" href="?date=<?php echo $nextEventDate; ?>"><i class="fas fa-angle-double-right"></i> Go to next event on <?php echo formatReadableDate($nextEventDate); ?></a>
 									</div>
 								<?php }
 								
