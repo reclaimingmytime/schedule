@@ -316,11 +316,14 @@ if (!empty($schedule)) {
 		if (isset($schedule[$key - 1]) && splitupEvent($schedule[$key - 1], $schedule[$key])) {
 			$prevEvent = $schedule[$key - 1];
 			
-			$schedule[$key - 1]["start"] = min($prevEvent["start"], $event["start"]);
-			$schedule[$key - 1]["end"] = max($prevEvent["end"], $event["end"]);
+			$mergedStart = min($prevEvent["startDateTime"], $event["startDateTime"]);
+			$mergedEnd = max($prevEvent["endDateTime"], $event["endDateTime"]);
 
-			$schedule[$key - 1]["startdatetime"] = createJsTime([$schedule[$key - 1]["start"]]);
-			$schedule[$key - 1]["enddatetime"] = createJsTime([$schedule[$key - 1]["end"]]);
+			$schedule[$key - 1]["start"] = dateTimeToHourMin($mergedStart);
+			$schedule[$key - 1]["end"] = dateTimeToHourMin($mergedEnd);
+
+			$schedule[$key - 1]["startDateTime"] = $mergedStart;
+			$schedule[$key - 1]["endDateTime"] = $mergedEnd;
 			unset($schedule[$key]);
 		}
 	}
