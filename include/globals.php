@@ -46,8 +46,8 @@ function lookup($key, $array) {
 }
 
 function compareDate($a, $b) {
-		return new DateTime($a['startDateTime']) <=> new DateTime($b['startDateTime']);
-	}
+	return new DateTime($a['startDateTime']) <=> new DateTime($b['startDateTime']);
+}
 
 /* Various Functions */
 
@@ -230,6 +230,10 @@ function readableToIsoDate($date) {
 
 function createJsTime($time) {
 	return date("M j, Y H:i:s", strtotime($time));
+}
+
+function dateTimeToHourMin($time) {
+	return DateTime::createFromFormat('M j, Y H:i:s', $time)->format("H:i");
 }
 
 /* CSRF Token */
