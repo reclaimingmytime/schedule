@@ -318,6 +318,9 @@ if (!empty($schedule)) {
 			
 			$schedule[$key - 1]["start"] = min($prevEvent["start"], $event["start"]);
 			$schedule[$key - 1]["end"] = max($prevEvent["end"], $event["end"]);
+
+			$schedule[$key - 1]["startdatetime"] = createJsTime([$schedule[$key - 1]["start"]]);
+			$schedule[$key - 1]["enddatetime"] = createJsTime([$schedule[$key - 1]["end"]]);
 			unset($schedule[$key]);
 		}
 	}
