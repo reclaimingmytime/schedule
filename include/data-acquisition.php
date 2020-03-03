@@ -247,5 +247,5 @@ $cache_folder = "cache/";
 createCache($cache_folder);
 
 $cache_file = $cache_folder . $cache_filename;
-$cache_time = "6 hours";
+$cache_time = "1 hour";
 $calendar = retrieveData($desiredAPI, $cache_file, $type, $cache_time);
