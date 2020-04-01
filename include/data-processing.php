@@ -329,7 +329,8 @@ if (!empty($schedule)) {
 	}
 	
 	//sort by date
-	usort($schedule, 'compareDate');
+	usort($schedule, 'compareStartDateTime');
+	usort($schedule, 'compareEndDateTime');
 	
 	//Sanitize input
 	escapeArray($schedule);
