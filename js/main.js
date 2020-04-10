@@ -15,8 +15,8 @@ $(function () {
 	function clickID(id) {
 		document.getElementById(id).click();
 	}
-	function clickIDIfExists(id) {
-		if ($("#" + id).length) {
+	function clickIDIfVisible(id) {
+		if ($("#" + id).isVisible()) {
 			clickID(id);
 		}
 	}
@@ -160,17 +160,19 @@ $(function () {
 						redirectToHref(keyElement);
 					}
 					if ($(keyElement).hasActiveClass() && $(keyElement).isVisible()) {
-						clickIDIfExists('classNavButton'); //close menu when selecting link with active class
+						clickIDIfVisible('classNavButton'); //close menu when selecting link with active class
 					}
 					break;
 				}
 
 				case "c":
-					clickIDIfExists('classNavButton');
+					clickIDIfVisible('classNavButton');
+					clickIDIfVisible('classFooterButton');
 					break;
 
 				case "x":
-					clickIDIfExists('extraEventsButton');
+					clickIDIfVisible('extraEventsFooterButton');
+					clickIDIfVisible('extraEventsButton');
 					break;
 
 				default:

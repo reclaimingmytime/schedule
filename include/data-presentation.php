@@ -390,6 +390,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 					<div class="d-block <?php echo $weekOverview == true ? "d-sm-none " : "" ?>dropup d-inline">
 						<a class="btn btn-white shadow-none text-secondary dropdown-toggle" href="#" role="button" id="classFooterButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="fas fa-chalkboard-teacher"></i> <?php echo $desiredClass; ?>
+							<small><code class="text-secondary d-none d-xl-inline">(C)</code></small>
 						</a>
 						<div class="dropdown-menu" id="classFooterMenu" aria-labelledby="classFooterButton">
 							<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed); ?>
@@ -399,8 +400,9 @@ $hasManifest = isset($manifest) && !empty($manifest);
 				
 				<?php if(!empty($extraSubjects)) { ?>
 					<div class="d-block <?php echo $weekOverview == true ? "d-sm-none " : "" ?>dropup d-inline">
-						<a class="btn btn-white shadow-none text-secondary dropdown-toggle" href="#" role="button" id="extraEventsButtonFooter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<a class="btn btn-white shadow-none text-secondary dropdown-toggle" href="#" role="button" id="extraEventsFooterButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="<?php echo $extraEventsIcon; ?>"></i> <?php echo $extraEventsText; ?>
+							<small><code class="text-secondary d-none d-xl-inline">(X)</code></small>
 						</a>
 						<div class="dropdown-menu" id="extraEventsMenuFooter" aria-labelledby="extraEventsButtonFooter">
 							<?php printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed); ?>
