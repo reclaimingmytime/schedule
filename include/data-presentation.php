@@ -1,7 +1,7 @@
 <?php
 /* Display Schedule */
 
-function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, $showIDs = false) {
+function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, $showIDs = true) {
 	$key = 1;
 	foreach ($allowedClasses as $class) {
 		$enableShortcut = $showIDs === true && $key <= 9;
@@ -178,7 +178,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 									<i class="fas fa-chalkboard-teacher"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?> <small><code class="text-white d-none d-xl-inline">(C)</code></small></span>
 								</a>
 								<div class="dropdown-menu bg-dark" id="classNavMenu" aria-labelledby="classNavButton">
-									<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, true); ?>
+									<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed); ?>
 								</div>
 							</li>
 						<?php } ?>
