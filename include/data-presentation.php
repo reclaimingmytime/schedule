@@ -9,7 +9,8 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 		$classSwitcherClasses = "dropdown-item text-white";
 		$icon = "fas fa-chalkboard";
 		if ($desiredClass == $class) {
-			$classSwitcherClasses .= ' active font-weight-bold text-body bg-transparent';
+			$classSwitcherClasses .= ' active font-weight-bold bg-transparent';
+//			$classSwitcherClasses .= ' text-body'; //light theme only
 			$icon = "fas fa-chalkboard-teacher";
 		}
 		?>
