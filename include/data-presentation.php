@@ -404,7 +404,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 							<i class="<?php echo $extraEventsIcon; ?>"></i> <?php echo $extraEventsText; ?>
 							<small><code class="text-secondary d-none d-xl-inline">(X)</code></small>
 						</a>
-						<div class="dropdown-menu" id="extraEventsMenuFooter" aria-labelledby="extraEventsButtonFooter">
+						<div class="dropdown-menu" id="extraEventsMenuFooter" aria-labelledby="extraEventsFooterButton">
 							<?php printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed); ?>
 						</div>
 					</div>
