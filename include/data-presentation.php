@@ -2,12 +2,11 @@
 /* Display Schedule */
 
 function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, $enableIDs = true) {
-	global $colors;
-	global $theme;
+	global $themeColors;
 	
-	$activeDropdownColor = lookup("activeDropdown", $colors[$theme]);
-	$dropdownItemColor = lookup("dropdown-item", $colors[$theme]);
-	$codeHighlightColors = lookup("text-secondary", $colors[$theme]);
+	$activeDropdownColor = lookup("activeDropdown", $themeColors);
+	$dropdownItemColor = lookup("dropdown-item", $themeColors);
+	$codeHighlightColors = lookup("text-secondary", $themeColors);
 	
 	$key = 1;
 	foreach ($allowedClasses as $class) {
@@ -35,10 +34,9 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 }
 
 function printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed) {
-	global $colors;
-	global $theme;
+	global $themeColors;
 	
-	$activeDropdownColor = lookup("dropdown-item", $colors[$theme]);
+	$activeDropdownColor = lookup("dropdown-item", $themeColors);
 	foreach ($extraSubjects as $extraSubject) {
 		$classes = $activeDropdownColor;
 		$icon = "fas fa-square";
@@ -132,10 +130,10 @@ $hasManifest = isset($manifest) && !empty($manifest);
 		}
 		</style>
 	</head>
-	<body class="mb-4 <?php echo lookup("body", $colors[$theme]); ?>">
+	<body class="mb-4 <?php echo lookup("body", $themeColors); ?>">
 		<div class="container-fluid">
 			<header>
-				<nav class="<?php echo lookup("navbar", $colors[$theme]); ?> navbar-expand mt-3 mb-4">
+				<nav class="<?php echo lookup("navbar", $themeColors); ?> navbar-expand mt-3 mb-4">
 					<div class="navbar-header d-none d-sm-block mr-3">
 						<a class="navbar-brand<?php echo (!$enableTodayLink) ? ' active' : ''; ?>" href="."><i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span></a>
 					</div>
@@ -144,29 +142,29 @@ $hasManifest = isset($manifest) && !empty($manifest);
 						
 						<?php if ($prevWeek !== "none") { ?>
 							<li class="nav-item mr-4">
-								<a class="nav-link" id="prevWeek" href="?date=<?php echo $prevWeek; ?>"><i class="fas fa-angle-double-left"></i> <span class="d-none d-lg-inline">Previous Week <small><code class="<?php echo lookup("text-secondary", $colors[$theme]); ?> d-none d-xl-inline">(<?php echo ($weekOverview === false) ? "S" : "A"; ?>)</code></small></span></a>
+								<a class="nav-link" id="prevWeek" href="?date=<?php echo $prevWeek; ?>"><i class="fas fa-angle-double-left"></i> <span class="d-none d-lg-inline">Previous Week <small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(<?php echo ($weekOverview === false) ? "S" : "A"; ?>)</code></small></span></a>
 							</li>
 						<?php } ?>
 
 						<?php if ($prevDay !== "none") { ?>
 							<li class="nav-item mr-4">
-								<a class="nav-link" id="prevDay" href="?date=<?php echo $prevDay; ?>"><i class="fas fa-angle-left"></i> <span class="d-none d-lg-inline">Previous Day <small><code class="<?php echo lookup("text-secondary", $colors[$theme]); ?> d-none d-xl-inline">(A)</code></small></span></a>
+								<a class="nav-link" id="prevDay" href="?date=<?php echo $prevDay; ?>"><i class="fas fa-angle-left"></i> <span class="d-none d-lg-inline">Previous Day <small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(A)</code></small></span></a>
 							</li>
 						<?php } ?>
 						
 						<li class="nav-item mr-4<?php echo (!$enableTodayLink) ? ' active' : ''; ?>">
-							<a class="nav-link" id="today" href="."><i class="fas fa-home"></i> <span class="d-none d-lg-inline">Today <small><code class="<?php echo lookup("text-secondary", $colors[$theme]); ?> d-none d-xl-inline">(Enter)</code></small></span></a>
+							<a class="nav-link" id="today" href="."><i class="fas fa-home"></i> <span class="d-none d-lg-inline">Today <small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(Enter)</code></small></span></a>
 						</li>
 						
 						<?php if ($nextDay !== "none") { ?>
 						<li class="nav-item mr-4">
-							<a class="nav-link" id="nextDay" href="?date=<?php echo $nextDay; ?>"><i class="fas fa-angle-right"></i> <span class="d-none d-lg-inline">Next Day <small><code class="<?php echo lookup("text-secondary", $colors[$theme]); ?> d-none d-xl-inline">(D)</code></small></span></a>
+							<a class="nav-link" id="nextDay" href="?date=<?php echo $nextDay; ?>"><i class="fas fa-angle-right"></i> <span class="d-none d-lg-inline">Next Day <small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(D)</code></small></span></a>
 						</li>
 						<?php } ?>
 
 						<?php if ($nextWeek !== "none") { ?>
 						<li class="nav-item mr-4">
-							<a class="nav-link" id="nextWeek" href="?date=<?php echo $nextWeek; ?>"><i class="fas fa-angle-double-right"></i> <span class="d-none d-lg-inline">Next Week <small><code class="<?php echo lookup("text-secondary", $colors[$theme]); ?> d-none d-xl-inline">(<?php echo ($weekOverview === false) ? "W" : "D"; ?>)</code></small></span></a>
+							<a class="nav-link" id="nextWeek" href="?date=<?php echo $nextWeek; ?>"><i class="fas fa-angle-double-right"></i> <span class="d-none d-lg-inline">Next Week <small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(<?php echo ($weekOverview === false) ? "W" : "D"; ?>)</code></small></span></a>
 						</li>
 						<?php } ?>
 
@@ -180,15 +178,15 @@ $hasManifest = isset($manifest) && !empty($manifest);
 							$text = "Week";
 						}  ?>
 						<li class="nav-item mr-4">
-							<a class="nav-link" id="overviewType" href="?<?php echo $desiredDateMidWeek !== $today ? 'date=' . $desiredDateMidWeek . '&' : ''; ?>overview=<?php echo $overviewType . $tokenEmbed; ?>"><i class="<?php echo $icon; ?>"></i> <span class="d-none d-lg-inline"><?php echo $text;?> <small><code class="<?php echo lookup("text-secondary", $colors[$theme]); ?> d-none d-xl-inline">(T)</code></small></span></a>
+							<a class="nav-link" id="overviewType" href="?<?php echo $desiredDateMidWeek !== $today ? 'date=' . $desiredDateMidWeek . '&' : ''; ?>overview=<?php echo $overviewType . $tokenEmbed; ?>"><i class="<?php echo $icon; ?>"></i> <span class="d-none d-lg-inline"><?php echo $text;?> <small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(T)</code></small></span></a>
 						</li>
 						
 						<?php if(!empty($allowedClasses) && !empty($desiredClass) && $weekOverview == true) { ?>
-							<li class="nav-item mr-3 d-none d-sm-inline-block <?php echo lookup("dropdown", $colors[$theme]); ?>">
+							<li class="nav-item mr-3 d-none d-sm-inline-block <?php echo lookup("dropdown", $themeColors); ?>">
 								<a class="nav-link dropdown-toggle" href="#" id="classNavButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<i class="fas fa-chalkboard-teacher"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?> <small><code class="<?php echo lookup("text-secondary", $colors[$theme]); ?> d-none d-xl-inline">(C)</code></small></span>
+									<i class="fas fa-chalkboard-teacher"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?> <small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(C)</code></small></span>
 								</a>
-								<div class="<?php echo lookup("dropdown-menu", $colors[$theme]); ?>" id="classNavMenu" aria-labelledby="classNavButton">
+								<div class="<?php echo lookup("dropdown-menu", $themeColors); ?>" id="classNavMenu" aria-labelledby="classNavButton">
 									<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, false); ?>
 								</div>
 							</li>
@@ -197,9 +195,9 @@ $hasManifest = isset($manifest) && !empty($manifest);
 						<?php if(!empty($extraSubjects) && $weekOverview == true) { ?>
 							<li class="nav-item mr-3 d-none d-sm-inline-block dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="extraEventsButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<i class="<?php echo $extraEventsIcon; ?>"></i> <span class="d-none d-lg-inline"><?php echo $extraEventsText; ?> <small><code class="<?php echo lookup("text-secondary", $colors[$theme]); ?> d-none d-xl-inline">(X)</code></small></span>
+									<i class="<?php echo $extraEventsIcon; ?>"></i> <span class="d-none d-lg-inline"><?php echo $extraEventsText; ?> <small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(X)</code></small></span>
 								</a>
-								<div class="<?php echo lookup("dropdown-menu", $colors[$theme]); ?>" id="extraEventsMenu" aria-labelledby="extraEventsButton">
+								<div class="<?php echo lookup("dropdown-menu", $themeColors); ?>" id="extraEventsMenu" aria-labelledby="extraEventsButton">
 									<?php	printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed); ?>
 								</div>
 							</li>
@@ -237,7 +235,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 								$firstEventDate = $displayedDate;
 							}
 							?>
-							<div<?php echo !isToday($firstEventDate, $today) ? ' class="' . lookup("text-secondary", $colors[$theme]) . '"' : ''; ?>>
+							<div<?php echo !isToday($firstEventDate, $today) ? ' class="' . lookup("text-secondary", $themeColors) . '"' : ''; ?>>
 								<span class="h4 float-right d-sm-none">
 									<i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span>
 								</span>
@@ -285,7 +283,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 												?>
 										</div>
 										<div class="col mt-4 mt-lg-0">
-											<span class="<?php echo ($undisplayedDate->format("Y-m-d") == $today) ? '' : lookup("text-secondary", $colors[$theme]) . ' '; ?>h4 pb-1">
+											<span class="<?php echo ($undisplayedDate->format("Y-m-d") == $today) ? '' : lookup("text-secondary", $themeColors) . ' '; ?>h4 pb-1">
 												<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
 												<span class="mr-1"><?php echo $undisplayedDate->format("D"); ?></span>
 												<span class="mr-1"><?php echo $undisplayedDate->format("d.m.y"); ?></span>
@@ -318,7 +316,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 										$clockIcon = $extraEventIcon;
 									}
 									?>
-									<div class="<?php echo lookup("card", $colors[$theme]); ?> my-3">
+									<div class="<?php echo lookup("card", $themeColors); ?> my-3">
 										<div class="<?php echo $headerClasses; ?>"
 												 data-start="<?php echo $event['start'];?>" 
 												 data-end="<?php echo $event['end'];?>"
@@ -337,7 +335,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 													<li class="list-inline-item pr-3"><?php echo $event['room']; ?></li>
 												<?php }
 												if (!empty($event['prof'])) { ?>
-													<li class="list-inline-item pr-3 <?php echo lookup("text-secondary", $colors[$theme]); ?>">
+													<li class="list-inline-item pr-3 <?php echo lookup("text-secondary", $themeColors); ?>">
 														<?php
 														if(strlen($event['prof']) <= 50) {
 															echo $event['prof'];
@@ -354,7 +352,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 											</ul>
 										</div>
 										<?php if(isToday($event['date'], $today) && $highlightEvents == true) { ?>
-											<div class="card-footer <?php echo lookup("text-muted", $colors[$theme]); echo !onGoingEvent($event, $currentTime, $today) ? ' d-none' : ''; ?>">
+											<div class="card-footer <?php echo lookup("text-muted", $themeColors); echo !onGoingEvent($event, $currentTime, $today) ? ' d-none' : ''; ?>">
 												<i class="fas fa-business-time"></i> <span class="timeRemaining"></span>
 											</div>
 										<?php } ?>
@@ -367,7 +365,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 										$breakStart = formatTime($thisEnd, "+1 minute");
 										$breakEnd = formatTime($nextStart, "-1 minute");
 										?>
-										<div class="<?php echo lookup("card", $colors[$theme]); ?> mt-3<?php echo !isBreak($currentTime, $thisEnd, $nextStart) ? ' d-none' : '' ?> today"
+										<div class="<?php echo lookup("card", $themeColors); ?> mt-3<?php echo !isBreak($currentTime, $thisEnd, $nextStart) ? ' d-none' : '' ?> today"
 												 data-start="<?php echo $breakStart;?>"
 												 data-end="<?php echo $breakEnd;?>"
 												 data-enddatetime="<?php echo createJsTime($nextStart);?>"
@@ -375,7 +373,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 											<div class="card-header <?php echo $highlightClasses; ?>">
 												<i class="fas fa-pause"></i> <strong>Break until <?php echo $nextStart; ?></strong>
 											</div>
-											<div class="card-footer <?php echo lookup("text-muted", $colors[$theme]); ?>">
+											<div class="card-footer <?php echo lookup("text-muted", $themeColors); ?>">
 												<i class="fas fa-business-time"></i> <span class="timeRemaining"></span>
 											</div>
 										</div>
@@ -391,7 +389,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 			<footer class="text-center my-4">
 				<?php if (isset($weekBump) && $weekBump === true) { ?>
 				<div class="d-block my-3">
-					<span class="<?php echo lookup("text-muted", $colors[$theme]); ?>" data-toggle="tooltip" data-placement="bottom" title="Weekends are not part of the schedule. You are now viewing the next week.">
+					<span class="<?php echo lookup("text-muted", $themeColors); ?>" data-toggle="tooltip" data-placement="bottom" title="Weekends are not part of the schedule. You are now viewing the next week.">
 						<small>Weekend skipped. <i class="fas fa-info-circle"></i></small>
 					</span>
 				</div>
@@ -400,11 +398,11 @@ $hasManifest = isset($manifest) && !empty($manifest);
 				<?php /* Class Dropdown */ ?>
 				<?php if(!empty($allowedClasses) && !empty($desiredClass)) { ?>
 					<div class="d-block <?php echo $weekOverview == true ? "d-sm-none " : "" ?>dropup d-inline">
-						<a class="btn btn-white shadow-none <?php echo lookup("text-secondary", $colors[$theme]); ?> dropdown-toggle" href="#" role="button" id="classFooterButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<a class="btn btn-white shadow-none <?php echo lookup("text-secondary", $themeColors); ?> dropdown-toggle" href="#" role="button" id="classFooterButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="fas fa-chalkboard-teacher"></i> <?php echo $desiredClass; ?>
-							<small><code class="<?php echo lookup("text-secondary", $colors[$theme]); ?> d-none d-xl-inline">(C)</code></small>
+							<small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(C)</code></small>
 						</a>
-						<div class="<?php echo lookup("dropdown-menu", $colors[$theme]); ?>" id="classFooterMenu" aria-labelledby="classFooterButton">
+						<div class="<?php echo lookup("dropdown-menu", $themeColors); ?>" id="classFooterMenu" aria-labelledby="classFooterButton">
 							<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed); ?>
 						</div>
 					</div>
@@ -412,18 +410,18 @@ $hasManifest = isset($manifest) && !empty($manifest);
 				
 				<?php if(!empty($extraSubjects)) { ?>
 					<div class="d-block <?php echo $weekOverview == true ? "d-sm-none " : "" ?>dropup d-inline">
-						<a class="btn btn-white shadow-none <?php echo lookup("text-secondary", $colors[$theme]); ?> dropdown-toggle" href="#" role="button" id="extraEventsFooterButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<a class="btn btn-white shadow-none <?php echo lookup("text-secondary", $themeColors); ?> dropdown-toggle" href="#" role="button" id="extraEventsFooterButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="<?php echo $extraEventsIcon; ?>"></i> <?php echo $extraEventsText; ?>
-							<small><code class="<?php echo lookup("text-secondary", $colors[$theme]); ?> d-none d-xl-inline">(X)</code></small>
+							<small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(X)</code></small>
 						</a>
-						<div class="<?php echo lookup("dropdown-menu", $colors[$theme]); ?>" id="extraEventsMenuFooter" aria-labelledby="extraEventsFooterButton">
+						<div class="<?php echo lookup("dropdown-menu", $themeColors); ?>" id="extraEventsMenuFooter" aria-labelledby="extraEventsFooterButton">
 							<?php printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed); ?>
 						</div>
 					</div>
 				<?php } ?>
 				
 				<div class="d-block d-sm-none mt-2">
-					<span class="<?php echo lookup("text-muted", $colors[$theme]); ?>" <?php if($weekOverview === false) { ?>data-toggle="tooltip" data-placement="bottom" title="One-finger swipes change the day. Two-finger swipes change the week." <?php } ?>>
+					<span class="<?php echo lookup("text-muted", $themeColors); ?>" <?php if($weekOverview === false) { ?>data-toggle="tooltip" data-placement="bottom" title="One-finger swipes change the day. Two-finger swipes change the week." <?php } ?>>
 						<small>Navigate by swiping left and right.<?php if($weekOverview === false) { ?> <i class="fas fa-info-circle"></i><?php } ?></small>
 					</span>
 				</div>

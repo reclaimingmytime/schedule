@@ -244,6 +244,7 @@ $displayExtraEvents = !empty($chosenExtraSubjects);
 
 $availableThemes = array_keys($colors);
 $theme = getOption("theme", $availableThemes, $availableThemes[0], $token, $desiredDate, $today);
+$themeColors = $colors[$theme]; 
 
 $cache_folder = "cache/";
 createCache($cache_folder);
