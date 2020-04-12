@@ -242,6 +242,8 @@ if(!empty($extraEvents)) {
 }
 $displayExtraEvents = !empty($chosenExtraSubjects);
 
+$availableThemes = array_keys($colors);
+$theme = getOption("theme", $availableThemes, $availableThemes[0], $token, $desiredDate, $today);
 
 $cache_folder = "cache/";
 createCache($cache_folder);
