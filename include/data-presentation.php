@@ -24,7 +24,7 @@ $colors = [
 
 /* Display Schedule */
 
-function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, $showIDs = true) {
+function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, $enableIDs = true) {
 	global $colors;
 	$activeDropdownColor = lookup("activeDropdown", $colors["dark"]);
 	$dropdownItemColor = lookup("dropdown-item", $colors["dark"]);
@@ -32,7 +32,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 	
 	$key = 1;
 	foreach ($allowedClasses as $class) {
-		$enableShortcut = $showIDs === true && $key <= 9;
+		$enableShortcut = $enableIDs === true && $key <= 9;
 		
 		$classSwitcherClasses = $dropdownItemColor;
 		$icon = "fas fa-chalkboard";
@@ -46,7 +46,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 			<i class="<?php echo $icon; ?>"></i>
 			<?php echo $class;
 
-			if($enableShortcut === true) { ?>
+			if($key <= 9) { ?>
 				<small class="d-none d-lg-inline"><code class="<?php echo $codeHighlightColors; ?> d-none d-xl-inline">(<?php echo $key; ?>)</code></small>
 			<?php } ?>
 		</a>
@@ -209,7 +209,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 									<i class="fas fa-chalkboard-teacher"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?> <small><code class="<?php echo lookup("text-secondary", $colors["dark"]); ?> d-none d-xl-inline">(C)</code></small></span>
 								</a>
 								<div class="<?php echo lookup("dropdown-menu", $colors["dark"]); ?>" id="classNavMenu" aria-labelledby="classNavButton">
-									<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed); ?>
+									<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, false); ?>
 								</div>
 							</li>
 						<?php } ?>
@@ -436,7 +436,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 							<i class="<?php echo $extraEventsIcon; ?>"></i> <?php echo $extraEventsText; ?>
 							<small><code class="<?php echo lookup("text-secondary", $colors["dark"]); ?> d-none d-xl-inline">(X)</code></small>
 						</a>
-						<div class="<?php echo lookup("dropdown-menu", $colors["dark"]); ?>" id="extraEventsMenuFooter" aria-labelledby="extraEventsButtonFooter">
+						<div class="<?php echo lookup("dropdown-menu", $colors["dark"]); ?>" id="extraEventsMenuFooter" aria-labelledby="extraEventsFooterButton">
 							<?php printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed); ?>
 						</div>
 					</div>
