@@ -408,6 +408,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 					</div>
 				<?php } ?>
 				
+				<?php /* Extra Subjects */ ?>
 				<?php if(!empty($extraSubjects)) { ?>
 					<div class="d-block <?php echo $weekOverview == true ? "d-sm-none " : "" ?>dropup d-inline">
 						<a class="btn btn-white shadow-none <?php echo lookup("text-secondary", $themeColors); ?> dropdown-toggle" href="#" role="button" id="extraEventsFooterButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -420,6 +421,12 @@ $hasManifest = isset($manifest) && !empty($manifest);
 					</div>
 				<?php } ?>
 				
+				<?php /* Color Switcher */ ?>
+				<div class="d-block">
+					<a href="?theme=<?php echo $theme == "dark" ? "light" : "dark"; ?><?php echo $tokenEmbed; ?>" class="btn btn-white <?php echo lookup("text-secondary", $themeColors); ?>" role="button"><i class="fas fa-<?php echo $theme == "dark" ? "check-square" : "square"; ?>"></i> Dark Theme</a>
+				</div>
+				
+				<?php /* Swipe Hints */ ?>
 				<div class="d-block d-sm-none mt-2">
 					<span class="<?php echo lookup("text-muted", $themeColors); ?>" <?php if($weekOverview === false) { ?>data-toggle="tooltip" data-placement="bottom" title="One-finger swipes change the day. Two-finger swipes change the week." <?php } ?>>
 						<small>Navigate by swiping left and right.<?php if($weekOverview === false) { ?> <i class="fas fa-info-circle"></i><?php } ?></small>
