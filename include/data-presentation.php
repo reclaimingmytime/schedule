@@ -421,7 +421,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 					</div>
 				<?php } ?>
 				
-				<?php /* Color Switcher */ ?>
+				<?php /* Theme Switcher */ ?>
 				<div class="d-block">
 					<a href="?theme=<?php echo $theme == "dark" ? "light" : "dark"; ?><?php echo $tokenEmbed; ?>" class="btn btn-white <?php echo lookup("text-secondary", $themeColors); ?>" role="button"><i class="fas fa-<?php echo $theme == "dark" ? "check-square" : "square"; ?>"></i> Dark Theme</a>
 				</div>
