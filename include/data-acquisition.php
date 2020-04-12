@@ -217,7 +217,6 @@ if(isset($type) && $type !== 'ical') {
 	$cache_filename = "api.json";
 }
 
-
 function getExtraSubjects($extraEvents) {
 	$iterator = new RecursiveIteratorIterator(new RecursiveArrayIterator($extraEvents));
 	$extraSubjects = iterator_to_array($iterator, false);
