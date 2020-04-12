@@ -1,10 +1,10 @@
 <?php
 /* Display Schedule */
 
-function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, $showIDs = true) {
+function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, $enableIDs = true) {
 	$key = 1;
 	foreach ($allowedClasses as $class) {
-		$enableShortcut = $showIDs === true && $key <= 9;
+		$enableShortcut = $enableIDs === true && $key <= 9;
 		
 		$classSwitcherClasses = "dropdown-item";
 		$icon = "fas fa-chalkboard";
@@ -17,7 +17,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 			<i class="<?php echo $icon; ?>"></i>
 			<?php echo $class;
 
-			if($enableShortcut === true) { ?>
+			if($key <= 9) { ?>
 				<small class="d-none d-lg-inline"><code class="text-secondary d-none d-xl-inline">(<?php echo $key; ?>)</code></small>
 			<?php } ?>
 		</a>
@@ -177,7 +177,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 									<i class="fas fa-chalkboard-teacher"></i> <span class="d-none d-lg-inline"><?php echo $desiredClass; ?> <small><code class="text-secondary d-none d-xl-inline">(C)</code></small></span>
 								</a>
 								<div class="dropdown-menu" id="classNavMenu" aria-labelledby="classNavButton">
-									<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed); ?>
+									<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, false); ?>
 								</div>
 							</li>
 						<?php } ?>
