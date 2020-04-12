@@ -1,27 +1,4 @@
 <?php
-/* Colors */
-$colors = [
-		"light" => [
-				"body" => "bg-white text-white",
-				"highlightClasses" => "bg-dark text-light",
-				"activeDropdown" => "text-body",
-		],
-		"dark" => [
-				"body" => "bg-dark text-light",
-				
-				"text-muted" => "text-white-50",
-				"text-secondary" => "text-white",
-				"card" => "card text-white bg-dark",
-				"navbar" => "navbar navbar-dark bg-dark",
-				
-				"dropdown" => "dropdown bg-dark",
-				"dropdown-item" => "dropdown-item text-light",
-				"dropdown-menu" => "dropdown-menu bg-dark",
-				"highlightClasses" => "bg-white text-dark",
-				"activeDropdown" => "",
-		],
-];
-
 /* Display Schedule */
 
 function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, $enableIDs = true) {

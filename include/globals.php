@@ -240,6 +240,29 @@ function dateTimeToHourMin($time) {
 	return DateTime::createFromFormat('M j, Y H:i:s', $time)->format("H:i");
 }
 
+/* Colors */
+$colors = [
+		"light" => [
+				"body" => "bg-white text-white",
+				"highlightClasses" => "bg-dark text-light",
+				"activeDropdown" => "text-body",
+		],
+		"dark" => [
+				"body" => "bg-dark text-light",
+				
+				"text-muted" => "text-white-50",
+				"text-secondary" => "text-white",
+				"card" => "card text-white bg-dark",
+				"navbar" => "navbar navbar-dark bg-dark",
+				
+				"dropdown" => "dropdown bg-dark",
+				"dropdown-item" => "dropdown-item text-light",
+				"dropdown-menu" => "dropdown-menu bg-dark",
+				"highlightClasses" => "bg-white text-dark",
+				"activeDropdown" => "",
+		],
+];
+
 /* CSRF Token */
 if (!isset($_SESSION['token'])) {
 	$_SESSION['token'] = bin2hex(random_bytes(16));
