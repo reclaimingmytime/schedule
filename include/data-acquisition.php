@@ -219,18 +219,10 @@ if(isset($type) && $type !== 'ical') {
 
 
 function getExtraSubjects($extraEvents) {
-	$extraSubjects = [];
-
-	foreach ($extraEvents as $classes) {
-		foreach ($classes as $days) {
-			foreach ($days as $subjects) {
-					if (!in_array($subjects, $extraSubjects)) {
-						$extraSubjects[] = $subjects;
-					}
-			}
-		}
-	}
-	return $extraSubjects;
+	$iterator = new RecursiveIteratorIterator(new RecursiveArrayIterator($extraEvents));
+	$extraSubjects = iterator_to_array($iterator, false);
+	
+	return array_unique($extraSubjects);
 }
 
 if(!empty($extraEvents)) {
