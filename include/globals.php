@@ -243,7 +243,8 @@ function dateTimeToHourMin($time) {
 /* Colors */
 $colors = [
 		"light" => [
-				"body" => "bg-white text-white",
+				"body" => "bg-white text-body",
+				"navbar" => "navbar navbar-light bg-light",
 				"highlightClasses" => "bg-dark text-light",
 				"activeDropdown" => "text-body",
 		],
