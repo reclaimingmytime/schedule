@@ -36,9 +36,9 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 function printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed) {
 	global $themeColors;
 	
-	$activeDropdownColor = lookup("dropdown-item", $themeColors);
+	$dropdownItemColor = lookup("dropdown-item", $themeColors);
 	foreach ($extraSubjects as $extraSubject) {
-		$classes = $activeDropdownColor;
+		$classes = $dropdownItemColor;
 		$icon = "fas fa-square";
 		$link = strtolower($extraSubject);
 
