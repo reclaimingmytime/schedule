@@ -257,7 +257,7 @@ $colors = [
 				"navbar" => "navbar navbar-dark bg-dark",
 				
 				"dropdown" => "dropdown bg-dark",
-				"dropdown-item" => "dropdown-item text-light",
+				"dropdown-item" => "dropdown-item bg-dark text-light",
 				"dropdown-menu" => "dropdown-menu bg-dark",
 				"highlightClasses" => "bg-secondary text-light",
 				"activeDropdown" => "",
