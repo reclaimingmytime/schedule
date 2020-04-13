@@ -218,10 +218,7 @@ if(isset($type) && $type !== 'ical') {
 }
 
 function getExtraSubjects($extraEvents) {
-	$iterator = new RecursiveIteratorIterator(new RecursiveArrayIterator($extraEvents));
-	$extraSubjects = iterator_to_array($iterator, false);
-	
-	return array_unique($extraSubjects);
+	return mergeDimension(array_map('mergeDimension', $extraEvents));
 }
 
 if(!empty($extraEvents)) {

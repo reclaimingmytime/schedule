@@ -45,6 +45,10 @@ function lookup($key, $array) {
 	return $key;
 }
 
+function mergeDimension($arr) {
+	return array_merge(...array_values($arr));
+}
+
 function compareStartDateTime($a, $b) {
 	return new DateTime($a['startDateTime']) <=> new DateTime($b['startDateTime']);
 }
