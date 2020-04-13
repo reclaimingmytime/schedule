@@ -423,7 +423,8 @@ $hasManifest = isset($manifest) && !empty($manifest);
 				
 				<?php /* Theme Switcher */ ?>
 				<div class="d-block">
-					<a href="?theme=<?php echo $theme == "dark" ? "light" : "dark"; ?><?php echo $tokenEmbed; ?>" class="btn btn-white <?php echo lookup("text-secondary", $themeColors); ?>" role="button"><i class="fas fa-<?php echo $theme == "dark" ? "check-square" : "square"; ?>"></i> Dark Theme</a>
+					<a href="?theme=<?php echo $theme == "dark" ? "light" : "dark"; ?><?php echo $tokenEmbed; ?>" class="btn btn-white <?php echo lookup("text-secondary", $themeColors); ?>" id="themeSwitcher" role="button"><i class="fas fa-<?php echo $theme == "dark" ? "check-square" : "square"; ?>"></i> Dark Theme	<small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(E)</code></small>
+</a>
 				</div>
 				
 				<?php /* Swipe Hints */ ?>

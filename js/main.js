@@ -174,6 +174,10 @@ $(function () {
 					clickIDIfVisible('extraEventsFooterButton');
 					clickIDIfVisible('extraEventsButton');
 					break;
+					
+				case "e":
+					clickIDIfVisible('themeSwitcher');
+					break;
 
 				default:
 					return; // exit this handler for other keys
