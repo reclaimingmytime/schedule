@@ -256,7 +256,7 @@ $colors = [
 				"body" => "bg-dark text-light",
 				
 				"text-muted" => "text-white-50",
-				"text-secondary" => "text-light",
+				"text-secondary" => "text-white-50",
 				"card" => "card text-light bg-secondary",
 				"navbar" => "navbar navbar-dark bg-dark",
 				
