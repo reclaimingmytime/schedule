@@ -89,7 +89,7 @@ $enableTodayLink = enableTodayLink($today, $desiredDate, $desiredDateTo);
 $extraClasses = 'bg-info text-light';
 
 $highlightEvents = !$weekBump;
-$highlightClasses = 'bg-dark text-light';
+$highlightClasses = lookup('highlightClasses', $themeColors);
 
 if(!isset($extraEventsText)) {
 	$extraEventsText = "Extra Events"; //TODO Starting with PHP 7.4: replace if statement with $var ??= "default"
