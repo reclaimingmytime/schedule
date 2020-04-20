@@ -301,7 +301,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 									<?php }
 									$timeRange = $event['start'] . " - " . $event['end'];
 									
-									$headerClasses = 'card-header';
+									$headerClasses = lookup('card-header', $themeColors);
 									if($highlightEvents == true && onGoingEvent($event, $currentTime, $today)) {
 										$headerClasses .= ' ' . $highlightClasses;
 									} else if($event['type'] == 'extraEvent') {
@@ -370,7 +370,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 												 data-end="<?php echo $breakEnd;?>"
 												 data-enddatetime="<?php echo createJsTime($nextStart);?>"
 												 data-type="break">
-											<div class="card-header <?php echo $highlightClasses; ?>">
+											<div class="<?php echo lookup('card-header', $themeColors); echo $highlightClasses; ?>">
 												<i class="fas fa-pause"></i> <strong>Break until <?php echo $nextStart; ?></strong>
 											</div>
 											<div class="card-footer <?php echo lookup("text-muted", $themeColors); ?>">
