@@ -165,6 +165,10 @@ function isExtraSubject($subject, $weekDay, $extraEvents, $extraClass, $chosenEx
 	return isset($extraEvents[$extraClass][$weekDay]) && inArray(strtoupper($subject), $extraEvents[$extraClass][$weekDay]) && inArray(strtoupper($subject), $chosenExtraSubjects);
 }
 
+function isAvailableExtraSubject($subject, $weekDay, $extraEvents, $extraClass) {
+	return isset($extraEvents[$extraClass][$weekDay]) && inArray(strtoupper($subject), $extraEvents[$extraClass][$weekDay]);
+}
+
 //Populating schedule array
 $schedule = [];
 
@@ -230,20 +234,25 @@ foreach ($calendar as $entry) {
 			$new["prof"] = lookupProfs($thisProf, $emptyProfs, $profs);
 		}
 
-		if ($isExtraClass) {
-			$new["type"] = "extraEvent";
-		} else {
-			$new["type"] = "event";
-		}
-
-
 		$add = true;
 
-		if ($isExtraClass) {
+		//BUG adds subject from current class as extra event but not from different class
+		$isExtraSubject = isExtraSubject($thisSubject, $new["weekDay"], $extraEvents, "all", $chosenExtraSubjects);
+		$isAvailableExtraSubject = isAvailableExtraSubject($thisSubject, $new["weekDay"], $extraEvents, "all");
+
+		if ($isExtraClass || $isExtraSubject) {
 			if (!isExtraSubject($thisSubject, $new["weekDay"], $extraEvents, $extraClass, $chosenExtraSubjects) &&
 							!isExtraSubject($new["info"], $new["weekDay"], $extraEvents, $extraClass, $chosenExtraSubjects)) {
 				$add = false;
 			}
+		} else if($isAvailableExtraSubject) {
+			$add = false;
+		}
+		
+		if ($isExtraClass || $isExtraSubject) {
+			$new["type"] = "extraEvent";
+		} else {
+			$new["type"] = "event";
 		}
 
 		if (!validSubject($new["subject"], $ignoredSubjects)) {
