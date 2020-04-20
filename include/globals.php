@@ -252,14 +252,14 @@ $colors = [
 				"body" => "bg-dark text-light",
 				
 				"text-muted" => "text-white-50",
-				"text-secondary" => "text-white",
-				"card" => "card text-white bg-dark",
+				"text-secondary" => "text-light",
+				"card" => "card text-light bg-dark",
 				"navbar" => "navbar navbar-dark bg-dark",
 				
 				"dropdown" => "dropdown bg-dark",
 				"dropdown-item" => "dropdown-item text-light",
 				"dropdown-menu" => "dropdown-menu bg-dark",
-				"highlightClasses" => "bg-white text-dark",
+				"highlightClasses" => "bg-secondary text-light",
 				"activeDropdown" => "",
 		],
 ];
