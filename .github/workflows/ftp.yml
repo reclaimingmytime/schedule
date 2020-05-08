@@ -26,8 +26,22 @@ jobs:
     - name: Run a multi-line script
       run: |
         lftp -f "
-        open ${{ secrets.FTP_USER }}
+        open ${{ secrets.FTP_HOST }}
         user ${{ secrets.FTP_USER }} ${{ secrets.FTP_PASS }}
         mirror --exclude=README.md --exclude=LICENSE --exclude=glob .git* --exclude=.git/ --reverse --verbose ${{ secrets.FTP_HOST }} ${{ secrets.FTP_REMOTE_DIR }}
         bye
         "
+        
+    - name: FTP Deploy
+      uses: SamKirkland/FTP-Deploy-Action@3.1.0
+      with:
+        # Deployment destination server & path. Formatted as protocol://domain.com:port/full/destination/path/
+        ftp-server: ${{ secrets.FTP_URL }}
+        # FTP account username
+        ftp-username: ${{ secrets.FTP_USER }}
+        # FTP account password
+        ftp-password: ${{ secrets.FTP_PASS }}
+        # The local folder to copy, defaults to root project folder
+        # local-dir: # optional, default is ./
+        # Passes through options into git-ftp
+        # git-ftp-args: # optional
