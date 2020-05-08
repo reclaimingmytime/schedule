@@ -3,8 +3,15 @@ name: CI
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    paths:
+      # Git and GitHub
+      - '!.github/**'
+      - '!.gitignore'
+      - '!.git-ftp-ignore'
+      - '!.git-ftp-include'
+      - '!.README.**'
+      # schedule-specific
+      - '!config.default.php'
 
 jobs:
   ftp-deploy:
