@@ -44,7 +44,7 @@ Note that your configuration file `config.php` will be **kept** in any case, as 
 
 Note: The directory of the script and the folder "cache/" (created by the script) must be **writable** with at least chmod 700. Otherwise, the script will **fail** to do it's job.
 
-1. Copy `config.default.php` to `config.php`.
+1. Copy `config.default.php` and rename the file to `config.php`.
 2. Open `config.php` and change the required variables.
 3. Test the page. If it does not display properly, make sure you have permissions to use the API. You might want to manually output certain variables - specifically, `$calendarJSON` . That usually tells you what the script thinks your API is.
 
