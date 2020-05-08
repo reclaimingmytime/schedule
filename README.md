@@ -23,34 +23,6 @@ When input is rejected, the default value is used without any message.
 
 **Note**: The script has been written for a specific API - yours might be very different. You will most likely have to change parts of the script manually. Modifications require only a basic understanding of PHP, as the script is not very complex.
 
-## Shortcuts
-
-A few shortcuts are available for quick navigation.
-
-### Keyboard navigation
-
-| Shortcut | Action                                    |
-| -------- | ----------------------------------------- |
-| `D`      | Next Day                                  |
-| `A`      | Previous Day                              |
-| `S`      | Previous Week                             |
-| `W`      | Next Week                                 |
-| `Enter`  | Current Week                              |
-| `C`      | Open class switcher (if available)        |
-| `1-9`    | Change class (if available)               |
-| `X`      | Open extra events switcher (if available) |
-
-Note: Arrow keys as a shortcut would interfere with keyboard-based scrolling.
-
-### Touch navigation
-
-| Gesture                                          | Action        |
-| ------------------------------------------------ | ------------- |
-| Swipe left with one finger                       | Next day      |
-| Swipe right with one finger                      | Previous day  |
-| Swipe left with two fingers (day overview only)  | Next week     |
-| Swipe right with two fingers (day overview only) | Previous week |
-
 ## Installation
 As an alternative to downloading the files manually from GitHub, you can use the command-line.
 
