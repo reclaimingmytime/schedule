@@ -20,17 +20,14 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v1
-    # Syncs out FTP
-    - name: ftp-action
-      uses: sebastianpopp/ftp-action@v2.0.0
-      with:
-        url: ${{ secrets.FTP_URL }}
-        user: ${{ secrets.FTP_USER }}
-        password: ${{ secrets.FTP_PWD }}
-        # Force SSL encryption
-        forceSsl: true # optional, default is false
-        # Local directory
-        #localDir: # optional, default is .
-        # Remote directory
-        #remoteDir: # optional, default is .
+    - uses: actions/checkout@v2
+
+    # Runs a set of commands using the runners shell
+    - name: Run a multi-line script
+      run: |
+        lftp -f "
+        open ${{ secrets.FTP_USER }}
+        user ${{ secrets.FTP_USER }} ${{ secrets.FTP_PASS }}
+        mirror --exclude=README.md --exclude=LICENSE --exclude=glob .git* --exclude=.git/ --reverse --verbose ${{ secrets.FTP_HOST }} ${{ secrets.FTP_REMOTE_DIR }}
+        bye
+        "
