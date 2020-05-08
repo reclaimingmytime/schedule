@@ -3,7 +3,7 @@ e.waitUntil(
    caches.open('airhorner').then(cache => {
        return cache.addAll([
            '/',
-       ]).map(url => new Request(url, {credentials: 'same-origin'}))
+       ].map(url => new Request(url, {credentials: 'same-origin'})))
            .then(() => self.skipWaiting());
    })
  )
