@@ -21,17 +21,7 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-
-    # Runs a set of commands using the runners shell
-    #- name: FTP Depoy
-    #  run: |
-    #    lftp -f "
-    #    open ${{ secrets.FTP_HOST }}
-    #    user ${{ secrets.FTP_USER }} ${{ secrets.FTP_PASS }}
-    #    mirror --exclude=README.md --exclude=LICENSE --exclude=glob .git* --exclude=.git/ --reverse --verbose ${{ secrets.FTP_HOST }} ${{ secrets.FTP_REMOTE_DIR }}
-    #    bye
-    #    "
-        
+       
     - name: FTP Deploy
       uses: SamKirkland/FTP-Deploy-Action@3.1.0
       with:
