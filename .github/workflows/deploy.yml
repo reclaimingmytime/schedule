@@ -9,6 +9,7 @@ on:
       - '.gitignore'
       - '.git-ftp-ignore'
       - '.git-ftp-include'
+      - 'LICENSE'
       - '.README.**'
       # schedule-specific
       - 'config.default.php'
