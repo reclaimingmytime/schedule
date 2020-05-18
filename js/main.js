@@ -80,8 +80,6 @@ $(function () {
 	}
 
 	/* Swipe */
-	// fingerCount 0: No touchscreen detected
-
 	function hasTouch() {
 		try {
 			document.createEvent("TouchEvent");
@@ -94,7 +92,7 @@ $(function () {
 	if (hasTouch() == true) {
 		$("html").swipe({
 			swipeLeft: function (event, direction, distance, duration, fingerCount) {
-				if (fingerCount === 1 || fingerCount === 0) {
+				if (fingerCount === 1 || fingerCount === 0) {	// fingerCount 0: No touchscreen detected
 					redirectToNextDay();
 				}
 				if (fingerCount === 2) {
@@ -316,9 +314,6 @@ $(function () {
 		updateTime();
 	}, 5000);
 
-	/* Tooltip */
-	$('[data-toggle="tooltip"]').tooltip();
-
 	/* Service Worker */
 	if ('serviceWorker' in navigator && head.data('hasmanifest') === true) {
 		navigator.serviceWorker.register('serviceworker.min.js').
@@ -329,5 +324,12 @@ $(function () {
 			/* console.log('ServiceWorker registration failed: ', err); */
 		});
 	}
+	
+	/**
+	 * Bootstrap
+	 */
+	
+	/* Tooltip */
+	$('[data-toggle="tooltip"]').tooltip();
 
 });
