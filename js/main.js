@@ -316,15 +316,6 @@ $(function () {
 		updateTime();
 	}, 5000);
 
-	/* Automatic Scroll */
-	/* $("#infoBtn").on("click", function () {
-	 if (!$('#notice').hasClass('show')) {
-	 $([document.documentElement, document.body]).animate({
-	 scrollTop: $("footer").offset().top //cannot scroll to hidden weekendNotice directly
-	 }, 250);
-	 }
-	 }); */
-
 	/* Tooltip */
 	$('[data-toggle="tooltip"]').tooltip();
 
