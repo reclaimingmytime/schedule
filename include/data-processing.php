@@ -307,16 +307,16 @@ if (!empty($schedule)) {
 		}
 	} */
 	
-	foreach ($schedule as $key => $event) {
+foreach ($schedule as $key => $event) {
 		/* Sort rooms */
-		if(!empty($schedule[$key]["room"])) {
+		if (!empty($schedule[$key]["room"])) {
 			$schedule[$key]["room"] = sortRooms($schedule[$key]["room"]);
 		}
-		
+
 		/* Merge events */
 		if (isset($schedule[$key - 1]) && splitupEvent($schedule[$key - 1], $schedule[$key])) {
 			$prevEvent = $schedule[$key - 1];
-			
+
 			$mergedStart = min($prevEvent["startDateTime"], $event["startDateTime"]);
 			$mergedEnd = max($prevEvent["endDateTime"], $event["endDateTime"]);
 
@@ -328,7 +328,7 @@ if (!empty($schedule)) {
 			unset($schedule[$key]);
 		}
 	}
-	
+
 	//sort by date
 	usort($schedule, 'compareStartDateTime');
 	usort($schedule, 'compareEndDateTime');
