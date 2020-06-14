@@ -307,7 +307,7 @@ if (!empty($schedule)) {
 		}
 	} */
 	
-foreach ($schedule as $key => $event) {
+	foreach ($schedule as $key => $event) {
 		/* Sort rooms */
 		if (!empty($schedule[$key]["room"])) {
 			$schedule[$key]["room"] = sortRooms($schedule[$key]["room"]);
