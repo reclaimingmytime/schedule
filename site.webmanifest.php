@@ -7,4 +7,4 @@ function arrayToUnescapedJson($array) {
 	return json_encode($array, JSON_UNESCAPED_SLASHES);
 }
 
-echo arrayToUnescapedJson($manifest);
+if(isset($manifest)) echo arrayToUnescapedJson($manifest);
