@@ -307,6 +307,7 @@ if (!empty($schedule)) {
 		}
 	} */
 	
+	$addedDates = [];
 	foreach ($schedule as $key => $event) {
 		/* Sort rooms */
 		if (!empty($schedule[$key]["room"])) {
@@ -327,7 +328,38 @@ if (!empty($schedule)) {
 			$schedule[$key - 1]["endDateTime"] = $mergedEnd;
 			unset($schedule[$key]);
 		}
+		
+		foreach ($schedule as $key => $event) {
+			if(!in_array($event["date"], $addedDates)) {
+				$addedDates[] = $event["date"];
+			}
+		}
 	}
+	
+	if($weekOverview == true) {
+		$period = new DatePeriod(
+						new DateTime($desiredDate),
+						DateInterval::createFromDateString('1 day'),
+						new DateTime($desiredDateTo)
+		);
+		
+		foreach ($period as $dt) {
+			if(!in_array($dt->format("d.m.y"), $addedDates)) {
+				$mockEvent["date"] = $dt->format("d.m.y");
+				$mockEvent["weekDay"] = $dt->format("D");
+
+				$mockEvent["startDateTime"] = $dt->format("M j, Y H:i:s");
+				$mockEvent["endDateTime"] = $dt->format("M j, Y H:i:s");
+				$mockEvent["start"] = "00:00";
+				$mockEvent["end"] = "00:00";
+
+				$mockEvent["type"] = "empty";
+
+				$schedule[] = $mockEvent;
+			}
+		}
+	}
+	
 
 	//sort by date
 	usort($schedule, 'compareStartDateTime');

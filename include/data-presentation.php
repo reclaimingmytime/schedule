@@ -274,31 +274,27 @@ $hasManifest = isset($manifest) && !empty($manifest);
 										
 										if(isNewDate($schedule, $key, $event)) {
 											$prevEventDate = DateTime::createFromFormat('d.m.y', $schedule[$key - 1]["date"]);
-											$undisplayedDate = $prevEventDate;
 											$nextEventDate = DateTime::createFromFormat('d.m.y', $event["date"]);
 											
-											
-											while($undisplayedDate < $nextEventDate) {
-											$undisplayedDate = $prevEventDate->modify("+1 day");
 												?>
 										</div>
 										<div class="col mt-4 mt-lg-0">
-											<span class="<?php echo ($undisplayedDate->format("Y-m-d") == $today) ? '' : lookup("text-secondary", $themeColors) . ' '; ?>h4 pb-1">
+											<span class="<?php echo ($nextEventDate->format("Y-m-d") == $today) ? '' : lookup("text-secondary", $themeColors) . ' '; ?>h4 pb-1">
 												<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
-												<span class="mr-1"><?php echo $undisplayedDate->format("D"); ?></span>
-												<span class="mr-1"><?php echo $undisplayedDate->format("d.m.y"); ?></span>
+												<span class="mr-1"><?php echo $nextEventDate->format("D"); ?></span>
+												<span class="mr-1"><?php echo $nextEventDate->format("d.m.y"); ?></span>
 											</span>
-											
-											<?php 
-											if($undisplayedDate != $nextEventDate) { ?>
-												<div class="alert alert-info mt-3" role="alert">
-													<i class="fas fa-info-circle"></i> No events on that day.
-												</div>
-											<?php }
-												
-											} ?>
 									
 									<?php }
+									
+									if($event["type"] == "empty") { ?>
+											<div class="alert alert-info mt-3" role="alert">
+													<i class="fas fa-info-circle"></i> No events.
+											</div>
+										<?php
+										continue;
+									}
+									
 									$timeRange = $event['start'] . " - " . $event['end'];
 									
 									$headerClasses = 'card-header';
