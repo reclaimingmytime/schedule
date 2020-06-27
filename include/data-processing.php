@@ -170,7 +170,7 @@ $schedule = [];
 
 $desiredDateTo = $desiredDate;
 if ($weekOverview === true) {
-	$desiredDateTo = getDateFromInterval($desiredDate, "+6 days");
+	$desiredDateTo = getDateFromInterval($desiredDate, "+5 days");
 	$displayedDateFull .= " - " . formatFullReadableDate($desiredDateTo);
 }
 
