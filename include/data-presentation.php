@@ -64,7 +64,9 @@ function printDateNavLi($id, $date, $icon, $text, $key, $liClasses = null) {
 	?>
 		
 	<li class="nav-item mr-4<?php if (isset($liClasses)) echo ' ' . $liClasses; ?>">
-		<a class="nav-link" id="<?php echo $id; ?>" href="?date=<?php echo $date; ?>"><i class="<?php echo $icon; ?>"></i> <span class="d-none d-lg-inline"><?php echo $text;?> <small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(<?php echo $key; ?>)</code></small></span></a>
+		<a class="nav-link<?php if($date == "none") echo " disabled"; ?>" id="<?php echo $id; ?>" href="?date=<?php echo $date; ?>">
+			<i class="<?php echo $icon; ?>"></i> <span class="d-none d-lg-inline"><?php echo $text;?> <small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(<?php echo $key; ?>)</code></small></span>
+		</a>
 	</li>
 <?php }
 
@@ -149,23 +151,12 @@ $hasManifest = isset($manifest) && !empty($manifest);
 
 					<ul class="navbar-nav m-auto ml-sm-0">
 						
-						<?php if ($prevWeek !== "none") {
-							printDateNavLi("prevWeek", $prevWeek, "fas fa-angle-double-left", "Previous Week", $weekOverview === false ? "S" : "A");
-						} 
-
-						if ($prevDay !== "none") {
-							printDateNavLi("prevDay", $prevDay, "fas fa-angle-left", "Previous Day", "A");
-						}
-						
+						<?php
+						printDateNavLi("prevWeek", $prevWeek, "fas fa-angle-double-left", "Previous Week", $weekOverview === false ? "S" : "A");
+						printDateNavLi("prevDay", $prevDay, "fas fa-angle-left", "Previous Day", "A");
 						printDateNavLi("today", $today, "fas fa-home", "Today", "Enter", !$enableTodayLink ? 'active' : null);
-						
-						if ($nextDay !== "none") {
-							printDateNavLi("nextDay", $nextDay, "fas fa-angle-right", "Next Day", "D");
-						} 
-
-						if ($nextWeek !== "none") {
-							printDateNavLi("nextWeek", $nextWeek, "fas fa-angle-double-right", "Next Week", $weekOverview === false ? "W" : "D");
-						}
+						printDateNavLi("nextDay", $nextDay, "fas fa-angle-right", "Next Day", "D");
+						printDateNavLi("nextWeek", $nextWeek, "fas fa-angle-double-right", "Next Week", $weekOverview === false ? "W" : "D");
 
 						if ($weekOverview === true) {
 							$overviewType = "day";
