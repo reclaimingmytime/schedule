@@ -59,11 +59,11 @@ function printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredD
 	}
 }
 
-function printDateNavLi($id, $date, $icon, $text, $key) {
+function printDateNavLi($id, $date, $icon, $text, $key, $liClasses = null) {
 	global $themeColors;
 	?>
 		
-	<li class="nav-item mr-4">
+	<li class="nav-item mr-4<?php if (isset($liClasses)) echo ' ' . $liClasses; ?>">
 		<a class="nav-link" id="<?php echo $id; ?>" href="?date=<?php echo $date; ?>"><i class="<?php echo $icon; ?>"></i> <span class="d-none d-lg-inline"><?php echo $text;?> <small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(<?php echo $key; ?>)</code></small></span></a>
 	</li>
 <?php }
@@ -155,13 +155,11 @@ $hasManifest = isset($manifest) && !empty($manifest);
 
 						if ($prevDay !== "none") {
 							printDateNavLi("prevDay", $prevDay, "fas fa-angle-left", "Previous Day", "A");
-						} ?>
+						}
 						
-						<li class="nav-item mr-4<?php if (!$enableTodayLink) echo ' active'; ?>">
-							<a class="nav-link" id="today" href="."><i class="fas fa-home"></i> <span class="d-none d-lg-inline">Today <small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(Enter)</code></small></span></a>
-						</li>
+						printDateNavLi("today", $today, "fas fa-home", "Today", "Enter", !$enableTodayLink ? 'active' : null);
 						
-						<?php if ($nextDay !== "none") {
+						if ($nextDay !== "none") {
 							printDateNavLi("nextDay", $nextDay, "fas fa-angle-right", "Next Day", "D");
 						} 
 
