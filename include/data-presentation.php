@@ -59,6 +59,14 @@ function printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredD
 	}
 }
 
+function printDateNavLi($id, $date, $icon, $text, $key) {
+	global $themeColors;
+	?>
+		
+	<li class="nav-item mr-4">
+		<a class="nav-link" id="<?php echo $id; ?>" href="?date=<?php echo $date; ?>"><i class="<?php echo $icon; ?>"></i> <span class="d-none d-lg-inline"><?php echo $text;?> <small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(<?php echo $key; ?>)</code></small></span></a>
+	</li>
+<?php }
 
 function prepareMsg($sessionName, $msg) {
 	if (isset($_SESSION[$sessionName])) {
@@ -141,35 +149,27 @@ $hasManifest = isset($manifest) && !empty($manifest);
 
 					<ul class="navbar-nav m-auto ml-sm-0">
 						
-						<?php if ($prevWeek !== "none") { ?>
-							<li class="nav-item mr-4">
-								<a class="nav-link" id="prevWeek" href="?date=<?php echo $prevWeek; ?>"><i class="fas fa-angle-double-left"></i> <span class="d-none d-lg-inline">Previous Week <small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(<?php echo ($weekOverview === false) ? "S" : "A"; ?>)</code></small></span></a>
-							</li>
-						<?php } ?>
+						<?php if ($prevWeek !== "none") {
+							printDateNavLi("prevWeek", $prevWeek, "fas fa-angle-double-left", "Previous Week", $weekOverview === false ? "S" : "A");
+						} 
 
-						<?php if ($prevDay !== "none") { ?>
-							<li class="nav-item mr-4">
-								<a class="nav-link" id="prevDay" href="?date=<?php echo $prevDay; ?>"><i class="fas fa-angle-left"></i> <span class="d-none d-lg-inline">Previous Day <small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(A)</code></small></span></a>
-							</li>
-						<?php } ?>
+						if ($prevDay !== "none") {
+							printDateNavLi("prevDay", $prevDay, "fas fa-angle-left", "Previous Day", "A");
+						} ?>
 						
 						<li class="nav-item mr-4<?php if (!$enableTodayLink) echo ' active'; ?>">
 							<a class="nav-link" id="today" href="."><i class="fas fa-home"></i> <span class="d-none d-lg-inline">Today <small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(Enter)</code></small></span></a>
 						</li>
 						
-						<?php if ($nextDay !== "none") { ?>
-						<li class="nav-item mr-4">
-							<a class="nav-link" id="nextDay" href="?date=<?php echo $nextDay; ?>"><i class="fas fa-angle-right"></i> <span class="d-none d-lg-inline">Next Day <small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(D)</code></small></span></a>
-						</li>
-						<?php } ?>
+						<?php if ($nextDay !== "none") {
+							printDateNavLi("nextDay", $nextDay, "fas fa-angle-right", "Next Day", "D");
+						} 
 
-						<?php if ($nextWeek !== "none") { ?>
-						<li class="nav-item mr-4">
-							<a class="nav-link" id="nextWeek" href="?date=<?php echo $nextWeek; ?>"><i class="fas fa-angle-double-right"></i> <span class="d-none d-lg-inline">Next Week <small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(<?php echo ($weekOverview === false) ? "W" : "D"; ?>)</code></small></span></a>
-						</li>
-						<?php } ?>
+						if ($nextWeek !== "none") {
+							printDateNavLi("nextWeek", $nextWeek, "fas fa-angle-double-right", "Next Week", $weekOverview === false ? "W" : "D");
+						}
 
-						<?php if ($weekOverview === true) {
+						if ($weekOverview === true) {
 							$overviewType = "day";
 							$icon = "fas fa-calendar-day";
 							$text = "Day";
