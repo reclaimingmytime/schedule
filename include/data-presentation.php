@@ -16,7 +16,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 		$icon = "fas fa-chalkboard";
 		if ($desiredClass == $class) {
 			$classSwitcherClasses .= ' active font-weight-bold bg-transparent';
-			$classSwitcherClasses .= " " . $activeDropdownColor; //light theme only
+			$classSwitcherClasses .= " $activeDropdownColor"; //light theme only
 			$icon = "fas fa-chalkboard-teacher";
 		}
 		?>
@@ -136,7 +136,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 			<header>
 				<nav class="<?php echo lookup("navbar", $themeColors); ?> navbar-expand mt-3 mb-4">
 					<div class="navbar-header d-none d-sm-block mr-3">
-						<a class="navbar-brand<?php echo (!$enableTodayLink) ? ' active' : ''; ?>" href="."><i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span></a>
+						<a class="navbar-brand<?php if (!$enableTodayLink) echo ' active'; ?>" href="."><i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span></a>
 					</div>
 
 					<ul class="navbar-nav m-auto ml-sm-0">
@@ -153,7 +153,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 							</li>
 						<?php } ?>
 						
-						<li class="nav-item mr-4<?php echo (!$enableTodayLink) ? ' active' : ''; ?>">
+						<li class="nav-item mr-4<?php if (!$enableTodayLink) echo ' active'; ?>">
 							<a class="nav-link" id="today" href="."><i class="fas fa-home"></i> <span class="d-none d-lg-inline">Today <small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(Enter)</code></small></span></a>
 						</li>
 						
@@ -179,7 +179,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 							$text = "Week";
 						}  ?>
 						<li class="nav-item mr-4">
-							<a class="nav-link" id="overviewType" href="?<?php echo $desiredDateMidWeek !== $today ? 'date=' . $desiredDateMidWeek . '&' : ''; ?>overview=<?php echo $overviewType . $tokenEmbed; ?>"><i class="<?php echo $icon; ?>"></i> <span class="d-none d-lg-inline"><?php echo $text;?> <small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(T)</code></small></span></a>
+							<a class="nav-link" id="overviewType" href="?<?php if($desiredDateMidWeek !== $today) echo 'date=' . $desiredDateMidWeek . '&'; ?>overview=<?php echo $overviewType . $tokenEmbed; ?>"><i class="<?php echo $icon; ?>"></i> <span class="d-none d-lg-inline"><?php echo $text;?> <small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(T)</code></small></span></a>
 						</li>
 						
 						<?php if(!empty($allowedClasses) && !empty($desiredClass) && $weekOverview == true) { ?>
@@ -236,7 +236,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 								$firstEventDate = $displayedDate;
 							}
 							?>
-							<div<?php echo !isToday($firstEventDate, $today) ? ' class="' . lookup("text-secondary", $themeColors) . '"' : ''; ?>>
+							<div<?php if (!isToday($firstEventDate, $today)) echo ' class="' . lookup("text-secondary", $themeColors) . '"'; ?>>
 								<span class="h4 float-right d-sm-none">
 									<i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span>
 								</span>
@@ -349,7 +349,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 											</ul>
 										</div>
 										<?php if(isToday($event['date'], $today) && $highlightEvents == true) { ?>
-											<div class="card-footer <?php echo lookup("text-muted", $themeColors); echo !onGoingEvent($event, $currentTime, $today) ? ' d-none' : ''; ?>">
+											<div class="card-footer <?php echo lookup("text-muted", $themeColors); if (!onGoingEvent($event, $currentTime, $today)) echo ' d-none'; ?>">
 												<i class="fas fa-business-time"></i> <span class="timeRemaining"></span>
 											</div>
 										<?php } ?>
@@ -362,7 +362,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 										$breakStart = formatTime($thisEnd, "+1 minute");
 										$breakEnd = formatTime($nextStart, "-1 minute");
 										?>
-										<div class="<?php echo lookup("card", $themeColors); ?> mt-3<?php echo !isBreak($currentTime, $thisEnd, $nextStart) ? ' d-none' : '' ?> today"
+										<div class="<?php echo lookup("card", $themeColors); ?> mt-3<?php if (!isBreak($currentTime, $thisEnd, $nextStart)) echo ' d-none'; ?> today"
 												 data-start="<?php echo $breakStart;?>"
 												 data-end="<?php echo $breakEnd;?>"
 												 data-enddatetime="<?php echo createJsTime($nextStart);?>"
@@ -394,7 +394,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 				
 				<?php /* Class Dropdown */ ?>
 				<?php if(!empty($allowedClasses) && !empty($desiredClass)) { ?>
-					<div class="d-block <?php echo $weekOverview == true ? "d-sm-none " : "" ?>dropup d-inline">
+					<div class="d-block <?php if ($weekOverview == true) echo "d-sm-none "; ?>dropup d-inline">
 						<a class="btn btn-white shadow-none <?php echo lookup("text-secondary", $themeColors); ?> dropdown-toggle" href="#" role="button" id="classFooterButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="fas fa-chalkboard-teacher"></i> <?php echo $desiredClass; ?>
 							<small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(C)</code></small>
@@ -407,7 +407,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 				
 				<?php /* Extra Subjects */ ?>
 				<?php if(!empty($extraSubjects)) { ?>
-					<div class="d-block <?php echo $weekOverview == true ? "d-sm-none " : "" ?>dropup d-inline">
+					<div class="d-block <?php if ($weekOverview == true) echo "d-sm-none "; ?>dropup d-inline">
 						<a class="btn btn-white shadow-none <?php echo lookup("text-secondary", $themeColors); ?> dropdown-toggle" href="#" role="button" id="extraEventsFooterButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="<?php echo $extraEventsIcon; ?>"></i> <?php echo $extraEventsText; ?>
 							<small><code class="<?php echo lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(X)</code></small>
