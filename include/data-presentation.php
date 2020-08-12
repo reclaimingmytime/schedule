@@ -73,8 +73,8 @@ function printDateNavLi($id, $date, $icon, $text, $key, $liClasses = null) {
 function prepareMsg($sessionName, $msg) {
 	if (isset($_SESSION[$sessionName])) {
 		if ($_SESSION[$sessionName] === false) {
-			$_SESSION["msg"] = $msg;
-		}
+				$_SESSION["msg"] = $msg;
+			}
 		unset($_SESSION[$sessionName]);
 	}
 }
@@ -152,11 +152,11 @@ $hasManifest = isset($manifest) && !empty($manifest);
 					<ul class="navbar-nav m-auto ml-sm-0">
 						
 						<?php
-						printDateNavLi("prevWeek", $prevWeek, "fas fa-angle-double-left", "Previous Week", $weekOverview === false ? "S" : "A");
-						if($weekOverview === false) printDateNavLi("prevDay", $prevDay, "fas fa-angle-left", "Previous Day", "A");
+						printDateNavLi("prevWeek", $prevWeek, "fas fa-angle-double-left", "Previous Week", $weekOverview === false ? "S" : 'A/<i class="fas fa-caret-square-left"></i>');
+						if($weekOverview === false) printDateNavLi("prevDay", $prevDay, "fas fa-angle-left", "Previous Day", 'A/<i class="fas fa-caret-square-left"></i>');
 						printDateNavLi("today", $today, "fas fa-home", "Today", "Enter", !$enableTodayLink ? 'active' : null);
-						if($weekOverview === false) printDateNavLi("nextDay", $nextDay, "fas fa-angle-right", "Next Day", "D");
-						printDateNavLi("nextWeek", $nextWeek, "fas fa-angle-double-right", "Next Week", $weekOverview === false ? "W" : "D");
+						if($weekOverview === false) printDateNavLi("nextDay", $nextDay, "fas fa-angle-right", "Next Day", 'D/<i class="fas fa-caret-square-right"></i>');
+						printDateNavLi("nextWeek", $nextWeek, "fas fa-angle-double-right", "Next Week", $weekOverview === false ? "W" : 'D/<i class="fas fa-caret-square-right"></i>');
 
 						if ($weekOverview === true) {
 							$overviewType = "day";
