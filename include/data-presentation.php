@@ -152,11 +152,14 @@ $hasManifest = isset($manifest) && !empty($manifest);
 					<ul class="navbar-nav m-auto ml-sm-0">
 						
 						<?php
-						printDateNavLi("prevWeek", $prevWeek, "fas fa-angle-double-left", "Previous Week", $weekOverview === false ? "S" : 'A/<i class="fas fa-caret-square-left"></i>');
-						if($weekOverview === false) printDateNavLi("prevDay", $prevDay, "fas fa-angle-left", "Previous Day", 'A/<i class="fas fa-caret-square-left"></i>');
+            $moveLeftKeys = 'A/<i class="fas fa-caret-square-left"></i>';
+            $moveRightKeys = 'D/<i class="fas fa-caret-square-right"></i>';
+
+            printDateNavLi("prevWeek", $prevWeek, "fas fa-angle-double-left", "Previous Week", $weekOverview === false ? "S" : $moveLeftKeys);
+						if($weekOverview === false) printDateNavLi("prevDay", $prevDay, "fas fa-angle-left", "Previous Day", $moveLeftKeys);
 						printDateNavLi("today", $today, "fas fa-home", "Today", "Enter", !$enableTodayLink ? 'active' : null);
-						if($weekOverview === false) printDateNavLi("nextDay", $nextDay, "fas fa-angle-right", "Next Day", 'D/<i class="fas fa-caret-square-right"></i>');
-						printDateNavLi("nextWeek", $nextWeek, "fas fa-angle-double-right", "Next Week", $weekOverview === false ? "W" : 'D/<i class="fas fa-caret-square-right"></i>');
+            if($weekOverview === false) printDateNavLi("nextDay", $nextDay, "fas fa-angle-right", "Next Day", $moveRightKeys);
+						printDateNavLi("nextWeek", $nextWeek, "fas fa-angle-double-right", "Next Week", $weekOverview === false ? "W" : $moveRightKeys);
 
 						if ($weekOverview === true) {
 							$overviewType = "day";
