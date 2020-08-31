@@ -245,7 +245,18 @@ $hasManifest = isset($manifest) && !empty($manifest);
 								</div>
 							<?php } else if (empty($schedule)) { ?>
 									<div class="alert alert-info mt-3" role="alert">
-									<i class="fas fa-info-circle"></i> No events <?php echo $weekOverview === true ? "in that week" : "on that day"; ?>.
+									<i class="fas fa-info-circle"></i> No events
+										<?php 
+										if (empty($nextEventDate)) {
+											echo "the following weeks";
+										} else {
+											if ($weekOverview === true) {
+												echo "in that week";
+											} else {
+												echo "on that day";
+											}
+										}
+										?>.
 									</div>
 								<?php if(!empty($nextEventDate)) {?>
 									<div class="text-center">
@@ -254,7 +265,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 								<?php } else { ?>
 									<div class="text-center">
 											<a class="btn btn-success text-light" href="."><i class="fas fa-angle-double-left"></i> Back to today</a>
-										</div>
+									</div>
 								<?php } ?>
 								
 							<?php } else {
