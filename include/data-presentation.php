@@ -244,132 +244,136 @@ $hasManifest = isset($manifest) && !empty($manifest);
 									<i class="fas fa-exclamation-circle"></i> No events exist for this class yet. Please check back later.
 								</div>
 							<?php } else if (empty($schedule)) { ?>
-								<div class="alert alert-info mt-3" role="alert">
+									<div class="alert alert-info mt-3" role="alert">
 									<i class="fas fa-info-circle"></i> No events <?php echo $weekOverview === true ? "in that week" : "on that day"; ?>.
-								</div>
+									</div>
 								<?php if(!empty($nextEventDate)) {?>
 									<div class="text-center">
 										<a class="btn btn-success text-light" href="?date=<?php echo $nextEventDate; ?>"><i class="fas fa-angle-double-right"></i> Go to next event on <?php echo formatReadableDate($nextEventDate); ?></a>
 									</div>
-								<?php }
+								<?php } else { ?>
+									<div class="text-center">
+											<a class="btn btn-success text-light" href="."><i class="fas fa-angle-double-left"></i> Back to today</a>
+										</div>
+								<?php } ?>
 								
-							} else {
-									foreach ($schedule as $key => $event) {
-										
-										if(isset($schedule[$key + 1])) {
-											$thisEnd = $event["end"];
-											$nextEvent = $schedule[$key + 1];
-											$nextStart = $nextEvent["start"];
-										} else {
-											$nextEvent = null; //prevent $nextEvent from previous loop persiting
-										}
-										
-										
-										if(isNewDate($schedule, $key, $event)) {
-											$prevEventDate = DateTime::createFromFormat('d.m.y', $schedule[$key - 1]["date"]);
-											$nextEventDate = DateTime::createFromFormat('d.m.y', $event["date"]);
-											
-												?>
-										</div>
-										<div class="col mt-4 mt-lg-0">
-											<span class="<?php echo ($nextEventDate->format("Y-m-d") == $today) ? '' : lookup("text-secondary", $themeColors) . ' '; ?>h4 pb-1">
-												<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
-												<span class="mr-1"><?php echo $nextEventDate->format("D"); ?></span>
-												<span class="mr-1"><?php echo $nextEventDate->format("d.m.y"); ?></span>
-											</span>
-									
-									<?php }
-									
-									if($event["type"] == "empty") { ?>
-											<div class="alert alert-info mt-3" role="alert">
-													<i class="fas fa-info-circle"></i> No events.
-											</div>
-										<?php
-										continue;
-									}
-									
-									$timeRange = $event['start'] . " - " . $event['end'];
-									
-									$headerClasses = 'card-header';
-									if($highlightEvents == true && onGoingEvent($event, $currentTime, $today)) {
-										$headerClasses .= ' ' . $highlightClasses;
-									} else if($event['type'] == 'extraEvent') {
-										$headerClasses .= ' ' . $extraClasses;
-									}
-									if(isToday($event['date'], $today) && $highlightEvents == true) {
-										$headerClasses .= ' today';
-									}
-									
-									$clockIcon = "fas fa-clock";
-									if($event['type'] == 'extraEvent' && !empty($extraEventIcon)) {
-										$clockIcon = $extraEventIcon;
-									}
-									?>
-									<div class="<?php echo lookup("card", $themeColors); ?> my-3">
-										<div class="<?php echo $headerClasses; ?>"
-												 data-start="<?php echo $event['start'];?>" 
-												 data-end="<?php echo $event['end'];?>"
-												 data-type="<?php echo $event['type']; ?>"
-												 data-enddatetime="<?php echo $event['endDateTime']; ?>">
-											<i class="<?php echo $clockIcon; ?>"></i>
-											<strong><?php echo $timeRange ?></strong>
-										</div>
+							<?php } else {
+								foreach ($schedule as $key => $event) {
 
-										<div class="card-body pt-3 pb-1">
-											<ul class="list-inline">
-												<?php if (!empty($event['subject'])) { ?>
-													<li class="list-inline-item pr-3 font-weight-bold"><?php echo $event['subject']; ?></li>
-												<?php }
-												if (!empty($event['room'])) { ?>
-													<li class="list-inline-item pr-3"><?php echo $event['room']; ?></li>
-												<?php }
-												if (!empty($event['prof'])) { ?>
-													<li class="list-inline-item pr-3 <?php echo lookup("text-secondary", $themeColors); ?>">
-														<?php
-														if(strlen($event['prof']) <= 50) {
-															echo $event['prof'];
-														} else { ?>
-															<span data-toggle="tooltip" data-placement="bottom" title="<?php echo $event['prof']; ?>">
-																<i class="fas fa-user-tie"></i>
-															</span>
-														<?php } ?>
-													</li>
-												<?php }
-												if (!empty($event['info'])) { ?>
-													<li class="list-inline-item font-italic"><?php echo $event['info']; ?></li>
-												<?php } ?>
-											</ul>
+									if(isset($schedule[$key + 1])) {
+										$thisEnd = $event["end"];
+										$nextEvent = $schedule[$key + 1];
+										$nextStart = $nextEvent["start"];
+									} else {
+										$nextEvent = null; //prevent $nextEvent from previous loop persiting
+									}
+
+
+									if(isNewDate($schedule, $key, $event)) {
+										$prevEventDate = DateTime::createFromFormat('d.m.y', $schedule[$key - 1]["date"]);
+										$nextEventDate = DateTime::createFromFormat('d.m.y', $event["date"]);
+
+											?>
+									</div>
+									<div class="col mt-4 mt-lg-0">
+										<span class="<?php echo ($nextEventDate->format("Y-m-d") == $today) ? '' : lookup("text-secondary", $themeColors) . ' '; ?>h4 pb-1">
+											<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
+											<span class="mr-1"><?php echo $nextEventDate->format("D"); ?></span>
+											<span class="mr-1"><?php echo $nextEventDate->format("d.m.y"); ?></span>
+										</span>
+
+								<?php }
+
+								if($event["type"] == "empty") { ?>
+										<div class="alert alert-info mt-3" role="alert">
+												<i class="fas fa-info-circle"></i> No events.
 										</div>
-										<?php if(isToday($event['date'], $today) && $highlightEvents == true) { ?>
-											<div class="card-footer <?php echo lookup("text-muted", $themeColors); if (!onGoingEvent($event, $currentTime, $today)) echo ' d-none'; ?>">
-												<i class="fas fa-business-time"></i> <span class="timeRemaining"></span>
-											</div>
-										<?php } ?>
+									<?php
+									continue;
+								}
+
+								$timeRange = $event['start'] . " - " . $event['end'];
+
+								$headerClasses = 'card-header';
+								if($highlightEvents == true && onGoingEvent($event, $currentTime, $today)) {
+									$headerClasses .= ' ' . $highlightClasses;
+								} else if($event['type'] == 'extraEvent') {
+									$headerClasses .= ' ' . $extraClasses;
+								}
+								if(isToday($event['date'], $today) && $highlightEvents == true) {
+									$headerClasses .= ' today';
+								}
+
+								$clockIcon = "fas fa-clock";
+								if($event['type'] == 'extraEvent' && !empty($extraEventIcon)) {
+									$clockIcon = $extraEventIcon;
+								}
+								?>
+								<div class="<?php echo lookup("card", $themeColors); ?> my-3">
+									<div class="<?php echo $headerClasses; ?>"
+											 data-start="<?php echo $event['start'];?>" 
+											 data-end="<?php echo $event['end'];?>"
+											 data-type="<?php echo $event['type']; ?>"
+											 data-enddatetime="<?php echo $event['endDateTime']; ?>">
+										<i class="<?php echo $clockIcon; ?>"></i>
+										<strong><?php echo $timeRange ?></strong>
+									</div>
+
+									<div class="card-body pt-3 pb-1">
+										<ul class="list-inline">
+											<?php if (!empty($event['subject'])) { ?>
+												<li class="list-inline-item pr-3 font-weight-bold"><?php echo $event['subject']; ?></li>
+											<?php }
+											if (!empty($event['room'])) { ?>
+												<li class="list-inline-item pr-3"><?php echo $event['room']; ?></li>
+											<?php }
+											if (!empty($event['prof'])) { ?>
+												<li class="list-inline-item pr-3 <?php echo lookup("text-secondary", $themeColors); ?>">
+													<?php
+													if(strlen($event['prof']) <= 50) {
+														echo $event['prof'];
+													} else { ?>
+														<span data-toggle="tooltip" data-placement="bottom" title="<?php echo $event['prof']; ?>">
+															<i class="fas fa-user-tie"></i>
+														</span>
+													<?php } ?>
+												</li>
+											<?php }
+											if (!empty($event['info'])) { ?>
+												<li class="list-inline-item font-italic"><?php echo $event['info']; ?></li>
+											<?php } ?>
+										</ul>
+									</div>
+									<?php if(isToday($event['date'], $today) && $highlightEvents == true) { ?>
+										<div class="card-footer <?php echo lookup("text-muted", $themeColors); if (!onGoingEvent($event, $currentTime, $today)) echo ' d-none'; ?>">
+											<i class="fas fa-business-time"></i> <span class="timeRemaining"></span>
+										</div>
+									<?php } ?>
+								</div>
+								<?php
+								if(isset($nextEvent)
+												&& $highlightEvents == true
+												&& isToday($event['date'], $today)
+												&& isToday($nextEvent['date'], $today)) {
+									$breakStart = formatTime($thisEnd, "+1 minute");
+									$breakEnd = formatTime($nextStart, "-1 minute");
+									?>
+									<div class="<?php echo lookup("card", $themeColors); ?> mt-3<?php if (!isBreak($currentTime, $thisEnd, $nextStart)) echo ' d-none'; ?> today"
+											 data-start="<?php echo $breakStart;?>"
+											 data-end="<?php echo $breakEnd;?>"
+											 data-enddatetime="<?php echo createJsTime($nextStart);?>"
+											 data-type="break">
+										<div class="card-header <?php echo $highlightClasses; ?>">
+											<i class="fas fa-pause"></i> <strong>Break until <?php echo $nextStart; ?></strong>
+										</div>
+										<div class="card-footer <?php echo lookup("text-muted", $themeColors); ?>">
+											<i class="fas fa-business-time"></i> <span class="timeRemaining"></span>
+										</div>
 									</div>
 									<?php
-									if(isset($nextEvent)
-													&& $highlightEvents == true
-													&& isToday($event['date'], $today)
-													&& isToday($nextEvent['date'], $today)) {
-										$breakStart = formatTime($thisEnd, "+1 minute");
-										$breakEnd = formatTime($nextStart, "-1 minute");
-										?>
-										<div class="<?php echo lookup("card", $themeColors); ?> mt-3<?php if (!isBreak($currentTime, $thisEnd, $nextStart)) echo ' d-none'; ?> today"
-												 data-start="<?php echo $breakStart;?>"
-												 data-end="<?php echo $breakEnd;?>"
-												 data-enddatetime="<?php echo createJsTime($nextStart);?>"
-												 data-type="break">
-											<div class="card-header <?php echo $highlightClasses; ?>">
-												<i class="fas fa-pause"></i> <strong>Break until <?php echo $nextStart; ?></strong>
-											</div>
-											<div class="card-footer <?php echo lookup("text-muted", $themeColors); ?>">
-												<i class="fas fa-business-time"></i> <span class="timeRemaining"></span>
-											</div>
-										</div>
-										<?php
-									}
 								}
-							} ?>
+							}
+						} ?>
 
 						</div>
 					</div>
