@@ -116,7 +116,8 @@ $hasManifest = isset($manifest) && !empty($manifest);
 				data-highlightclasses="<?php echo $highlightClasses; ?>"
 				data-extraclasses="<?php echo $extraClasses; ?>"
 				data-enabletodaylink="<?php echo printBoolean($enableTodayLink);?>"
-				data-hasmanifest="<?php echo printBoolean($hasManifest); ?>">
+				data-hasmanifest="<?php echo printBoolean($hasManifest); ?>"
+				data-pickedtheme="<?php echo printBoolean($pickedTheme); ?>">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="theme-color" content="<?php echo lookup("bg-hex", $themeColors); ?>">

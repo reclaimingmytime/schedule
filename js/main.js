@@ -313,6 +313,11 @@ $(function () {
 	setInterval(function () {
 		updateTime();
 	}, 5000);
+	
+	/* Preferred Theme detection */
+	if(head.data('pickedtheme') === false && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+		clickIDIfVisible('themeSwitcher');
+	}
 
 	/* Service Worker */
 	if ('serviceWorker' in navigator && head.data('hasmanifest') === true) {
