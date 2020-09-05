@@ -206,15 +206,17 @@ $hasManifest = isset($manifest) && !empty($manifest);
 						<?php } ?>
 					</ul>
 				</nav>
-				<nav class="nav nav-pills nav-fill mt-3 d-lg-none">
-				<?php
-				foreach ($period as $dt) {
-					$thisWkDay = $dt->format("D");
-					$thisDay = $dt->format("Y-m-d");
-					?>
-					<a class="nav-link <?php echo lookup('text-dark', $themeColors); ?><?php if($thisDay == $today) echo " font-weight-bold" ?>" href="#<?php echo strtolower($thisWkDay); ?>"><?php echo $thisWkDay; ?></a>
+				<?php if(!empty($schedule)) { ?>
+					<nav class="nav nav-pills nav-fill mt-3 d-lg-none">
+					<?php
+					foreach ($period as $dt) {
+						$thisWkDay = $dt->format("D");
+						$thisDay = $dt->format("Y-m-d");
+						?>
+						<a class="nav-link <?php echo lookup('text-dark', $themeColors); ?><?php if($thisDay == $today) echo " font-weight-bold" ?>" href="#<?php echo strtolower($thisWkDay); ?>"><?php echo $thisWkDay; ?></a>
+					<?php } ?>
+					</nav>
 				<?php } ?>
-				</nav>
 			</header>
 
 			<main class="mt-3">
