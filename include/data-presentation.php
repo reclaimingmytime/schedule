@@ -139,6 +139,9 @@ $hasManifest = isset($manifest) && !empty($manifest);
 		} ?>
 
 		<style>
+		html {
+			scroll-behavior: smooth;
+		}
 		.dropdown-toggle {
 			outline: none;
 		}
