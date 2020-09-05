@@ -259,6 +259,7 @@ $colors = [
 				
 				"text-muted" => "text-white-50",
 				"text-secondary" => "text-white-50",
+				"text-dark" => "text-light",
 				"card" => "card text-light bg-secondary",
 				"navbar" => "navbar navbar-dark bg-dark",
 				

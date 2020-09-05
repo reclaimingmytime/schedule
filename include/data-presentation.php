@@ -150,7 +150,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 	<body class="mb-4 <?php echo lookup("body", $themeColors); ?>">
 		<div class="container-fluid">
 			<header>
-				<nav class="<?php echo lookup("navbar", $themeColors); ?> navbar-expand mt-3 mb-4">
+				<nav class="<?php echo lookup("navbar", $themeColors); ?> navbar-expand mt-3">
 					<div class="navbar-header d-none d-sm-block mr-3">
 						<a class="navbar-brand<?php if (!$enableTodayLink) echo ' active'; ?>" href="."><i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span></a>
 					</div>
@@ -203,9 +203,18 @@ $hasManifest = isset($manifest) && !empty($manifest);
 						<?php } ?>
 					</ul>
 				</nav>
+				<nav class="nav nav-pills nav-fill mt-3 d-lg-none">
+				<?php
+				foreach ($period as $dt) {
+					$thisWkDay = $dt->format("D");
+					$thisDay = $dt->format("Y-m-d");
+					?>
+					<a class="nav-link <?php echo lookup('text-dark', $themeColors); ?><?php if($thisDay == $today) echo " font-weight-bold" ?>" href="#<?php echo strtolower($thisWkDay); ?>"><?php echo $thisWkDay; ?></a>
+				<?php } ?>
+				</nav>
 			</header>
 
-			<main>
+			<main class="mt-3">
 				<?php if (!empty($_SESSION['msg'])) { ?>
 					<div class="row">
 						<div class="col-xl-4">
@@ -238,7 +247,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 								<span class="h4 float-right d-sm-none">
 									<i class="fas fa-clock"></i> <span class="currentTime"><?php echo $currentTime; ?></span>
 								</span>
-								<h1 class="h4 pb-1 d-inline">
+								<h1 class="h4 pb-1 d-inline" id="<?php echo strtolower($weekDay); ?>">
 									<i class="fas fa-calendar-alt mr-1"></i>
 									<?php if(empty($schedule) && $weekOverview == true) { ?>Week of <?php } ?>
 									<span class="mr-1"><?php echo $firstEventWeekDay . " " . $firstEventDate; ?></span>
@@ -293,7 +302,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 											?>
 									</div>
 									<div class="col mt-4 mt-lg-0">
-										<span class="<?php echo ($nextEventDate->format("Y-m-d") == $today) ? '' : lookup("text-secondary", $themeColors) . ' '; ?>h4 pb-1">
+										<span class="<?php echo ($nextEventDate->format("Y-m-d") == $today) ? '' : lookup("text-secondary", $themeColors) . ' '; ?>h4 pb-1" id="<?php echo strtolower($nextEventDate->format("D")); ?>">
 											<span class="mr-1"><i class="fas fa-calendar-alt"></i></span>
 											<span class="mr-1"><?php echo $nextEventDate->format("D"); ?></span>
 											<span class="mr-1"><?php echo $nextEventDate->format("d.m.y"); ?></span>
