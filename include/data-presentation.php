@@ -206,7 +206,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 						<?php } ?>
 					</ul>
 				</nav>
-				<?php if(!empty($schedule)) { ?>
+				<?php if(!empty($schedule) && isset($period)) { ?>
 					<nav class="nav nav-pills nav-fill mt-3 d-lg-none">
 					<?php
 					foreach ($period as $dt) {
