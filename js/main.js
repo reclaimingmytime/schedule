@@ -52,7 +52,7 @@ $(function () {
 	function redirectToNextDay() {
 		if (dataNotNone('nextday')) {
 			redirectToHref('#nextDay');
-		} else if (dataNotNone('nextday') && head.data('weekoverview') === true) {
+		} else if (dataNotNone('nextweek') && head.data('weekoverview') === true) {
 			redirectToHref('#nextWeek');
 		}
 	}
