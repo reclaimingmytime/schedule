@@ -56,16 +56,16 @@ $(function () {
 			redirectToHref('#nextWeek');
 		}
 	}
-	function redirectToNextWeek() {
-		if (dataNotNone('nextweek')) {
-			redirectToHref('#nextWeek');
-		}
-	}
 	function redirectToPrevDay() {
 		if (dataNotNone('prevday')) {
 			redirectToHref('#prevDay');
 		} else if (dataNotNone('prevweek') && head.data('weekoverview') === true) {
 			redirectToHref('#prevWeek');
+		}
+	}
+	function redirectToNextWeek() {
+		if (dataNotNone('nextweek')) {
+			redirectToHref('#nextWeek');
 		}
 	}
 	function redirectToPrevWeek() {
