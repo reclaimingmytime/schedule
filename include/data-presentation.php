@@ -20,11 +20,11 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 			$icon = "fas fa-chalkboard-teacher";
 		}
 		?>
-		<a class="<?= $classSwitcherClasses; ?>" href="?class=<?= $class; ?>&amp;date=<?= $desiredDate . $tokenEmbed; ?>"<?php if($enableShortcut === true) { ?> id="key<?= $key; ?>"<?php } ?>>
+		<a class="<?= $classSwitcherClasses; ?>" href="?class=<?= $class; ?>&amp;date=<?= $desiredDate . $tokenEmbed; ?>"<?php if($enableShortcut === true) { ?> id="classKey<?= $key; ?>"<?php } ?>>
 			<i class="<?= $icon; ?>"></i>
 			<?= $class;
 
-			if($key <= 9) { ?>
+			if($enableShortcut) { ?>
 				<small class="d-none d-lg-inline"><code class="<?= $codeHighlightColors; ?> d-none d-xl-inline">(<?= $key; ?>)</code></small>
 			<?php } ?>
 		</a>
@@ -33,14 +33,19 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 	}
 }
 
-function printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed) {
+function printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed, $enableIDs = true) {
 	global $themeColors;
 	
 	$dropdownItemColor = lookup("dropdown-item", $themeColors);
+	$key = 1;
 	foreach ($extraSubjects as $extraSubject) {
+		$enableShortcut = $enableIDs === true && $key <= 9;
+		
 		$classes = $dropdownItemColor;
 		$icon = "fas fa-square";
 		$link = strtolower($extraSubject);
+		
+		$codeHighlightColors = lookup("text-secondary", $themeColors);
 
 		if (!empty($chosenExtraSubjects) && strlen($chosenExtraSubjects[0]) !== 0) {
 			if (inArray($extraSubject, $chosenExtraSubjects)) {
@@ -54,8 +59,15 @@ function printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredD
 		$encodedLink = urlencode($link);
 		
 		?>
-		<a class="<?= $classes; ?>" href="?extraSubjects=<?= $encodedLink; ?>&amp;date=<?= $desiredDate . $tokenEmbed; ?>"><i class="<?= $icon; ?>"></i> <?= $extraSubject; ?></a>
+		<a class="<?= $classes; ?>" href="?extraSubjects=<?= $encodedLink; ?>&amp;date=<?= $desiredDate . $tokenEmbed; ?>"<?php if($enableShortcut === true) { ?> id="eventsKey<?= $key; ?>"<?php } ?>><i class="<?= $icon; ?>"></i> <?= $extraSubject; ?>
+		
 		<?php 
+		if($enableShortcut) { ?>
+			<small class="d-none d-lg-inline"><code class="<?= $codeHighlightColors; ?> d-none d-xl-inline">(<?= $key; ?>)</code></small>
+		<?php } ?>
+		</a>
+		<?php
+		++$key;
 	}
 }
 
@@ -206,7 +218,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 									<i class="<?= $extraEventsIcon; ?>"></i> <span class="d-none d-lg-inline"><?= $extraEventsText; ?> <small><code class="<?= lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(X)</code></small></span>
 								</a>
 								<div class="<?= lookup("dropdown-menu", $themeColors); ?>" id="extraEventsMenu" aria-labelledby="extraEventsButton">
-									<?php	printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed); ?>
+									<?php	printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed, true); ?>
 								</div>
 							</li>
 						<?php } ?>
@@ -446,7 +458,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 							<small><code class="<?= lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(X)</code></small>
 						</a>
 						<div class="<?= lookup("dropdown-menu", $themeColors); ?>" id="extraEventsMenuFooter" aria-labelledby="extraEventsFooterButton">
-							<?php printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed); ?>
+							<?php printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed, false); ?>
 						</div>
 					</div>
 				<?php } ?>

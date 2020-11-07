@@ -114,6 +114,8 @@ $(function () {
 	}
 
 	/* Keyboard navigation */
+	openClassNav = false;
+	openExtraEventsNav = false;
 	$(document).on("keydown", function (e) {
 		if (!e.ctrlKey && !e.metaKey && !e.altKey && !e.shiftKey) {
 			switch (e.key) {
@@ -153,12 +155,21 @@ $(function () {
 				case "8":
 				case "9":
 				{
-					const keyElement = '#key' + e.key;
-					if ($(keyElement).length && !$(keyElement).hasActiveClass()) {
-						redirectToHref(keyElement);
+					if (openClassNav) {
+						const keyElement = '#classKey' + e.key;
+						if ($(keyElement).length && !$(keyElement).hasActiveClass()) {
+							redirectToHref(keyElement);
+						}
+						if ($(keyElement).hasActiveClass() && $(keyElement).isVisible()) {
+							clickIDIfVisible('classNavButton'); //close menu when selecting link with active class
+							openClassNav = !openClassNav;
+						}
 					}
-					if ($(keyElement).hasActiveClass() && $(keyElement).isVisible()) {
-						clickIDIfVisible('classNavButton'); //close menu when selecting link with active class
+					if (openExtraEventsNav) {
+						const keyElement = '#eventsKey' + e.key;
+						if ($(keyElement).length) {
+							redirectToHref(keyElement);
+						}
 					}
 					break;
 				}
@@ -166,11 +177,13 @@ $(function () {
 				case "c":
 					clickIDIfVisible('classNavButton');
 					clickIDIfVisible('classFooterButton');
+					openClassNav = !openClassNav;
 					break;
 
 				case "x":
 					clickIDIfVisible('extraEventsFooterButton');
 					clickIDIfVisible('extraEventsButton');
+					openExtraEventsNav = !openExtraEventsNav;
 					break;
 					
 				case "e":
