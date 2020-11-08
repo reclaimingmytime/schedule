@@ -3,6 +3,7 @@
 
 function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, $enableIDs = true) {
 	global $themeColors;
+	global $classPrefix;
 	
 	$activeDropdownColor = lookup("activeDropdown", $themeColors);
 	$dropdownItemColor = lookup("dropdown-item", $themeColors);
@@ -11,10 +12,11 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 	$key = 1;
 	foreach ($allowedClasses as $class) {
 		$enableShortcut = $enableIDs === true && $key <= 9;
+		$shortClass = isset($classPrefix) ? removeFromString($classPrefix, $class) : $classPrefix;
 		
 		$classSwitcherClasses = $dropdownItemColor;
 		$icon = "fas fa-chalkboard";
-		if ($desiredClass == $class) {
+		if ($desiredClass == $shortClass) {
 			$classSwitcherClasses .= ' active font-weight-bold bg-transparent';
 			$classSwitcherClasses .= " $activeDropdownColor"; //light theme only
 			$icon = "fas fa-chalkboard-teacher";
@@ -22,7 +24,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 		?>
 		<a class="<?= $classSwitcherClasses; ?>" href="?class=<?= $class; ?>&amp;date=<?= $desiredDate . $tokenEmbed; ?>"<?php if($enableShortcut === true) { ?> id="classKey<?= $key; ?>"<?php } ?>>
 			<i class="<?= $icon; ?>"></i>
-			<?= $class;
+			<?= $shortClass;
 
 			if($enableShortcut) { ?>
 				<small class="d-none d-lg-inline"><code class="<?= $codeHighlightColors; ?> d-none d-xl-inline">(<?= $key; ?>)</code></small>
@@ -201,13 +203,15 @@ $hasManifest = isset($manifest) && !empty($manifest);
 							<a class="nav-link" id="overviewType" href="?<?php if($desiredDateMidWeek !== $today) echo 'date=' . $desiredDateMidWeek . '&'; ?>overview=<?= $overviewType . $tokenEmbed; ?>"><i class="<?= $icon; ?>"></i> <span class="d-none d-lg-inline"><?= $text;?> <small><code class="<?= lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(T)</code></small></span></a>
 						</li>
 						
-						<?php if(!empty($allowedClasses) && !empty($desiredClass) && $weekOverview == true) { ?>
+						<?php if(!empty($allowedClasses) && !empty($desiredClass) && $weekOverview == true) {
+							$desiredClassShort = isset($classPrefix) ? removeFromString($classPrefix, $desiredClass) : $classPrefix;
+							?>
 							<li class="nav-item mr-3 d-none d-sm-inline-block <?= lookup("dropdown", $themeColors); ?>">
 								<a class="nav-link dropdown-toggle" href="#" id="classNavButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<i class="fas fa-chalkboard-teacher"></i> <span class="d-none d-lg-inline"><?= $desiredClass; ?> <small><code class="<?= lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(C)</code></small></span>
+									<i class="fas fa-chalkboard-teacher"></i> <span class="d-none d-lg-inline"><?= $desiredClassShort; ?> <small><code class="<?= lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(C)</code></small></span>
 								</a>
 								<div class="<?= lookup("dropdown-menu", $themeColors); ?>" id="classNavMenu" aria-labelledby="classNavButton">
-									<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, true); ?>
+									<?php printClassDropdown($allowedClasses, $desiredClassShort, $desiredDate, $tokenEmbed, true); ?>
 								</div>
 							</li>
 						<?php } ?>
