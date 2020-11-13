@@ -339,7 +339,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 
 								if($event["type"] == "empty") { ?>
 										<div class="alert alert-info mt-3" role="alert">
-												<i class="fas fa-info-circle"></i> No events.
+												<i class="fas fa-info-circle"></i> No events
 										</div>
 									<?php
 									continue;
