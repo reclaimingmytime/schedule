@@ -378,10 +378,10 @@ $hasManifest = isset($manifest) && !empty($manifest);
 												<li class="list-inline-item pr-3 font-weight-bold"><?= $event['subject']; ?></li>
 											<?php }
 											if (!empty($event['room'])) { ?>
-												<li class="list-inline-item pr-3"><?= $event['room']; ?></li>
+												<li class="list-inline-item pr-3 mt-1"><?= $event['room']; ?></li>
 											<?php }
 											if (!empty($event['prof'])) { ?>
-												<li class="list-inline-item pr-3 <?= lookup("text-secondary", $themeColors); ?>">
+												<li class="list-inline-item pr-3 mt-1 font-italic">
 													<?php
 													if(strlen($event['prof']) <= 50) {
 														echo $event['prof'];
@@ -393,12 +393,12 @@ $hasManifest = isset($manifest) && !empty($manifest);
 												</li>
 											<?php }
 											if (!empty($event['info'])) { ?>
-												<li class="list-inline-item font-italic"><?= $event['info']; ?></li>
+												<li class="list-inline-item font-italic mt-1"><?= $event['info']; ?></li>
 											<?php } ?>
 										</ul>
 									</div>
 									<?php if(isToday($event['date'], $today) && $highlightEvents == true) { ?>
-										<div class="card-footer <?= lookup("text-muted", $themeColors); if (!onGoingEvent($event, $currentTime, $today)) echo ' d-none'; ?>">
+										<div class="card-footer font-italic<?php if (!onGoingEvent($event, $currentTime, $today)) echo ' d-none'; ?>">
 											<i class="fas fa-business-time"></i> <span class="timeRemaining"></span>
 										</div>
 									<?php } ?>
@@ -419,7 +419,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 										<div class="card-header <?= $highlightClasses; ?>">
 											<i class="fas fa-pause"></i> <strong>Break until <?= $nextStart; ?></strong>
 										</div>
-										<div class="card-footer <?= lookup("text-muted", $themeColors); ?>">
+										<div class="card-footer font-italic">
 											<i class="fas fa-business-time"></i> <span class="timeRemaining"></span>
 										</div>
 									</div>
