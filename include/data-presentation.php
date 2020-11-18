@@ -241,7 +241,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 				<?php } ?>
 			</header>
 
-			<main class="mt-3">
+			<main class="mt-4">
 				<?php if (!empty($_SESSION['msg'])) { ?>
 					<div class="row">
 						<div class="col-xl-4">
@@ -362,7 +362,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 									$clockIcon = $extraEventIcon;
 								}
 								?>
-								<div class="<?= lookup("card", $themeColors); ?> my-3">
+								<div class="<?= lookup("card", $themeColors); ?> my-4">
 									<div class="<?= $headerClasses; ?>"
 											 data-start="<?= $event['start'];?>" 
 											 data-end="<?= $event['end'];?>"
