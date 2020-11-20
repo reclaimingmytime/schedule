@@ -282,11 +282,11 @@ $hasManifest = isset($manifest) && !empty($manifest);
 							</div>
 							
 							<?php if(empty($calendar)) { ?>
-								<div class="alert alert-warning mt-3" role="alert">
+								<div class="alert alert-warning mt-4" role="alert">
 									<i class="fas fa-exclamation-circle"></i> No events exist for this class yet. Please check back later.
 								</div>
 							<?php } else if (empty($schedule)) { ?>
-									<div class="alert alert-info mt-3" role="alert">
+									<div class="alert alert-info mt-4" role="alert">
 									<i class="fas fa-info-circle"></i> No events
 										<?php 
 										if (empty($nextEventDate)) {
@@ -301,11 +301,11 @@ $hasManifest = isset($manifest) && !empty($manifest);
 										?>.
 									</div>
 								<?php if(!empty($nextEventDate)) {?>
-									<div class="text-center">
+									<div class="text-center mt-4">
 										<a class="btn btn-success text-light" href="?date=<?= $nextEventDate; ?>"><i class="fas fa-angle-double-right"></i> Go to next event on <?= formatReadableDate($nextEventDate); ?></a>
 									</div>
 								<?php } else { ?>
-									<div class="text-center">
+									<div class="text-center mt-4">
 											<a class="btn btn-success text-light" href="."><i class="fas fa-angle-double-left"></i> Back to today</a>
 									</div>
 								<?php } ?>
@@ -338,7 +338,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 								<?php }
 
 								if($event["type"] == "empty") { ?>
-										<div class="alert alert-info mt-3" role="alert">
+										<div class="alert alert-info mt-4" role="alert">
 												<i class="fas fa-info-circle"></i> No events
 										</div>
 									<?php
@@ -411,7 +411,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 									$breakStart = formatTime($thisEnd, "+1 minute");
 									$breakEnd = formatTime($nextStart, "-1 minute");
 									?>
-									<div class="<?= lookup("card", $themeColors); ?> mt-3<?php if (!isBreak($currentTime, $thisEnd, $nextStart)) echo ' d-none'; ?> today"
+									<div class="<?= lookup("card", $themeColors); ?> mt-4<?php if (!isBreak($currentTime, $thisEnd, $nextStart)) echo ' d-none'; ?> today"
 											 data-start="<?= $breakStart;?>"
 											 data-end="<?= $breakEnd;?>"
 											 data-enddatetime="<?= createJsTime($nextStart);?>"
