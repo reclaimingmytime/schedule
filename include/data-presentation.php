@@ -12,7 +12,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 	$key = 1;
 	foreach ($allowedClasses as $class) {
 		$enableShortcut = $enableIDs === true && $key <= 9;
-		$shortClass = isset($classPrefix) ? removeFromString($classPrefix, $class) : $classPrefix;
+		$shortClass = isset($classPrefix) ? removeFromString($classPrefix, $class) : $class;
 		
 		$classSwitcherClasses = $dropdownItemColor;
 		$icon = "fas fa-chalkboard";
@@ -204,7 +204,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 						</li>
 						
 						<?php if(!empty($allowedClasses) && !empty($desiredClass) && $weekOverview == true) {
-							$desiredClassShort = isset($classPrefix) ? removeFromString($classPrefix, $desiredClass) : $classPrefix;
+							$desiredClassShort = isset($classPrefix) ? removeFromString($classPrefix, $desiredClass) : $desiredClass;
 							?>
 							<li class="nav-item mr-3 d-none d-sm-inline-block <?= lookup("dropdown", $themeColors); ?>">
 								<a class="nav-link dropdown-toggle" href="#" id="classNavButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
