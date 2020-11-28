@@ -306,7 +306,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 									</div>
 								<?php } else { ?>
 									<div class="text-center mt-4">
-											<a class="btn btn-success text-light" href="."><i class="fas fa-angle-double-left"></i> Back to today</a>
+											<a class="btn btn-success text-light" href="."><i class="fas fa-angle-double-left"></i> Back to today <small class="d-none d-lg-inline"><code class="text-light d-none d-xl-inline">(Enter)</code></small></a>
 									</div>
 								<?php } ?>
 								
