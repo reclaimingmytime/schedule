@@ -302,7 +302,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 									</div>
 								<?php if(!empty($nextEventDate)) {?>
 									<div class="text-center mt-4">
-										<a class="btn btn-success text-light" href="?date=<?= $nextEventDate; ?>"><i class="fas fa-angle-double-right"></i> Go to next event on <?= formatReadableDate($nextEventDate); ?></a>
+										<a class="btn btn-success text-light" id="nextEventBtn" href="?date=<?= $nextEventDate; ?>"><i class="fas fa-angle-double-right"></i> Go to next event on <?= formatReadableDate($nextEventDate); ?> <small class="d-none d-lg-inline"><code class="text-light d-none d-xl-inline">(N)</code></small></a>
 									</div>
 								<?php } else { ?>
 									<div class="text-center mt-4">

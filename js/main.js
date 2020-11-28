@@ -189,6 +189,10 @@ $(function () {
 				case "e":
 					clickIDIfVisible('themeSwitcher');
 					break;
+					
+				case "n":
+					clickIDIfVisible('nextEventBtn');
+					break;
 
 				default:
 					return; // exit this handler for other keys
