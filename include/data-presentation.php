@@ -468,13 +468,13 @@ $hasManifest = isset($manifest) && !empty($manifest);
 				<?php } ?>
 				
 				<?php /* Theme Switcher */ ?>
-				<div class="d-block">
+				<div class="d-block mb-2">
 					<a href="?theme=<?= $theme == "dark" ? "light" : "dark";?>&date=<?= $desiredDate . $tokenEmbed; ?>" class="btn btn-white <?= lookup("text-secondary", $themeColors); ?>" id="themeSwitcher" role="button"><i class="fas fa-<?= $theme == "dark" ? "check-square" : "square"; ?>"></i> Dark Theme <small><code class="<?= lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(E)</code></small>
 </a>
 				</div>
 				
 				<?php /* Swipe Hints */ ?>
-				<div class="d-block d-sm-none mt-2">
+				<div class="d-block d-sm-none">
 					<span class="<?= lookup("text-muted", $themeColors); ?>" <?php if($weekOverview === false) { ?>data-toggle="tooltip" data-placement="bottom" title="One-finger swipes change the day. Two-finger swipes change the week." <?php } ?>>
 						<small>Navigate by swiping left and right.<?php if($weekOverview === false) { ?> <i class="fas fa-info-circle"></i><?php } ?></small>
 					</span>
