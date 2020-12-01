@@ -111,6 +111,7 @@ function enableTodayLink($today, $desiredDate, $desiredDateTo) {
 $enableTodayLink = enableTodayLink($today, $desiredDate, $desiredDateTo);
 
 $extraClasses = 'bg-info text-light';
+$desiredClassShort = isset($classPrefix) ? removeFromString($classPrefix, $desiredClass) : $desiredClass;
 
 $highlightEvents = !$weekBump;
 $highlightClasses = lookup('highlightClasses', $themeColors);
@@ -204,7 +205,6 @@ $hasManifest = isset($manifest) && !empty($manifest);
 						</li>
 						
 						<?php if(!empty($allowedClasses) && !empty($desiredClass) && $weekOverview == true) {
-							$desiredClassShort = isset($classPrefix) ? removeFromString($classPrefix, $desiredClass) : $desiredClass;
 							?>
 							<li class="nav-item mr-3 d-none d-sm-inline-block <?= lookup("dropdown", $themeColors); ?>">
 								<a class="nav-link dropdown-toggle" href="#" id="classNavButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -445,11 +445,11 @@ $hasManifest = isset($manifest) && !empty($manifest);
 				<?php if(!empty($allowedClasses) && !empty($desiredClass)) { ?>
 					<div class="d-block <?php if ($weekOverview == true) echo "d-sm-none "; ?>dropup d-inline">
 						<a class="btn btn-white shadow-none <?= lookup("text-secondary", $themeColors); ?> dropdown-toggle" href="#" role="button" id="classFooterButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<i class="fas fa-chalkboard-teacher"></i> <?= $desiredClass; ?>
+							<i class="fas fa-chalkboard-teacher"></i> <?= $desiredClassShort; ?>
 							<small><code class="<?= lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(C)</code></small>
 						</a>
 						<div class="<?= lookup("dropdown-menu", $themeColors); ?>" id="classFooterMenu" aria-labelledby="classFooterButton">
-							<?php printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $tokenEmbed, false); ?>
+							<?php printClassDropdown($allowedClasses, $desiredClassShort, $desiredDate, $tokenEmbed, false); ?>
 						</div>
 					</div>
 				<?php } ?>
