@@ -233,10 +233,6 @@ $(function () {
 		return removeMinutes(minutes) + " h " + removeHours(minutes) + " min";
 	}
 
-	function formatRemainingTime(minutes) {
-		return prettyPrintMinutes(minutes) + " remaining";
-	}
-
 	function displayRemainingTime(card, timeRemaining) {
 		var cardFooter = card.find('.card-footer');
 		cardFooter.find('.timeRemaining').html(timeRemaining);
@@ -246,12 +242,16 @@ $(function () {
 		card.find('.card-footer').addClass('d-none');
 	}
 
-	function updateRemainingTime(endDateTime, timeMilliseconds, card) {
+	function updateRemainingTime(endDateTime, timeMilliseconds, card, startTime) {
 		var remaining = computeRemainingMilliseconds(endDateTime, timeMilliseconds);
 
 		var minutesRemaining = millisecondsToMins(remaining);
 		if (minutesRemaining >= 0) {
-			var timeRemaining = formatRemainingTime(minutesRemaining);
+			if(startTime == "future") {
+				var timeRemaining = "starts in " + prettyPrintMinutes(minutesRemaining);
+			} else {
+				var timeRemaining = prettyPrintMinutes(minutesRemaining) + " remaining";
+			}
 			displayRemainingTime(card, timeRemaining);
 		}
 	}
@@ -269,9 +269,9 @@ $(function () {
 		var card = $(element).closest('.card');
 
 		if(i == 0 && time < start) {
-			updateRemainingTime(startDateTime, timeMilliseconds, card);
+			updateRemainingTime(startDateTime, timeMilliseconds, card, "future");
 		} else if (isBetween(time, start, end)) {
-			updateRemainingTime(endDateTime, timeMilliseconds, card);
+			updateRemainingTime(endDateTime, timeMilliseconds, card, "past");
 			swapClasses(element, normal, highlight);
 		} else {
 			hideRemainingTime(card);
