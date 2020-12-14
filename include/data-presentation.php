@@ -367,6 +367,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 											 data-start="<?= $event['start'];?>" 
 											 data-end="<?= $event['end'];?>"
 											 data-type="<?= $event['type']; ?>"
+											 data-startdatetime="<?= $event['startDateTime'];?>"
 											 data-enddatetime="<?= $event['endDateTime']; ?>">
 										<i class="<?= $clockIcon; ?>"></i>
 										<strong><?= $timeRange ?></strong>

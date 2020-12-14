@@ -265,10 +265,12 @@ $(function () {
 		}
 	}
 
-	function highlightEvent(element, time, timeMilliseconds, start, end, endDateTime, highlight, normal) {
+	function highlightEvent(element, time, timeMilliseconds, start, end, startDateTime, endDateTime, highlight, normal, i = -1) {
 		var card = $(element).closest('.card');
 
-		if (isBetween(time, start, end)) {
+		if(i == 0 && time < start) {
+			updateRemainingTime(startDateTime, timeMilliseconds, card);
+		} else if (isBetween(time, start, end)) {
 			updateRemainingTime(endDateTime, timeMilliseconds, card);
 			swapClasses(element, normal, highlight);
 		} else {
@@ -281,24 +283,25 @@ $(function () {
 	const extraClasses = head.data('extraclasses');
 
 	function updateEvents(time, timeMilliseconds) {
-		$("div[data-start].today").val(function () { //for-each all divs with data-start and class today
+		$("div[data-start].today").val(function (i) { //for-each all divs with data-start and class today
 			const thisType = $(this).data('type');
 
 			const thisStart = $(this).data('start');
 			const thisEnd = $(this).data('end');
+			const startDateTime = $(this).data('startdatetime');
 			const endDateTime = $(this).data('enddatetime');
 
 			if (thisType == "event") {
 				highlightEvent(this, time, timeMilliseconds,
-								thisStart, thisEnd, endDateTime,
-								highlightClasses, undefined);
+								thisStart, thisEnd, startDateTime, endDateTime,
+								highlightClasses, undefined, i);
 			} else if (thisType == "extraEvent") {
 				highlightEvent(this, time, timeMilliseconds,
-								thisStart, thisEnd, endDateTime,
+								thisStart, thisEnd, startDateTime, endDateTime,
 								highlightClasses, extraClasses);
 			} else if (thisType == "break") {
 				highlightEvent(this, time, timeMilliseconds,
-								thisStart, thisEnd, endDateTime,
+								thisStart, thisEnd, startDateTime, endDateTime,
 								undefined, "d-none");
 			}
 		});
