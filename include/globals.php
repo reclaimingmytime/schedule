@@ -240,6 +240,10 @@ function getLastMonday($date) {
 	return getDateFromInterval($date, "last monday");
 }
 
+function isSameWeek($date1, $date2) {
+	return (new DateTime($date1))->format("W Y") == (new DateTime($date2))->format("W Y");
+}
+
 function createJsTime($time) {
 	return date("M j, Y H:i:s", strtotime($time));
 }
