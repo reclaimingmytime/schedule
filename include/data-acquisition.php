@@ -76,9 +76,8 @@ $weekOverview = $overviewType === "week";
 
 if($weekOverview === true) {
 	if(formatWeekDay($desiredDate) !== "Mon") {
-		$lastMonday = getDateFromInterval($desiredDate, "last monday");
 		$desiredDateMidWeek = $desiredDate;
-		$desiredDate = $lastMonday;
+		$desiredDate = getLastMonday($desiredDate);
 	}
 }
 
