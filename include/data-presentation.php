@@ -108,7 +108,12 @@ function enableTodayLink($today, $desiredDate, $desiredDateTo) {
 	return !isBetween($today, $desiredDate, $desiredDateTo);
 }
 
+function enableBackToTodayLink($today, $desiredDate, $weekOverview) {
+	return $weekOverview == false ? $desiredDate != $today : $desiredDate != getLastMonday($today);
+}
+
 $enableTodayLink = enableTodayLink($today, $desiredDate, $desiredDateTo);
+$enableBackToTodayLink = enableBackToTodayLink($today, $desiredDate, $weekOverview);
 
 $extraClasses = 'bg-info text-light';
 $desiredClassShort = isset($classPrefix) ? removeFromString($classPrefix, $desiredClass) : $desiredClass;
@@ -304,7 +309,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 									<div class="text-center mt-4">
 										<a class="btn btn-success text-light" id="nextEventBtn" href="?date=<?= $nextEventDate; ?>"><i class="fas fa-angle-double-right"></i> Go to next event on <?= formatReadableDate($nextEventDate); ?> <small class="d-none d-lg-inline"><code class="text-light d-none d-xl-inline">(N)</code></small></a>
 									</div>
-								<?php } else if ($desiredDate != $today) { ?>
+								<?php } else if ($enableBackToTodayLink) { ?>
 									<div class="text-center mt-4">
 											<a class="btn btn-success text-light" href="."><i class="fas fa-angle-double-<?= $desiredDate < $today ? "right" : "left"; ?>"></i> Back to today <small class="d-none d-lg-inline"><code class="text-light d-none d-xl-inline">(Enter)</code></small></a>
 									</div>
