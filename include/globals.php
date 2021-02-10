@@ -236,6 +236,10 @@ function readableToIsoDate($date) {
 	return $object->format("Y-m-d");
 }
 
+function getLastMonday($date) {
+	return getDateFromInterval($date, "last monday");
+}
+
 function createJsTime($time) {
 	return date("M j, Y H:i:s", strtotime($time));
 }
