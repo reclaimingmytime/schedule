@@ -108,12 +108,12 @@ function enableTodayLink($today, $desiredDate, $desiredDateTo) {
 	return !isBetween($today, $desiredDate, $desiredDateTo);
 }
 
-function enableBackToTodayLink($today, $desiredDate, $weekOverview) {
-	return $weekOverview == false ? $desiredDate != $today : $desiredDate != getLastMonday($today);
+function enableBackToTodayLink($today, $desiredDate, $weekOverview, $todayStartWeek) {
+	return $weekOverview == false ? $desiredDate != $today : $desiredDate != $todayStartWeek;
 }
 
 $enableTodayLink = enableTodayLink($today, $desiredDate, $desiredDateTo);
-$enableBackToTodayLink = enableBackToTodayLink($today, $desiredDate, $weekOverview);
+$enableBackToTodayLink = enableBackToTodayLink($today, $desiredDate, $weekOverview, $todayStartWeek);
 
 $extraClasses = 'bg-info text-light';
 $desiredClassShort = isset($classPrefix) ? removeFromString($classPrefix, $desiredClass) : $desiredClass;

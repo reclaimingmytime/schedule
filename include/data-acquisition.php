@@ -74,12 +74,15 @@ $desiredDateMidWeek = $desiredDate;
 $overviewType = getOption("overview", ["week", "day"], "week", $token, $desiredDate, $today);
 $weekOverview = $overviewType === "week";
 
-if($weekOverview === true) {
-	if(formatWeekDay($desiredDate) !== "Mon") {
+$desiredDateNotMonday = formatWeekDay($desiredDate) !== "Mon";
+
+if ($weekOverview === true) {
+	if ($desiredDateNotMonday) {
 		$desiredDateMidWeek = $desiredDate;
 		$desiredDate = getLastMonday($desiredDate);
 	}
 }
+$todayStartWeek = $desiredDateNotMonday ? getLastMonday($desiredDate) : $today;
 
 $weekBump = false;
 
