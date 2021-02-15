@@ -455,7 +455,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 							<small><code class="<?= lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(C)</code></small>
 						</a>
 						<div class="<?= lookup("dropdown-menu", $themeColors); ?>" id="classFooterMenu" aria-labelledby="classFooterButton">
-							<?php printClassDropdown($allowedClasses, $desiredClassShort, $desiredDate, $tokenEmbed, false); ?>
+							<?php printClassDropdown($allowedClasses, $desiredClassShort, $desiredDate, $tokenEmbed); ?>
 						</div>
 					</div>
 				<?php } ?>
@@ -468,7 +468,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 							<small><code class="<?= lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(X)</code></small>
 						</a>
 						<div class="<?= lookup("dropdown-menu", $themeColors); ?>" id="extraEventsMenuFooter" aria-labelledby="extraEventsFooterButton">
-							<?php printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed, false); ?>
+							<?php printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed); ?>
 						</div>
 					</div>
 				<?php } ?>
