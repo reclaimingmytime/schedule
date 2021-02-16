@@ -44,7 +44,7 @@ function printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredD
 		$enableShortcut = $enableIDs === true && $key <= 9;
 		
 		$classes = $dropdownItemColor;
-		$icon = "fas fa-square";
+		$icon = "fas fa-toggle-off";
 		$link = strtolower($extraSubject);
 		
 		$codeHighlightColors = lookup("text-secondary", $themeColors);
@@ -52,7 +52,7 @@ function printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredD
 		if (!empty($chosenExtraSubjects) && strlen($chosenExtraSubjects[0]) !== 0) {
 			if (inArray($extraSubject, $chosenExtraSubjects)) {
 				$classes .= ' font-weight-bold';
-				$icon = "fas fa-check-square";
+				$icon = "fas fa-toggle-on";
 				$link = printArray(getArrayWithout($chosenExtraSubjects, $extraSubject), true);
 			} else {
 				$link = printArray(getArrayWith($chosenExtraSubjects, $extraSubject), true);
@@ -470,7 +470,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 				
 				<?php /* Theme Switcher */ ?>
 				<div class="d-block mb-2">
-					<a href="?theme=<?= $theme == "dark" ? "light" : "dark";?>&date=<?= $desiredDate . $tokenEmbed; ?>" class="btn btn-white <?= lookup("text-secondary", $themeColors); ?>" id="themeSwitcher" role="button"><i class="fas fa-<?= $theme == "dark" ? "check-square" : "square"; ?>"></i> Dark Theme <small><code class="<?= lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(E)</code></small>
+					<a href="?theme=<?= $theme == "dark" ? "light" : "dark";?>&date=<?= $desiredDate . $tokenEmbed; ?>" class="btn btn-white <?= lookup("text-secondary", $themeColors); ?>" id="themeSwitcher" role="button"><i class="fas fa-toggle-<?= $theme == "dark" ? "on" : "off"; ?>"></i> Dark Theme <small><code class="<?= lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(E)</code></small>
 </a>
 				</div>
 				
