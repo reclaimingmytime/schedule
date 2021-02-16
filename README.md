@@ -65,6 +65,7 @@ Note: The directory of the script and the folder "cache/" (created by the script
 | `$type`            | *Optional*. Type of the API. Can be "*json*" or "*ical*".    |
 | `$defaultClass`    | **Required**. Default class when fetching the API.           |
 | `$allowedClasses`  | *Optional*. Array of allowed classes. If undefined or empty, only $defaultClass is allowed and the class switcher is hidden. |
+| `$classPrefix`     | *Optional*. String of prefix that gets removed, e.g. `Class-A` becomes `A`. Note: This is only removed in the frontend. |
 | `$extraEvents`     | *Optional.* Associative array of extra events in the following format: `[$class][$weekDays][$subjects]`, e.g. `["Class-A" => "Mon" => "INF", "ENG"]` |
 | `$extraEventsText` | *Optional.* Text for the switcher.                           |
 | `$extraEventsIcon` | *Optional.* Font Awesome icon for the switcher.              |
