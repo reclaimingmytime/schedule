@@ -7,8 +7,6 @@ on:
       # Git and GitHub
       - '.github/**'
       - '.gitignore'
-      - '.git-ftp-ignore'
-      - '.git-ftp-include'
       - 'LICENSE'
       - 'README.**'
       # schedule-specific
@@ -20,17 +18,22 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      with:
-        fetch-depth: 2 # required to find changed files
 
     - name: Deploy
-      uses: SamKirkland/FTP-Deploy-Action@3.1.0
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
-        # Deployment destination server & path. Formatted as protocol://domain.com:port/full/destination/path/
-        ftp-server: ${{ secrets.FTP_URL }}
-        ftp-username: ${{ secrets.FTP_USER }}
-        ftp-password: ${{ secrets.FTP_PASS }}
+        # Connection
+        server: ${{ secrets.FTP_SERVER }}
+        protocol: ${{ secrets.FTP_PROTOCOL }}
+        server-dir: ${{ secrets.FTP_SERVERDIR }}
+        # Login
+        username: ${{ secrets.FTP_USER }}
+        password: ${{ secrets.FTP_PASS }}
+        # Exludes
+        exclude: README.**
+          - **/.README.**
+          - LICENSE
+          - config.default.php
+         
         # The local folder to copy, defaults to root project folder
         # local-dir: # optional, default is ./
-        # Passes through options into git-ftp
-        # git-ftp-args: # optional
