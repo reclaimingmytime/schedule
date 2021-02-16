@@ -30,7 +30,10 @@ jobs:
         username: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PASS }}
         # Exludes
-        exclude: README.**
+        exclude: .git*
+          - .git*/**
+          -  **/.git*/**
+          -  README.**
           - **/.README.**
           - LICENSE
           - config.default.php
