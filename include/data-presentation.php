@@ -286,7 +286,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 									<i class="fas fa-exclamation-circle"></i> No events exist for this class yet. Please check back later.
 								</div>
 							<?php } else if (empty($schedule)) { ?>
-									<div class="alert alert-info mt-4" role="alert">
+									<div class="alert alert-<?= empty($nextEventDate) ? "warning" : "info"; ?> mt-4" role="alert">
 									<i class="fas fa-info-circle"></i> No events
 										<?php 
 										if (empty($nextEventDate)) {
