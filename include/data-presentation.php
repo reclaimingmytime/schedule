@@ -433,7 +433,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 					</div>
 			</main>
 
-			<footer class="text-center my-4">
+			<footer class="text-center my-5">
 				<?php if (isset($weekBump) && $weekBump === true) { ?>
 				<div class="d-block my-3">
 					<span class="<?= lookup("text-muted", $themeColors); ?>" data-toggle="tooltip" data-placement="bottom" title="Weekends are not part of the schedule. You are now viewing the next week.">
