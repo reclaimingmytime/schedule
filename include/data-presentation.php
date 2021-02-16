@@ -293,9 +293,9 @@ $hasManifest = isset($manifest) && !empty($manifest);
 											echo "the following weeks";
 										} else {
 											if ($weekOverview === true) {
-												echo "in that week";
+												echo "that week";
 											} else {
-												echo "on that day";
+												echo "that day";
 											}
 										}
 										?>.
