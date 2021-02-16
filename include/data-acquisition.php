@@ -111,19 +111,22 @@ $nextDay = getDateFromInterval($desiredDate, "1 $weekDayString");
 $prevDay = getDateFromInterval($desiredDate, "1 $weekDayString ago");
 $prevWeek = getDateFromInterval($desiredDate, "1 week ago");
 
-if($prevWeek < getDateFromInterval($minDate)) {
+$minDateISO = getDateFromInterval($minDate);
+$maxDateISO = getDateFromInterval($maxDate);
+
+if($prevWeek < $minDateISO) {
 	$prevWeek = "none";
 }
 
-if($prevDay < getDateFromInterval($minDate)) {
+if($prevDay < $minDateISO) {
 	$prevDay = "none";
 }
 
-if($nextWeek > getDateFromInterval($maxDate)) {
+if($nextWeek > $maxDateISO) {
 	$nextWeek = "none";
 }
 
-if($nextDay > getDateFromInterval($maxDate)) {
+if($nextDay > $maxDateISO) {
 	$nextDay = "none";
 }
 
