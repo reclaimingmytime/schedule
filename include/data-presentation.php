@@ -270,7 +270,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 								$firstEventDate = $displayedDate;
 							}
 							?>
-							<div<?php if (!isToday($firstEventDate, $today)) echo ' class="' . lookup("text-secondary", $themeColors) . '"'; ?>>
+						<div<?php if (!isToday($firstEventDate, $today) && !($weekOverview == true && empty($schedule) && !$enableTodayLink)) echo ' class="' . lookup("text-secondary", $themeColors) . '"'; ?>>
 								<span class="h4 float-right d-sm-none">
 									<i class="fas fa-clock"></i> <span class="currentTime"><?= $currentTime; ?></span>
 								</span>
