@@ -120,7 +120,7 @@ if(!isset($extraEventsText)) {
 	$extraEventsText = "Extra Events"; //TODO Starting with PHP 7.4: replace if statement with $var ??= "default"
 }
 if(!isset($extraEventsIcon)) {
-	$extraEventsIcon = "fas fa-cog";
+	$extraEventsIcon = "fas fa-plus-circle";
 }
 $hasManifest = isset($manifest) && !empty($manifest);
 ?>
