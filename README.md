@@ -100,3 +100,4 @@ In the "include" folder, you will find several files:
 | `data-acquisition.php`  | Functions for fetching the data from the API. This includes retrieving and validating a custom class, if specified. |
 | `data-processing.php`   | Processing date, time and event data. This includes removing invalid data, where specified in the `config.php`. |
 | `data-presentation.php` | The logic for displaying the events. This mostly includes the necessary markup. |
+| `classes/CalFileParser.php` | [CalFileParser](https://github.com/controlz/CalFileParser) by GitHub user [controlz](https://github.com/controlz/CalFileParser). Used for parsing iCal files when `$type`is `"ical"`. |
