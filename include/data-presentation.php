@@ -287,7 +287,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 								</div>
 							<?php } else if (empty($schedule)) { ?>
 									<div class="alert alert-<?= empty($nextEventDate) ? "warning" : "info"; ?> mt-4" role="alert">
-									<i class="fas fa-info-circle"></i> No events
+									<i class="fas fa-<?= empty($nextEventDate) ? "exclamation" : "info"; ?>-circle"></i> No events
 										<?php 
 										if (empty($nextEventDate)) {
 											echo "the following weeks";
