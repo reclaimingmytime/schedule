@@ -149,6 +149,12 @@ $hasManifest = isset($manifest) && !empty($manifest);
 		<?php if($hasManifest == true) { ?>
 			<link rel="manifest" href="site.webmanifest.php" crossorigin="use-credentials">	
 		<?php } ?>
+		<?php if(!empty($faviconPath)) { ?>
+			<link rel="icon" href="<?= $faviconPath; ?>">	
+		<?php } ?>
+		<?php if(!empty($svgIconPath)) { ?>
+			<link rel="icon" href="<?= $svgIconPath; ?>" type="image/svg+xml">
+		<?php } ?>
 		<?php if(!empty($touchIconPath)) { ?>
 			<link rel="apple-touch-icon" href="<?= $touchIconPath; ?>">	
 		<?php } ?>
