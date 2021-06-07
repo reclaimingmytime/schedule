@@ -232,25 +232,38 @@ $(function () {
 		}
 		return removeMinutes(minutes) + " h " + removeHours(minutes) + " min";
 	}
+	
+	function calculateProgress(remaining, total) {
+		return 100 - Math.abs(remaining/total) * 100;
+	}
 
 	function displayRemainingTime(card, timeRemaining) {
 		var cardFooter = card.find('.card-footer');
 		cardFooter.find('.timeRemaining').html(timeRemaining);
 		cardFooter.removeClass('d-none');
 	}
+	function displayProgress(card, progress) {
+		card.find('.progress').removeClass('d-none').find('.progress-bar').width(progress + "%").attr('aria-valuenow', progress);
+	}
+	function showProgress(card, progress) {
+		card.find('.progress').removeClass('d-none');
+	}
 	function hideRemainingTime(card) {
-		card.find('.card-footer').addClass('d-none');
+		card.find('.card-footer, .progress').addClass('d-none');
 	}
 
-	function updateRemainingTime(endDateTime, timeMilliseconds, card, startTime) {
+	function updateRemainingTime(endDateTime, timeMilliseconds, card, startTime, startDateTime = null) {
 		var remaining = computeRemainingMilliseconds(endDateTime, timeMilliseconds);
+		var total = new Date(endDateTime) - new Date(startDateTime);
 
 		var minutesRemaining = millisecondsToMins(remaining);
 		if (minutesRemaining >= 0) {
 			if(startTime == "future") {
 				var timeRemaining = "starts in " + prettyPrintMinutes(minutesRemaining);
+				showProgress();
 			} else {
 				var timeRemaining = prettyPrintMinutes(minutesRemaining) + " remaining";
+				displayProgress(card, calculateProgress(remaining, total));
 			}
 			displayRemainingTime(card, timeRemaining);
 		}
@@ -271,7 +284,7 @@ $(function () {
 		if(i == 0 && time < start) {
 			updateRemainingTime(startDateTime, timeMilliseconds, card, "future");
 		} else if (isBetween(time, start, end)) {
-			updateRemainingTime(endDateTime, timeMilliseconds, card, "past");
+			updateRemainingTime(endDateTime, timeMilliseconds, card, "past", startDateTime);
 			swapClasses(element, normal, highlight);
 		} else {
 			hideRemainingTime(card);

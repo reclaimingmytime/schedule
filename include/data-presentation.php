@@ -400,6 +400,9 @@ $hasManifest = isset($manifest) && !empty($manifest);
 										</ul>
 									</div>
 									<?php if(isToday($event['date'], $today) && $highlightEvents == true) { ?>
+										<div class="progress<?php if (!onGoingEvent($event, $currentTime, $today)) echo ' d-none'; ?>" style="height: 1px;">
+											<div class="progress-bar bg-dark" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
 										<div class="card-footer fst-italic<?php if (!onGoingEvent($event, $currentTime, $today)) echo ' d-none'; ?>">
 											<i class="fas fa-business-time"></i> <span class="timeRemaining"></span>
 										</div>
@@ -416,10 +419,14 @@ $hasManifest = isset($manifest) && !empty($manifest);
 									<div class="<?= lookup("card", $themeColors); ?> mt-4<?php if (!isBreak($currentTime, $thisEnd, $nextStart)) echo ' d-none'; ?> today"
 											 data-start="<?= $breakStart;?>"
 											 data-end="<?= $breakEnd;?>"
+											 data-startdatetime="<?= createJsTime($breakStart);?>"
 											 data-enddatetime="<?= createJsTime($nextStart);?>"
 											 data-type="break">
 										<div class="card-header <?= $highlightClasses; ?>">
 											<i class="fas fa-pause"></i> <strong>Break until <?= $nextStart; ?></strong>
+										</div>
+										<div class="progress" style="height: 1px;">
+											<div class="progress-bar bg-dark" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 										<div class="card-footer fst-italic">
 											<i class="fas fa-business-time"></i> <span class="timeRemaining"></span>
