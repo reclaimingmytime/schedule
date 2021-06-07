@@ -245,9 +245,6 @@ $(function () {
 	function displayProgress(card, progress) {
 		card.find('.progress').removeClass('d-none').find('.progress-bar').width(progress + "%").attr('aria-valuenow', progress);
 	}
-	function showProgress(card, progress) {
-		card.find('.progress').removeClass('d-none');
-	}
 	function hideRemainingTime(card) {
 		card.find('.card-footer, .progress').addClass('d-none');
 	}
@@ -260,7 +257,6 @@ $(function () {
 		if (minutesRemaining >= 0) {
 			if(startTime == "future") {
 				var timeRemaining = "starts in " + prettyPrintMinutes(minutesRemaining);
-				showProgress();
 			} else {
 				var timeRemaining = prettyPrintMinutes(minutesRemaining) + " remaining";
 				displayProgress(card, calculateProgress(remaining, total));
