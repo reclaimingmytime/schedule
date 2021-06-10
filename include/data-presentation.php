@@ -18,7 +18,7 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 		$icon = "fas fa-chalkboard";
 		if ($desiredClass == $shortClass) {
 			$classSwitcherClasses .= ' active pe-none fw-bold bg-transparent';
-			if(!empty($activeDropdownColor)) $classSwitcherClasses .= "sdsdsd $activeDropdownColor"; //light theme only
+			if(!empty($activeDropdownColor)) $classSwitcherClasses .= " $activeDropdownColor"; //light theme only
 			$icon = "fas fa-chalkboard-teacher";
 		}
 		?>
