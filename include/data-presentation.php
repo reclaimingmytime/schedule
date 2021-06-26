@@ -11,7 +11,8 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 	
 	$key = 1;
 	foreach ($allowedClasses as $class) {
-		$enableShortcut = $enableIDs === true && $key <= 9;
+		$keyInRange = $key <= 9;
+		$enableShortcutAnchor = $enableIDs === true && $keyInRange;
 		$shortClass = isset($classPrefix) ? removeFromString($classPrefix, $class) : $class;
 		
 		$classSwitcherClasses = $dropdownItemColor;
@@ -22,11 +23,11 @@ function printClassDropdown($allowedClasses, $desiredClass, $desiredDate, $token
 			$icon = "fas fa-chalkboard-teacher";
 		}
 		?>
-		<a class="<?= $classSwitcherClasses; ?>" href="?class=<?= $class; ?>&amp;date=<?= $desiredDate . $tokenEmbed; ?>"<?php if($enableShortcut === true) { ?> id="classKey<?= $key; ?>"<?php } ?>>
+		<a class="<?= $classSwitcherClasses; ?>" href="?class=<?= $class; ?>&amp;date=<?= $desiredDate . $tokenEmbed; ?>"<?php if($enableShortcutAnchor === true) { ?> id="classKey<?= $key; ?>"<?php } ?>>
 			<i class="<?= $icon; ?>"></i>
 			<?= $shortClass;
 
-			if($enableShortcut) { ?>
+			if($keyInRange) { ?>
 				<small class="d-none d-lg-inline"><code class="<?= $codeHighlightColors; ?> d-none d-xl-inline">(<?= $key; ?>)</code></small>
 			<?php } ?>
 		</a>
@@ -42,7 +43,8 @@ function printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredD
 	$codeHighlightColors = lookup("text-secondary", $themeColors);
 	$key = 1;
 	foreach ($extraSubjects as $extraSubject) {
-		$enableShortcut = $enableIDs === true && $key <= 9;
+		$keyInRange = $key <= 9;
+		$enableShortcutAnchor = $enableIDs === true && $keyInRange;
 		
 		$classes = $dropdownItemColor;
 		$icon = "fas fa-toggle-off";
@@ -61,10 +63,10 @@ function printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredD
 		$encodedLink = urlencode($link);
 		
 		?>
-		<a class="<?= $classes; ?>" href="?extraSubjects=<?= $encodedLink; ?>&amp;date=<?= $desiredDate . $tokenEmbed; ?>"<?php if($enableShortcut === true) { ?> id="eventsKey<?= $key; ?>"<?php } ?>><i class="<?= $icon; ?>"></i> <?= $extraSubject; ?>
+		<a class="<?= $classes; ?>" href="?extraSubjects=<?= $encodedLink; ?>&amp;date=<?= $desiredDate . $tokenEmbed; ?>"<?php if($enableShortcutAnchor === true) { ?> id="eventsKey<?= $key; ?>"<?php } ?>><i class="<?= $icon; ?>"></i> <?= $extraSubject; ?>
 		
 		<?php 
-		if($enableShortcut) { ?>
+		if($keyInRange) { ?>
 			<small class="d-none d-lg-inline"><code class="<?= $codeHighlightColors; ?> d-none d-xl-inline">(<?= $key; ?>)</code></small>
 		<?php } ?>
 		</a>
@@ -178,7 +180,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 		<div class="container-fluid">
 			<header>
 				<nav class="<?= lookup("navbar", $themeColors); ?> navbar-expand mt-3">
-		<div class="container-fluid">
+					<div class="container-fluid">
 						<div class="navbar-header d-none d-sm-block me-3">
 						<a class="navbar-brand<?php if (!$enableTodayLink) echo ' active pe-none'; ?>" href="."><i class="fas fa-clock"></i> <span class="currentTime"><?= $currentTime; ?></span></a>
 					</div>
@@ -229,6 +231,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 								</div>
 							</li>
 						<?php } ?>
+					</ul>
 				</div>
 				</nav>
 				<?php if(!empty($schedule) && isset($period)) { ?>
@@ -458,7 +461,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 							<small><code class="<?= lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(C)</code></small>
 						</a>
 						<div class="<?= lookup("dropdown-menu", $themeColors); ?>" id="classFooterMenu" aria-labelledby="classFooterButton">
-							<?php printClassDropdown($allowedClasses, $desiredClassShort, $desiredDate, $tokenEmbed); ?>
+							<?php printClassDropdown($allowedClasses, $desiredClassShort, $desiredDate, $tokenEmbed, $weekOverview == false); ?>
 						</div>
 					</div>
 				<?php } ?>
@@ -471,7 +474,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 							<small><code class="<?= lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(X)</code></small>
 						</a>
 						<div class="<?= lookup("dropdown-menu", $themeColors); ?>" id="extraEventsMenuFooter" aria-labelledby="extraEventsFooterButton">
-							<?php printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed); ?>
+							<?php printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredDate, $tokenEmbed, $weekOverview == false); ?>
 						</div>
 					</div>
 				<?php } ?>
