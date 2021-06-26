@@ -161,7 +161,9 @@ $(function () {
 							redirectToHref(keyElement);
 						}
 						if ($(keyElement).hasActiveClass() && $(keyElement).isVisible()) {
-							clickIDIfVisible('classNavButton'); //close menu when selecting link with active class
+							//close menu when selecting link with active class
+							clickIDIfVisible('classNavButton');
+							clickIDIfVisible('classFooterButton');
 							openClassNav = !openClassNav;
 						}
 					}
