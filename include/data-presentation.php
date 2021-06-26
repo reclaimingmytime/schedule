@@ -63,7 +63,9 @@ function printExtraEventDropdown($extraSubjects, $chosenExtraSubjects, $desiredD
 		$encodedLink = urlencode($link);
 		
 		?>
-		<a class="<?= $classes; ?>" href="?extraSubjects=<?= $encodedLink; ?>&amp;date=<?= $desiredDate . $tokenEmbed; ?>"<?php if($enableShortcutAnchor === true) { ?> id="eventsKey<?= $key; ?>"<?php } ?>><i class="<?= $icon; ?>"></i> <?= $extraSubject; ?>
+		<a class="<?= $classes; ?>" href="?extraSubjects=<?= $encodedLink; ?>&amp;date=<?= $desiredDate . $tokenEmbed; ?>"<?php if($enableShortcutAnchor === true) { ?> id="eventsKey<?= $key; ?>"<?php } ?>>
+			<i class="<?= $icon; ?>"></i>
+		  <?= $extraSubject; ?>
 		
 		<?php 
 		if($keyInRange) { ?>
