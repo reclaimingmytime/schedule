@@ -22,6 +22,10 @@ function notContains($haystack, $needle) {
 	return strpos($haystack, $needle) === false;
 }
 
+function startsWith($haystack, $needle) {
+	return substr($haystack, 0, strlen($needle));
+}
+
 function isDifferent($x, $y) {
 	return !empty($x) && $x !== $y;
 }
