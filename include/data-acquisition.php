@@ -192,6 +192,9 @@ function retrieveData($api, $cache_filename, $type, $cache_time) {
 		file_put_contents($cache_filename, $calendar, LOCK_EX);
 	}
 
+	if($type == 'ical' && startsWith($calendar, "Error: ")) {
+		die("Error parsing API. Please check the json cache file for details.");
+	}
 	$calendarArray = json_decode($calendar, true);
 	return defined('CALENDAR') ? $calendarArray[CALENDAR] : $calendarArray;
 }
