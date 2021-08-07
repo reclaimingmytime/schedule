@@ -187,6 +187,10 @@ function retrieveData($api, $cache_filename, $type, $cache_time) {
 		}
 		if($type == 'ical') {
 			file_put_contents($cache_filename, $calendar, LOCK_EX); // write tmp file for CalFileParser to process
+			
+			if(!isset($timezone)) $timezone = "Europe/London";
+			$calFileParser->set_timezone($timezone);
+			
 			$calendar = $calFileParser->parse($cache_filename, 'json');
 		}
 		file_put_contents($cache_filename, $calendar, LOCK_EX);
