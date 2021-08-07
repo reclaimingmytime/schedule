@@ -23,7 +23,7 @@ function notContains($haystack, $needle) {
 }
 
 function startsWith($haystack, $needle) {
-	return substr($haystack, 0, strlen($needle));
+	return substr($haystack, 0, strlen($needle)) === $query;
 }
 
 function isDifferent($x, $y) {
