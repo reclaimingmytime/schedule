@@ -111,14 +111,6 @@ function ensureAllDefined($constants) {
 
 ensureAllDefined(['SUBJECT', 'START', 'END', 'ROOM']);
 
-//Get data from event
-function getSubject($type, $wholeString) {
-	if ($type == 'ical') {
-		return stringRange($wholeString, SUBJECTSECTION[0], SUBJECTSECTION[1]);
-	}
-	return $wholeString;
-}
-
 //Duplicate check
 function sameEvent($e, $new) {
 	return $e["date"] == $new["date"] &&
@@ -180,17 +172,22 @@ foreach ($calendar as $entry) {
 	$isCorrectClass = true;
 	$isExtraClass = false;
 	if (isset($desiredClass)) {
-		$class = stringRange($entry[LESSONCLASS], CLASSSECTION[0], CLASSSECTION[1]);
+		/* See if key in array contains value */
+		$attendeesArray = array_filter($entry, function($key) {
+			return strpos($key, 'ATTENDEE;CN=') === 0;
+		}, ARRAY_FILTER_USE_KEY);
+		$attendeesRaw = array_keys($attendeesArray);
+		$attendees = str_replace("ATTENDEE;CN=", "", $attendeesRaw);
 
-		if (notContains($class, $desiredClass)) {
+		if (!in_array($desiredClass, $attendees)) {
 			$isCorrectClass = false;
 			if ($displayExtraEvents == true) {
 				foreach ($extraEvents as $extraClass => $value) {
-					if (contains($class, $extraClass)) {
+					if (in_array($extraClass, $attendees)) {
 						$isCorrectClass = true;
 						$isExtraClass = true;
+						break;
 					}
-					break;
 				}
 			}
 		}
@@ -207,7 +204,7 @@ foreach ($calendar as $entry) {
 		$new["startDateTime"] = extractApiDateTime($type, $entry[START]);
 		$new["endDateTime"] = extractApiDateTime($type, $entry[END]);
 
-		$thisSubject = getSubject($type, $entry[SUBJECT]);
+		$thisSubject = $entry[SUBJECT];
 		$new["subject"] = !empty($subjects) ? lookup($thisSubject, $subjects) : $thisSubject;
 
 		if (!isset($excludedRoomSubjects) || isset($excludedRoomSubjects) && !in_array($new["subject"], $excludedRoomSubjects)) {
@@ -285,7 +282,7 @@ foreach ($calendar as $entry) {
 					$date > $desiredDateTo && //"next event" = later than desired date
 					(empty($nextEventDate) ||
 					isset($nextEventDate) && $date < $nextEventDate)) {
-		if (!$isExtraClass || ($isExtraClass && isExtraSubject(getSubject($type, $entry[SUBJECT]), formatWeekDay($date), $extraEvents, $extraClass, $chosenExtraSubjects))) {
+		if (!$isExtraClass || ($isExtraClass && isExtraSubject($entry[SUBJECT], formatWeekDay($date), $extraEvents, $extraClass, $chosenExtraSubjects))) {
 			$nextEventDate = $date;
 		}
 	}

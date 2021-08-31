@@ -310,6 +310,9 @@ class CalFileParser {
                         if (substr($date_value, -1) == "Z") $timezone = "UTC";
 
                         // format date
+                        /* CUSTOM FIX START */
+                        $timezone = str_replace("W. Europe Standard Time", "Europe/Berlin", $timezone);
+                        /* CUSTOM FIX END */
                         $date = DateTime::createFromFormat('Ymd\THis', str_replace('Z', '', $date_value), new DateTimeZone($timezone));
                         if ($date !== false) $date->setTimezone(new DateTimeZone($this->_user_timezone));
 
