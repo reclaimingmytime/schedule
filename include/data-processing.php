@@ -215,7 +215,7 @@ foreach ($calendar as $entry) {
 		}
 
 		if (defined('INFO')) {
-			$rawInfo = stringRange($entry[INFO], INFOSECTION[0], INFOSECTION[1]);
+			$rawInfo = isset ($entry[INFO]) && stringRange($entry[INFO], INFOSECTION[0], INFOSECTION[1]);
 			$new["info"] = lookup($rawInfo, $infos);
 		}
 
