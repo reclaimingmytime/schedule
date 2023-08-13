@@ -448,7 +448,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 
 			<footer class="text-center my-5">
 				<?php if (isset($weekBump) && $weekBump === true) { ?>
-				<div class="d-block my-3">
+				<div class="my-3">
 					<span class="<?= lookup("text-muted", $themeColors); ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Weekends are not part of the schedule. You are now viewing the next week.">
 						<small>Weekend skipped. <i class="fas fa-info-circle"></i></small>
 					</span>
@@ -457,7 +457,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 				
 				<?php /* Class Dropdown */ ?>
 				<?php if(!empty($allowedClasses) && !empty($desiredClass)) { ?>
-					<div class="d-block <?php if ($weekOverview == true) echo "d-sm-none "; ?>dropup d-inline">
+					<div class="<?php if ($weekOverview == true) echo "d-sm-none "; ?>dropup d-inline">
 						<a class="btn btn-white shadow-none <?= lookup("text-secondary", $themeColors); ?> dropdown-toggle" href="#" role="button" id="classFooterButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="fas fa-chalkboard-teacher"></i> <?= $desiredClassShort; ?>
 							<small><code class="<?= lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(C)</code></small>
@@ -470,7 +470,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 				
 				<?php /* Extra Subjects */ ?>
 				<?php if(!empty($extraSubjects)) { ?>
-					<div class="d-block <?php if ($weekOverview == true) echo "d-sm-none "; ?>dropup d-inline">
+					<div class="<?php if ($weekOverview == true) echo "d-sm-none "; ?>dropup d-inline">
 						<a class="btn btn-white shadow-none <?= lookup("text-secondary", $themeColors); ?> dropdown-toggle" href="#" role="button" id="extraEventsFooterButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="<?= $extraEventsIcon; ?>"></i> <?= $extraEventsText; ?>
 							<small><code class="<?= lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(X)</code></small>
@@ -482,13 +482,13 @@ $hasManifest = isset($manifest) && !empty($manifest);
 				<?php } ?>
 				
 				<?php /* Theme Switcher */ ?>
-				<div class="d-block mb-2">
+				<div class="mb-2">
 					<a href="?theme=<?= $theme == "dark" ? "light" : "dark";?>&date=<?= $desiredDate . $tokenEmbed; ?>" class="btn btn-white <?= lookup("text-secondary", $themeColors); ?>" id="themeSwitcher" role="button"><i class="fas fa-toggle-<?= $theme == "dark" ? "on" : "off"; ?>"></i> Dark Theme <small><code class="<?= lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(E)</code></small>
 </a>
 				</div>
 				
 				<?php /* Swipe Hints */ ?>
-				<div class="d-block d-sm-none">
+				<div class="d-sm-none">
 					<span class="<?= lookup("text-muted", $themeColors); ?>" <?php if($weekOverview === false) { ?>data-bs-toggle="tooltip" data-bs-placement="bottom" title="One-finger swipes change the day. Two-finger swipes change the week." <?php } ?>>
 						<small>Navigate by swiping left and right.<?php if($weekOverview === false) { ?> <i class="fas fa-info-circle"></i><?php } ?></small>
 					</span>
