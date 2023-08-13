@@ -137,7 +137,7 @@ function validProf($profs, $emptyProfs) {
 
 function validSubject($subject, $ignoredSubjects) {
 	foreach ($ignoredSubjects as $ignored) {
-		if(startsWith($subject, $ignored . ",")) {  // needs to be changed when subject no longer in format "subject, room"
+		if(startsWith($subject, $ignored)) {
 			return false;
 		}
 	}
@@ -211,6 +211,10 @@ foreach ($calendar as $entry) {
 
 		$thisSubject = $entry[SUBJECT];
 		$new["subject"] = !empty($subjects) ? lookup($thisSubject, $subjects) : $thisSubject;
+		if(isset($subjectRemoveAt) && contains($new["subject"], $subjectRemoveAt)) {
+			$new["subject"] = substr_replace($new["subject"], "", strpos($new["subject"], $subjectRemoveAt)); //remove starting at
+			$new["subject"] = removeFromString(", ", $new["subject"]);
+		}
 
 		if (!isset($excludedRoomSubjects) || isset($excludedRoomSubjects) && !in_array($new["subject"], $excludedRoomSubjects)) {
 			$shortRoom = !empty($roomPrefix) ? trimRoom($entry[ROOM], $roomPrefix) : $entry[ROOM];
