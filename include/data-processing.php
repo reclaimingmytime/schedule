@@ -14,7 +14,7 @@ if (!isset($ignoredSubjects)) {
 
 //Room Functions
 if (!isset($roomPrefix)) {
-	$roomPrefix = "";
+	$roomPrefix = [""];
 }
 
 function trimRoom($raw, $roomPrefix) {
