@@ -136,7 +136,12 @@ function validProf($profs, $emptyProfs) {
 }
 
 function validSubject($subject, $ignoredSubjects) {
-	return !in_array($subject, $ignoredSubjects);
+	foreach ($ignoredSubjects as $ignored) {
+		if(startsWith($subject, $ignored . ",")) {  // needs to be changed when subject no longer in format "subject, room"
+			return false;
+		}
+	}
+	return true;
 }
 
 function containsNewRoom($existing, $new) {
