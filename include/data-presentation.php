@@ -178,7 +178,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 		}
 		</style>
 	</head>
-	<body class="mb-4 <?= lookup("body", $themeColors); ?>">
+	<body class="<?= lookup("body", $themeColors); ?>">
 		<div class="container-fluid">
 			<header>
 				<nav class="<?= lookup("navbar", $themeColors); ?> navbar-expand mt-3">
@@ -446,7 +446,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 					</div>
 			</main>
 
-			<footer class="text-center my-5">
+			<footer class="text-center py-5"> <?php // need to use padding here, as "h-100" on "html" doesn't allow setting margin-bottom at end of page ?>
 				<?php if (isset($weekBump) && $weekBump === true) { ?>
 				<div class="d-block my-3">
 					<span class="<?= lookup("text-muted", $themeColors); ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Weekends are not part of the schedule. You are now viewing the next week.">
