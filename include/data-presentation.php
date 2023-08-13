@@ -129,7 +129,7 @@ if(!isset($extraEventsIcon)) {
 $hasManifest = isset($manifest) && !empty($manifest);
 ?>
 <!DOCTYPE html>
-<html class="h-100" lang="en">
+<html class="min-vh-100" lang="en">
 	<head data-nextday="<?= $nextDay; ?>"
 				data-prevday="<?= $prevDay; ?>"
 				data-nextweek="<?= $nextWeek; ?>"
@@ -446,7 +446,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 					</div>
 			</main>
 
-			<footer class="text-center py-5"> <?php // need to use padding here, as "h-100" on "html" doesn't allow setting margin-bottom at end of page ?>
+			<footer class="text-center my-5">
 				<?php if (isset($weekBump) && $weekBump === true) { ?>
 				<div class="d-block my-3">
 					<span class="<?= lookup("text-muted", $themeColors); ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Weekends are not part of the schedule. You are now viewing the next week.">
