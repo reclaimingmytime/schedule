@@ -194,7 +194,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 
             printDateNavLi("prevWeek", $prevWeek, "fas fa-angle-double-left", "Previous Week", $weekOverview === false ? "S" : $moveLeftKeys);
 						if($weekOverview === false) printDateNavLi("prevDay", $prevDay, "fas fa-angle-left", "Previous Day", $moveLeftKeys);
-						printDateNavLi("today", $today, "fas fa-home", "Today", '<i class="fas fa-level-down-alt fa-rotate-90"></i>', !$enableTodayLink ? 'active pe-none' : null);
+						printDateNavLi("today", $today, "fas fa-home", "Today", '<i class="fas fa-arrow-turn-down fa-rotate-90"></i>', !$enableTodayLink ? 'active pe-none' : null);
             if($weekOverview === false) printDateNavLi("nextDay", $nextDay, "fas fa-angle-right", "Next Day", $moveRightKeys);
 						printDateNavLi("nextWeek", $nextWeek, "fas fa-angle-double-right", "Next Week", $weekOverview === false ? "W" : $moveRightKeys);
 
