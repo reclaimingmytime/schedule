@@ -311,7 +311,7 @@ class CalFileParser {
 
                         // format date
                         /* CUSTOM FIX START */
-                        $timezone = str_replace("W. Europe Standard Time", "Europe/Berlin", $timezone);
+                        $timezone = str_replace("W. Europe Standard Time", "Europe/Lisbon", $timezone);
                         /* CUSTOM FIX END */
                         $date = DateTime::createFromFormat('Ymd\THis', str_replace('Z', '', $date_value), new DateTimeZone($timezone));
                         if ($date !== false) $date->setTimezone(new DateTimeZone($this->_user_timezone));
