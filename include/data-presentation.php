@@ -115,7 +115,9 @@ function enableTodayLink($today, $desiredDate, $desiredDateTo) {
 $enableTodayLink = enableTodayLink($today, $desiredDate, $desiredDateTo);
 
 $extraClasses = 'bg-info text-light';
-$desiredClassShort = isset($classPrefix) ? removeFromString($classPrefix, $desiredClass) : $desiredClass;
+if(isset($desiredClass)) {
+	$desiredClassShort = isset($classPrefix) ? removeFromString($classPrefix, $desiredClass) : $desiredClass;
+}
 
 $highlightEvents = !$weekBump;
 $highlightClasses = lookup('highlightClasses', $themeColors);
