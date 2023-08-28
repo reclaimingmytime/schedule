@@ -168,7 +168,7 @@ function writeCookie($name, $val, $time = "1 year") {
 	$expTime = new DateTime($time);
 	$exp = $expTime->getTimestamp();
 
-	setcookie($name, $val, $exp, '/', null, false, true);
+	setcookie($name, $val, $exp, '/', "", false, true);
 }
 
 function getToCookie($name, $value, $token) {
