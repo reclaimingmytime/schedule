@@ -169,7 +169,7 @@ function cacheIsUpToDate($config_filename, $cache_filename, $cache_time) {
 						$cacheAge > $refreshAt;
 }
 
-function retrieveData($api, $cache_filename, $type, $cache_time) {
+function retrieveData($api, $cache_filename, $type, $cache_time, $timezone) {
 	include('classes/CalFileParser.php');
 	$calFileParser = new CalFileParser();
 	
@@ -248,4 +248,4 @@ createCache($cache_folder);
 
 $cache_file = $cache_folder . $cache_filename;
 $cache_time = "1 hour";
-$calendar = retrieveData($desiredAPI, $cache_file, $type, $cache_time);
+$calendar = retrieveData($desiredAPI, $cache_file, $type, $cache_time, $timezone);
