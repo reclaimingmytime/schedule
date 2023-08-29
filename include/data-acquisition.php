@@ -170,9 +170,6 @@ function cacheIsUpToDate($config_filename, $cache_filename, $cache_time) {
 }
 
 function retrieveData($api, $cache_filename, $type, $cache_time, $timezone) {
-	include('classes/CalFileParser.php');
-	$calFileParser = new CalFileParser();
-	
 	if (is_writable($cache_filename) && cacheIsUpToDate("config.php", $cache_filename, $cache_time)) {
 		$calendar = file_get_contents($cache_filename);
 	} else {
@@ -186,6 +183,9 @@ function retrieveData($api, $cache_filename, $type, $cache_time, $timezone) {
 			die("Unable to reach API.");
 		}
 		if($type == 'ical') {
+			include('classes/CalFileParser.php');
+	                $calFileParser = new CalFileParser();
+			
 			file_put_contents($cache_filename, $calendar, LOCK_EX); // write tmp file for CalFileParser to process
 			
 			if(!isset($timezone)) $timezone = "Europe/London";
