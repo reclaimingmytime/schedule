@@ -198,7 +198,7 @@ foreach ($calendar as $entry) {
 		}
 	}
 
-	if (isBetween($date, $desiredDate, $desiredDateTo) && $isCorrectClass) {
+	if (isset($fullCalendar) || isBetween($date, $desiredDate, $desiredDateTo) && $isCorrectClass) {
 		$new = [];
 
 		$new["date"] = formatReadableDate($date);
@@ -343,7 +343,7 @@ if (!empty($schedule)) {
 		}
 	}
 	
-	if($weekOverview == true) {
+	if(!isset($fullCalendar) && $weekOverview == true) {
 		$period = new DatePeriod(
 						new DateTime($desiredDate),
 						DateInterval::createFromDateString('1 day'),
