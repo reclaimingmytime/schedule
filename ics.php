@@ -6,6 +6,9 @@ if(isset($icaltoken) && (!isset($_GET['icaltoken']) || $_GET['icaltoken'] != $ic
 }
 
 require_once("include/globals.php");
+
+$realTimezone = $timezone;
+$timezone = "UTC";
 require_once("include/data-acquisition.php");
 
 $fullCalendar = true;
@@ -21,8 +24,8 @@ foreach($schedule as $event) {
 BEGIN:VEVENT
 UID:" . md5(uniqid(mt_rand(), true)) . "
 DTSTAMP:" . gmdate("Ymd") . "T" . gmdate("His") . "Z
-DTSTART:" . date("Ymd\THis", strtotime($event['startDateTime'])) .  "
-DTEND:" . date("Ymd\THis", strtotime($event['endDateTime'])) . "
+DTSTART;TZID=" . $realTimezone . ":" . date("Ymd\THis\Z", strtotime($event['startDateTime'])) .  "
+DTEND;TZID=" . $realTimezone . ":" . date("Ymd\THis\Z", strtotime($event['endDateTime'])) . "
 SUMMARY:" . $event['subject'] . ", " . $event['room'] . "
 END:VEVENT";
 }
