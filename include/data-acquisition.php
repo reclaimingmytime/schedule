@@ -222,6 +222,9 @@ if(isset($type) && $type !== 'ical') {
 		$desiredClass = getOption("class", $allowedClasses, $defaultClass, $token, $desiredDate, $today);
 	}
 	$desiredAPI = $api;
+	if(!isset($cache_filename)) {
+		$cache_filename = "api.json";
+	}
 	$cache_filename = "api.json";
 }
 
