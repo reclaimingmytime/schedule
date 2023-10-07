@@ -1,6 +1,6 @@
 <?php
 require_once("config.php");
-if(isset($icaltoken) && (!isset($_GET['icaltoken']) || $_GET['icaltoken'] != $icaltoken)) {
+if(!isset($icaltoken) || $_GET['icaltoken'] != $icaltoken)) {
     echo "No permission";
     die;
 }
