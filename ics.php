@@ -1,14 +1,19 @@
 <?php
 require_once("config.php");
-if(!isset($icaltoken) || $_GET['icaltoken'] != $icaltoken)) {
-    echo "No permission";
-    die;
+/* Check permission */
+if(!isset($icaltoken)) {
+    die("No key available");
+}
+if(!isset($_GET['icaltoken']) || $_GET['icaltoken'] != $icaltoken) {
+    die("No permission");
 }
 
+/* Fetch events */
+$cache_filename = "ics_api.json";
 require_once("include/globals.php");
 
 $realTimezone = $timezone;
-$timezone = "UTC";
+$timezone = "Europe/Berlin";
 require_once("include/data-acquisition.php");
 
 $fullCalendar = true;
@@ -30,8 +35,8 @@ SUMMARY:" . $event['subject'] . ", " . $event['room'] . "
 END:VEVENT";
 }
 
-header('Content-Type: text/calendar; charset=utf-8');
-header('Content-Disposition: attachment; filename=schedule.ics');
+//header('Content-Type: text/calendar; charset=utf-8');
+//header('Content-Disposition: attachment; filename=schedule.ics');
 
 echo $ical . "
 END:VCALENDAR";
