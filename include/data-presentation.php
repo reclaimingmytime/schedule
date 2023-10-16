@@ -411,7 +411,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 											<div class="progress-bar bg-dark" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 										<div class="card-footer fst-italic<?php if (!onGoingEvent($event, $currentTime, $today)) echo ' d-none'; ?>">
-											<i class="fas fa-business-time"></i> <span class="timeRemaining"></span>
+											<span class="timeRemaining"></span>
 										</div>
 									<?php } ?>
 								</div>
@@ -436,7 +436,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 											<div class="progress-bar bg-dark" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 										<div class="card-footer fst-italic">
-											<i class="fas fa-business-time"></i> <span class="timeRemaining"></span>
+											<span class="timeRemaining"></span>
 										</div>
 									</div>
 									<?php
