@@ -162,6 +162,15 @@ function isExtraSubject($subject, $weekDay, $extraEvents, $extraClass, $chosenEx
 	return isset($extraEvents[$extraClass][$weekDay]) && inArray(strtoupper($subject), $extraEvents[$extraClass][$weekDay]) && inArray(strtoupper($subject), $chosenExtraSubjects);
 }
 
+function formatSubject($thisSubject, $subjects, $subjectRemoveAt) {
+	$subject = !empty($subjects) ? lookup($thisSubject, $subjects) : $thisSubject;
+	if(isset($subjectRemoveAt) && contains($subject, $subjectRemoveAt)) {
+		$subject = substr_replace($subject, "", strpos($subject, $subjectRemoveAt)); //remove starting at
+		$subject = removeFromString(", ", $subject);
+	}
+	return $subject;
+}
+
 //Populating schedule array
 $schedule = [];
 
@@ -173,6 +182,7 @@ if ($weekOverview === true) {
 
 foreach ($calendar as $entry) {
 	$date = extractApiDate($type, $entry[START]);
+	$subject = formatSubject($entry[SUBJECT], $subjects, $subjectRemoveAt);
 
 	$isCorrectClass = true;
 	$isExtraClass = false;
@@ -210,11 +220,8 @@ foreach ($calendar as $entry) {
 		$new["endDateTime"] = extractApiDateTime($type, $entry[END]);
 
 		$thisSubject = $entry[SUBJECT];
-		$new["subject"] = !empty($subjects) ? lookup($thisSubject, $subjects) : $thisSubject;
-		if(isset($subjectRemoveAt) && contains($new["subject"], $subjectRemoveAt)) {
-			$new["subject"] = substr_replace($new["subject"], "", strpos($new["subject"], $subjectRemoveAt)); //remove starting at
-			$new["subject"] = removeFromString(", ", $new["subject"]);
-		}
+		$new["subject"] = $subject;
+
 
 		if (!isset($excludedRoomSubjects) || isset($excludedRoomSubjects) && !in_array($new["subject"], $excludedRoomSubjects)) {
 			$shortRoom = !empty($roomPrefix) ? trimRoom($entry[ROOM], $roomPrefix) : $entry[ROOM];
@@ -287,7 +294,7 @@ foreach ($calendar as $entry) {
 		}
 	}
 
-	if (empty($schedule) && $isCorrectClass &&
+	if (empty($schedule) && $isCorrectClass && validSubject($subject, $ignoredSubjects) &&
 					$date > $desiredDateTo && //"next event" = later than desired date
 					(empty($nextEventDate) ||
 					isset($nextEventDate) && $date < $nextEventDate)) {
