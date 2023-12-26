@@ -31,7 +31,7 @@ UID:" . md5(uniqid(mt_rand(), true)) . "
 DTSTAMP:" . gmdate("Ymd") . "T" . gmdate("His") . "Z
 DTSTART;TZID=" . $realTimezone . ":" . date("Ymd\THis\Z", strtotime($event['startDateTime'])) .  "
 DTEND;TZID=" . $realTimezone . ":" . date("Ymd\THis\Z", strtotime($event['endDateTime'])) . "
-SUMMARY:" . $event['subject'] . ", " . $event['room'] . "
+SUMMARY:" . $event['subject'] . (!empty($event['room']) ?  ", " . $event['room'] : "") . "
 END:VEVENT";
 }
 
