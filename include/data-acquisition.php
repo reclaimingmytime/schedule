@@ -37,16 +37,12 @@ if(empty($maxDate)) {
 $min = new DateTime($minDate);
 $max = new DateTime($maxDate);
 
-function hasNoDateErrors($date_errors) {
-	return $date_errors['warning_count'] === 0 && $date_errors['error_count'] === 0;
-}
-
 function validDate($min, $max, $input) {
 	//The ! resets the time to midnight
 	$date = DateTime::createFromFormat('!Y-m-d', $input);
 	$date_errors = DateTime::getLastErrors();
 	
-	return isBetween($date, $min, $max) && hasNoDateErrors($date_errors);
+	return $date_errors == false && isBetween($date, $min, $max);
 }
 
 function getCustomDate($param, $today, $min, $max) {
