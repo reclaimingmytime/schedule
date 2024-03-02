@@ -1,7 +1,7 @@
 # schedule
-A PHP script that creates a course schedule based on an API.
+A PHP script that creates a course schedule based on an API. The script has been kept simple by design.
 
-The script has been kept simple by design.
+Requires at least PHP 8.2.
 
 ## Functionality
 
