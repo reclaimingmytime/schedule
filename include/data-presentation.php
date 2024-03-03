@@ -210,7 +210,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 							$text = "Week";
 						}  ?>
 						<li class="nav-item me-4">
-							<a class="nav-link" id="overviewType" href="?<?php if($desiredDateMidWeek !== $today) echo 'date=' . $desiredDateMidWeek . '&'; ?>overview=<?= $overviewType . $tokenEmbed; ?>"><i class="<?= $icon; ?>"></i> <span class="d-none d-lg-inline"><?= $text;?> <small><code class="<?= lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(T)</code></small></span></a>
+							<a class="nav-link" id="overviewType" href="?<?php if($desiredDateMidWeek !== $today) echo 'date=' . $desiredDateMidWeek . '&amp;'; ?>overview=<?= $overviewType . $tokenEmbed; ?>"><i class="<?= $icon; ?>"></i> <span class="d-none d-lg-inline"><?= $text;?> <small><code class="<?= lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(T)</code></small></span></a>
 						</li>
 						
 						<?php if(!empty($allowedClasses) && !empty($desiredClass) && $weekOverview == true) {
@@ -485,7 +485,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 				
 				<?php /* Theme Switcher */ ?>
 				<div class="mb-2">
-					<a href="?theme=<?= $theme == "dark" ? "light" : "dark";?>&date=<?= $desiredDate . $tokenEmbed; ?>" class="btn btn-white <?= lookup("text-secondary", $themeColors); ?>" id="themeSwitcher" role="button"><i class="fas fa-toggle-<?= $theme == "dark" ? "on" : "off"; ?>"></i> Dark Theme <small><code class="<?= lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(E)</code></small>
+					<a href="?theme=<?= $theme == "dark" ? "light" : "dark";?>&amp;date=<?= $desiredDate . $tokenEmbed; ?>" class="btn btn-white <?= lookup("text-secondary", $themeColors); ?>" id="themeSwitcher" role="button"><i class="fas fa-toggle-<?= $theme == "dark" ? "on" : "off"; ?>"></i> Dark Theme <small><code class="<?= lookup("text-secondary", $themeColors); ?> d-none d-xl-inline">(E)</code></small>
 </a>
 				</div>
 				
