@@ -306,7 +306,7 @@ $hasManifest = isset($manifest) && !empty($manifest);
 												echo "that day";
 											}
 										}
-										?>.
+										?>
 									</div>
 								<?php if(!empty($nextEventDate)) {?>
 									<div class="text-center mt-4">
