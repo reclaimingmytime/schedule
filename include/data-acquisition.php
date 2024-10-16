@@ -50,8 +50,8 @@ function getCustomDate($param, $today, $min, $max) {
 	  if(validDate($min, $max, $_GET[$param])) {
 		  return $_GET[$param];
     }
-    $_SESSION['validDate'] = false;
-	  redirect(".");
+	$_SESSION['validDate'] = false;
+	redirect(".");
 	}
 	return $today;
 }
@@ -165,6 +165,11 @@ function cacheIsUpToDate($config_filename, $cache_filename, $cache_time) {
 						$cacheAge > $refreshAt;
 }
 
+function getCalendarColumn($calendar) {
+	$calendarArray = json_decode($calendar, true);
+	return defined('CALENDAR') ? $calendarArray[CALENDAR] : $calendarArray;
+}
+
 function retrieveData($api, $cache_filename, $type, $cache_time, $timezone) {
 	if (is_writable($cache_filename) && cacheIsUpToDate("config.php", $cache_filename, $cache_time)) {
 		$calendar = file_get_contents($cache_filename);
@@ -173,15 +178,21 @@ function retrieveData($api, $cache_filename, $type, $cache_time, $timezone) {
 		try {
 			$calendar = file_get_contents($api);
 			if (empty($calendar) || $calendar === false) {
-				die("Error connecting to API.");
+				$calendarCache = file_get_contents($cache_filename);
+				if (!empty($calendarCache)) {
+					$_SESSION["msg"] = "<strong>Could not connect to the schedule.</strong><br>You are viewing an older version.";
+					return getCalendarColumn($calendarCache);
+				}
+				$_SESSION["msg"] = "Could not connect to the API.";
+				return;
 			}
 		} catch (Exception $ex) {
 			die("Unable to reach API.");
 		}
 		if($type == 'ical') {
-			include('classes/CalFileParser.php');
+                        include('classes/CalFileParser.php');
 	                $calFileParser = new CalFileParser();
-			
+
 			file_put_contents($cache_filename, $calendar, LOCK_EX); // write tmp file for CalFileParser to process
 			
 			if(!isset($timezone)) $timezone = "Europe/London";
@@ -195,8 +206,7 @@ function retrieveData($api, $cache_filename, $type, $cache_time, $timezone) {
 	if($type == 'ical' && startsWith($calendar, "Error: ")) {
 		die("Error parsing API. Please check the json cache file for details.");
 	}
-	$calendarArray = json_decode($calendar, true);
-	return defined('CALENDAR') ? $calendarArray[CALENDAR] : $calendarArray;
+	return getCalendarColumn($calendar);
 }
 
 if(!isset($allowedClasses)) {
@@ -221,7 +231,6 @@ if(isset($type) && $type !== 'ical') {
 	if(!isset($cache_filename)) {
 		$cache_filename = "api.json";
 	}
-	$cache_filename = "api.json";
 }
 
 function getExtraSubjects($extraEvents) {
